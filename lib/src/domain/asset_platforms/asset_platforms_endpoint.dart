@@ -7,7 +7,7 @@ class AssetPlatformsEndpoint extends EndpointBase {
   AssetPlatformsEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// List all asset platforms (Blockchain networks)
-  /// endpoint : /asset_platforms
+  /// <br/><b>Endpoint </b>: /asset_platforms
   /// 
   /// [filter] apply relevant filters to results
   ///  valid values: "nft" (asset_platform nft-support)

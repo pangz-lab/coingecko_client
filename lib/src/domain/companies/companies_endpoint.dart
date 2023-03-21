@@ -7,7 +7,7 @@ class CompaniesEndpoint extends EndpointBase {
   CompaniesEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// Get public companies bitcoin or ethereum holdings (Ordered by total holdings descending)
-  /// endpoint : /companies/public_treasury/{coin_id}
+  /// <br/><b>Endpoint </b>: /companies/public_treasury/{coin_id}
   /// 
   /// [coin_id] bitcoin or ethereum
   Future<Response> getCompaniesPublicTreasuryWithCoinId({

@@ -7,14 +7,14 @@ class GlobalEndpoint extends EndpointBase {
   GlobalEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// Get cryptocurrency global data
-  /// endpoint : /global
+  /// <br/><b>Endpoint </b>: /global
   Future<Response> getGlobal() async {
     _path = '/global';
     return await send(_path);
   }
 
   /// Get Top 100 Cryptocurrency Global Eecentralized Finance(defi) data
-  /// endpoint : /global/decentralized_finance_defi
+  /// <br/><b>Endpoint </b>: /global/decentralized_finance_defi
   Future<Response> getGlobalDecentralizedFinanceDefi() async {
     _path = '/global/decentralized_finance_defi';
     return await send(_path);

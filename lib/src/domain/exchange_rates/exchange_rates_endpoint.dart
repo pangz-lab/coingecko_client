@@ -7,7 +7,7 @@ class ExchangeRatesEndpoint extends EndpointBase {
   ExchangeRatesEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// Get BTC-to-Currency exchange rates
-  /// endpoint : /exchange_rates
+  /// <br/><b>Endpoint </b>: /exchange_rates
   Future<Response> getExchangeRates() async {
     _path = '/exchange_rates';
     return await send(_path);

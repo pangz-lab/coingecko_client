@@ -7,14 +7,14 @@ class CategoriesEndpoint extends EndpointBase {
   CategoriesEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// List all categories
-  /// endpoint : /coins/categories/list
+  /// <br/><b>Endpoint </b>: /coins/categories/list
   Future<Response> getCoinsCategoriesList() async {
     _path = '/coins/categories/list';
     return await send(_path);
   }
 
   /// List all categories with market data
-  /// endpoint : /coins/categories
+  /// <br/><b>Endpoint </b>: /coins/categories
   /// 
   /// [order] valid values: <b>market_cap_desc (default), market_cap_asc, name_desc, name_asc, market_cap_change_24h_desc and market_cap_change_24h_asc</b>
   Future<Response> getCoinsCategories({

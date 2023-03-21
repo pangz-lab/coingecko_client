@@ -7,7 +7,7 @@ class ExchangesEndpoint extends EndpointBase {
   ExchangesEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// List all exchanges (Active with trading volumes)
-  /// endpoint : /exchanges
+  /// <br/><b>Endpoint </b>: /exchanges
   /// 
   /// [per_page] Valid values: 1...250
   /// Total results per page
@@ -28,7 +28,7 @@ class ExchangesEndpoint extends EndpointBase {
   }
 
   /// List all supported markets id and name (no pagination required)
-  /// endpoint : /exchanges/list
+  /// <br/><b>Endpoint </b>: /exchanges/list
   /// 
   /// Use this to obtain all the markets' id in order to make API calls
   Future<Response> getExchangesList() async {
@@ -37,7 +37,7 @@ class ExchangesEndpoint extends EndpointBase {
   }
 
   /// Get exchange volume in BTC and top 100 tickers only
-  /// endpoint : /exchanges/{id}
+  /// <br/><b>Endpoint </b>: /exchanges/{id}
   /// 
   /// Get exchange volume in BTC and tickers<br><br> **IMPORTANT**:
   /// Ticker object is limited to 100 items, to get more tickers, use `/exchanges/{id}/tickers`
@@ -59,7 +59,7 @@ class ExchangesEndpoint extends EndpointBase {
   }
 
   /// Get exchange tickers (paginated, 100 tickers per page)
-  /// endpoint : /exchanges/{id}/tickers
+  /// <br/><b>Endpoint </b>: /exchanges/{id}/tickers
   /// 
   /// Get exchange tickers (paginated)<br><br> **IMPORTANT**:
   /// Ticker `is_stale` is true when ticker that has not been updated/unchanged from the exchange for a while.
@@ -95,7 +95,7 @@ class ExchangesEndpoint extends EndpointBase {
   }
 
   /// Get volume_chart data for a given exchange
-  /// endpoint : /exchanges/{id}/volume_chart
+  /// <br/><b>Endpoint </b>: /exchanges/{id}/volume_chart
   /// 
   /// [id] pass the exchange id (can be obtained from /exchanges/list) eg. binance
   /// [days]  Data up to number of days ago (eg. 1,14,30)
