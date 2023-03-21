@@ -1,4 +1,4 @@
-import 'package:coingecko_client/src/endpoints/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/endpoint_base.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 

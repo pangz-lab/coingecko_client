@@ -1,4 +1,4 @@
-import 'package:coingecko_client/src/endpoints/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/endpoint_base.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
@@ -12,8 +12,6 @@ class CategoriesEndpoint extends EndpointBase {
     return await send(_path);
   }
 
-  /// List all categories with market data
-  /// 
   /// List all categories with market data
   /// 
   /// [order] valid values: <b>market_cap_desc (default), market_cap_asc, name_desc, name_asc, market_cap_change_24h_desc and market_cap_change_24h_asc</b>

@@ -1,4 +1,4 @@
-/// Support for doing something awesome.
+/// CoinGecko API client.
 ///
 /// More dartdocs go here.
 library coingecko_client;

@@ -1,4 +1,4 @@
-import 'package:coingecko_client/src/endpoints/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/endpoint_base.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
@@ -7,8 +7,6 @@ class AssetPlatformsEndpoint extends EndpointBase {
   AssetPlatformsEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// List all asset platforms (Blockchain networks)
-  /// 
-  /// List all asset platforms
   /// 
   /// [filter] apply relevant filters to results
   ///  valid values: "nft" (asset_platform nft-support)

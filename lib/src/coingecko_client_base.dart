@@ -1,18 +1,18 @@
-import 'package:coingecko_client/src/endpoints/asset_platforms/asset_platforms_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/categories/categories_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/coins/coins_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/companies/companies_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/contract/contract_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/derivatives/derivatives_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/exchange_rates/exchange_rates_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/exchanges/exchanges_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/global/global_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/indexes/indexes_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/nfts/nfts_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/ping/ping_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/search/search_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/simple/simple_endpoint.dart';
-import 'package:coingecko_client/src/endpoints/trending/trending_endpoint.dart';
+import 'package:coingecko_client/src/domain/asset_platforms/asset_platforms_endpoint.dart';
+import 'package:coingecko_client/src/domain/categories/categories_endpoint.dart';
+import 'package:coingecko_client/src/domain/coins/coins_endpoint.dart';
+import 'package:coingecko_client/src/domain/companies/companies_endpoint.dart';
+import 'package:coingecko_client/src/domain/contract/contract_endpoint.dart';
+import 'package:coingecko_client/src/domain/derivatives/derivatives_endpoint.dart';
+import 'package:coingecko_client/src/domain/exchange_rates/exchange_rates_endpoint.dart';
+import 'package:coingecko_client/src/domain/exchanges/exchanges_endpoint.dart';
+import 'package:coingecko_client/src/domain/global/global_endpoint.dart';
+import 'package:coingecko_client/src/domain/indexes/indexes_endpoint.dart';
+import 'package:coingecko_client/src/domain/nfts/nfts_endpoint.dart';
+import 'package:coingecko_client/src/domain/ping/ping_endpoint.dart';
+import 'package:coingecko_client/src/domain/search/search_endpoint.dart';
+import 'package:coingecko_client/src/domain/simple/simple_endpoint.dart';
+import 'package:coingecko_client/src/domain/trending/trending_endpoint.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
 class CoinGeckoClient {
