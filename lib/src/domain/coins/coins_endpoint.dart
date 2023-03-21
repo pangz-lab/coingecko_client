@@ -7,6 +7,7 @@ class CoinsEndpoint extends EndpointBase {
   CoinsEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// List all supported coins id, name and symbol (no pagination required)
+  /// endpoint : /coins/list
   /// 
   /// Use this to obtain all the coins' id in order to make API calls
   /// 
@@ -25,6 +26,7 @@ class CoinsEndpoint extends EndpointBase {
   }
 
   /// List all supported coins price, market cap, volume, and market related data
+  /// endpoint : /coins/markets
   /// 
   /// Use this to obtain all the coins market data (price, market cap, volume)
   /// 
@@ -65,6 +67,7 @@ class CoinsEndpoint extends EndpointBase {
   }
 
   /// Get current data (name, price, market, ... including exchange tickers) for a coin
+  /// endpoint : /coins/{id}
   /// 
   /// Get current data (name, price, market, ... including exchange tickers) for a coin.<br><br> **IMPORTANT**:
   /// Ticker object is limited to 100 items, to get more tickers, use `/coins/{id}/tickers`
@@ -104,6 +107,7 @@ class CoinsEndpoint extends EndpointBase {
   }
 
   /// Get coin tickers (paginated to 100 items)
+  /// endpoint : /coins/{id}/tickers
   /// 
   /// Get coin tickers (paginated to 100 items)<br><br> **IMPORTANT**:
   /// Ticker `is_stale` is true when ticker that has not been updated/unchanged from the exchange for a while.
@@ -139,6 +143,7 @@ class CoinsEndpoint extends EndpointBase {
   }
 
   /// Get historical data (name, price, market, stats) at a given date for a coin
+  /// endpoint : /coins/{id}/history
   /// 
   /// [id] pass the coin id (can be obtained from /coins) eg. bitcoin
   /// [date] The date of data snapshot in dd-mm-yyyy eg. 30-12-2017
@@ -160,6 +165,7 @@ class CoinsEndpoint extends EndpointBase {
   }
 
   /// Get historical market data include price, market cap, and 24h volume (granularity auto)
+  /// endpoint : /coins/{id}/market_chart
   /// 
   /// <b><ul><li>Data granularity is automatic (cannot be adjusted)</li><li>1 day from current time = 5 minute interval data</li><li>1 - 90 days from current time = hourly data</li><li>above 90 days from current time = daily data (00:00 UTC)</li></ul> </b>
   /// 
@@ -186,6 +192,7 @@ class CoinsEndpoint extends EndpointBase {
   }
 
   /// Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)
+  /// endpoint : /coins/{id}/market_chart/range
   /// 
   /// <b><ul><li>Data granularity is automatic (cannot be adjusted)</li><li>1 day from current time = 5 minute interval data</li><li>1 - 90 days from current time = hourly data</li><li>above 90 days from current time = daily data (00:00 UTC)</li></ul> </b>
   /// 
@@ -212,6 +219,7 @@ class CoinsEndpoint extends EndpointBase {
   }
 
   /// Get coin's OHLC
+  /// endpoint : /coins/{id}/ohlc
   /// 
   /// Candle's body:
   ///

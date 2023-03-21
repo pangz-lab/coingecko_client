@@ -7,6 +7,7 @@ class NftsEndpoint extends EndpointBase {
   NftsEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// List all supported NFT ids, paginated by 100 items per page, paginated to 100 items
+  /// endpoint : /nfts/list
   /// 
   /// Use this to obtain all the NFT ids in order to make API calls, paginated to 100 items
   /// 
@@ -33,6 +34,7 @@ class NftsEndpoint extends EndpointBase {
   }
 
   /// Get current data (name, price_floor, volume_24h ...) for an NFT collection. native_currency (string) is only a representative of the currency.
+  /// endpoint : /nfts/{id}
   /// 
   /// [id] id of nft collection (can be obtained from /nfts/list)
   Future<Response> getNftsWithId({
@@ -48,6 +50,7 @@ class NftsEndpoint extends EndpointBase {
   }
 
   /// Get current data (name, price_floor, volume_24h ...) for an NFT collection
+  /// endpoint : /nfts/{asset_platform_id}/contract/{contract_address}
   /// 
   /// [asset_platform_id] The id of the platform issuing tokens (See asset_platforms endpoint for list of options, use filter=nft param)
   /// [contract_address] The contract_address of the nft collection (/nfts/list for list of nft collection with metadata)

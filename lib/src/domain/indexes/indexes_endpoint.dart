@@ -7,6 +7,7 @@ class IndexesEndpoint extends EndpointBase {
   IndexesEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// List all market indexes
+  /// endpoint : /indexes
   /// 
   /// [per_page] Total results per page
   /// [page] Page through results
@@ -25,6 +26,7 @@ class IndexesEndpoint extends EndpointBase {
   }
 
   /// Get market index by market id and index id
+  /// endpoint : /indexes/{market_id}/{id}
   /// 
   /// [market_id] pass the market id (can be obtained from /exchanges/list)
   /// [id] pass the index id (can be obtained from /indexes/list)
@@ -43,6 +45,7 @@ class IndexesEndpoint extends EndpointBase {
   }
 
   /// List market indexes id and name
+  /// endpoint : /indexes/list
   Future<Response> getIndexesList() async {
     _path = '/indexes/list';
     return await send(_path);

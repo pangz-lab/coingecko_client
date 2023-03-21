@@ -7,6 +7,7 @@ class SimpleEndpoint extends EndpointBase {
   SimpleEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// Get the current price of any cryptocurrencies in any other supported currencies that you need.
+  /// endpoint : /simple/price
   /// 
   /// [ids] id of coins, comma-separated if querying more than 1 coin
   /// *refers to <b>`coins/list`</b>
@@ -42,6 +43,7 @@ class SimpleEndpoint extends EndpointBase {
   }
 
   /// Get current price of tokens (using contract addresses) for a given platform in any other currency that you need.
+  /// endpoint : /simple/token_price/{id}
   /// 
   /// [id] The id of the platform issuing tokens (See asset_platforms endpoint for list of options)
   /// [contract_addresses] The contract address of tokens, comma separated
@@ -79,6 +81,7 @@ class SimpleEndpoint extends EndpointBase {
   }
 
   /// Get list of supported_vs_currencies.
+  /// endpoint : /simple/supported_vs_currencies
   Future<Response> getSimpleSupportedVsCurrencies() async {
     _path = '/simple/supported_vs_currencies';
     return await send(_path);

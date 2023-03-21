@@ -7,6 +7,7 @@ class ContractEndpoint extends EndpointBase {
   ContractEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// Get coin info from contract address
+  /// endpoint : /coins/{id}/contract/{contract_address}
   /// 
   /// [id] Asset platform (See asset_platforms endpoint for list of options)
   /// [contract_address] Token's contract address
@@ -25,6 +26,7 @@ class ContractEndpoint extends EndpointBase {
   }
 
   /// Get historical market data include price, market cap, and 24h volume (granularity auto) from a contract address 
+  /// endpoint : /coins/{id}/contract/{contract_address}/market_chart/
   /// 
   /// [id] The id of the platform issuing tokens (See asset_platforms endpoint for list of options)
   /// [contract_address] Token's contract address
@@ -49,6 +51,7 @@ class ContractEndpoint extends EndpointBase {
   }
 
   /// Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto) from a contract address
+  /// endpoint : /coins/{id}/contract/{contract_address}/market_chart/range
   /// 
   /// [id] The id of the platform issuing tokens (See asset_platforms endpoint for list of options)
   /// [contract_address] Token's contract address

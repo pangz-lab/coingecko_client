@@ -7,6 +7,7 @@ class DerivativesEndpoint extends EndpointBase {
   DerivativesEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// List all derivative tickers
+  /// endpoint : /derivatives
   /// 
   /// [include_tickers] ['all', 'unexpired'] - expired to show unexpired tickers, all to list all tickers, defaults to unexpired
   Future<Response> getDerivatives({
@@ -22,6 +23,7 @@ class DerivativesEndpoint extends EndpointBase {
   }
 
   /// List all derivative exchanges
+  /// endpoint : /derivatives/exchanges
   /// 
   /// [order] order results using following params name_asc，name_desc，open_interest_btc_asc，open_interest_btc_desc，trade_volume_24h_btc_asc，trade_volume_24h_btc_desc
   /// [per_page] Total results per page
@@ -43,6 +45,7 @@ class DerivativesEndpoint extends EndpointBase {
   }
 
   /// show derivative exchange data
+  /// endpoint : /derivatives/exchanges/{id}
   /// 
   /// [id] pass the exchange id (can be obtained from derivatives/exchanges/list) eg. bitmex
   /// [include_tickers] ['all', 'unexpired'] - expired to show unexpired tickers, all to list all tickers, leave blank to omit tickers data in response
@@ -61,6 +64,7 @@ class DerivativesEndpoint extends EndpointBase {
   }
 
   /// List all derivative exchanges name and identifier
+  /// endpoint : /derivatives/exchanges/list
   Future<Response> getDerivativesExchangesList() async {
     _path = '/derivatives/exchanges/list';
     return await send(_path);

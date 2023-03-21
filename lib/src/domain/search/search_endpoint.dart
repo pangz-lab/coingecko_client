@@ -7,6 +7,7 @@ class SearchEndpoint extends EndpointBase {
   SearchEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
   
   /// Search for coins, categories and markets listed on CoinGecko ordered by largest Market Cap first
+  /// endpoint : /search
   /// 
   /// [query] Search string
   Future<Response> getSearch({

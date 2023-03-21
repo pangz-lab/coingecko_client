@@ -7,6 +7,7 @@ class PingEndpoint extends EndpointBase {
   PingEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
   /// Check API server status
+  /// endpoint : /ping
   Future<Response> call() async {
     _path = '/ping';
     return await send(_path);
