@@ -2,13 +2,13 @@ import 'package:coingecko_client/src/endpoints/endpoint_base.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
-class SearchEndpoint extends EndpointBase implements EndpointInterface {
-  final String _baseEndpoint = "/search";
+class SearchEndpoint extends EndpointBase {
   String _path = "";
-  @override
-  String get baseEndpoint => _baseEndpoint;
   SearchEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
-
+  
+  /// Search for coins, categories and markets listed on CoinGecko ordered by largest Market Cap first
+  /// 
+  /// [query] Search string
   Future<Response> getSearch({
     required String query
   }) async {

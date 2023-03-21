@@ -2,13 +2,14 @@ import 'package:coingecko_client/src/endpoints/endpoint_base.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
-class ContractEndpoint extends EndpointBase implements EndpointInterface {
-  final String _baseEndpoint = "/contract";
+class ContractEndpoint extends EndpointBase {
   String _path = "";
-  @override
-  String get baseEndpoint => _baseEndpoint;
   ContractEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
 
+  /// Get coin info from contract address
+  /// 
+  /// [id] Asset platform (See asset_platforms endpoint for list of options)
+  /// [contract_address] Token's contract address
   Future<Response> getCoinsWithIdContractWithContractAddress({
     required String id,
     required String contractAddress
@@ -18,11 +19,17 @@ class ContractEndpoint extends EndpointBase implements EndpointInterface {
         'id': id,
         'contract_address': contractAddress
       },
-      endpointPath: "/coins/$id/contract/$contractAddress"
+      endpointPath: "/coins/{id}/contract/{contract_address}"
     );
     return await send(_path);
   }
 
+  /// Get historical market data include price, market cap, and 24h volume (granularity auto) from a contract address 
+  /// 
+  /// [id] The id of the platform issuing tokens (See asset_platforms endpoint for list of options)
+  /// [contract_address] Token's contract address
+  /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
+  /// [days] Data up to number of days ago (eg. 1,14,30,max)
   Future<Response> getCoinsWithIdContractWithContractAddressMarketChart({
     required String id,
     required String contractAddress,
@@ -36,11 +43,18 @@ class ContractEndpoint extends EndpointBase implements EndpointInterface {
         'vs_currency': vsCurrency,
         'days': days
       },
-      endpointPath: "/coins/$id/contract/$contractAddress/market_chart/"
+      endpointPath: "/coins/{id}/contract/{contract_address}/market_chart/"
     );
     return await send(_path);
   }
 
+  /// Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto) from a contract address
+  /// 
+  /// [id] The id of the platform issuing tokens (See asset_platforms endpoint for list of options)
+  /// [contract_address] Token's contract address
+  /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
+  /// [from] From date in UNIX Timestamp (eg. 1392577232)
+  /// [to] To date in UNIX Timestamp (eg. 1422577232)
   Future<Response> getCoinsWithIdContractWithContractAddressMarketChartRange({
     required String id,
     required String contractAddress,
@@ -56,7 +70,7 @@ class ContractEndpoint extends EndpointBase implements EndpointInterface {
         'from': from,
         'to': to
       },
-      endpointPath: "/coins/$id/contract/$contractAddress/market_chart/range"
+      endpointPath: "/coins/{id}/contract/{contract_address}/market_chart/range"
     );
     return await send(_path);
   }
