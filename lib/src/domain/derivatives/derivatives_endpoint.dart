@@ -1,21 +1,23 @@
 import 'package:coingecko_client/src/domain/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange_ordering.dart';
+import 'package:coingecko_client/src/domain/derivatives/models/derivatives_tickers.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
 class DerivativesEndpoint extends EndpointBase {
   String _path = "";
-  DerivativesEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  DerivativesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// List all derivative tickers
   /// <br/><b>Endpoint </b>: /derivatives
   /// 
   /// [include_tickers] ['all', 'unexpired'] - expired to show unexpired tickers, all to list all tickers, defaults to unexpired
   Future<Response> getDerivatives({
-    String? includeTickers
+    DerivativesTickers? includeTickers
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
-        'include_tickers': includeTickers
+        'include_tickers': includeTickers?.value ?? ''
       },
       endpointPath: "/derivatives"
     );
@@ -29,13 +31,13 @@ class DerivativesEndpoint extends EndpointBase {
   /// [per_page] Total results per page
   /// [page] Page through results
   Future<Response> getDerivativesExchanges({
-    String? order,
+    DerivativesExchangeOrdering? order,
     int? perPage,
     int? page
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
-        'order': order,
+        'order': order?.value ?? '',
         'per_page': perPage,
         'page': page
       },
@@ -51,12 +53,12 @@ class DerivativesEndpoint extends EndpointBase {
   /// [include_tickers] ['all', 'unexpired'] - expired to show unexpired tickers, all to list all tickers, leave blank to omit tickers data in response
   Future<Response> getDerivativesExchangesWithId({
     required String id,
-    String? includeTickers
+    DerivativesTickers? includeTickers
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
         'id': id,
-        'include_tickers': includeTickers
+        'include_tickers': includeTickers?.value ?? ''
       },
       endpointPath: "/derivatives/exchanges/{id}"
     );

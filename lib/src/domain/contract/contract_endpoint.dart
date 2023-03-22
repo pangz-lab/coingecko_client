@@ -1,10 +1,12 @@
 import 'package:coingecko_client/src/domain/endpoint_base.dart';
+import 'package:coingecko_client/src/models/currencies.dart';
+import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
 class ContractEndpoint extends EndpointBase {
   String _path = "";
-  ContractEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  ContractEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// Get coin info from contract address
   /// <br/><b>Endpoint </b>: /coins/{id}/contract/{contract_address}
@@ -35,15 +37,15 @@ class ContractEndpoint extends EndpointBase {
   Future<Response> getCoinsWithIdContractWithContractAddressMarketChart({
     required String id,
     required String contractAddress,
-    required String vsCurrency,
-    required String days
+    required Currencies vsCurrency,
+    required DataRange days
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
         'id': id,
         'contract_address': contractAddress,
-        'vs_currency': vsCurrency,
-        'days': days
+        'vs_currency': vsCurrency.code,
+        'days': days.value
       },
       endpointPath: "/coins/{id}/contract/{contract_address}/market_chart/"
     );
@@ -61,17 +63,17 @@ class ContractEndpoint extends EndpointBase {
   Future<Response> getCoinsWithIdContractWithContractAddressMarketChartRange({
     required String id,
     required String contractAddress,
-    required String vsCurrency,
-    required String from,
-    required String to
+    required Currencies vsCurrency,
+    required DateTime from,
+    required DateTime to
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
         'id': id,
         'contract_address': contractAddress,
-        'vs_currency': vsCurrency,
-        'from': from,
-        'to': to
+        'vs_currency': vsCurrency.code,
+        'from': from.millisecondsSinceEpoch,
+        'to': to.millisecondsSinceEpoch
       },
       endpointPath: "/coins/{id}/contract/{contract_address}/market_chart/range"
     );

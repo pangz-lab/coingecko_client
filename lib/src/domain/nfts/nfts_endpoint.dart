@@ -1,10 +1,11 @@
 import 'package:coingecko_client/src/domain/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/nfts/models/nfts_data_ordering.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
 class NftsEndpoint extends EndpointBase {
   String _path = "";
-  NftsEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  NftsEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// List all supported NFT ids, paginated by 100 items per page, paginated to 100 items
   /// <br/><b>Endpoint </b>: /nfts/list
@@ -16,14 +17,14 @@ class NftsEndpoint extends EndpointBase {
   /// [per_page] Total results per page
   /// [page] Page through results
   Future<Response> getNftsList({
-    String? order,
+    NftsDataOrdering? order,
     String? assetPlatformId,
     int? perPage,
     int? page
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
-        'order': order,
+        'order': order?.value ?? '',
         'asset_platform_id': assetPlatformId,
         'per_page': perPage,
         'page': page

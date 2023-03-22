@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 
 class GlobalEndpoint extends EndpointBase {
   String _path = "";
-  GlobalEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  GlobalEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// Get cryptocurrency global data
   /// <br/><b>Endpoint </b>: /global

@@ -1,10 +1,11 @@
 import 'package:coingecko_client/src/domain/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/categories/models/categories_data_ordering.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
 class CategoriesEndpoint extends EndpointBase {
   String _path = "";
-  CategoriesEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  CategoriesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// List all categories
   /// <br/><b>Endpoint </b>: /coins/categories/list
@@ -18,11 +19,11 @@ class CategoriesEndpoint extends EndpointBase {
   /// 
   /// [order] valid values: <b>market_cap_desc (default), market_cap_asc, name_desc, name_asc, market_cap_change_24h_desc and market_cap_change_24h_asc</b>
   Future<Response> getCoinsCategories({
-    String? order
+    CategoriesCoinDataOrdering? order
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
-        'order': order
+        'order': order?.value ?? ''
       },
       endpointPath: "/coins/categories"
     );

@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 
 class ExchangeRatesEndpoint extends EndpointBase {
   String _path = "";
-  ExchangeRatesEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  ExchangeRatesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// Get BTC-to-Currency exchange rates
   /// <br/><b>Endpoint </b>: /exchange_rates

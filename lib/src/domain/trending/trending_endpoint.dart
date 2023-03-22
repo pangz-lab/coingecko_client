@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 
 class TrendingEndpoint extends EndpointBase {
   String _path = "";
-  TrendingEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  TrendingEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// Get trending search coins (Top-7) on CoinGecko in the last 24 hours
   /// <br/><b>Endpoint </b>: /search/trending

@@ -1,10 +1,15 @@
+import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
+import 'package:coingecko_client/src/models/currencies.dart';
+import 'package:coingecko_client/src/models/data_range.dart';
+import 'package:coingecko_client/src/services/date_service.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
 class CoinsEndpoint extends EndpointBase {
   String _path = "";
-  CoinsEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  CoinsEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// List all supported coins id, name and symbol (no pagination required)
   /// <br/><b>Endpoint </b>: /coins/list
@@ -41,25 +46,25 @@ class CoinsEndpoint extends EndpointBase {
   /// [sparkline] Include sparkline 7 days data (eg. true, false)
   /// [price_change_percentage] Include price change percentage in <b>1h, 24h, 7d, 14d, 30d, 200d, 1y</b> (eg. '`1h,24h,7d`' comma-separated, invalid values will be discarded)
   Future<Response> getCoinsMarkets({
-    required String vsCurrency,
-    String? ids,
+    required Currencies vsCurrency,
+    List<String>? ids,
     String? category,
-    String? order,
+    CoinMarketDataOrdering? order,
     int? perPage,
     int? page,
     bool? sparkline,
-    String? priceChangePercentage
+    List<CoinPriceChange>? priceChangePercentage
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
-        'vs_currency': vsCurrency,
-        'ids': ids,
+        'vs_currency': vsCurrency.code,
+        'ids': ids?.join(',') ?? '',
         'category': category,
-        'order': order,
+        'order': order?.value ?? '',
         'per_page': perPage,
         'page': page,
         'sparkline': sparkline,
-        'price_change_percentage': priceChangePercentage
+        'price_change_percentage': priceChangePercentage?.map((e) => e.value).join(",") ?? ''
       },
       endpointPath: "/coins/markets"
     );
@@ -84,7 +89,7 @@ class CoinsEndpoint extends EndpointBase {
   /// [sparkline] Include sparkline 7 days data (eg. true, false) <b>[default: false]</b>
   Future<Response> getCoinsWithId({
     required String id,
-    String? localization,
+    bool? localization,
     bool? tickers,
     bool? marketData,
     bool? communityData,
@@ -123,10 +128,10 @@ class CoinsEndpoint extends EndpointBase {
   Future<Response> getCoinsWithIdTickers({
     required String id,
     String? exchangeIds,
-    String? includeExchangeLogo,
+    bool? includeExchangeLogo,
     int? page,
-    String? order,
-    String? depth
+    CoinTickersDataOrdering? order,
+    bool? depth
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
@@ -134,7 +139,7 @@ class CoinsEndpoint extends EndpointBase {
         'exchange_ids': exchangeIds,
         'include_exchange_logo': includeExchangeLogo,
         'page': page,
-        'order': order,
+        'order': order?.value ?? '',
         'depth': depth
       },
       endpointPath: "/coins/{id}/tickers"
@@ -150,13 +155,13 @@ class CoinsEndpoint extends EndpointBase {
   /// [localization] Set to false to exclude localized languages in response
   Future<Response> getCoinsWithIdHistory({
     required String id,
-    required String date,
-    String? localization
+    required DateTime date,
+    bool? localization
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
         'id': id,
-        'date': date,
+        'date': DateService.formatAsDefault(date),
         'localization': localization
       },
       endpointPath: "/coins/{id}/history"
@@ -175,15 +180,15 @@ class CoinsEndpoint extends EndpointBase {
   /// [interval] Data interval. Possible value: daily
   Future<Response> getCoinsWithIdMarketChart({
     required String id,
-    required String vsCurrency,
-    required String days,
+    required Currencies vsCurrency,
+    required DataRange days,
     String? interval
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
         'id': id,
-        'vs_currency': vsCurrency,
-        'days': days,
+        'vs_currency': vsCurrency.code,
+        'days': days.value,
         'interval': interval
       },
       endpointPath: "/coins/{id}/market_chart"
@@ -202,16 +207,16 @@ class CoinsEndpoint extends EndpointBase {
   /// [to] To date in UNIX Timestamp (eg. 1422577232)
   Future<Response> getCoinsWithIdMarketChartRange({
     required String id,
-    required String vsCurrency,
-    required String from,
-    required String to
+    required Currencies vsCurrency,
+    required DateTime from,
+    required DateTime to
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
         'id': id,
-        'vs_currency': vsCurrency,
-        'from': from,
-        'to': to
+        'vs_currency': vsCurrency.code,
+        'from': from.millisecondsSinceEpoch,
+        'to': to.millisecondsSinceEpoch
       },
       endpointPath: "/coins/{id}/market_chart/range"
     );
@@ -232,14 +237,14 @@ class CoinsEndpoint extends EndpointBase {
   /// [days]  Data up to number of days ago (1/7/14/30/90/180/365/max)
   Future<Response> getCoinsWithIdOhlc({
     required String id,
-    required String vsCurrency,
-    required String days
+    required Currencies vsCurrency,
+    required DataRange days
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
         'id': id,
-        'vs_currency': vsCurrency,
-        'days': days
+        'vs_currency': vsCurrency.code,
+        'days': days.value
       },
       endpointPath: "/coins/{id}/ohlc"
     );

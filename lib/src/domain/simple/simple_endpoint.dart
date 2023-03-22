@@ -1,10 +1,11 @@
 import 'package:coingecko_client/src/domain/endpoint_base.dart';
+import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
 class SimpleEndpoint extends EndpointBase {
   String _path = "";
-  SimpleEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  SimpleEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// Get the current price of any cryptocurrencies in any other supported currencies that you need.
   /// <br/><b>Endpoint </b>: /simple/price
@@ -19,18 +20,18 @@ class SimpleEndpoint extends EndpointBase {
   /// [include_last_updated_at] <b>true/false</b> to include last_updated_at of price, <b>default: false</b>
   /// [precision] <b>full</b> or any value between 0 - 18 to specify decimal place for currency price value, <b>default: 2</b>
   Future<Response> getSimplePrice({
-    required String ids,
-    required String vsCurrencies,
-    String? includeMarketCap,
-    String? include24hrVol,
-    String? include24hrChange,
-    String? includeLastUpdatedAt,
-    String? precision
+    required List<String> ids,
+    required List<Currencies> vsCurrencies,
+    bool? includeMarketCap,
+    bool? include24hrVol,
+    bool? include24hrChange,
+    bool? includeLastUpdatedAt,
+    int? precision
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
-        'ids': ids,
-        'vs_currencies': vsCurrencies,
+        'ids': ids.join(','),
+        'vs_currencies': vsCurrencies.map((e) => e.code).join(','),
         'include_market_cap': includeMarketCap,
         'include_24hr_vol': include24hrVol,
         'include_24hr_change': include24hrChange,
@@ -56,19 +57,19 @@ class SimpleEndpoint extends EndpointBase {
   /// [precision] <b>full</b> or any Integer to specify decimal place for currency price value, <b>default: 2</b>
   Future<Response> getSimpleTokenPriceWithId({
     required String id,
-    required String contractAddresses,
-    required String vsCurrencies,
-    String? includeMarketCap,
-    String? include24hrVol,
-    String? include24hrChange,
-    String? includeLastUpdatedAt,
-    String? precision
+    required List<String> contractAddresses,
+    required List<Currencies> vsCurrencies,
+    bool? includeMarketCap,
+    bool? include24hrVol,
+    bool? include24hrChange,
+    bool? includeLastUpdatedAt,
+    int? precision
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
         'id': id,
-        'contract_addresses': contractAddresses,
-        'vs_currencies': vsCurrencies,
+        'contract_addresses': contractAddresses.join(','),
+        'vs_currencies': vsCurrencies.map((e) => e.code).join(','),
         'include_market_cap': includeMarketCap,
         'include_24hr_vol': include24hrVol,
         'include_24hr_change': include24hrChange,

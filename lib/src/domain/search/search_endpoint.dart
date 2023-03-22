@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 
 class SearchEndpoint extends EndpointBase {
   String _path = "";
-  SearchEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  SearchEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
   
   /// Search for coins, categories and markets listed on CoinGecko ordered by largest Market Cap first
   /// <br/><b>Endpoint </b>: /search

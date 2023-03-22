@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 
 class CompaniesEndpoint extends EndpointBase {
   String _path = "";
-  CompaniesEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  CompaniesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// Get public companies bitcoin or ethereum holdings (Ordered by total holdings descending)
   /// <br/><b>Endpoint </b>: /companies/public_treasury/{coin_id}

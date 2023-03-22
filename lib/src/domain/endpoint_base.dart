@@ -7,13 +7,27 @@ abstract class EndpointInterface {
 
 class EndpointBase {
   static final apiHost = "api.coingecko.com";
+  static final apiProHost = "pro-api.coingecko.com";
+  static final apiKeyQueryParam = "x_cg_pro_api_key";
   static final version = "/api/v3";
   HttpRequestServiceInterface httpRequestService;
-  EndpointBase(this.httpRequestService);
+  String? apiKey;
+  EndpointBase(
+    this.httpRequestService,
+    {this.apiKey}
+  );
 
   Future<Response> send(String path) {
     try {
       return httpRequestService.sendGet(apiHost, "$version$path");
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<Response> sendPro(String path) {
+    try {
+      return httpRequestService.sendGet(apiProHost, "$version$path&$apiKeyQueryParam=$apiKey");
     } catch (_) {
       rethrow;
     }

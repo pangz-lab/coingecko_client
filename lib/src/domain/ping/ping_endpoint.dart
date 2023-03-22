@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 
 class PingEndpoint extends EndpointBase {
   String _path = "";
-  PingEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  PingEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// Check API server status
   /// <br/><b>Endpoint </b>: /ping

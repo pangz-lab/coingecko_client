@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 
 class IndexesEndpoint extends EndpointBase {
   String _path = "";
-  IndexesEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  IndexesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// List all market indexes
   /// <br/><b>Endpoint </b>: /indexes

@@ -1,10 +1,12 @@
 import 'package:coingecko_client/src/domain/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchanges_data_ordering.dart';
+import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
 class ExchangesEndpoint extends EndpointBase {
   String _path = "";
-  ExchangesEndpoint(HttpRequestServiceInterface httpRequestService) : super(httpRequestService);
+  ExchangesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// List all exchanges (Active with trading volumes)
   /// <br/><b>Endpoint </b>: /exchanges
@@ -15,7 +17,7 @@ class ExchangesEndpoint extends EndpointBase {
   /// [page] page through results
   Future<Response> getExchanges({
     int? perPage,
-    String? page
+    int? page
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
@@ -68,17 +70,17 @@ class ExchangesEndpoint extends EndpointBase {
   /// 
   /// [id] pass the exchange id (can be obtained from /exchanges/list) eg. binance
   /// [coin_ids] filter tickers by coin_ids (ref: v3/coins/list)
-  /// [include_exchange_logo] flag to show exchange_logo
+  /// [include_exchange_logo] flag to show exchange_logo. valid values: true, false
   /// [page] Page through results
-  /// [depth] flag to show 2% orderbook depth i.e., cost_to_move_up_usd and cost_to_move_down_usd
+  /// [depth] flag to show 2% orderbook depth i.e., cost_to_move_up_usd and cost_to_move_down_usd. valid values: true, false
   /// [order] valid values: <b>trust_score_desc (default), trust_score_asc and volume_desc</b>
   Future<Response> getExchangesWithIdTickers({
     required String id,
     String? coinIds,
-    String? includeExchangeLogo,
+    bool? includeExchangeLogo,
     int? page,
-    String? depth,
-    String? order
+    bool? depth,
+    ExchangesDataOrdering? order
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
@@ -87,7 +89,7 @@ class ExchangesEndpoint extends EndpointBase {
         'include_exchange_logo': includeExchangeLogo,
         'page': page,
         'depth': depth,
-        'order': order
+        'order': order?.value ?? ''
       },
       endpointPath: "/exchanges/{id}/tickers"
     );
@@ -101,12 +103,12 @@ class ExchangesEndpoint extends EndpointBase {
   /// [days]  Data up to number of days ago (eg. 1,14,30)
   Future<Response> getExchangesWithIdVolumeChart({
     required String id,
-    required int days
+    required DataRange days
   }) async {
     _path = createEndpointUrlPath(
       rawQueryItems: {
         'id': id,
-        'days': days
+        'days': days.value
       },
       endpointPath: "/exchanges/{id}/volume_chart"
     );
