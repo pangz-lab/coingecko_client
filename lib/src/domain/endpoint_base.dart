@@ -1,7 +1,10 @@
+import 'dart:convert';
+
+import 'package:coingecko_client/src/models/exceptions/failed_request_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
-abstract class EndpointInterface {
+abstract class ResponseDate {
   String get baseEndpoint;
 }
 
@@ -10,16 +13,37 @@ class EndpointBase {
   static final apiProHost = "pro-api.coingecko.com";
   static final apiKeyQueryParam = "x_cg_pro_api_key";
   static final version = "/api/v3";
+  String _endpointPath = "";
+  String get endpointPath => _endpointPath;
   HttpRequestServiceInterface httpRequestService;
   String? apiKey;
   EndpointBase(
-    this.httpRequestService,
+    this.httpRequestService, Map<String?, String?> map,
     {this.apiKey}
   );
 
-  Future<Response> send(String path) {
+  Future<dynamic> sendBasic(String path) async {
     try {
-      return httpRequestService.sendGet(apiHost, "$version$path");
+      _endpointPath = "$version$path";
+      var response = await httpRequestService.sendGet(apiHost, _endpointPath);
+      if(response.statusCode != 200) {
+        throw FailedRequestException('Failed sending the request.');
+      }
+
+      if(response.body.trim().isEmpty) {
+        throw FormatException('Result is empty');
+      }
+      return jsonDecode(response.body);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  /// Remove this
+  Future<Response> send(String path) async {
+    try {
+      _endpointPath = "$version$path";
+      return await httpRequestService.sendGet(apiHost, _endpointPath);
     } catch (_) {
       rethrow;
     }
@@ -27,7 +51,8 @@ class EndpointBase {
 
   Future<Response> sendPro(String path) {
     try {
-      return httpRequestService.sendGet(apiProHost, "$version$path&$apiKeyQueryParam=$apiKey");
+      _endpointPath = "$version$path&$apiKeyQueryParam=$apiKey";
+      return httpRequestService.sendGet(apiProHost, _endpointPath);
     } catch (_) {
       rethrow;
     }
@@ -43,11 +68,14 @@ class EndpointBase {
     }
     var kvList = rawQueryItems!.map(
       (key, value) {
-        return MapEntry(key, value != null ? "$key=${value.toString()}" : "");
+        return MapEntry(key, value.toString().isNotEmpty ? "$key=${value.toString()}" : "");
       }).values.toList();
 
     kvList.removeWhere((value) => value.toString().isEmpty);
-    return "${_replaceEndpointPathWithValue(endpointPath, rawQueryItems, pathParameters)}?${kvList.join("&")}";
+    var path = kvList.join("&").trim(); 
+    path = path.isNotEmpty ? "?${kvList.join("&")}" : '';
+
+    return "${_replaceEndpointPathWithValue(endpointPath, rawQueryItems, pathParameters)}$path";
   }
 
   List<String?> _getPathParameters(String path, Map<String, dynamic>? parameters) {
@@ -78,35 +106,4 @@ class EndpointBase {
     }
     return replacedPath;
   }
-
-  // String _convertPathToMethodName(String path) {
-  //   return "get${path.split("/").map(
-  //     (e) {
-  //       if(e.isEmpty) { return ""; }
-  //       if(e.startsWith("{")) {
-  //         return "With${_convertNameToUpperCamelCase(e
-  //           .replaceAll("{", "")
-  //           .replaceAll("}", "")
-  //         )}";
-  //       }
-  //       return _convertNameToUpperCamelCase(e);
-  //     }).toList().join("")}";
-  // }
-
-  // String _convertNameToLowerCamelCase(String name) {
-  //   name = _convertNameToUpperCamelCase(name);
-  //   return name[0].toLowerCase() + name.substring(1);
-  // }
-
-  // String _convertNameToUpperCamelCase(String name) {
-  //   if(name.isEmpty) { return ""; }
-  //   if(!name.contains("_")) {
-  //     return name[0].toUpperCase() + name.substring(1).toLowerCase();
-  //   }
-  //   return name.split('_').map((n) {
-  //     if(n.isEmpty || n.contains('beta')) { return ''; }
-  //     var convertedName = n.trim().toLowerCase();
-  //     return convertedName[0].toUpperCase() + convertedName.substring(1);
-  //   }).join('');
-  // }
 }
