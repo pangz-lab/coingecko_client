@@ -1,10 +1,10 @@
-import 'package:coingecko_client/src/domain/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange_ordering.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_tickers.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
-class DerivativesEndpoint extends EndpointBase {
+class DerivativesEndpoint extends BaseEndpoint {
   String _path = "";
   DerivativesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 

@@ -1,5 +1,5 @@
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
-import 'package:coingecko_client/src/domain/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
@@ -7,7 +7,7 @@ import 'package:coingecko_client/src/services/date_service.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
-class CoinsEndpoint extends EndpointBase {
+class CoinsEndpoint extends BaseEndpoint {
   String _path = "";
   CoinsEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 

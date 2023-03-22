@@ -8,7 +8,7 @@ abstract class ResponseDate {
   String get baseEndpoint;
 }
 
-class EndpointBase {
+class BaseEndpoint {
   static final apiHost = "api.coingecko.com";
   static final apiProHost = "pro-api.coingecko.com";
   static final apiKeyQueryParam = "x_cg_pro_api_key";
@@ -17,7 +17,7 @@ class EndpointBase {
   String get endpointPath => _endpointPath;
   HttpRequestServiceInterface httpRequestService;
   String? apiKey;
-  EndpointBase(
+  BaseEndpoint(
     this.httpRequestService, Map<String?, String?> map,
     {this.apiKey}
   );

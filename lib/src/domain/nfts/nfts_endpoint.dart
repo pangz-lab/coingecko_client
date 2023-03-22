@@ -1,9 +1,9 @@
-import 'package:coingecko_client/src/domain/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/nfts/models/nfts_data_ordering.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
-class NftsEndpoint extends EndpointBase {
+class NftsEndpoint extends BaseEndpoint {
   String _path = "";
   NftsEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 

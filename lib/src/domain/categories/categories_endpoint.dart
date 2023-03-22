@@ -1,9 +1,9 @@
-import 'package:coingecko_client/src/domain/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/categories/models/categories_data_ordering.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
-class CategoriesEndpoint extends EndpointBase {
+class CategoriesEndpoint extends BaseEndpoint {
   String _path = "";
   CategoriesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 

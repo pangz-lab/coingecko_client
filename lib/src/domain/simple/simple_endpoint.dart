@@ -1,9 +1,9 @@
-import 'package:coingecko_client/src/domain/endpoint_base.dart';
+import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
-class SimpleEndpoint extends EndpointBase {
+class SimpleEndpoint extends BaseEndpoint {
   String _path = "";
   SimpleEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
