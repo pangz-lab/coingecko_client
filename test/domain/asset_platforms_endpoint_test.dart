@@ -1,7 +1,7 @@
 import 'package:coingecko_client/src/domain/asset_platforms/asset_platforms_endpoint.dart';
 import 'package:coingecko_client/src/domain/asset_platforms/models/asset_platforms_filter.dart';
-import 'package:coingecko_client/src/models/exceptions/failed_request_exception.dart';
-import 'package:coingecko_client/src/models/exceptions/failed_parsing_exception.dart';
+import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
+import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:test/test.dart';
 
 import '../services/http_request_service_mock.dart';
@@ -104,7 +104,7 @@ void main() {
           body: responseBody
         )
       );
-      await expectLater(sut!(), throwsA(isA<FailedRequestException>()));
+      await expectLater(sut!(), throwsA(isA<NetworkRequestException>()));
     });
 
     test('should return a FormatException when result is error or when parsing failed', () async {
@@ -116,21 +116,23 @@ void main() {
 }'''
         )
       );
-      await expectLater(sut!(), throwsA(isA<FailedParsingException>()));
+      await expectLater(sut!(), throwsA(isA<DataParsingException>()));
+
       sut = AssetPlatformsEndpoint(
         HttpRequestServiceMock(
           statusCode : 200,
           body: responseBodyInvalidFormat
         )
       );
-      await expectLater(sut!(), throwsA(isA<FailedParsingException>()));
+      await expectLater(sut!(), throwsA(isA<DataParsingException>()));
+
       sut = AssetPlatformsEndpoint(
         HttpRequestServiceMock(
           statusCode : 200,
           body: ""
         )
       );
-      await expectLater(sut!(), throwsA(isA<FailedParsingException>()));
+      await expectLater(sut!(), throwsA(isA<DataParsingException>()));
     });
   });
 }

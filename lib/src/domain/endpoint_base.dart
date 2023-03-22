@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:coingecko_client/src/models/exceptions/failed_request_exception.dart';
+import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
@@ -27,12 +27,12 @@ class EndpointBase {
       _endpointPath = "$version$path";
       var response = await httpRequestService.sendGet(apiHost, _endpointPath);
       if(response.statusCode != 200) {
-        throw FailedRequestException('Failed sending the request.');
+        throw NetworkRequestException('Failed sending the request.');
       }
 
-      if(response.body.trim().isEmpty) {
-        throw FormatException('Result is empty');
-      }
+      // if(response.body.trim().isEmpty) {
+      //   throw FormatException('Result is empty');
+      // }
       return jsonDecode(response.body);
     } catch (_) {
       rethrow;
