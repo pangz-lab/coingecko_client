@@ -25,14 +25,19 @@ class BaseEndpoint {
   Future<dynamic> sendBasic(String path) async {
     try {
       _endpointPath = "$version$path";
-      var response = await httpRequestService.sendGet(apiHost, _endpointPath);
+      var urlComponent = _endpointPath.split("?");
+      var query = urlComponent.length > 1 ? urlComponent.elementAt(1) : '';
+      var response = await httpRequestService.sendGet(
+        apiHost,
+        urlComponent.elementAt(0),
+        query
+      );
       if(response.statusCode != 200) {
-        throw NetworkRequestException('Failed sending the request.');
+        throw NetworkRequestException.failedResponse(
+          response.statusCode,
+          response
+        );
       }
-
-      // if(response.body.trim().isEmpty) {
-      //   throw FormatException('Result is empty');
-      // }
       return jsonDecode(response.body);
     } catch (_) {
       rethrow;
@@ -43,7 +48,7 @@ class BaseEndpoint {
   Future<Response> send(String path) async {
     try {
       _endpointPath = "$version$path";
-      return await httpRequestService.sendGet(apiHost, _endpointPath);
+      return await httpRequestService.sendGet(apiHost, _endpointPath, '');
     } catch (_) {
       rethrow;
     }
@@ -52,7 +57,7 @@ class BaseEndpoint {
   Future<Response> sendPro(String path) {
     try {
       _endpointPath = "$version$path&$apiKeyQueryParam=$apiKey";
-      return httpRequestService.sendGet(apiProHost, _endpointPath);
+      return httpRequestService.sendGet(apiProHost, _endpointPath, '');
     } catch (_) {
       rethrow;
     }
@@ -68,7 +73,12 @@ class BaseEndpoint {
     }
     var kvList = rawQueryItems!.map(
       (key, value) {
-        return MapEntry(key, value.toString().isNotEmpty ? "$key=${value.toString()}" : "");
+        return MapEntry(
+          key,
+          value != null && value.toString().isNotEmpty ? 
+            "$key=${value.toString()}" : 
+            ""
+          );
       }).values.toList();
 
     kvList.removeWhere((value) => value.toString().isEmpty);

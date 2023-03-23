@@ -1,4 +1,6 @@
-class AssetPlatform {
+import 'package:coingecko_client/src/models/base_model.dart';
+
+class AssetPlatform extends BaseModel {
   String? id;
   int? chainIdentifier;
   String? name;
@@ -16,7 +18,7 @@ class AssetPlatform {
   
   AssetPlatform.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    chainIdentifier = json['chain_identifier'];
+    chainIdentifier = toInt(json['chain_identifier']);
     name = json['name'];
     shortName = json['shortname'];
   }

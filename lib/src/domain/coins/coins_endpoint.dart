@@ -1,14 +1,16 @@
+import 'package:coingecko_client/src/domain/coins/models/coin.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_market.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
+import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/date_service.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
 class CoinsEndpoint extends BaseEndpoint {
-  String _path = "";
   CoinsEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// List all supported coins id, name and symbol (no pagination required)
@@ -18,16 +20,27 @@ class CoinsEndpoint extends BaseEndpoint {
   /// 
   /// [include_platform] flag to include platform contract addresses (eg. 0x.... for Ethereum based tokens). 
   ///  valid values: true, false
-  Future<Response> getCoinsList({
+  Future<List<Coin>> getCoinsList({
     bool? includePlatform
   }) async {
-    _path = createEndpointPathUrl(
-      rawQueryItems: {
-        'include_platform': includePlatform
-      },
-      endpointPath: "/coins/list"
-    );
-    return await send(_path);
+    
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'include_platform': includePlatform
+        },
+        endpointPath: "/coins/list"
+      );
+
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => Coin.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// List all supported coins price, market cap, volume, and market related data
@@ -38,14 +51,14 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [ids] The ids of the coin, comma separated crytocurrency symbols (base). refers to `/coins/list`.
   /// [category] filter by coin category. Refer to /coin/categories/list
-  /// [order] valid values: <b>market_cap_desc, gecko_desc, gecko_asc, market_cap_asc, market_cap_desc, volume_asc, volume_desc, id_asc, id_desc</b>
+  /// [order] valid values: <b>market_cap_asc, market_cap_desc, volume_asc, volume_desc, id_asc, id_desc</b>
   /// sort results by field.
   /// [per_page] valid values: 1..250
   ///  Total results per page
   /// [page] Page through results
   /// [sparkline] Include sparkline 7 days data (eg. true, false)
   /// [price_change_percentage] Include price change percentage in <b>1h, 24h, 7d, 14d, 30d, 200d, 1y</b> (eg. '`1h,24h,7d`' comma-separated, invalid values will be discarded)
-  Future<Response> getCoinsMarkets({
+  Future<List<CoinMarket>> getCoinsMarkets({
     required Currencies vsCurrency,
     List<String>? ids,
     String? category,
@@ -55,20 +68,30 @@ class CoinsEndpoint extends BaseEndpoint {
     bool? sparkline,
     List<CoinPriceChange>? priceChangePercentage
   }) async {
-    _path = createEndpointPathUrl(
-      rawQueryItems: {
-        'vs_currency': vsCurrency.code,
-        'ids': ids?.join(',') ?? '',
-        'category': category,
-        'order': order?.value ?? '',
-        'per_page': perPage,
-        'page': page,
-        'sparkline': sparkline,
-        'price_change_percentage': priceChangePercentage?.map((e) => e.value).join(",") ?? ''
-      },
-      endpointPath: "/coins/markets"
-    );
-    return await send(_path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'vs_currency': vsCurrency.code,
+          'ids': ids?.join(',') ?? '',
+          'category': category,
+          'order': order?.value ?? '',
+          'per_page': perPage,
+          'page': page,
+          'sparkline': sparkline,
+          'price_change_percentage': priceChangePercentage?.map((e) => e.value).join(",") ?? ''
+        },
+        endpointPath: "/coins/markets"
+      );
+    
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => CoinMarket.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get current data (name, price, market, ... including exchange tickers) for a coin
@@ -96,7 +119,7 @@ class CoinsEndpoint extends BaseEndpoint {
     bool? developerData,
     bool? sparkline
   }) async {
-    _path = createEndpointPathUrl(
+    var path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'localization': localization,
@@ -108,7 +131,7 @@ class CoinsEndpoint extends BaseEndpoint {
       },
       endpointPath: "/coins/{id}"
     );
-    return await send(_path);
+    return await sendBasic(path);
   }
 
   /// Get coin tickers (paginated to 100 items)
@@ -133,7 +156,7 @@ class CoinsEndpoint extends BaseEndpoint {
     CoinTickersDataOrdering? order,
     bool? depth
   }) async {
-    _path = createEndpointPathUrl(
+    var path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'exchange_ids': exchangeIds,
@@ -144,7 +167,7 @@ class CoinsEndpoint extends BaseEndpoint {
       },
       endpointPath: "/coins/{id}/tickers"
     );
-    return await send(_path);
+    return await sendBasic(path);
   }
 
   /// Get historical data (name, price, market, stats) at a given date for a coin
@@ -158,7 +181,7 @@ class CoinsEndpoint extends BaseEndpoint {
     required DateTime date,
     bool? localization
   }) async {
-    _path = createEndpointPathUrl(
+    var path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'date': DateService.formatAsDefault(date),
@@ -166,7 +189,7 @@ class CoinsEndpoint extends BaseEndpoint {
       },
       endpointPath: "/coins/{id}/history"
     );
-    return await send(_path);
+    return await sendBasic(path);
   }
 
   /// Get historical market data include price, market cap, and 24h volume (granularity auto)
@@ -184,7 +207,7 @@ class CoinsEndpoint extends BaseEndpoint {
     required DataRange days,
     String? interval
   }) async {
-    _path = createEndpointPathUrl(
+    var path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'vs_currency': vsCurrency.code,
@@ -193,7 +216,7 @@ class CoinsEndpoint extends BaseEndpoint {
       },
       endpointPath: "/coins/{id}/market_chart"
     );
-    return await send(_path);
+    return await sendBasic(path);
   }
 
   /// Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)
@@ -211,7 +234,7 @@ class CoinsEndpoint extends BaseEndpoint {
     required DateTime from,
     required DateTime to
   }) async {
-    _path = createEndpointPathUrl(
+    var path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'vs_currency': vsCurrency.code,
@@ -220,7 +243,7 @@ class CoinsEndpoint extends BaseEndpoint {
       },
       endpointPath: "/coins/{id}/market_chart/range"
     );
-    return await send(_path);
+    return await sendBasic(path);
   }
 
   /// Get coin's OHLC
@@ -240,7 +263,7 @@ class CoinsEndpoint extends BaseEndpoint {
     required Currencies vsCurrency,
     required DataRange days
   }) async {
-    _path = createEndpointPathUrl(
+    var path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'vs_currency': vsCurrency.code,
@@ -248,6 +271,6 @@ class CoinsEndpoint extends BaseEndpoint {
       },
       endpointPath: "/coins/{id}/ohlc"
     );
-    return await send(_path);
+    return await sendBasic(path);
   }
 }

@@ -5,48 +5,20 @@ import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.da
 import 'package:test/test.dart';
 
 import '../../services/http_request_service_mock.dart';
+import 'mock/asset_platforms_mock_data.dart';
 
 
 
 void main() {
   AssetPlatformsEndpoint? sut;
   final String apiVersionPath = "/api/v3";
-  var responseBody = '''[
-  {
-    "id": "factom",
-    "chain_identifier": null,
-    "name": "Factom",
-    "shortname": ""
-  },
-  {
-    "id": "openledger",
-    "chain_identifier": 12,
-    "name": "OpenLedger",
-    "shortname": ""
-  }
-]''';
-  var responseBodyIncomplete = '''[
-  {
-    "id": "factom",
-    "name": "Factom"
-  },
-  {
-    "chain_identifier": 12,
-    "shortname": "sn"
-  }
-]''';
-  //With comman at the last part
-  var responseBodyInvalidFormat = '''[
-  {
-    "id": "factom",
-    "name": "Factom",
-  },
-]''';
+
+
   group('AssetPlatformsEndpoint test endpoint path creation', () {
     var sut = AssetPlatformsEndpoint(
       HttpRequestServiceMock(
         statusCode : 200,
-        body: responseBody
+        body: AssetPlatformsMockData.validResponseBody
       )
     );
 
@@ -65,7 +37,7 @@ void main() {
     sut = AssetPlatformsEndpoint(
       HttpRequestServiceMock(
         statusCode : 200,
-        body: responseBody
+        body: AssetPlatformsMockData.validResponseBody
       )
     );
     test('with data in getting the correct response type', () async {
@@ -82,7 +54,7 @@ void main() {
       sut = AssetPlatformsEndpoint(
         HttpRequestServiceMock(
           statusCode : 200,
-          body: responseBodyIncomplete
+          body: AssetPlatformsMockData.responseBodyWithIncompleteKeys
         )
       );
       var result = await sut!();
@@ -103,7 +75,7 @@ void main() {
       sut = AssetPlatformsEndpoint(
         HttpRequestServiceMock(
           statusCode : 500,
-          body: responseBody
+          body: AssetPlatformsMockData.validResponseBody
         )
       );
       await expectLater(sut!(), throwsA(isA<NetworkRequestException>()));
@@ -123,7 +95,7 @@ void main() {
       sut = AssetPlatformsEndpoint(
         HttpRequestServiceMock(
           statusCode : 200,
-          body: responseBodyInvalidFormat
+          body: AssetPlatformsMockData.responseBodyWithInvalidFormat
         )
       );
       await expectLater(sut!(), throwsA(isA<DataParsingException>()));

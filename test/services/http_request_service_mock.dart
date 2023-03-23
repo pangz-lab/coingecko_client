@@ -9,7 +9,7 @@ class HttpRequestServiceMock implements HttpRequestServiceInterface {
     required this.statusCode
   });
   @override
-  Future<Response> sendGet(String server, String path) {
+  Future<Response> sendGet(String server, String path, String query) {
     return Future.delayed(
       Duration.zero,() => Response(
         body,
