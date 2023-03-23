@@ -22,7 +22,7 @@ class AssetPlatformsEndpoint extends BaseEndpoint {
     AssetPlatformsFilter? filter
   }) async {
     try {
-      _path = createEndpointUrlPath(
+      _path = createEndpointPathUrl(
         rawQueryItems: {
           'filter': filter?.name ?? ''
         },

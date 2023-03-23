@@ -4,7 +4,9 @@ import 'package:coingecko_client/src/models/exceptions/network_request_exception
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:test/test.dart';
 
-import '../services/http_request_service_mock.dart';
+import '../../services/http_request_service_mock.dart';
+
+
 
 void main() {
   AssetPlatformsEndpoint? sut;

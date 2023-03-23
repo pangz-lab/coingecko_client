@@ -22,7 +22,7 @@ class NftsEndpoint extends BaseEndpoint {
     int? perPage,
     int? page
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'order': order?.value ?? '',
         'asset_platform_id': assetPlatformId,
@@ -41,7 +41,7 @@ class NftsEndpoint extends BaseEndpoint {
   Future<Response> getNftsWithId({
     required String id
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id
       },
@@ -59,7 +59,7 @@ class NftsEndpoint extends BaseEndpoint {
     required String assetPlatformId,
     required String contractAddress
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'asset_platform_id': assetPlatformId,
         'contract_address': contractAddress

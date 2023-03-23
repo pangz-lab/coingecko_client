@@ -58,7 +58,7 @@ class BaseEndpoint {
     }
   }
 
-  String createEndpointUrlPath({
+  String createEndpointPathUrl({
     required String endpointPath,
     Map<String, dynamic>? rawQueryItems
   }) {

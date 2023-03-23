@@ -21,7 +21,7 @@ class CoinsEndpoint extends BaseEndpoint {
   Future<Response> getCoinsList({
     bool? includePlatform
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'include_platform': includePlatform
       },
@@ -55,7 +55,7 @@ class CoinsEndpoint extends BaseEndpoint {
     bool? sparkline,
     List<CoinPriceChange>? priceChangePercentage
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'vs_currency': vsCurrency.code,
         'ids': ids?.join(',') ?? '',
@@ -96,7 +96,7 @@ class CoinsEndpoint extends BaseEndpoint {
     bool? developerData,
     bool? sparkline
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'localization': localization,
@@ -133,7 +133,7 @@ class CoinsEndpoint extends BaseEndpoint {
     CoinTickersDataOrdering? order,
     bool? depth
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'exchange_ids': exchangeIds,
@@ -158,7 +158,7 @@ class CoinsEndpoint extends BaseEndpoint {
     required DateTime date,
     bool? localization
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'date': DateService.formatAsDefault(date),
@@ -184,7 +184,7 @@ class CoinsEndpoint extends BaseEndpoint {
     required DataRange days,
     String? interval
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'vs_currency': vsCurrency.code,
@@ -211,7 +211,7 @@ class CoinsEndpoint extends BaseEndpoint {
     required DateTime from,
     required DateTime to
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'vs_currency': vsCurrency.code,
@@ -240,7 +240,7 @@ class CoinsEndpoint extends BaseEndpoint {
     required Currencies vsCurrency,
     required DataRange days
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'vs_currency': vsCurrency.code,

@@ -13,7 +13,7 @@ class SearchEndpoint extends BaseEndpoint {
   Future<Response> getSearch({
     required String query
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'query': query
       },

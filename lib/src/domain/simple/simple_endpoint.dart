@@ -28,7 +28,7 @@ class SimpleEndpoint extends BaseEndpoint {
     bool? includeLastUpdatedAt,
     int? precision
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'ids': ids.join(','),
         'vs_currencies': vsCurrencies.map((e) => e.code).join(','),
@@ -65,7 +65,7 @@ class SimpleEndpoint extends BaseEndpoint {
     bool? includeLastUpdatedAt,
     int? precision
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'contract_addresses': contractAddresses.join(','),

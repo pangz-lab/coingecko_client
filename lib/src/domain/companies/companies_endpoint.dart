@@ -13,7 +13,7 @@ class CompaniesEndpoint extends BaseEndpoint {
   Future<Response> getCompaniesPublicTreasuryWithCoinId({
     String? coinId
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'coin_id': coinId
       },

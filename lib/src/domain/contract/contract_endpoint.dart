@@ -17,7 +17,7 @@ class ContractEndpoint extends BaseEndpoint {
     required String id,
     required String contractAddress
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'contract_address': contractAddress
@@ -40,7 +40,7 @@ class ContractEndpoint extends BaseEndpoint {
     required Currencies vsCurrency,
     required DataRange days
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'contract_address': contractAddress,
@@ -67,7 +67,7 @@ class ContractEndpoint extends BaseEndpoint {
     required DateTime from,
     required DateTime to
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'contract_address': contractAddress,

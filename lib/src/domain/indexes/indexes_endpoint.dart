@@ -15,7 +15,7 @@ class IndexesEndpoint extends BaseEndpoint {
     int? perPage,
     int? page
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'per_page': perPage,
         'page': page
@@ -34,7 +34,7 @@ class IndexesEndpoint extends BaseEndpoint {
     required String marketId,
     required String id
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'market_id': marketId,
         'id': id

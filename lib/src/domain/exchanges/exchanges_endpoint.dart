@@ -19,7 +19,7 @@ class ExchangesEndpoint extends BaseEndpoint {
     int? perPage,
     int? page
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'per_page': perPage,
         'page': page
@@ -51,7 +51,7 @@ class ExchangesEndpoint extends BaseEndpoint {
   Future<Response> getExchangesWithId({
     required String id
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id
       },
@@ -82,7 +82,7 @@ class ExchangesEndpoint extends BaseEndpoint {
     bool? depth,
     ExchangesDataOrdering? order
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'coin_ids': coinIds,
@@ -105,7 +105,7 @@ class ExchangesEndpoint extends BaseEndpoint {
     required String id,
     required DataRange days
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'days': days.value

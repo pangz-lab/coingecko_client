@@ -21,7 +21,7 @@ class CategoriesEndpoint extends BaseEndpoint {
   Future<Response> getCoinsCategories({
     CategoriesCoinDataOrdering? order
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'order': order?.value ?? ''
       },

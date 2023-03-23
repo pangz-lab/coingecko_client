@@ -15,7 +15,7 @@ class DerivativesEndpoint extends BaseEndpoint {
   Future<Response> getDerivatives({
     DerivativesTickers? includeTickers
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'include_tickers': includeTickers?.value ?? ''
       },
@@ -35,7 +35,7 @@ class DerivativesEndpoint extends BaseEndpoint {
     int? perPage,
     int? page
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'order': order?.value ?? '',
         'per_page': perPage,
@@ -55,7 +55,7 @@ class DerivativesEndpoint extends BaseEndpoint {
     required String id,
     DerivativesTickers? includeTickers
   }) async {
-    _path = createEndpointUrlPath(
+    _path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'include_tickers': includeTickers?.value ?? ''
