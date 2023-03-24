@@ -1,4 +1,5 @@
 import 'package:coingecko_client/src/domain/coins/models/coin.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_market.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
@@ -110,7 +111,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [community_data] Include community_data data (true/false) <b>[default: true]</b>
   /// [developer_data] Include developer_data data (true/false) <b>[default: true]</b>
   /// [sparkline] Include sparkline 7 days data (eg. true, false) <b>[default: false]</b>
-  Future<Response> getCoinsWithId({
+  Future<CoinInfo> getCoinsWithId({
     required String id,
     bool? localization,
     bool? tickers,
@@ -119,19 +120,28 @@ class CoinsEndpoint extends BaseEndpoint {
     bool? developerData,
     bool? sparkline
   }) async {
-    var path = createEndpointPathUrl(
-      rawQueryItems: {
-        'id': id,
-        'localization': localization,
-        'tickers': tickers,
-        'market_data': marketData,
-        'community_data': communityData,
-        'developer_data': developerData,
-        'sparkline': sparkline
-      },
-      endpointPath: "/coins/{id}"
-    );
-    return await sendBasic(path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'localization': localization,
+          'tickers': tickers,
+          'market_data': marketData,
+          'community_data': communityData,
+          'developer_data': developerData,
+          'sparkline': sparkline
+        },
+        endpointPath: "/coins/{id}"
+      );
+    
+      return CoinInfo.fromJson(Map<String, dynamic>.of(await sendBasic(path)));
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get coin tickers (paginated to 100 items)

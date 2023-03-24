@@ -1,3 +1,4 @@
+import 'package:coingecko_client/src/domain/coins/models/roi.dart';
 import 'package:coingecko_client/src/models/base_model.dart';
 
 class CoinMarket extends BaseModel {
@@ -63,7 +64,7 @@ class CoinMarket extends BaseModel {
     DateTime? atlDate,
     Roi? roi,
     DateTime? lastUpdated,
-    Map<String, List<double>>? sparklineIn7d,
+    Map<String, List<dynamic>>? sparklineIn7d,
     double? priceChangePercentage14dInCurrency,
     double? priceChangePercentage1hInCurrency,
     double? priceChangePercentage1yInCurrency,
@@ -170,9 +171,7 @@ class CoinMarket extends BaseModel {
     _atlDate = toDate(json['atl_date']);
     _roi = json['roi'] != null ? Roi.fromJson(json['roi']) : null;
     _lastUpdated = toDate(json['last_updated']);
-    _sparklineIn7d = json['sparkline_in_7d'] != null 
-      ? Map<String, dynamic>.from(json['sparkline_in_7d']) 
-      : null;
+    _sparklineIn7d = toMap<dynamic>(json['sparkline_in_7d']);
     _priceChangePercentage14dInCurrency = toDouble(json['price_change_percentage_14d_in_currency']);
     _priceChangePercentage1hInCurrency = toDouble(json['price_change_percentage_1h_in_currency']);
     _priceChangePercentage1yInCurrency = toDouble(json['price_change_percentage_1y_in_currency']);
@@ -220,37 +219,6 @@ class CoinMarket extends BaseModel {
     data['price_change_percentage_24h_in_currency'] = _priceChangePercentage24hInCurrency;
     data['price_change_percentage_30d_in_currency'] = _priceChangePercentage30dInCurrency;
     data['price_change_percentage_7d_in_currency'] = _priceChangePercentage7dInCurrency;
-    return data;
-  }
-}
-
-class Roi extends BaseModel {
-  double? _times;
-  String? _currency;
-  double? _percentage;
-
-  Roi({double? times, String? currency, double? percentage}) {
-    _times = times;
-    _currency = currency;
-    _percentage = percentage;
-  }
-
-  double? get times => _times;
-  String? get currency => _currency;
-  double? get percentage => _percentage;
-  
-
-  Roi.fromJson(Map<String, dynamic> json) {
-    _times = toDouble(json['times']);
-    _currency = json['currency'];
-    _percentage = toDouble(json['percentage']);
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['times'] = _times;
-    data['currency'] = _currency;
-    data['percentage'] = _percentage;
     return data;
   }
 }

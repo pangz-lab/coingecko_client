@@ -3,6 +3,7 @@ import 'package:coingecko_client/src/domain/coins/models/coin.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_market.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
+import 'package:coingecko_client/src/domain/coins/models/roi.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
@@ -358,4 +359,8 @@ void main() {
       });
     });
   });
+
+
+
+
 }

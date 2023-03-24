@@ -13,4 +13,12 @@ class BaseModel {
     if(value == null) return null;
     return int.tryParse(value.toString());
   }
+
+  Map<String, T>? toMap<T>(dynamic value) {
+    return value != null ? Map<String, T>.of(value) : null;
+  }
+
+  List<T>? toList<T>(dynamic value) {
+    return value != null ? List<T>.from(value) : null;
+  }
 }
