@@ -111,7 +111,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [community_data] Include community_data data (true/false) <b>[default: true]</b>
   /// [developer_data] Include developer_data data (true/false) <b>[default: true]</b>
   /// [sparkline] Include sparkline 7 days data (eg. true, false) <b>[default: false]</b>
-  Future<CoinInfo> getCoinsWithId({
+  Future<CoinInfo> getCoinInfo({
     required String id,
     bool? localization,
     bool? tickers,
@@ -133,8 +133,7 @@ class CoinsEndpoint extends BaseEndpoint {
         },
         endpointPath: "/coins/{id}"
       );
-    
-      return CoinInfo.fromJson(Map<String, dynamic>.of(await sendBasic(path)));
+      return CoinInfo.fromJson(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {

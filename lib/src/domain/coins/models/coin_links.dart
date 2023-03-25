@@ -52,17 +52,17 @@ class CoinLinks extends BaseModel {
   Map<String, dynamic>? get reposUrl => _reposUrl;
 
   CoinLinks.fromJson(Map<String, dynamic> json) {
-    _homepage = json['homepage'].forEach((v) {_homepage!.add(v);});
-    _blockchainSite = json['blockchain_site'].forEach((v) {_blockchainSite!.add(v);});
-    _officialForumUrl = json['official_forum_url'].forEach((v) {_officialForumUrl!.add(v);});
-    _chatUrl = json['chat_url'].forEach((v) {_chatUrl!.add(v);});
-    _announcementUrl = json['announcement_url'].forEach((v) {_announcementUrl!.add(v);});
+    _homepage = toList<String>(json['homepage']);
+    _blockchainSite = toList<String>(json['blockchain_site']);
+    _officialForumUrl = toList<String>(json['official_forum_url']);
+    _chatUrl = toList<String>(json['chat_url']);
+    _announcementUrl = toList<String>(json['announcement_url']);
     _twitterScreenName = json['twitter_screen_name'];
     _facebookUsername = json['facebook_username'];
     _bitcointalkThreadIdentifier = json['bitcointalk_thread_identifier'];
     _telegramChannelIdentifier = json['telegram_channel_identifier'];
     _subredditUrl = json['subreddit_url'];
-    _reposUrl = json['repos_url'];
+    _reposUrl = toMap<dynamic>(json['repos_url']);
   }
 
   Map<String, dynamic> toJson() {

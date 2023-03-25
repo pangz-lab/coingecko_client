@@ -361,6 +361,235 @@ void main() {
   });
 
 
+  group('getCoinInfo method in', () {
+    var basePath = "/coins/bitcoin";
+    group('CoinsEndpoint test endpoint path creation', () {
+      var sut = CoinsEndpoint(
+        HttpRequestServiceMock(
+          statusCode : 200,
+          body: CoinInfoMockData.validResponseBody
+        )
+      );
 
+      test('with required parameters', () async {
+        await sut.getCoinInfo(id: 'bitcoin');
+        expect(sut.endpointPath, "$apiVersionPath$basePath");
+      });
+
+      test('with all parameters', () async {
+        await sut.getCoinInfo(
+          id: 'bitcoin',
+          localization: true,
+          tickers: true,
+          communityData: true,
+          developerData: true,
+          sparkline: true
+        );
+
+        expect(
+          sut.endpointPath,
+          "$apiVersionPath$basePath?localization=true&tickers=true&community_data=true&developer_data=true&sparkline=true"
+        );
+      });
+    });
+
+    group('CoinsEndpoint test endpoint response', () {
+      test('with data in getting the correct response type', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinInfoMockData.validResponseBody
+          )
+        );
+        var result = await sut!.getCoinInfo(
+          id: 'bitcoin',
+          localization: false,
+          tickers: true,
+          communityData: true,
+          developerData: true,
+          sparkline: true
+        );
+        
+        expect(result.id, 'bitcoin');
+        expect(result.symbol, 'btc');
+        expect(result.name, 'Bitcoin');
+        expect(result.assetPlatformId, null);
+        expect(result.platforms![''], '');
+        expect(result.detailPlatforms![''], <String, dynamic>{'decimal_place': null, 'contract_address': ''});
+        expect(result.blockTimeInMinutes, 10);
+        expect(result.hashingAlgorithm, "SHA-256");
+        expect(result.categories, [ "Cryptocurrency", "Layer 1 (L1)" ]);
+        expect(result.publicNotice, null);
+        expect(result.additionalNotices, []);
+        expect(result.description!['en'], "Bitcoin is the first successful internet money based on peer-to-peer technology; whereby no central bank or authority is involved in the transaction and production of the Bitcoin currency. It was created by an anonymous individual/group under the name, Satoshi Nakamoto. The source code is available publicly as an open source project, anybody can look at it and be part of the developmental process.\r\n\r\nBitcoin is changing the way we see money as we speak. The idea was to produce a means of exchange, independent of any central authority, that could be transferred electronically in a secure, verifiable and immutable way. It is a decentralized peer-to-peer internet currency making mobile payment easy, very low transaction fees, protects your identity, and it works anywhere all the time with no central authority and banks.\r\n\r\nBitcoin is designed to have only 21 million BTC ever created, thus making it a deflationary currency. Bitcoin uses the <a href=\"https://www.coingecko.com/en?hashing_algorithm=SHA-256\">SHA-256</a> hashing algorithm with an average transaction confirmation time of 10 minutes. Miners today are mining Bitcoin using ASIC chip dedicated to only mining Bitcoin, and the hash rate has shot up to peta hashes.\r\n\r\nBeing the first successful online cryptography currency, Bitcoin has inspired other alternative currencies such as <a href=\"https://www.coingecko.com/en/coins/litecoin\">Litecoin</a>, <a href=\"https://www.coingecko.com/en/coins/peercoin\">Peercoin</a>, <a href=\"https://www.coingecko.com/en/coins/primecoin\">Primecoin</a>, and so on.\r\n\r\nThe cryptocurrency then took off with the innovation of the turing-complete smart contract by <a href=\"https://www.coingecko.com/en/coins/ethereum\">Ethereum</a> which led to the development of other amazing projects such as <a href=\"https://www.coingecko.com/en/coins/eos\">EOS</a>, <a href=\"https://www.coingecko.com/en/coins/tron\">Tron</a>, and even crypto-collectibles such as <a href=\"https://www.coingecko.com/buzz/ethereum-still-king-dapps-cryptokitties-need-1-billion-on-eos\">CryptoKitties</a>.");
+        expect(result.links!.homepage!.elementAt(1), "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579");
+        expect(result.links!.blockchainSite!.elementAt(3), "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579");
+        expect(result.links!.officialForumUrl!.elementAt(2), "");
+        expect(result.links!.chatUrl!.elementAt(0), "");
+        expect(result.links!.announcementUrl!.elementAt(1), "");
+        expect(result.links!.twitterScreenName, "bitcoin");
+        expect(result.links!.facebookUsername, "bitcoins");
+        expect(result.links!.bitcointalkThreadIdentifier, null);
+        expect(result.links!.telegramChannelIdentifier, "");
+        expect(result.links!.subredditUrl, "https://www.reddit.com/r/Bitcoin/");
+        expect(List<String>.from(result.links!.reposUrl!['github']!).elementAt(2), "https://github.com/bitcoin/bips");
+        expect(List<String>.from(result.links!.reposUrl!['bitbucket']!).isEmpty, true);
+        expect(result.image, <String, dynamic>{
+          "thumb": "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
+          "small": "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579",
+          "large": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
+        });
+        expect(result.countryOrigin, "");
+        expect(result.genesisDate, DateTime.parse("2009-01-03"));
+        expect(result.sentimentVotesUpPercentage, 82.84);
+        expect(result.sentimentVotesDownPercentage, 17.16);
+        expect(result.marketCapRank, 1);
+        expect(result.coingeckoRank, 1);
+        expect(result.coingeckoScore, 83.151);
+        expect(result.developerScore, 99.241);
+        expect(result.communityScore, 83.341);
+        expect(result.liquidityScore, 100.011);
+        expect(result.publicInterestScore, 0.073);
+        expect(result.publicInterestStats, <String, dynamic>{
+          "alexa_rank": 9440,
+          "bing_matches": null
+        });
+        expect(result.statusUpdates!.length, 0);
+        expect(result.lastUpdated!, DateTime.parse("2023-03-24T13:55:13.610Z"));
+      });
+
+      test('with data with complete parameters in getting the correct response type', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinInfoMockData.validResponseBodyWithCompleteParameter
+          )
+        );
+        var result = await sut!.getCoinInfo(
+          id: 'bitcoin',
+          localization: true,
+          tickers: true,
+          communityData: true,
+          developerData: true,
+          sparkline: true
+        );
+
+        expect(result.id, 'bitcoin');
+        expect(result.symbol, 'btc');
+        expect(result.name, 'Bitcoin');
+        expect(result.assetPlatformId, null);
+        expect(result.platforms![''], '');
+        expect(result.detailPlatforms![''], <String, dynamic>{'decimal_place': null, 'contract_address': ''});
+        expect(result.blockTimeInMinutes, 10);
+        expect(result.hashingAlgorithm, "SHA-256");
+        expect(result.categories, [ "Cryptocurrency", "Layer 1 (L1)" ]);
+        expect(result.publicNotice, null);
+        expect(result.additionalNotices, []);
+        // expect(result.description!['en'], "Bitcoin is the first successful internet money based on peer-to-peer technology; whereby no central bank or authority is involved in the transaction and production of the Bitcoin currency. It was created by an anonymous individual/group under the name, Satoshi Nakamoto. The source code is available publicly as an open source project, anybody can look at it and be part of the developmental process.\r\n\r\nBitcoin is changing the way we see money as we speak. The idea was to produce a means of exchange, independent of any central authority, that could be transferred electronically in a secure, verifiable and immutable way. It is a decentralized peer-to-peer internet currency making mobile payment easy, very low transaction fees, protects your identity, and it works anywhere all the time with no central authority and banks.\r\n\r\nBitcoin is designed to have only 21 million BTC ever created, thus making it a deflationary currency. Bitcoin uses the <a href=\"https://www.coingecko.com/en?hashing_algorithm=SHA-256\">SHA-256</a> hashing algorithm with an average transaction confirmation time of 10 minutes. Miners today are mining Bitcoin using ASIC chip dedicated to only mining Bitcoin, and the hash rate has shot up to peta hashes.\r\n\r\nBeing the first successful online cryptography currency, Bitcoin has inspired other alternative currencies such as <a href=\"https://www.coingecko.com/en/coins/litecoin\">Litecoin</a>, <a href=\"https://www.coingecko.com/en/coins/peercoin\">Peercoin</a>, <a href=\"https://www.coingecko.com/en/coins/primecoin\">Primecoin</a>, and so on.\r\n\r\nThe cryptocurrency then took off with the innovation of the turing-complete smart contract by <a href=\"https://www.coingecko.com/en/coins/ethereum\">Ethereum</a> which led to the development of other amazing projects such as <a href=\"https://www.coingecko.com/en/coins/eos\">EOS</a>, <a href=\"https://www.coingecko.com/en/coins/tron\">Tron</a>, and even crypto-collectibles such as <a href=\"https://www.coingecko.com/buzz/ethereum-still-king-dapps-cryptokitties-need-1-billion-on-eos\">CryptoKitties</a>.");
+        expect(result.links!.homepage!.elementAt(1), "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579");
+        expect(result.links!.blockchainSite!.elementAt(3), "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579");
+        expect(result.links!.officialForumUrl!.elementAt(2), "");
+        expect(result.links!.chatUrl!.elementAt(0), "");
+        expect(result.links!.announcementUrl!.elementAt(1), "");
+        expect(result.links!.twitterScreenName, "bitcoin");
+        expect(result.links!.facebookUsername, "bitcoins");
+        expect(result.links!.bitcointalkThreadIdentifier, null);
+        expect(result.links!.telegramChannelIdentifier, "");
+        expect(result.links!.subredditUrl, "https://www.reddit.com/r/Bitcoin/");
+        expect(List<String>.from(result.links!.reposUrl!['github']!).elementAt(2), "https://github.com/bitcoin/bips");
+        expect(List<String>.from(result.links!.reposUrl!['bitbucket']!).isEmpty, true);
+        expect(result.image, <String, dynamic>{
+          "thumb": "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
+          "small": "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579",
+          "large": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
+        });
+        expect(result.countryOrigin, "");
+        expect(result.genesisDate, DateTime.parse("2009-01-03"));
+        expect(result.sentimentVotesUpPercentage, 82.84);
+        expect(result.sentimentVotesDownPercentage, 17.16);
+        expect(result.marketCapRank, 1);
+        expect(result.coingeckoRank, 1);
+        expect(result.coingeckoScore, 83.151);
+        expect(result.developerScore, 99.241);
+        expect(result.communityScore, 83.341);
+        expect(result.liquidityScore, 100.011);
+        expect(result.publicInterestScore, 0.073);
+        expect(result.publicInterestStats, <String, dynamic>{
+          "alexa_rank": 9440,
+          "bing_matches": null
+        });
+        expect(result.statusUpdates!.length, 0);
+        expect(result.lastUpdated!, DateTime.parse("2023-03-24T13:55:13.610Z"));
+      });
+
+  //     test('should still return a result for incomplete data format', () async {
+  //       sut = CoinsEndpoint(
+  //         HttpRequestServiceMock(
+  //           statusCode : 200,
+  //           body: CoinMarketMockData.responseBodyWithIncompleteKeys
+  //         )
+  //       );
+  //       var result = await sut!.getCoinsMarkets(vsCurrency: Currencies.php);
+  //       var item = result.elementAt(0);
+  //       expect(item.currentPrice, 34006);
+  //       expect(item.marketCap, 23.3);
+  //       expect(item.marketCapRank, 23);
+  //       expect(item.fullyDilutedValuation, null);
+  //       expect(item.totalVolume, 233.3);
+  //       expect(item.high24h, 35471);
+  //       expect(item.low24h, 33335);
+  //       expect(item.priceChange24h, -1153.9176068902307);
+  //       expect(item.maxSupply, null);
+  //       expect(item.ath, null);
+  //       expect(item.athChangePercentage, null);
+  //       expect(item.athDate, null);
+  //       expect(item.atl, 18940.5);
+  //       expect(item.atlChangePercentage, 79.54002);
+  //       expect(item.atlDate, DateTime.parse("2022-06-18T21:00:56.647Z"));
+  //       expect(item.sparklineIn7d, {});
+  //       expect(item.roi, isA<Roi>());
+  //     });
+    });
+
+  //   group('CoinsEndpoint test for error handling', () {
+  //     test('should throw an exception for failed request', () async {
+  //       sut = CoinsEndpoint(
+  //         HttpRequestServiceMock(
+  //           statusCode : 500,
+  //           body: CoinMarketMockData.validResponseBody
+  //         )
+  //       );
+  //       await expectLater(sut!.getCoinsMarkets(vsCurrency: Currencies.php), throwsA(isA<NetworkRequestException>()));
+  //     });
+
+  //     test('should return a FormatException when result is error or when parsing failed', () async {
+  //       sut = CoinsEndpoint(
+  //         HttpRequestServiceMock(
+  //           statusCode : 200,
+  //           body: '''{
+  //   "error": "coin not found"
+  // }'''
+  //         )
+  //       );
+  //       await expectLater(sut!.getCoinsMarkets(vsCurrency: Currencies.php), throwsA(isA<DataParsingException>()));
+
+  //       sut = CoinsEndpoint(
+  //         HttpRequestServiceMock(
+  //           statusCode : 200,
+  //           body: CoinMarketMockData.responseBodyWithInvalidFormat
+  //         )
+  //       );
+  //       await expectLater(sut!.getCoinsMarkets(vsCurrency: Currencies.php), throwsA(isA<DataParsingException>()));
+
+  //       sut = CoinsEndpoint(
+  //         HttpRequestServiceMock(
+  //           statusCode : 200,
+  //           body: ""
+  //         )
+  //       );
+  //       await expectLater(sut!.getCoinsMarkets(vsCurrency: Currencies.php), throwsA(isA<DataParsingException>()));
+  //     });
+  //   });
+  });
 
 }

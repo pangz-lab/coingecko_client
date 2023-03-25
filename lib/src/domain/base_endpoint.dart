@@ -26,7 +26,7 @@ class BaseEndpoint {
     try {
       _endpointPath = "$version$path";
       var urlComponent = _endpointPath.split("?");
-      var query = urlComponent.length > 1 ? urlComponent.elementAt(1) : '';
+      var query = urlComponent.length > 1 ? urlComponent.elementAt(1) : null;
       var response = await httpRequestService.sendGet(
         apiHost,
         urlComponent.elementAt(0),
@@ -67,6 +67,7 @@ class BaseEndpoint {
     required String endpointPath,
     Map<String, dynamic>? rawQueryItems
   }) {
+    var defaultRawQueryItems = Map<String, dynamic>.from(rawQueryItems ?? {});
     var pathParameters = _getPathParameters(endpointPath, rawQueryItems);
     if(pathParameters.isNotEmpty && rawQueryItems != null) {
       rawQueryItems.removeWhere((key, value) => pathParameters.contains(key));
@@ -85,7 +86,7 @@ class BaseEndpoint {
     var path = kvList.join("&").trim(); 
     path = path.isNotEmpty ? "?${kvList.join("&")}" : '';
 
-    return "${_replaceEndpointPathWithValue(endpointPath, rawQueryItems, pathParameters)}$path";
+    return "${_replaceEndpointPathWithValue(endpointPath, defaultRawQueryItems)}$path";
   }
 
   List<String?> _getPathParameters(String path, Map<String, dynamic>? parameters) {
@@ -108,11 +109,11 @@ class BaseEndpoint {
     return result;
   }
 
-  String _replaceEndpointPathWithValue(String path, Map<String, dynamic> paramters, List<String?> pathVariableList) {
-    if(!path.contains("{")) { return path; }
+  String _replaceEndpointPathWithValue(String path, Map<String, dynamic>? parameters) {
+    if(!path.contains("{") || parameters == null) { return path; }
     var replacedPath = path;
-    for (var pathVariable in pathVariableList) {
-      replacedPath = replacedPath.replaceAll("{$pathVariable}", paramters[pathVariable]! as String);
+    for (var pathVariable in parameters.keys) {
+      replacedPath = replacedPath.replaceAll("{$pathVariable}", parameters[pathVariable].toString());
     }
     return replacedPath;
   }

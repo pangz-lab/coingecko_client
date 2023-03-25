@@ -15,10 +15,10 @@ class CoinInfo extends BaseModel {
   List<String>? _categories;
   String? _publicNotice;
   List<String>? _additionalNotices;
-  Map<String, String>? _localization;
-  Map<String, String>? _description;
+  Map<String, dynamic>? _localization;
+  Map<String, dynamic>? _description;
   CoinLinks? _links;
-  Map<String, String>? _image;
+  Map<String, dynamic>? _image;
   String? _countryOrigin;
   DateTime? _genesisDate;
   double? _sentimentVotesUpPercentage;
@@ -50,10 +50,10 @@ class CoinInfo extends BaseModel {
     List<String>? categories,
     String? publicNotice,
     List<String>? additionalNotices,
-    Map<String, String>? localization,
-    Map<String, String>? description,
+    Map<String, dynamic>? localization,
+    Map<String, dynamic>? description,
     CoinLinks? links,
-    Map<String, String>? image,
+    Map<String, dynamic>? image,
     String? countryOrigin,
     DateTime? genesisDate,
     double? sentimentVotesUpPercentage,
@@ -119,10 +119,10 @@ class CoinInfo extends BaseModel {
   List<String>? get categories => _categories;
   String? get publicNotice => _publicNotice;
   List<String>? get additionalNotices => _additionalNotices;
-  Map<String, String>? get localization => _localization;
-  Map<String, String>? get description => _description;
+  Map<String, dynamic>? get localization => _localization;
+  Map<String, dynamic>? get description => _description;
   CoinLinks? get links => _links;
-  Map<String, String>? get image => _image;
+  Map<String, dynamic>? get image => _image;
   String? get countryOrigin => _countryOrigin;
   DateTime? get genesisDate => _genesisDate;
   double? get sentimentVotesUpPercentage => _sentimentVotesUpPercentage;
@@ -147,17 +147,17 @@ class CoinInfo extends BaseModel {
     _symbol = json['symbol'];
     _name = json['name'];
     _assetPlatformId = json['asset_platform_id'];
-    _platforms = toMap(json['platforms']);
-    _detailPlatforms = toMap(json['detail_platforms']);
+    _platforms = toMap<dynamic>(json['platforms']);
+    _detailPlatforms = toMap<dynamic>(json['detail_platforms']);
     _blockTimeInMinutes = toInt(json['block_time_in_minutes']);
     _hashingAlgorithm = json['hashing_algorithm'];
-    _categories = json['categories'].forEach((v) {_categories!.add(v);});
+    _categories = toList(json['categories']);
     _publicNotice = json['public_notice'];
     _additionalNotices = toList(json['additional_notices']);
-    _localization = toMap<String>(json['localization']);
-    _description = toMap<String>(json['description']);
-    _links = _links != null? CoinLinks.fromJson(json['links']) : null;
-    _image = toMap<String>(json['image']);
+    _localization = toMap<dynamic>(json['localization']);
+    _description = toMap<dynamic>(json['description']);
+    _links = json['links'] != null? CoinLinks.fromJson(json['links']) : null;
+    _image = toMap<dynamic>(json['image']);
     _countryOrigin = json['country_origin'];
     _genesisDate = toDate(json['genesis_date']);
     _sentimentVotesUpPercentage = toDouble(json['sentiment_votes_up_percentage']);
