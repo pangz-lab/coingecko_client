@@ -133,6 +133,7 @@ class CoinsEndpoint extends BaseEndpoint {
         },
         endpointPath: "/coins/{id}"
       );
+      
       return CoinInfo.fromJson(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();

@@ -8,7 +8,7 @@ class TickerInfo extends BaseModel {
   double? _volume;
   Map<String, dynamic>? _convertedLast;
   Map<String, dynamic>? _convertedVolume;
-  double? _trustScore;
+  dynamic _trustScore;
   double? _bidAskSpreadPercentage;
   DateTime? _timestamp;
   DateTime? _lastTradedAt;
@@ -28,7 +28,7 @@ class TickerInfo extends BaseModel {
     double? volume,
     Map<String, dynamic>? convertedLast,
     Map<String, dynamic>? convertedVolume,
-    double? trustScore,
+    dynamic trustScore,
     double? bidAskSpreadPercentage,
     DateTime? timestamp,
     DateTime? lastTradedAt,
@@ -67,7 +67,7 @@ class TickerInfo extends BaseModel {
   double? get volume => _volume;
   Map<String, dynamic>? get convertedLast => _convertedLast;
   Map<String, dynamic>? get convertedVolume => _convertedVolume;
-  double? get trustScore => _trustScore;
+  dynamic get trustScore => _trustScore;
   double? get bidAskSpreadPercentage => _bidAskSpreadPercentage;
   DateTime? get timestamp => _timestamp;
   DateTime? get lastTradedAt => _lastTradedAt;
@@ -87,7 +87,7 @@ class TickerInfo extends BaseModel {
     _volume = toDouble(json['volume']);
     _convertedLast = toMap<dynamic>(json['converted_last']);
     _convertedVolume = toMap<dynamic>(json['converted_volume']);
-    _trustScore = toDouble(json['trust_score']);
+    _trustScore = json['trust_score'];
     _bidAskSpreadPercentage = toDouble(json['bid_ask_spread_percentage']);
     _timestamp = toDate(json['timestamp']);
     _lastTradedAt = toDate(json['last_traded_at']);

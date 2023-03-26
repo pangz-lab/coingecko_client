@@ -3,6 +3,7 @@ import 'package:coingecko_client/src/domain/asset_platforms/models/asset_platfor
 import 'package:coingecko_client/src/domain/coins/coins_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_market.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
@@ -47,6 +48,19 @@ void main() {
         ],
       );
       expect(result.elementAt(0).runtimeType, CoinMarket);
+    });
+
+    test('from CoinsEndpoint for getCoinInfo should return a valid response', () async {
+      var sut = CoinsEndpoint(httpService);
+      var result = await sut.getCoinInfo(
+          id: 'bitcoin',
+          localization: true,
+          tickers: true,
+          communityData: true,
+          developerData: true,
+          sparkline: true
+        );
+      expect(result.runtimeType, CoinInfo);
     });
   });
 }

@@ -27,18 +27,14 @@ class BaseEndpoint {
       _endpointPath = "$version$path";
       var urlComponent = _endpointPath.split("?");
       var query = urlComponent.length > 1 ? urlComponent.elementAt(1) : null;
-      var response = await httpRequestService.sendGet(
-        apiHost,
-        urlComponent.elementAt(0),
-        query
-      );
+      var response = await httpRequestService.sendGet(apiHost, urlComponent.elementAt(0), query);
       if(response.statusCode != 200) {
         throw NetworkRequestException.failedResponse(
           response.statusCode,
           response
         );
       }
-      return jsonDecode(response.body);
+      return jsonDecode(utf8.decode(response.bodyBytes));
     } catch (_) {
       rethrow;
     }

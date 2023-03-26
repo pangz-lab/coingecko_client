@@ -31,7 +31,7 @@ class CoinInfo extends BaseModel {
   double? _liquidityScore;
   double? _publicInterestScore;
   MarketData? _marketData;
-  Map<String, int>? _communitydata;
+  Map<String, dynamic>? _communitydata;
   Map<String, dynamic>? _developerdata;
   Map<String, dynamic>? _publicInterestStats;
   List<String>? _statusUpdates;
@@ -66,7 +66,7 @@ class CoinInfo extends BaseModel {
     double? liquidityScore,
     double? publicInterestScore,
     MarketData? marketData,
-    Map<String, int>? communitydata,
+    Map<String, dynamic>? communitydata,
     Map<String, dynamic>? developerdata,
     Map<String, dynamic>? publicInterestStats,
     List<String>? statusUpdates,
@@ -135,7 +135,7 @@ class CoinInfo extends BaseModel {
   double? get liquidityScore => _liquidityScore;
   double? get publicInterestScore => _publicInterestScore;
   MarketData? get marketData => _marketData;
-  Map<String, int>? get communitydata => _communitydata;
+  Map<String, dynamic>? get communitydata => _communitydata;
   Map<String, dynamic>? get developerdata => _developerdata;
   Map<String, dynamic>? get publicInterestStats => _publicInterestStats;
   List<String>? get statusUpdates => _statusUpdates;
@@ -170,7 +170,7 @@ class CoinInfo extends BaseModel {
     _liquidityScore = toDouble(json['liquidity_score']);
     _publicInterestScore = toDouble(json['public_interest_score']);
     _marketData = json['market_data'] != null ? MarketData.fromJson(json['market_data']) : null;
-    _communitydata = toMap<int>(json['community_data']);
+    _communitydata = toMap<dynamic>(json['community_data']);
     _developerdata = toMap<dynamic>(json['developer_data']);
     _publicInterestStats = toMap<dynamic>(json['public_interest_stats']);
     _statusUpdates = toList<String>(json['status_updates']);

@@ -4,9 +4,9 @@ class Coin extends BaseModel {
   String? _id;
   String? _symbol;
   String? _name;
-  Map<String, String>? _platforms;
+  Map<String, dynamic>? _platforms;
 
-  Coin({String? id, String? symbol, String? name, Map<String, String>? platforms}) {
+  Coin({String? id, String? symbol, String? name, Map<String, dynamic>? platforms}) {
     _id = id;
     _symbol = symbol;
     _name = name;
@@ -16,13 +16,13 @@ class Coin extends BaseModel {
   String? get id => _id;
   String? get symbol => _symbol;
   String? get name => _name;
-  Map<String, String>? get platforms => _platforms;
+  Map<String, dynamic>? get platforms => _platforms;
 
   Coin.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _symbol = json['symbol'];
     _name = json['name'];
-    _platforms = toMap<String>(json['platforms']);
+    _platforms = toMap<dynamic>(json['platforms']);
   }
 
   Map<String, dynamic> toJson() {

@@ -9,10 +9,10 @@ class MarketData extends BaseModel {
   Roi? _roi;
   Map<String, dynamic>? _ath;
   Map<String, dynamic>? _athChangePercentage;
-  Map<String, String>? _athDate;
+  Map<String, dynamic>? _athDate;
   Map<String, dynamic>? _atl;
   Map<String, dynamic>? _atlChangePercentage;
-  Map<String, String>? _atlDate;
+  Map<String, dynamic>? _atlDate;
   Map<String, dynamic>? _marketCap;
   int? _marketCapRank;
   Map<String, dynamic>? _fullyDilutedValuation;
@@ -54,10 +54,10 @@ class MarketData extends BaseModel {
       Roi? roi,
       Map<String, dynamic>? ath,
       Map<String, dynamic>? athChangePercentage,
-      Map<String, String>? athDate,
+      Map<String, dynamic>? athDate,
       Map<String, dynamic>? atl,
       Map<String, dynamic>? atlChangePercentage,
-      Map<String, String>? atlDate,
+      Map<String, dynamic>? atlDate,
       Map<String, dynamic>? marketCap,
       int? marketCapRank,
       Map<String, dynamic>? fullyDilutedValuation,
@@ -153,10 +153,10 @@ class MarketData extends BaseModel {
   Roi? get roi => _roi;
   Map<String, dynamic>? get ath => _ath;
   Map<String, dynamic>? get athChangePercentage => _athChangePercentage;
-  Map<String, String>? get athDate => _athDate;
+  Map<String, dynamic>? get athDate => _athDate;
   Map<String, dynamic>? get atl => _atl;
   Map<String, dynamic>? get atlChangePercentage => _atlChangePercentage;
-  Map<String, String>? get atlDate => _atlDate;
+  Map<String, dynamic>? get atlDate => _atlDate;
   Map<String, dynamic>? get marketCap => _marketCap;
   int? get marketCapRank => _marketCapRank;
   Map<String, dynamic>? get fullyDilutedValuation => _fullyDilutedValuation;
@@ -200,10 +200,10 @@ class MarketData extends BaseModel {
     _roi = json['roi'] != null ? Roi.fromJson(json['roi']) : null;
     _ath = toMap<dynamic>(json['ath']);
     _athChangePercentage = toMap<dynamic>(json['ath_change_percentage']);
-    _athDate = toMap<String>(json['ath_date']);
+    _athDate = toMap<dynamic>(json['ath_date']);
     _atl = toMap<dynamic>(json['atl']);
     _atlChangePercentage = toMap<dynamic>(json['atl_change_percentage']);
-    _atlDate = toMap<String>(json['atl_date']);
+    _atlDate = toMap<dynamic>(json['atl_date']);
     _marketCap = toMap<dynamic>(json['market_cap']);
     _marketCapRank = toInt(json['market_cap_rank']);
     _fullyDilutedValuation = toMap<dynamic>(json['fully_diluted_valuation']);

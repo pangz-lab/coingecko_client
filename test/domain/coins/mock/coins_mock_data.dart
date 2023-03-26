@@ -1,5 +1,5 @@
 class CoinListMockData {
-  static final validResponseBody = '''[
+  static final validResponseBody = r'''[
   {
     "id": "01coin",
     "symbol": "zoc",
@@ -16,7 +16,7 @@ class CoinListMockData {
     "name": "0VIX Protocol"
   }
 ]''';
-  static final validResponseBodyWithPlatforms = '''[
+  static final validResponseBodyWithPlatforms = r'''[
   {
     "id": "01coin",
     "symbol": "zoc",
@@ -38,7 +38,7 @@ class CoinListMockData {
     }
   }
 ]''';
-  static final responseBodyWithIncompleteKeys = '''[
+  static final responseBodyWithIncompleteKeys = r'''[
   {
     "id": "01coin",
     "name": "01coin",
@@ -54,7 +54,7 @@ class CoinListMockData {
   }
 ]''';
   //With comman at the last part
-  static final responseBodyWithInvalidFormat = '''[
+  static final responseBodyWithInvalidFormat = r'''[
   {
     "id": "0chain",
     "symbol": "zcn",
@@ -64,7 +64,7 @@ class CoinListMockData {
 }
 
 class CoinMarketMockData {
-  static final validResponseBody = '''[{
+  static final validResponseBody = r'''[{
     "id": "vechain",
     "symbol": "vet",
     "name": "VeChain",
@@ -97,7 +97,7 @@ class CoinMarketMockData {
     "last_updated": "2023-03-23T03:40:36.668Z"
   }]''';
 
-  static final validResponseBodyWithCompleteParameter = '''[{
+  static final validResponseBodyWithCompleteParameter = r'''[{
     "id": "aave-amm-bptbalweth",
     "symbol": "aammbptbalweth",
     "name": "Aave AMM BptBALWETH",
@@ -145,7 +145,7 @@ class CoinMarketMockData {
     "price_change_percentage_7d_in_currency": 1.4191558625633633
 }]''';
 
-  static final responseBodyWithIncompleteKeys = '''[{
+  static final responseBodyWithIncompleteKeys = r'''[{
     "current_price": 34006,
     "market_cap": 23.3,
     "market_cap_rank": 23,
@@ -165,7 +165,7 @@ class CoinMarketMockData {
     "roi": {}
 }]''';
   //Invalid json format - with comma at the end
-  static final responseBodyWithInvalidFormat = '''[{
+  static final responseBodyWithInvalidFormat = r'''[{
     "current_price": 34006,
     "market_cap": 23.3,
     "market_cap_rank": 23,
@@ -373,7 +373,7 @@ class CoinInfoMockData {
   "links": {
     "homepage": [
       "http://www.bitcoin.org",
-      "",
+      "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
       ""
     ],
     "blockchain_site": [
@@ -385,7 +385,7 @@ class CoinInfoMockData {
       "",
       "",
       "",
-      "",
+      "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
       ""
     ],
     "official_forum_url": [
@@ -501,7 +501,7 @@ class CoinInfoMockData {
       "sats": 76469824499968
     },
     "high_24h": {
-      "aed": 104468,
+      "aed": null,
       "ars": 5853.397,
       "zar": 0,
       "bits": -10.07623,
@@ -510,7 +510,7 @@ class CoinInfoMockData {
     },
     "low_24h": {
       "aed": 99926,
-      "ars": 5594423,
+      "ars": null,
       "bits": 99.6387,
       "link": 0,
       "sats": -99.638749
@@ -520,8 +520,8 @@ class CoinInfoMockData {
     "price_change_percentage_7d": 1.06962,
     "price_change_percentage_14d": 37.46052,
     "price_change_percentage_30d": 14.96873,
-    "price_change_percentage_60d": 20.7771,
-    "price_change_percentage_200d": 40.30547,
+    "price_change_percentage_60d": null,
+    "price_change_percentage_200d": 4030547,
     "price_change_percentage_1y": -36.81627,
     "market_cap_change_24h": -12023865909.323,
     "market_cap_change_percentage_24h": -2.19182,
@@ -724,44 +724,24 @@ class CoinInfoMockData {
   ]
 }''';
 
-  static final responseBodyWithIncompleteKeys = '''[{
-    "current_price": 34006,
-    "market_cap": 23.3,
-    "market_cap_rank": 23,
-    "fully_diluted_valuation": null,
-    "total_volume": 233.3,
-    "high_24h": 35471,
-    "low_24h": 33335,
-    "price_change_24h": -1153.9176068902307,
-    "max_supply": null,
-    "ath": null,
-    "ath_change_percentage": null,
-    "ath_date": null,
-    "atl": 18940.5,
-    "atl_change_percentage": 79.54002,
-    "atl_date": "2022-06-18T21:00:56.647Z",
-    "sparkline_in_7d": {},
-    "roi": {}
-}]''';
+  static final responseBodyWithIncompleteKeys = r'''{
+  "id": "bitcoin",
+  "symbol": "btc",
+  "name": "Bitcoin",
+  "asset_platform_id": null,
+  "platforms": {
+    "": ""
+  }
+}''';
   //Invalid json format - with comma at the end
-  static final responseBodyWithInvalidFormat = '''[{
-    "current_price": 34006,
-    "market_cap": 23.3,
-    "market_cap_rank": 23,
-    "fully_diluted_valuation": null,
-    "total_volume": 233.3,
-    "high_24h": 35471,
-    "low_24h": 33335,
-    "price_change_24h": -1153.9176068902307,
-    "max_supply": null,
-    "ath": null,
-    "ath_change_percentage": null,
-    "ath_date": null,
-    "atl": 18940.5,
-    "atl_change_percentage": 79.54002,
-    "atl_date": "2022-06-18T21:00:56.647Z",
-    "sparkline_in_7d": {},
-    "roi": {},
-},]''';
+  static final responseBodyWithInvalidFormat = r'''{
+  "id": "bitcoin",
+  "symbol": "btc",
+  "name": "Bitcoin",
+  "asset_platform_id": null,
+  "platforms": {
+    "": ""
+  },
+},''';
 }
 
