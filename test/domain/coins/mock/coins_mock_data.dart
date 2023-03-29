@@ -745,3 +745,155 @@ class CoinInfoMockData {
 },''';
 }
 
+class CoinTickersMockData {
+  static final validResponseBody = r'''{
+  "name": "Bitcoin",
+  "tickers": [
+    {
+      "base": "BTC",
+      "target": "EUR",
+      "market": {
+        "name": "Bittrex",
+        "identifier": "bittrex",
+        "has_trading_incentive": false,
+        "logo": "https://assets.coingecko.com/markets/images/10/small/BG-color-250x250_icon.png?1596167574"
+      },
+      "last": 26075.866,
+      "volume": 5.86785553,
+      "converted_last": {
+        "btc": 0.99646975,
+        "eth": 15.559817,
+        "usd": 28307
+      },
+      "converted_volume": {
+        "btc": 5.847141,
+        "eth": 91.303,
+        "usd": 166099
+      },
+      "trust_score": "green",
+      "bid_ask_spread_percentage": 0.200478,
+      "timestamp": "2023-03-29T10:27:01+00:00",
+      "last_traded_at": "2023-03-29T10:27:01+00:00",
+      "last_fetch_at": "2023-03-29T10:27:01+00:00",
+      "is_anomaly": false,
+      "is_stale": false,
+      "trade_url": "https://bittrex.com/Market/Index?MarketName=EUR-BTC",
+      "token_info_url": null,
+      "coin_id": "bitcoin"
+    }
+  ]
+}''';
+
+  static final validResponseBodyWithCompleteParameter = r'''{
+  "name": "Bitcoin",
+  "tickers": [
+    {
+      "base": "BTC",
+      "target": "EUR",
+      "market": {
+        "name": "Bittrex",
+        "identifier": "bittrex",
+        "has_trading_incentive": false,
+        "logo": "https://assets.coingecko.com/markets/images/10/small/BG-color-250x250_icon.png?1596167574"
+      },
+      "last": 26075.866,
+      "volume": 5.86785553,
+      "converted_last": {
+        "btc": 0.99646975,
+        "eth": 15.559817,
+        "usd": 28307
+      },
+      "converted_volume": {
+        "btc": 5.847141,
+        "eth": 91.303,
+        "usd": 166099
+      },
+      "trust_score": "green",
+      "bid_ask_spread_percentage": 0.200478,
+      "timestamp": "2023-03-29T10:27:01+00:00",
+      "last_traded_at": "2023-03-29T10:27:01+00:00",
+      "last_fetch_at": "2023-03-29T10:27:01+00:00",
+      "is_anomaly": false,
+      "is_stale": false,
+      "trade_url": "https://bittrex.com/Market/Index?MarketName=EUR-BTC",
+      "token_info_url": null,
+      "coin_id": "bitcoin"
+    },
+    {
+      "base": "NEO",
+      "target": "BTC",
+      "market": {
+        "name": "Crypto.com Exchange",
+        "identifier": "crypto_com",
+        "has_trading_incentive": false,
+        "logo": "https://assets.coingecko.com/markets/images/589/small/h2oMjPp6_400x400.jpg?1669699705"
+      },
+      "last": 0.00045636,
+      "volume": 3704.5501,
+      "converted_last": {
+        "btc": 1,
+        "eth": 15.601969,
+        "usd": 28343
+      },
+      "converted_volume": {
+        "btc": 1.690608,
+        "eth": 26.37682,
+        "usd": 47917
+      },
+      "trust_score": "green",
+      "bid_ask_spread_percentage": 0.273057,
+      "timestamp": "2023-03-29T10:20:59+00:00",
+      "last_traded_at": "2023-03-29T10:20:59+00:00",
+      "last_fetch_at": "2023-03-29T10:25:42+00:00",
+      "is_anomaly": false,
+      "is_stale": false,
+      "trade_url": "https://crypto.com/exchange/trade/spot/NEO_BTC",
+      "token_info_url": null,
+      "coin_id": "neo",
+      "target_coin_id": "bitcoin"
+    },
+    {
+      "base": "FET",
+      "target": "BTC",
+      "market": {
+        "name": "Binance",
+        "identifier": "binance",
+        "has_trading_incentive": false,
+        "logo": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250"
+      },
+      "last": 0.00001299,
+      "volume": 2378554.7590454197,
+      "converted_last": {
+        "btc": 1,
+        "eth": 15.612598,
+        "usd": 28357
+      },
+      "converted_volume": {
+        "btc": 30.897426,
+        "eth": 482.389,
+        "usd": 876146
+      },
+      "trust_score": "green",
+      "bid_ask_spread_percentage": 0.152788,
+      "timestamp": "2023-03-29T10:08:42+00:00",
+      "last_traded_at": "2023-03-29T10:08:42+00:00",
+      "last_fetch_at": "2023-03-29T10:08:42+00:00",
+      "is_anomaly": false,
+      "is_stale": false,
+      "trade_url": "https://www.binance.com/en/trade/FET_BTC?ref=37754157",
+      "token_info_url": null,
+      "coin_id": "fetch-ai",
+      "target_coin_id": "bitcoin"
+    }
+  ]
+}''';
+
+  static final responseBodyWithIncompleteKeys = r'''{
+  "name": "Bitcoin"
+}''';
+  //Invalid json format - with comma at the end
+  static final responseBodyWithInvalidFormat = r'''{
+  "name": "bitcoin",
+},''';
+}
+

@@ -6,6 +6,7 @@ import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart
 import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_market.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:test/test.dart';
@@ -61,6 +62,14 @@ void main() {
           sparkline: true
         );
       expect(result.runtimeType, CoinInfo);
+    });
+    
+    test('from CoinsEndpoint for getCoinInfo should return a valid response', () async {
+      var sut = CoinsEndpoint(httpService);
+      var result = await sut.getCoinTickers(
+        id: 'bitcoin'
+      );
+      expect(result.runtimeType, CoinTickers);
     });
   });
 }

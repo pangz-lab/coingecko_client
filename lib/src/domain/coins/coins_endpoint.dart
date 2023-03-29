@@ -4,6 +4,7 @@ import 'package:coingecko_client/src/domain/coins/models/coin_market.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
@@ -133,7 +134,7 @@ class CoinsEndpoint extends BaseEndpoint {
         },
         endpointPath: "/coins/{id}"
       );
-      
+
       return CoinInfo.fromJson(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();
@@ -158,7 +159,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [page] Page through results
   /// [order] valid values: <b>trust_score_desc (default), trust_score_asc and volume_desc</b>
   /// [depth] flag to show 2% orderbook depth. valid values: true, false
-  Future<Response> getCoinsWithIdTickers({
+  Future<CoinTickers> getCoinTickers({
     required String id,
     String? exchangeIds,
     bool? includeExchangeLogo,
@@ -166,18 +167,28 @@ class CoinsEndpoint extends BaseEndpoint {
     CoinTickersDataOrdering? order,
     bool? depth
   }) async {
-    var path = createEndpointPathUrl(
-      rawQueryItems: {
-        'id': id,
-        'exchange_ids': exchangeIds,
-        'include_exchange_logo': includeExchangeLogo,
-        'page': page,
-        'order': order?.value ?? '',
-        'depth': depth
-      },
-      endpointPath: "/coins/{id}/tickers"
-    );
-    return await sendBasic(path);
+
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'exchange_ids': exchangeIds,
+          'include_exchange_logo': includeExchangeLogo,
+          'page': page,
+          'order': order?.value ?? '',
+          'depth': depth
+        },
+        endpointPath: "/coins/{id}/tickers"
+      );
+      return CoinTickers.fromJson(await sendBasic(path));
+    
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get historical data (name, price, market, stats) at a given date for a coin

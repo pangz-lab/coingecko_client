@@ -3,7 +3,9 @@ import 'package:coingecko_client/src/domain/coins/models/coin.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
 import 'package:coingecko_client/src/domain/coins/models/roi.dart';
+import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
@@ -833,6 +835,163 @@ void main() {
           )
         );
         await expectLater(sut!.getCoinInfo(id: 'verus-coin'), throwsA(isA<DataParsingException>()));
+      });
+    });
+  });
+
+
+  group('getCoinTickers method in', () {
+    var basePath = "/coins/bitcoin/tickers";
+    group('CoinsEndpoint test endpoint path creation', () {
+      var sut = CoinsEndpoint(
+        HttpRequestServiceMock(
+          statusCode : 200,
+          body: CoinTickersMockData.validResponseBody
+        )
+      );
+
+      test('with required parameters', () async {
+        await sut.getCoinTickers(id: 'bitcoin');
+        expect(sut.endpointPath, "$apiVersionPath$basePath");
+      });
+
+      test('with all parameters', () async {
+        await sut.getCoinTickers(
+          id: 'bitcoin',
+          exchangeIds: 'aave',
+          includeExchangeLogo: true,
+          page: 6,
+          order: CoinTickersDataOrdering.trustScoreDesc,
+          depth: true
+        );
+
+        expect(
+          sut.endpointPath,
+          "$apiVersionPath$basePath?exchange_ids=aave&include_exchange_logo=true&page=6&order=trust_score_desc&depth=true"
+        );
+      });
+    });
+
+    group('CoinsEndpoint test endpoint response', () {
+      test('with data in getting the correct response type', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinTickersMockData.validResponseBody
+          )
+        );
+        var result = await sut!.getCoinTickers(
+          id: 'bitcoin',
+        );
+        
+        expect(result.name, 'Bitcoin');
+        expect(result.tickers!.elementAt(0), isA<TickerInfo>());
+      });
+
+      test('with data with complete parameters in getting the correct response type', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinTickersMockData.validResponseBodyWithCompleteParameter
+          )
+        );
+        var result = await sut!.getCoinTickers(
+          id: 'bitcoin',
+          exchangeIds: 'aave',
+          includeExchangeLogo: true,
+          page: 6,
+          order: CoinTickersDataOrdering.trustScoreDesc,
+          depth: true
+        );
+
+        expect(result.name, 'Bitcoin');
+        expect(result.tickers!.length, 3);
+        expect(result.tickers!.elementAt(0), isA<TickerInfo>());
+        expect(result.tickers!.elementAt(0).base, "BTC");
+        expect(result.tickers!.elementAt(0).target, "EUR");
+        expect(result.tickers!.elementAt(0).market, {
+          "name": "Bittrex",
+          "identifier": "bittrex",
+          "has_trading_incentive": false,
+          "logo": "https://assets.coingecko.com/markets/images/10/small/BG-color-250x250_icon.png?1596167574"
+        });
+        expect(result.tickers!.elementAt(0).last, 26075.866);
+        expect(result.tickers!.elementAt(0).volume, 5.86785553);
+        expect(result.tickers!.elementAt(0).convertedLast, {
+          "btc": 0.99646975,
+          "eth": 15.559817,
+          "usd": 28307
+        });
+        expect(result.tickers!.elementAt(0).convertedVolume, {
+          "btc": 5.847141,
+          "eth": 91.303,
+          "usd": 166099
+        });
+        expect(result.tickers!.elementAt(0).trustScore, "green");
+        expect(result.tickers!.elementAt(0).bidAskSpreadPercentage, 0.200478);
+        expect(result.tickers!.elementAt(0).timestamp, DateTime.parse("2023-03-29T10:27:01+00:00"));
+        expect(result.tickers!.elementAt(0).lastTradedAt, DateTime.parse("2023-03-29T10:27:01+00:00"));
+        expect(result.tickers!.elementAt(0).lastFetchAt,DateTime.parse("2023-03-29T10:27:01+00:00"));
+        expect(result.tickers!.elementAt(0).isAnomaly, false);
+        expect(result.tickers!.elementAt(0).isStale, false);
+        expect(result.tickers!.elementAt(0).tradeUrl, "https://bittrex.com/Market/Index?MarketName=EUR-BTC");
+        expect(result.tickers!.elementAt(0).tokenInfoUrl, null);
+        expect(result.tickers!.elementAt(0).coinId, "bitcoin");
+        expect(result.tickers!.elementAt(0).targetCoinId, null);
+        
+      });
+
+      test('should still return a result for incomplete data format', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinTickersMockData.responseBodyWithIncompleteKeys
+          )
+        );
+        var result = await sut!.getCoinTickers(id: 'bitcoin');
+        expect(result.name, 'Bitcoin');
+        expect(result.tickers, null);
+      });
+
+      test('should still return a result for error response', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: '''{"error": "coin not found"}'''
+          )
+        );
+        expect(await sut!.getCoinTickers(id: 'verus-coin'), isA<CoinTickers>());
+      });
+    });
+
+    group('CoinsEndpoint test for error handling', () {
+      test('should throw an exception for failed request', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 500,
+            body: CoinInfoMockData.validResponseBody
+          )
+        );
+        await expectLater(sut!.getCoinTickers(id: 'verus-coin'), throwsA(isA<NetworkRequestException>()));
+      });
+
+      test('should return a FormatException when result is error or when parsing failed', () async {
+
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinInfoMockData.responseBodyWithInvalidFormat
+          )
+        );
+        await expectLater(sut!.getCoinTickers(id: 'verus-coin'), throwsA(isA<DataParsingException>()));
+
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: ""
+          )
+        );
+        await expectLater(sut!.getCoinTickers(id: 'verus-coin'), throwsA(isA<DataParsingException>()));
       });
     });
   });
