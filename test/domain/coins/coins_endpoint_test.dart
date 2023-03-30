@@ -996,4 +996,253 @@ void main() {
     });
   });
 
+
+  group('getCoinHistory method in', () {
+    var basePath = "/coins/bitcoin/history";
+    group('CoinsEndpoint test endpoint path creation', () {
+      var sut = CoinsEndpoint(
+        HttpRequestServiceMock(
+          statusCode : 200,
+          body: CoinHistoryMockData.validResponseBody
+        )
+      );
+
+      test('with required parameters', () async {
+        await sut.getCoinHistory(id: 'bitcoin', date: DateTime(2022, 12, 30));
+        expect(sut.endpointPath, "$apiVersionPath$basePath?date=30-12-2022");
+      });
+
+      test('with all parameters', () async {
+        await sut.getCoinHistory(
+          id: 'bitcoin',
+          date: DateTime(2022, 12, 30),
+          localization: true
+        );
+
+        expect(
+          sut.endpointPath,
+          "$apiVersionPath$basePath?date=30-12-2022&localization=true"
+        );
+      });
+    });
+
+    group('CoinsEndpoint test endpoint response', () {
+
+      test('with data in getting the correct response type', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinHistoryMockData.validResponseBody
+          )
+        );
+        var result = await sut!.getCoinHistory(
+          id: 'bitcoin',
+          date: DateTime(2022, 12, 30)
+        );
+        
+        expect(result.id, 'bitcoin');
+        expect(result.symbol, 'btc');
+        expect(result.name, 'Bitcoin');
+        expect(result.assetPlatformId, null);
+        expect(result.platforms, null);
+        expect(result.detailPlatforms, null);
+        expect(result.blockTimeInMinutes, null);
+        expect(result.hashingAlgorithm, null);
+        expect(result.categories, null);
+        expect(result.publicNotice, null);
+        expect(result.additionalNotices, null);
+        expect(result.description, null);
+        expect(result.links, null);
+        expect(result.localization!['en']!, "Bitcoin");
+        expect(result.localization!['ru']!, "Биткоин");
+        expect(result.localization!['ja']!, "ビットコイン");
+        expect(result.localization!['zh']!, "比特币");
+        expect(result.localization!['zh-tw']!, "比特幣");
+        expect(result.localization!['ko']!, "비트코인");
+        expect(result.localization!['ar']!, "بيتكوين");
+        expect(result.localization!['th']!, "บิตคอยน์");
+        expect(result.localization!['sl']!, "Bitcoin");
+        expect(result.image, {
+          "thumb": "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
+          "small": "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
+        });
+      });
+
+      test('with data in getting the correct response type with complete body', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinHistoryMockData.validResponseBodyWithCompleteParameter
+          )
+        );
+        var result = await sut!.getCoinHistory(
+          id: 'bitcoin',
+          date: DateTime(2022, 12, 30)
+        );
+        
+        expect(result.id, 'bitcoin');
+        expect(result.symbol, 'btc');
+        expect(result.name, 'Bitcoin');
+        expect(result.assetPlatformId, null);
+        expect(result.platforms, null);
+        expect(result.detailPlatforms, null);
+        expect(result.blockTimeInMinutes, null);
+        expect(result.hashingAlgorithm, null);
+        expect(result.categories, null);
+        expect(result.publicNotice, null);
+        expect(result.additionalNotices, null);
+        expect(result.description, null);
+        expect(result.links, null);
+        expect(result.localization!['en']!, "Bitcoin");
+        expect(result.localization!['ru']!, "Биткоин");
+        expect(result.localization!['ja']!, "ビットコイン");
+        expect(result.localization!['zh']!, "比特币");
+        expect(result.localization!['zh-tw']!, "比特幣");
+        expect(result.localization!['ko']!, "비트코인");
+        expect(result.localization!['ar']!, "بيتكوين");
+        expect(result.localization!['th']!, "บิตคอยน์");
+        expect(result.localization!['sl']!, "Bitcoin");
+        expect(result.image, {
+          "thumb": "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
+          "small": "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
+        });
+        expect(result.statusUpdates, null);
+        expect(result.lastUpdated, null);
+        expect(result.countryOrigin, null);
+        expect(result.genesisDate, null);
+        expect(result.sentimentVotesUpPercentage, null);
+        expect(result.sentimentVotesDownPercentage, null);
+        expect(result.marketCapRank, null);
+        expect(result.coingeckoRank, null);
+        expect(result.coingeckoScore, null);
+        expect(result.developerScore, null);
+        expect(result.communityScore, null);
+        expect(result.liquidityScore, null);
+        expect(result.publicInterestScore, null);
+        expect(result.marketData!.currentPrice, <String, dynamic>{
+          "aed": 61128.22985695089,
+          "ars": 2943801.482766091,
+          "link": 2972.256266475138,
+          "sats": 100004012.08331282
+        });
+        expect(result.marketData!.marketCap, {
+          "aed": 1176325458767.2192,
+          "link": 57165497740.20414,
+          "sats": 1924808957959762.5
+        });
+        expect(result.marketData!.totalVolume, {
+          "aed": 57600151375.60185,
+          "ars": 2773896960927.079,
+          "aud": 23188099293.539948,
+          "sats": 94232177958468.03
+        });
+        expect(result.communitydata, {
+          "facebook_likes": null,
+          "twitter_followers": 5684671,
+          "reddit_average_posts_48h": 5.8,
+          "reddit_average_comments_48h": 302.8,
+          "reddit_subscribers": 4767785,
+          "reddit_accounts_active_48h": "10351.2727272727"
+        });
+        expect(result.developerdata, {
+          "forks": null,
+          "stars": null,
+          "subscribers": null,
+          "total_issues": null,
+          "closed_issues": null,
+          "pull_requests_merged": null,
+          "pull_request_contributors": null,
+          "code_additions_deletions_4_weeks": {
+            "additions": null,
+            "deletions": null
+          },
+          "commit_count_4_weeks": null
+        });
+        expect(result.publicInterestStats, {
+          "alexa_rank": null,
+          "bing_matches": null
+        });
+      });
+
+      test('should still return a result for incomplete data format', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinHistoryMockData.responseBodyWithIncompleteKeys
+          )
+        );
+        var result = await sut!.getCoinHistory(
+          id: 'bitcoin',
+          date: DateTime(2022, 12, 30)
+        );
+        expect(result.name, "Bitcoin");
+        expect(result.id, null);
+        expect(result.platforms, null);
+        expect(result.lastUpdated, null);
+      });
+
+      test('should still return a result for error response', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: '''{"error": "coin not found"}'''
+          )
+        );
+        expect(await sut!.getCoinHistory(
+            id: 'bitcoin',
+            date: DateTime(2022, 12, 30)
+          ),
+          isA<CoinInfo>()
+        );
+      });
+    });
+
+    group('CoinsEndpoint test for error handling', () {
+      test('should throw an exception for failed request', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 500,
+            body: CoinHistoryMockData.validResponseBody
+          )
+        );
+        await expectLater(
+          sut!.getCoinHistory(
+            id: 'bitcoin',
+            date: DateTime(2022, 12, 30)
+          ),
+          throwsA(isA<NetworkRequestException>())
+        );
+      });
+
+      test('should return a FormatException when result is error or when parsing failed', () async {
+
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinHistoryMockData.responseBodyWithInvalidFormat
+          )
+        );
+        await expectLater(sut!.getCoinHistory(
+            id: 'bitcoin',
+            date: DateTime(2022, 12, 30)
+          ),
+          throwsA(isA<DataParsingException>())
+        );
+
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: ""
+          )
+        );
+        await expectLater(sut!.getCoinHistory(
+            id: 'bitcoin',
+            date: DateTime(2022, 12, 30)
+          ),
+          throwsA(isA<DataParsingException>())
+        );
+      });
+    });
+  });
+
 }

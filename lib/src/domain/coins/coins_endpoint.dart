@@ -197,20 +197,28 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [id] pass the coin id (can be obtained from /coins) eg. bitcoin
   /// [date] The date of data snapshot in dd-mm-yyyy eg. 30-12-2017
   /// [localization] Set to false to exclude localized languages in response
-  Future<Response> getCoinsWithIdHistory({
+  Future<CoinInfo> getCoinHistory({
     required String id,
     required DateTime date,
     bool? localization
   }) async {
-    var path = createEndpointPathUrl(
-      rawQueryItems: {
-        'id': id,
-        'date': DateService.formatAsDefault(date),
-        'localization': localization
-      },
-      endpointPath: "/coins/{id}/history"
-    );
-    return await sendBasic(path);
+    try{
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'date': DateService.formatAsDefault(date),
+          'localization': localization
+        },
+        endpointPath: "/coins/{id}/history"
+      );
+      return CoinInfo.fromJson(await sendBasic(path));
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get historical market data include price, market cap, and 24h volume (granularity auto)

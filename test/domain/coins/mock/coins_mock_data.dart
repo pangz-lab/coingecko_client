@@ -186,7 +186,6 @@ class CoinMarketMockData {
 },]''';
 }
 
-
 class CoinInfoMockData {
   static final validResponseBody = r'''{
   "id": "bitcoin",
@@ -886,6 +885,141 @@ class CoinTickersMockData {
       "target_coin_id": "bitcoin"
     }
   ]
+}''';
+
+  static final responseBodyWithIncompleteKeys = r'''{
+  "name": "Bitcoin"
+}''';
+  //Invalid json format - with comma at the end
+  static final responseBodyWithInvalidFormat = r'''{
+  "name": "bitcoin",
+},''';
+}
+
+class CoinHistoryMockData {
+  static final validResponseBody = r'''{
+  "id": "bitcoin",
+  "symbol": "btc",
+  "name": "Bitcoin",
+  "localization": {
+    "en": "Bitcoin",
+    "ru": "Биткоин",
+    "ja": "ビットコイン",
+    "zh": "比特币",
+    "zh-tw": "比特幣",
+    "ko": "비트코인",
+    "ar": "بيتكوين",
+    "th": "บิตคอยน์",
+    "id": "Bitcoin",
+    "cs": "Bitcoin",
+    "da": "Bitcoin",
+    "el": "Bitcoin",
+    "hi": "Bitcoin",
+    "no": "Bitcoin",
+    "sk": "Bitcoin",
+    "uk": "Bitcoin",
+    "he": "Bitcoin",
+    "fi": "Bitcoin",
+    "bg": "Bitcoin",
+    "hr": "Bitcoin",
+    "lt": "Bitcoin",
+    "sl": "Bitcoin"
+  },
+  "image": {
+    "thumb": "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
+    "small": "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
+  }
+}''';
+
+  static final validResponseBodyWithCompleteParameter = r'''{
+  "id": "bitcoin",
+  "symbol": "btc",
+  "name": "Bitcoin",
+  "localization": {
+    "en": "Bitcoin",
+    "de": "Bitcoin",
+    "es": "Bitcoin",
+    "fr": "Bitcoin",
+    "it": "Bitcoin",
+    "pl": "Bitcoin",
+    "ro": "Bitcoin",
+    "hu": "Bitcoin",
+    "nl": "Bitcoin",
+    "pt": "Bitcoin",
+    "sv": "Bitcoin",
+    "vi": "Bitcoin",
+    "tr": "Bitcoin",
+    "ru": "Биткоин",
+    "ja": "ビットコイン",
+    "zh": "比特币",
+    "zh-tw": "比特幣",
+    "ko": "비트코인",
+    "ar": "بيتكوين",
+    "th": "บิตคอยน์",
+    "id": "Bitcoin",
+    "cs": "Bitcoin",
+    "da": "Bitcoin",
+    "el": "Bitcoin",
+    "hi": "Bitcoin",
+    "no": "Bitcoin",
+    "sk": "Bitcoin",
+    "uk": "Bitcoin",
+    "he": "Bitcoin",
+    "fi": "Bitcoin",
+    "bg": "Bitcoin",
+    "hr": "Bitcoin",
+    "lt": "Bitcoin",
+    "sl": "Bitcoin"
+  },
+  "image": {
+    "thumb": "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
+    "small": "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
+  },
+  "market_data": {
+    "current_price": {
+      "aed": 61128.22985695089,
+      "ars": 2943801.482766091,
+      "link": 2972.256266475138,
+      "sats": 100004012.08331282
+    },
+    "market_cap": {
+      "aed": 1176325458767.2192,
+      "link": 57165497740.20414,
+      "sats": 1924808957959762.5
+    },
+    "total_volume": {
+      "aed": 57600151375.60185,
+      "ars": 2773896960927.079,
+      "aud": 23188099293.539948,
+      "sats": 94232177958468.03
+    }
+  },
+  "community_data": {
+    "facebook_likes": null,
+    "twitter_followers": 5684671,
+    "reddit_average_posts_48h": 5.8,
+    "reddit_average_comments_48h": 302.8,
+    "reddit_subscribers": 4767785,
+    "reddit_accounts_active_48h": "10351.2727272727"
+  },
+  "developer_data": {
+    "forks": null,
+    "stars": null,
+    "subscribers": null,
+    "total_issues": null,
+    "closed_issues": null,
+    "pull_requests_merged": null,
+    "pull_request_contributors": null,
+    "code_additions_deletions_4_weeks": {
+      "additions": null,
+      "deletions": null
+    },
+    "commit_count_4_weeks": null
+  },
+  "public_interest_stats": {
+    "alexa_rank": null,
+    "bing_matches": null
+  }
 }''';
 
   static final responseBodyWithIncompleteKeys = r'''{
