@@ -5,6 +5,7 @@ import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart'
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_market_chart.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
@@ -230,22 +231,31 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [days] Data up to number of days ago (eg. 1,14,30,max)
   /// [interval] Data interval. Possible value: daily
-  Future<Response> getCoinsWithIdMarketChart({
+  Future<CoinMarketChart> getCoinMarketChart({
     required String id,
     required Currencies vsCurrency,
     required DataRange days,
     String? interval
   }) async {
-    var path = createEndpointPathUrl(
-      rawQueryItems: {
-        'id': id,
-        'vs_currency': vsCurrency.code,
-        'days': days.value,
-        'interval': interval
-      },
-      endpointPath: "/coins/{id}/market_chart"
-    );
-    return await sendBasic(path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'vs_currency': vsCurrency.code,
+          'days': days.value,
+          'interval': interval
+        },
+        endpointPath: "/coins/{id}/market_chart"
+      );
+      
+      return CoinMarketChart.fromJson(await sendBasic(path));
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)

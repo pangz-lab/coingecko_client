@@ -5,9 +5,11 @@ import 'package:coingecko_client/src/domain/coins/models/coin.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_market.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_market_chart.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
+import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:test/test.dart';
 
@@ -70,6 +72,17 @@ void main() {
         id: 'bitcoin'
       );
       expect(result.runtimeType, CoinTickers);
+    });
+
+    test('from CoinsEndpoint for getCoinInfo should return a valid response', () async {
+      var sut = CoinsEndpoint(httpService);
+      var result = await sut.getCoinMarketChart(
+        id: 'bitcoin',
+        vsCurrency: Currencies.jpy,
+        days: DataRange.in1Day,
+        interval: 'daily'
+      );
+      expect(result.runtimeType, CoinMarketChart);
     });
   });
 }
