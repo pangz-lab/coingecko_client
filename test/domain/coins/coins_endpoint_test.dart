@@ -1461,4 +1461,223 @@ void main() {
   });
 
 
+  group('getCoinMarketChartWithRange method in', () {
+    var basePath = "$apiVersionPath/coins/bitcoin/market_chart/range";
+    group('CoinsEndpoint test endpoint path creation', () {
+      var sut = CoinsEndpoint(
+        HttpRequestServiceMock(
+          statusCode : 200,
+          body: CoinMarketChartMockData.validResponseBody
+        )
+      );
+
+      test('with parameters', () async {
+        await sut.getCoinMarketChartWithRange(
+          id: 'bitcoin',
+          vsCurrency: Currencies.jpy,
+          from: DateTime.fromMillisecondsSinceEpoch(1392577232),
+          to: DateTime.fromMillisecondsSinceEpoch(1396587232)
+        );
+        expect(sut.endpointPath, "$basePath?vs_currency=jpy&from=1392577232&to=1396587232");
+      });
+    });
+
+    group('CoinsEndpoint test endpoint response', () {
+      test('with data in getting the correct response type', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinMarketChartMockData.validResponseBody
+          )
+        );
+        var result = await sut!.getCoinMarketChartWithRange(
+          id: 'bitcoin',
+          vsCurrency: Currencies.jpy,
+          from: DateTime.fromMillisecondsSinceEpoch(1392577232),
+          to: DateTime.fromMillisecondsSinceEpoch(1396587232)
+        );
+        expect(result, isA<CoinMarketChart>());
+        expect(result.prices, [
+          [
+            1680134400000,
+            3764825.6157043367
+          ],
+          [
+            1680175636000,
+            3792357.969195695
+          ],
+        ]);
+        expect(result.marketCaps, [
+          [
+            1680134400000,
+            72766031840740.89
+          ],
+          [
+            1680175636000,
+            73372376001887.88
+          ]
+        ]);
+        expect(result.totalVolumes, [
+          [
+            1680134400000,
+            2797280292466.4453
+          ],
+          [
+            1680175636000,
+            2785972479143.1724
+          ]
+        ]);
+      });
+
+      test('with data in getting the correct response type with complete parameters', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinMarketChartMockData.validResponseBodyWithCompleteParameter
+          )
+        );
+        var result = await sut!.getCoinMarketChartWithRange(
+          id: 'bitcoin',
+          vsCurrency: Currencies.jpy,
+          from: DateTime.fromMillisecondsSinceEpoch(1392577232),
+          to: DateTime.fromMillisecondsSinceEpoch(1396587232)
+        );
+        expect(result, isA<CoinMarketChart>());
+        expect(result.prices, [
+          [
+            1680134400000,
+            3764825.6157043367
+          ],
+          [
+            1680175636000,
+            3792357.969195695
+          ],
+          [
+            null,
+            3792357.969195695
+          ]
+        ]);
+        expect(result.marketCaps, [
+          [
+            1680134400000,
+            72766031840740.89
+          ],
+          [
+            1680175636000,
+            73372376001887.88
+          ],
+          [
+            1680175636000,
+            null
+          ]
+        ]);
+        expect(result.totalVolumes, [
+          [
+            1680134400000,
+            2797280292466.4453
+          ],
+          [
+            1680175636000,
+            2785972479143.1724
+          ],
+          [
+            null,
+            null
+          ]
+        ]);
+      });
+
+      test('should still return a result for incomplete data format', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinMarketChartMockData.responseBodyWithIncompleteKeys
+          )
+        );
+        var result = await sut!.getCoinMarketChartWithRange(
+          id: 'bitcoin',
+          vsCurrency: Currencies.jpy,
+          from: DateTime.fromMillisecondsSinceEpoch(1392577232),
+          to: DateTime.fromMillisecondsSinceEpoch(1396587232)
+        );
+        expect(result.prices!.length, 2);
+        expect(result.marketCaps!.length, 2);
+        expect(result.totalVolumes, null);
+      });
+
+      test('should still return a result for invalid data format', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: '''{
+    "error": "coin not found"
+  }'''
+          )
+        );
+        var result = await sut!.getCoinMarketChartWithRange(
+          id: 'bitcoin',
+          vsCurrency: Currencies.jpy,
+          from: DateTime.fromMillisecondsSinceEpoch(1392577232),
+          to: DateTime.fromMillisecondsSinceEpoch(1396587232)
+        );
+        expect(result , isA<CoinMarketChart>());
+      });
+    });
+
+    group('CoinsEndpoint test for error handling', () {
+      test('should throw an exception for failed request', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 500,
+            body: CoinMarketChartMockData.validResponseBody
+          )
+        );
+        await expectLater(
+          sut!.getCoinMarketChartWithRange(
+            id: 'bitcoin',
+            vsCurrency: Currencies.jpy,
+            from: DateTime.fromMillisecondsSinceEpoch(1392577232),
+            to: DateTime.fromMillisecondsSinceEpoch(1396587232)
+          ),
+          throwsA(isA<NetworkRequestException>()
+          )
+        );
+      });
+
+      test('should return a FormatException when result is error or when parsing failed', () async {
+
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinMarketChartMockData.responseBodyWithInvalidFormat
+          )
+        );
+        await expectLater(sut!.getCoinMarketChartWithRange(
+            id: 'bitcoin',
+            vsCurrency: Currencies.jpy,
+            from: DateTime.fromMillisecondsSinceEpoch(1392577232),
+            to: DateTime.fromMillisecondsSinceEpoch(1396587232)
+          ),
+          throwsA(isA<DataParsingException>())
+        );
+
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: ""
+          )
+        );
+        await expectLater(sut!.getCoinMarketChartWithRange(
+            id: 'bitcoin',
+            vsCurrency: Currencies.jpy,
+            from: DateTime.fromMillisecondsSinceEpoch(1392577232),
+            to: DateTime.fromMillisecondsSinceEpoch(1396587232)
+        ), throwsA(isA<DataParsingException>())
+        );
+      });
+    });
+  });
+
+
+
 }

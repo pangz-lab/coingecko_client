@@ -66,7 +66,7 @@ void main() {
       expect(result.runtimeType, CoinInfo);
     });
     
-    test('from CoinsEndpoint for getCoinInfo should return a valid response', () async {
+    test('from CoinsEndpoint for getCoinTickers should return a valid response', () async {
       var sut = CoinsEndpoint(httpService);
       var result = await sut.getCoinTickers(
         id: 'bitcoin'
@@ -74,7 +74,7 @@ void main() {
       expect(result.runtimeType, CoinTickers);
     });
 
-    test('from CoinsEndpoint for getCoinInfo should return a valid response', () async {
+    test('from CoinsEndpoint for getCoinMarketChart should return a valid response', () async {
       var sut = CoinsEndpoint(httpService);
       var result = await sut.getCoinMarketChart(
         id: 'bitcoin',
@@ -82,6 +82,17 @@ void main() {
         days: DataRange.in1Day,
         interval: 'daily'
       );
+      expect(result.runtimeType, CoinMarketChart);
+    });
+
+    test('from CoinsEndpoint for getCoinMarketChartWithRange should return a valid response', () async {
+      var sut = CoinsEndpoint(httpService);
+      var result = await sut.getCoinMarketChartWithRange(
+          id: 'bitcoin',
+          vsCurrency: Currencies.jpy,
+          from: DateTime.fromMillisecondsSinceEpoch(1392577232),
+          to: DateTime.fromMillisecondsSinceEpoch(1396587232)
+        );
       expect(result.runtimeType, CoinMarketChart);
     });
   });

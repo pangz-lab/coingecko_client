@@ -267,22 +267,31 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [from] From date in UNIX Timestamp (eg. 1392577232)
   /// [to] To date in UNIX Timestamp (eg. 1422577232)
-  Future<Response> getCoinsWithIdMarketChartRange({
+  Future<CoinMarketChart> getCoinMarketChartWithRange({
     required String id,
     required Currencies vsCurrency,
     required DateTime from,
     required DateTime to
   }) async {
-    var path = createEndpointPathUrl(
-      rawQueryItems: {
-        'id': id,
-        'vs_currency': vsCurrency.code,
-        'from': from.millisecondsSinceEpoch,
-        'to': to.millisecondsSinceEpoch
-      },
-      endpointPath: "/coins/{id}/market_chart/range"
-    );
-    return await sendBasic(path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'vs_currency': vsCurrency.code,
+          'from': from.millisecondsSinceEpoch,
+          'to': to.millisecondsSinceEpoch
+        },
+        endpointPath: "/coins/{id}/market_chart/range"
+      );
+      
+      return CoinMarketChart.fromJson(await sendBasic(path));
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get coin's OHLC
