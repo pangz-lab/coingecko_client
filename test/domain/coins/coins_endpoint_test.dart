@@ -5,6 +5,7 @@ import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_market_chart.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
 import 'package:coingecko_client/src/domain/coins/models/roi.dart';
 import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
@@ -1678,6 +1679,146 @@ void main() {
     });
   });
 
+group('getCoinOhlc method in', () {
+    var basePath = "$apiVersionPath/coins/bitcoin/ohlc";
+    group('CoinsEndpoint test endpoint path creation', () {
+      var sut = CoinsEndpoint(
+        HttpRequestServiceMock(
+          statusCode : 200,
+          body: '[]'
+        )
+      );
 
+      test('with parameters', () async {
+        await sut.getCoinOhlc(
+          id: 'bitcoin',
+          vsCurrency: Currencies.jpy,
+          days: DataRange.in1Day
+        );
+        expect(sut.endpointPath, "$basePath?vs_currency=jpy&days=1");
+      });
+    });
+
+    group('CoinsEndpoint test endpoint response', () {
+      test('with data in getting the correct response type', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinOhlcMockData.validResponseBody
+          )
+        );
+        var result = await sut!.getCoinOhlc(
+          id: 'bitcoin',
+          vsCurrency: Currencies.jpy,
+          days: DataRange.in1Day
+        );
+        var fistElement = result.elementAt(0);
+        expect(result.length, 3);
+        expect(fistElement, isA<CoinOhlc>());
+        expect(fistElement.time!.millisecondsSinceEpoch, 1681441200000);
+        expect(fistElement.open, 4075375.26);
+        expect(fistElement.high, 4075375.26);
+        expect(fistElement.low, 4056990.83);
+        expect(fistElement.close, 4056990.83);
+      });
+
+      test('should still return a result for incomplete data format', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinOhlcMockData.responseBodyWithIncompleteKeys
+          )
+        );
+        var result = await sut!.getCoinOhlc(
+          id: 'bitcoin',
+          vsCurrency: Currencies.jpy,
+          days: DataRange.in1Day
+        );
+        var fistElement = result.elementAt(0);
+        var secondElement = result.elementAt(1);
+        var thirdElement = result.elementAt(2);
+        expect(fistElement.time!.millisecondsSinceEpoch, 0);
+        expect(fistElement.open, 0);
+        expect(fistElement.high, 0);
+        expect(fistElement.low, 0);
+        expect(fistElement.close, 0);
+
+        expect(secondElement.time!.millisecondsSinceEpoch, 1681444800000);
+        expect(secondElement.open, null);
+        expect(secondElement.high, null);
+        expect(secondElement.low, null);
+        expect(secondElement.close, null);
+        
+        expect(thirdElement.open, 2333);
+        expect(thirdElement.high, null);
+        expect(thirdElement.low, null);
+        expect(thirdElement.close, null);
+      });
+
+      test('should still return a result for invalid data format', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: '[]'
+          )
+        );
+        var result = await sut!.getCoinOhlc(
+          id: 'bitcoin',
+          vsCurrency: Currencies.jpy,
+          days: DataRange.in1Day
+        );
+        expect(result.isEmpty, true);
+      });
+    });
+
+    group('CoinsEndpoint test for error handling', () {
+      test('should throw an exception for failed request', () async {
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 500,
+            body: CoinMarketChartMockData.validResponseBody
+          )
+        );
+        await expectLater(sut!.getCoinOhlc(
+            id: 'bitcoin',
+            vsCurrency: Currencies.jpy,
+            days: DataRange.in1Day
+          ),
+          throwsA(isA<NetworkRequestException>()
+          )
+        );
+      });
+
+      test('should return a FormatException when result is error or when parsing failed', () async {
+
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: CoinMarketChartMockData.responseBodyWithInvalidFormat
+          )
+        );
+        await expectLater(sut!.getCoinOhlc(
+            id: 'bitcoin',
+            vsCurrency: Currencies.jpy,
+            days: DataRange.in1Day
+          ),
+          throwsA(isA<DataParsingException>())
+        );
+
+        sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: ""
+          )
+        );
+        await expectLater(sut!.getCoinOhlc(
+            id: 'bitcoin',
+            vsCurrency: Currencies.jpy,
+            days: DataRange.in1Day
+          ), throwsA(isA<DataParsingException>())
+        );
+      });
+    });
+  });
 
 }

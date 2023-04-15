@@ -6,6 +6,7 @@ import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart
 import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_market.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_market_chart.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
@@ -33,7 +34,7 @@ void main() {
     test('from CoinsEndpoint for getCoinsMarkets should return a valid response', () async {
       var sut = CoinsEndpoint(httpService);
       var result = await sut.getCoinsMarkets(
-        vsCurrency: Currencies.jpy,
+        vsCurrency: Currencies.php,
         ids: ['bitcoin','verus-coin'],
         category: 'aave-tokens',
         order: CoinMarketDataOrdering.marketCapDesc,
@@ -78,7 +79,7 @@ void main() {
       var sut = CoinsEndpoint(httpService);
       var result = await sut.getCoinMarketChart(
         id: 'bitcoin',
-        vsCurrency: Currencies.jpy,
+        vsCurrency: Currencies.php,
         days: DataRange.in1Day,
         interval: 'daily'
       );
@@ -88,12 +89,22 @@ void main() {
     test('from CoinsEndpoint for getCoinMarketChartWithRange should return a valid response', () async {
       var sut = CoinsEndpoint(httpService);
       var result = await sut.getCoinMarketChartWithRange(
-          id: 'bitcoin',
-          vsCurrency: Currencies.jpy,
-          from: DateTime.fromMillisecondsSinceEpoch(1392577232),
-          to: DateTime.fromMillisecondsSinceEpoch(1396587232)
-        );
+        id: 'bitcoin',
+        vsCurrency: Currencies.php,
+        from: DateTime.fromMillisecondsSinceEpoch(1392577232),
+        to: DateTime.fromMillisecondsSinceEpoch(1396587232)
+      );
       expect(result.runtimeType, CoinMarketChart);
+    });
+
+    test('from CoinsEndpoint for getCoinOhlc should return a valid response', () async {
+      var sut = CoinsEndpoint(httpService);
+      var result = await sut.getCoinOhlc(
+        id: 'bitcoin',
+        vsCurrency: Currencies.php,
+        days: DataRange.max
+      );
+      expect(result.elementAt(0).runtimeType, CoinOhlc);
     });
   });
 }

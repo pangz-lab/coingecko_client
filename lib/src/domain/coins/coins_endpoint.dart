@@ -6,12 +6,12 @@ import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_market_chart.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/date_service.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
-import 'package:http/http.dart';
 
 class CoinsEndpoint extends BaseEndpoint {
   CoinsEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
@@ -181,8 +181,8 @@ class CoinsEndpoint extends BaseEndpoint {
         },
         endpointPath: "/coins/{id}/tickers"
       );
+
       return CoinTickers.fromJson(await sendBasic(path));
-    
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
@@ -212,6 +212,7 @@ class CoinsEndpoint extends BaseEndpoint {
         },
         endpointPath: "/coins/{id}/history"
       );
+
       return CoinInfo.fromJson(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();
@@ -306,19 +307,29 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [id] pass the coin id (can be obtained from /coins/list) eg. bitcoin
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [days]  Data up to number of days ago (1/7/14/30/90/180/365/max)
-  Future<Response> getCoinsWithIdOhlc({
+  Future<List<CoinOhlc>> getCoinOhlc({
     required String id,
     required Currencies vsCurrency,
     required DataRange days
   }) async {
-    var path = createEndpointPathUrl(
-      rawQueryItems: {
-        'id': id,
-        'vs_currency': vsCurrency.code,
-        'days': days.value
-      },
-      endpointPath: "/coins/{id}/ohlc"
-    );
-    return await sendBasic(path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'vs_currency': vsCurrency.code,
+          'days': days.value
+        },
+        endpointPath: "/coins/{id}/ohlc"
+      );
+
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => CoinOhlc.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 }
