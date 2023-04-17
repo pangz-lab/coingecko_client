@@ -21,7 +21,7 @@ void main() {
   CoinsEndpoint? sut;
   final String apiVersionPath = "/api/v3";
 
-  group('getCoinsList method in', () {
+  group('getCoinList method in', () {
     group('CoinsEndpoint test endpoint path creation', () {
       var sut = CoinsEndpoint(
         HttpRequestServiceMock(
@@ -31,14 +31,14 @@ void main() {
       );
 
       test('without parameters', () async {
-        await sut.getCoinsList();
+        await sut.getCoinList();
         expect(sut.endpointPath, "$apiVersionPath/coins/list");
       });
 
       test('with parameters', () async {
-        await sut.getCoinsList(includePlatform: true);
+        await sut.getCoinList(includePlatform: true);
         expect(sut.endpointPath, "$apiVersionPath/coins/list?include_platform=true");
-        await sut.getCoinsList(includePlatform: false);
+        await sut.getCoinList(includePlatform: false);
         expect(sut.endpointPath, "$apiVersionPath/coins/list?include_platform=false");
       });
     });
@@ -51,7 +51,7 @@ void main() {
             body: CoinListMockData.validResponseBody
           )
         );
-        var result = await sut!.getCoinsList();
+        var result = await sut!.getCoinList();
         expect(result.elementAt(0), isA<Coin>());
         expect(result.elementAt(0).id, '01coin');
         expect(result.elementAt(0).symbol, 'zoc');
@@ -66,7 +66,7 @@ void main() {
             body: CoinListMockData.validResponseBodyWithPlatforms
           )
         );
-        result = await sut!.getCoinsList(includePlatform: true);
+        result = await sut!.getCoinList(includePlatform: true);
         expect(result.elementAt(0).platforms!.length, 2);
         expect(result.elementAt(0).platforms!["ethereum"], "0xb9ef770b6a5e12e45983c5d80545258aa38f3b78");
         expect(result.elementAt(0).platforms!["polygon-pos"], "0x8bb30e0e67b11b978a5040144c410e1ccddcba30");
@@ -84,7 +84,7 @@ void main() {
             body: CoinListMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut!.getCoinsList(includePlatform: true);
+        var result = await sut!.getCoinList(includePlatform: true);
         expect(result.length, 2);
         expect(result.elementAt(0).id, '01coin');
         expect(result.elementAt(0).name, '01coin');
@@ -105,7 +105,7 @@ void main() {
             body: CoinListMockData.validResponseBody
           )
         );
-        await expectLater(sut!.getCoinsList(), throwsA(isA<NetworkRequestException>()));
+        await expectLater(sut!.getCoinList(), throwsA(isA<NetworkRequestException>()));
       });
 
       test('should return a FormatException when result is error or when parsing failed', () async {
@@ -117,7 +117,7 @@ void main() {
   }'''
           )
         );
-        await expectLater(sut!.getCoinsList(), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getCoinList(), throwsA(isA<DataParsingException>()));
 
         sut = CoinsEndpoint(
           HttpRequestServiceMock(
@@ -125,7 +125,7 @@ void main() {
             body: CoinListMockData.responseBodyWithInvalidFormat
           )
         );
-        await expectLater(sut!.getCoinsList(includePlatform: true), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getCoinList(includePlatform: true), throwsA(isA<DataParsingException>()));
 
         sut = CoinsEndpoint(
           HttpRequestServiceMock(
@@ -133,13 +133,13 @@ void main() {
             body: ""
           )
         );
-        await expectLater(sut!.getCoinsList(includePlatform: true), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getCoinList(includePlatform: true), throwsA(isA<DataParsingException>()));
       });
     });
   });
 
   
-  group('getCoinsMarkets method in', () {
+  group('getCoinMarkets method in', () {
     var basePath = "/coins/markets";
     group('CoinsEndpoint test endpoint path creation', () {
       var sut = CoinsEndpoint(
@@ -150,14 +150,14 @@ void main() {
       );
 
       test('with required parameters', () async {
-        await sut.getCoinsMarkets(vsCurrency: Currencies.php);
+        await sut.getCoinMarkets(vsCurrency: Currencies.php);
         expect(sut.endpointPath, "$apiVersionPath$basePath?vs_currency=php");
-        await sut.getCoinsMarkets(vsCurrency: Currencies.jpy);
+        await sut.getCoinMarkets(vsCurrency: Currencies.jpy);
         expect(sut.endpointPath, "$apiVersionPath$basePath?vs_currency=jpy");
       });
 
       test('with all parameters', () async {
-        await sut.getCoinsMarkets(
+        await sut.getCoinMarkets(
           vsCurrency: Currencies.php,
           ids: ['btc','vrsc','eth'],
           category: 'nft',
@@ -187,7 +187,7 @@ void main() {
             body: CoinMarketMockData.validResponseBody
           )
         );
-        var result = await sut!.getCoinsMarkets(
+        var result = await sut!.getCoinMarkets(
           vsCurrency: Currencies.php
         );
         var item1 = result.elementAt(0);
@@ -229,7 +229,7 @@ void main() {
           )
         );
 
-        var result = await sut!.getCoinsMarkets(
+        var result = await sut!.getCoinMarkets(
           vsCurrency: Currencies.jpy,
           ids: ['bitcoin','verus-coin'],
           category: 'aave-tokens',
@@ -301,7 +301,7 @@ void main() {
             body: CoinMarketMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut!.getCoinsMarkets(vsCurrency: Currencies.php);
+        var result = await sut!.getCoinMarkets(vsCurrency: Currencies.php);
         var item = result.elementAt(0);
         expect(item.currentPrice, 34006);
         expect(item.marketCap, 23.3);
@@ -331,7 +331,7 @@ void main() {
             body: CoinMarketMockData.validResponseBody
           )
         );
-        await expectLater(sut!.getCoinsMarkets(vsCurrency: Currencies.php), throwsA(isA<NetworkRequestException>()));
+        await expectLater(sut!.getCoinMarkets(vsCurrency: Currencies.php), throwsA(isA<NetworkRequestException>()));
       });
 
       test('should return a FormatException when result is error or when parsing failed', () async {
@@ -343,7 +343,7 @@ void main() {
   }'''
           )
         );
-        await expectLater(sut!.getCoinsMarkets(vsCurrency: Currencies.php), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getCoinMarkets(vsCurrency: Currencies.php), throwsA(isA<DataParsingException>()));
 
         sut = CoinsEndpoint(
           HttpRequestServiceMock(
@@ -351,7 +351,7 @@ void main() {
             body: CoinMarketMockData.responseBodyWithInvalidFormat
           )
         );
-        await expectLater(sut!.getCoinsMarkets(vsCurrency: Currencies.php), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getCoinMarkets(vsCurrency: Currencies.php), throwsA(isA<DataParsingException>()));
 
         sut = CoinsEndpoint(
           HttpRequestServiceMock(
@@ -359,7 +359,7 @@ void main() {
             body: ""
           )
         );
-        await expectLater(sut!.getCoinsMarkets(vsCurrency: Currencies.php), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getCoinMarkets(vsCurrency: Currencies.php), throwsA(isA<DataParsingException>()));
       });
     });
   });
@@ -1678,6 +1678,7 @@ void main() {
       });
     });
   });
+
 
 group('getCoinOhlc method in', () {
     var basePath = "$apiVersionPath/coins/bitcoin/ohlc";

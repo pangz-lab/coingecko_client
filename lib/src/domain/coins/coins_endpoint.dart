@@ -23,7 +23,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// 
   /// [include_platform] flag to include platform contract addresses (eg. 0x.... for Ethereum based tokens). 
   ///  valid values: true, false
-  Future<List<Coin>> getCoinsList({
+  Future<List<Coin>> getCoinList({
     bool? includePlatform
   }) async {
     
@@ -61,7 +61,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [page] Page through results
   /// [sparkline] Include sparkline 7 days data (eg. true, false)
   /// [price_change_percentage] Include price change percentage in <b>1h, 24h, 7d, 14d, 30d, 200d, 1y</b> (eg. '`1h,24h,7d`' comma-separated, invalid values will be discarded)
-  Future<List<CoinMarket>> getCoinsMarkets({
+  Future<List<CoinMarket>> getCoinMarkets({
     required Currencies vsCurrency,
     List<String>? ids,
     String? category,

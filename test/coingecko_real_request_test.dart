@@ -25,15 +25,15 @@ void main() {
   });
 
   group('Test for real request', () {
-    test('from CoinsEndpoint for getCoinsList should return a valid response', () async {
+    test('from CoinsEndpoint for getCoinList should return a valid response', () async {
       var sut = CoinsEndpoint(httpService);
-      var result = await sut.getCoinsList();
+      var result = await sut.getCoinList();
       expect(result.elementAt(0).runtimeType, Coin);
     });
 
-    test('from CoinsEndpoint for getCoinsMarkets should return a valid response', () async {
+    test('from CoinsEndpoint for getCoinMarkets should return a valid response', () async {
       var sut = CoinsEndpoint(httpService);
-      var result = await sut.getCoinsMarkets(
+      var result = await sut.getCoinMarkets(
         vsCurrency: Currencies.php,
         ids: ['bitcoin','verus-coin'],
         category: 'aave-tokens',

@@ -28,6 +28,7 @@ class AssetPlatformsEndpoint extends BaseEndpoint {
         },
         endpointPath: "/asset_platforms"
       );
+      
       var result = List<dynamic>.of(await sendBasic(_path));
       return result.map((value) => AssetPlatform.fromJson(value)).toList();
     } on FormatException {
