@@ -1,5 +1,5 @@
 import 'package:coingecko_client/src/domain/coins/models/coin_links.dart';
-import 'package:coingecko_client/src/domain/coins/models/marke_data.dart';
+import 'package:coingecko_client/src/domain/coins/models/market_data.dart';
 import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
 import 'package:coingecko_client/src/models/base_model.dart';
 

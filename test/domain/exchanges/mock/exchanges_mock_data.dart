@@ -65,7 +65,7 @@ class ExchangesMockData {
 ]''';
 }
 
-class ExchangeMarketMockData {
+class MarketExchangeMockData {
   static final validResponseBody = r'''[
   {
     "id": "1bch",
@@ -92,6 +92,261 @@ class ExchangeMarketMockData {
     "name": "ABCC"
   }
 ]''';
+  //With comman at the last part
+  static final responseBodyWithInvalidFormat = r'''[
+  {
+    "id": "0chain",
+    "symbol": "zcn",
+    "name": "Zus"
+  },
+]''';
+}
+
+
+class MarketExchangeInfoMockData {
+  static final validResponseBody = r'''{
+  "name": "Binance",
+  "year_established": 2017,
+  "country": "Cayman Islands",
+  "description": "Binance Weekly Report: Record BNB Burn at $68M\r\n\r\nRead here ➡️ https://ter.li/Binance-Report-October-23",
+  "url": "https://www.binance.com/",
+  "image": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250",
+  "facebook_url": "https://www.test.com/",
+  "reddit_url": "https://www.test.com/",
+  "telegram_url": "https://www.test.com/",
+  "slack_url": "https://www.test.com/",
+  "other_url_1": "https://www.test.com/",
+  "other_url_2": "https://www.test.com/",
+  "twitter_handle": "binance",
+  "has_trading_incentive": false,
+  "centralized": true,
+  "public_notice": "notice test",
+  "alert_notice": "notice test",
+  "trust_score": 10,
+  "trust_score_rank": 4,
+  "trade_volume_24h_btc": 511298.14836440206,
+  "trade_volume_24h_btc_normalized": 511298.14836440206,
+  "tickers": [
+    {
+      "base": "BUSD",
+      "target": "USDT",
+      "market": {
+        "name": "Binance",
+        "identifier": "binance",
+        "has_trading_incentive": false
+      },
+      "last": 0.9996,
+      "volume": 495186394.1897759,
+      "converted_last": {
+        "btc": 0.00003417,
+        "eth": 0.00050611,
+        "usd": 1
+      },
+      "converted_volume": {
+        "btc": 16921,
+        "eth": 250619,
+        "usd": 495366172
+      },
+      "trust_score": "green",
+      "bid_ask_spread_percentage": 0.010003,
+      "timestamp": "2023-04-19T11:06:47+00:00",
+      "last_traded_at": "2023-04-19T11:06:47+00:00",
+      "last_fetch_at": "2023-04-19T11:06:47+00:00",
+      "is_anomaly": false,
+      "is_stale": false,
+      "trade_url": "https://www.binance.com/en/trade/BUSD_USDT?ref=37754157",
+      "token_info_url": null,
+      "coin_id": "binance-usd",
+      "target_coin_id": "tether"
+    },
+    {
+      "base": "BTC",
+      "target": "USDT",
+      "market": {
+        "name": "Binance",
+        "identifier": "binance",
+        "has_trading_incentive": false
+      },
+      "last": 29268.28,
+      "volume": 83637.58064628167,
+      "converted_last": {
+        "btc": 1.000409,
+        "eth": 14.798078,
+        "usd": 29275
+      },
+      "converted_volume": {
+        "btc": 83672,
+        "eth": 1237675,
+        "usd": 2448521568
+      },
+      "trust_score": "green",
+      "bid_ask_spread_percentage": 0.010034,
+      "timestamp": "2023-04-19T11:02:48+00:00",
+      "last_traded_at": "2023-04-19T11:02:48+00:00",
+      "last_fetch_at": "2023-04-19T11:02:48+00:00",
+      "is_anomaly": false,
+      "is_stale": false,
+      "trade_url": "https://www.binance.com/en/trade/BTC_USDT?ref=37754157",
+      "token_info_url": null,
+      "coin_id": "bitcoin",
+      "target_coin_id": "tether"
+    }
+  ],
+  "status_updates": [
+    {
+      "description": "Juventus and Paris Saint-Germain Fan Tokens on Binance Launchpool! \r\n\r\nFarm JUV and PSG tokens By Staking BNB, BUSD & CHZ Tokens\r\n\r\nClick here➡️ https://ter.li/JUV-and-PSG-tokens",
+      "category": "general",
+      "created_at": "2020-12-14T11:18:49.085Z",
+      "user": "Darc",
+      "user_title": "Marketing",
+      "pin": false,
+      "project": {
+        "type": "Market",
+        "id": "binance",
+        "name": "Binance",
+        "image": {
+          "thumb": "https://assets.coingecko.com/markets/images/52/thumb/binance.jpg?1519353250",
+          "small": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250",
+          "large": "https://assets.coingecko.com/markets/images/52/large/binance.jpg?1519353250"
+        }
+      }
+    },
+    {
+      "description": "Binance Black Friday - $100,000 in Bitcoin Up For Grabs!\r\n\r\nComplete tasks on Binance to get a guaranteed Bitcoin payout and to enter a lucky draw.\r\n\r\nGet started ➡️ https://ter.li/Binance-Black-Friday",
+      "category": "general",
+      "created_at": "2020-11-24T09:37:17.816Z",
+      "user": "Darc",
+      "user_title": "Marketing",
+      "pin": false,
+      "project": {
+        "type": "Market",
+        "id": "binance",
+        "name": "Binance",
+        "image": {
+          "thumb": "https://assets.coingecko.com/markets/images/52/thumb/binance.jpg?1519353250",
+          "small": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250",
+          "large": "https://assets.coingecko.com/markets/images/52/large/binance.jpg?1519353250"
+        }
+      }
+    }
+  ]
+}''';
+
+  static final responseBodyWithIncompleteKeys = r'''{
+  "name": "Binance",
+  "year_established": 2017,
+  "country": "Cayman Islands",
+  "description": "Binance Weekly Report: Record BNB Burn at $68M\r\n\r\nRead here ➡️ https://ter.li/Binance-Report-October-23",
+  "url": "https://www.binance.com/",
+  "image": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250",
+  "other_url_1": "https://www.test.com/",
+  "other_url_2": "https://www.test.com/",
+  "twitter_handle": "binance",
+  "has_trading_incentive": false,
+  "public_notice": "notice test",
+  "trust_score": 10,
+  "trust_score_rank": 4,
+  "trade_volume_24h_btc": null,
+  "trade_volume_24h_btc_normalized": 511298.14836440206,
+  "tickers": [
+    {
+      "base": "BUSD",
+      "target": "USDT",
+      "market": {
+        "name": "Binance",
+        "identifier": "binance"
+      },
+      "last": 0.9996,
+      "converted_last": {
+        "btc": 0.00003417,
+        "eth": 0.00050611,
+        "usd": 1
+      },
+      "converted_volume": {
+        "btc": 16921,
+        "eth": 250619,
+        "usd": 495366172
+      },
+      "trust_score": "green",
+      "bid_ask_spread_percentage": 0.010003,
+      "timestamp": "2023-04-19T11:06:47+00:00",
+      "last_traded_at": "2023-04-19T11:06:47+00:00",
+      "last_fetch_at": "2023-04-19T11:06:47+00:00",
+      "is_anomaly": false,
+      "is_stale": false,
+      "trade_url": "https://www.binance.com/en/trade/BUSD_USDT?ref=37754157",
+      "token_info_url": null,
+      "coin_id": "binance-usd",
+      "target_coin_id": "tether"
+    },
+    {
+      "base": "BTC",
+      "target": "USDT",
+      "market": {
+        "name": "Binance",
+        "identifier": "binance",
+        "has_trading_incentive": false
+      },
+      "last": 29268.28,
+      "volume": 83637.58064628167,
+      "converted_last": {
+        "btc": 1.000409,
+        "eth": 14.798078,
+        "usd": 29275
+      },
+      "converted_volume": {
+        "btc": 83672,
+        "eth": 1237675,
+        "usd": 2448521568
+      },
+      "trust_score": "green",
+      "bid_ask_spread_percentage": 0.010034,
+      "timestamp": "2023-04-19T11:02:48+00:00",
+      "last_traded_at": "2023-04-19T11:02:48+00:00",
+      "last_fetch_at": "2023-04-19T11:02:48+00:00",
+      "is_anomaly": false,
+      "is_stale": false,
+      "trade_url": "https://www.binance.com/en/trade/BTC_USDT?ref=37754157",
+      "token_info_url": null,
+      "coin_id": "bitcoin",
+      "target_coin_id": "tether"
+    }
+  ],
+  "status_updates": [
+    {
+      "description": "Juventus and Paris Saint-Germain Fan Tokens on Binance Launchpool! \r\n\r\nFarm JUV and PSG tokens By Staking BNB, BUSD & CHZ Tokens\r\n\r\nClick here➡️ https://ter.li/JUV-and-PSG-tokens",
+      "category": "general",
+      "user": "Darc",
+      "user_title": "Marketing",
+      "pin": false,
+      "project": {
+        "type": "Market",
+        "image": {
+          "thumb": "https://assets.coingecko.com/markets/images/52/thumb/binance.jpg?1519353250",
+          "large": "https://assets.coingecko.com/markets/images/52/large/binance.jpg?1519353250"
+        }
+      }
+    },
+    {
+      "description": "Binance Black Friday - $100,000 in Bitcoin Up For Grabs!\r\n\r\nComplete tasks on Binance to get a guaranteed Bitcoin payout and to enter a lucky draw.\r\n\r\nGet started ➡️ https://ter.li/Binance-Black-Friday",
+      "category": "general",
+      "created_at": "2020-11-24T09:37:17.816Z",
+      "user": "Darc",
+      "user_title": "Marketing",
+      "pin": false,
+      "project": {
+        "type": "Market",
+        "id": "binance",
+        "name": "Binance",
+        "image": {
+          "thumb": "https://assets.coingecko.com/markets/images/52/thumb/binance.jpg?1519353250",
+          "small": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250",
+          "large": "https://assets.coingecko.com/markets/images/52/large/binance.jpg?1519353250"
+        }
+      }
+    }
+  ]
+}''';
   //With comman at the last part
   static final responseBodyWithInvalidFormat = r'''[
   {

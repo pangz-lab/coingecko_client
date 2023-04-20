@@ -10,8 +10,8 @@ import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
 import 'package:coingecko_client/src/domain/exchanges/exchanges_endpoint.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/exchange_info.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/exchange_market.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_info.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_basic_info.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
@@ -115,13 +115,19 @@ void main() {
     test('from ExchangesEndpoint for getExchangeList should return a valid response', () async {
       var sut = ExchangesEndpoint(httpService);
       var result = await sut.getExchangeList();
-      expect(result.elementAt(0).runtimeType, ExchangeInfo);
+      expect(result.elementAt(0).runtimeType, MarketExchangeInfo);
     });
 
-    test('from ExchangesEndpoint for getExchangeMarketList should return a valid response', () async {
+    test('from ExchangesEndpoint for getMarketExchangeList should return a valid response', () async {
       var sut = ExchangesEndpoint(httpService);
-      var result = await sut.getExchangeMarketList();
-      expect(result.elementAt(0).runtimeType, ExchangeMarket);
+      var result = await sut.getMarketExchangeList();
+      expect(result.elementAt(0).runtimeType, MarketExchangeBasicInfo);
+    });
+
+    test('from ExchangesEndpoint for getMarketExchangeInfo should return a valid response', () async {
+      var sut = ExchangesEndpoint(httpService);
+      var result = await sut.getMarketExchangeInfo(id: 'binance');
+      expect(result.runtimeType, MarketExchangeInfo);
     });
   });
 }

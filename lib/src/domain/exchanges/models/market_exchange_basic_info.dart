@@ -1,8 +1,8 @@
-class ExchangeMarket {
+class MarketExchangeBasicInfo {
   String? _id;
   String? _name;
 
-  ExchangeMarket({String? id, String? name}) {
+  MarketExchangeBasicInfo({String? id, String? name}) {
     _id = id;
     _name = name;
   }
@@ -10,7 +10,7 @@ class ExchangeMarket {
   String? get id => _id;
   String? get name => _name;
 
-  ExchangeMarket.fromJson(Map<String, dynamic> json) {
+  MarketExchangeBasicInfo.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _name = json['name'];
   }

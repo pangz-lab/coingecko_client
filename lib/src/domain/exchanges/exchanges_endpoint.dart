@@ -1,14 +1,13 @@
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/exchange_info.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/exchange_market.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/exchanges_data_ordering.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_info.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_basic_info.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_data_ordering.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
 
 class ExchangesEndpoint extends BaseEndpoint {
-  String _path = "";
   ExchangesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// List all exchanges (Active with trading volumes)
@@ -18,12 +17,12 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// Total results per page
   /// Default value:: 100
   /// [page] page through results
-  Future<List<ExchangeInfo>> getExchangeList({
+  Future<List<MarketExchangeInfo>> getExchangeList({
     int? perPage,
     int? page
   }) async {
     try {
-      _path = createEndpointPathUrl(
+      var path = createEndpointPathUrl(
         rawQueryItems: {
           'per_page': perPage,
           'page': page
@@ -31,8 +30,8 @@ class ExchangesEndpoint extends BaseEndpoint {
         endpointPath: "/exchanges"
       );
 
-      var result = List<dynamic>.of(await sendBasic(_path));
-      return result.map((value) => ExchangeInfo.fromJson(value)).toList();
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => MarketExchangeInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
@@ -46,11 +45,11 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// <br/><b>Endpoint </b>: /exchanges/list
   /// 
   /// Use this to obtain all the markets' id in order to make API calls
-  Future<List<ExchangeMarket>> getExchangeMarketList() async {
+  Future<List<MarketExchangeBasicInfo>> getMarketExchangeList() async {
     try {
-      _path = '/exchanges/list';
-      var result = List<dynamic>.of(await sendBasic(_path));
-      return result.map((value) => ExchangeMarket.fromJson(value)).toList();
+      var path = '/exchanges/list';
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => MarketExchangeBasicInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
@@ -70,16 +69,24 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// You are responsible for managing how you want to display these information (e.g. footnote, different background, change opacity, hide)
   /// 
   /// [id] pass the exchange id (can be obtained from /exchanges/list) eg. binance
-  Future<Response> getExchangeListWithId({
+  Future<MarketExchangeInfo> getMarketExchangeInfo({
     required String id
   }) async {
-    _path = createEndpointPathUrl(
-      rawQueryItems: {
-        'id': id
-      },
-      endpointPath: "/exchanges/{id}"
-    );
-    return await send(_path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id
+        },
+        endpointPath: "/exchanges/{id}"
+      );
+      return MarketExchangeInfo.fromJson(await sendBasic(path));
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get exchange tickers (paginated, 100 tickers per page)
@@ -102,9 +109,9 @@ class ExchangesEndpoint extends BaseEndpoint {
     bool? includeExchangeLogo,
     int? page,
     bool? depth,
-    ExchangesDataOrdering? order
+    MarketExchangeDataOrdering? order
   }) async {
-    _path = createEndpointPathUrl(
+    var path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'coin_ids': coinIds,
@@ -115,7 +122,7 @@ class ExchangesEndpoint extends BaseEndpoint {
       },
       endpointPath: "/exchanges/{id}/tickers"
     );
-    return await send(_path);
+    return await send(path);
   }
 
   /// Get volume_chart data for a given exchange
@@ -127,13 +134,13 @@ class ExchangesEndpoint extends BaseEndpoint {
     required String id,
     required DataRange days
   }) async {
-    _path = createEndpointPathUrl(
+    var path = createEndpointPathUrl(
       rawQueryItems: {
         'id': id,
         'days': days.value
       },
       endpointPath: "/exchanges/{id}/volume_chart"
     );
-    return await send(_path);
+    return await send(path);
   }
 }

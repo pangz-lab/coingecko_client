@@ -8,7 +8,7 @@
 //   ExchangesEndpoint? sut;
 //   final String apiVersionPath = "/api/v3";
 
-//   group('getExchangeList method in', () {
+//   group('getMarketExchangeInfo method in', () {
 //     var basePath = "/exchanges";
 //     group('ExchangesEndpoint test endpoint path creation', () {
 //       sut = ExchangesEndpoint(
