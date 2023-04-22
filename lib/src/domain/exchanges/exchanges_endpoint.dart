@@ -1,4 +1,5 @@
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
+import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_basic_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_data_ordering.dart';
@@ -103,26 +104,38 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// [page] Page through results
   /// [depth] flag to show 2% orderbook depth i.e., cost_to_move_up_usd and cost_to_move_down_usd. valid values: true, false
   /// [order] valid values: <b>trust_score_desc (default), trust_score_asc and volume_desc</b>
-  Future<Response> getExchangeListWithIdTickers({
+  Future<List<TickerInfo>?> getMarketExchangeTickers({
     required String id,
-    String? coinIds,
+    List<String>? coinIds,
     bool? includeExchangeLogo,
     int? page,
     bool? depth,
     MarketExchangeDataOrdering? order
   }) async {
-    var path = createEndpointPathUrl(
-      rawQueryItems: {
-        'id': id,
-        'coin_ids': coinIds,
-        'include_exchange_logo': includeExchangeLogo,
-        'page': page,
-        'depth': depth,
-        'order': order?.value ?? ''
-      },
-      endpointPath: "/exchanges/{id}/tickers"
-    );
-    return await send(path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'coin_ids': coinIds?.join(','),
+          'include_exchange_logo': includeExchangeLogo,
+          'page': page,
+          'depth': depth,
+          'order': order?.value
+        },
+        endpointPath: "/exchanges/{id}/tickers"
+      );
+
+      var json = await sendBasic(path);
+      return json['tickers'] != null 
+        ? List<dynamic>.of(json['tickers']).map((e) => TickerInfo.fromJson(e)).toList() 
+        : null;
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get volume_chart data for a given exchange

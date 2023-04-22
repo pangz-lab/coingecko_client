@@ -356,3 +356,147 @@ class MarketExchangeInfoMockData {
   },
 ]''';
 }
+class MarketExchangeTickersMockData {
+  static final validResponseBody = r'''{
+  "name": "Binance",
+  "tickers": [
+    {
+      "base": "BTC",
+      "target": "USDT",
+      "market": {
+        "name": "Binance",
+        "identifier": "binance",
+        "has_trading_incentive": false
+      },
+      "last": 27642.71,
+      "volume": 85401.59418823966,
+      "converted_last": {
+        "btc": 1.000116,
+        "eth": 15.682484,
+        "usd": 27790
+      },
+      "converted_volume": {
+        "btc": 85412,
+        "eth": 1339309,
+        "usd": 2373320029
+      },
+      "trust_score": "green",
+      "bid_ask_spread_percentage": 0.010036,
+      "timestamp": "2023-03-25T02:30:36+00:00",
+      "last_traded_at": "2023-03-25T02:30:36+00:00",
+      "last_fetch_at": "2023-03-25T02:30:36+00:00",
+      "is_anomaly": false,
+      "is_stale": false,
+      "trade_url": "https://www.binance.com/en/trade/BTC_USDT?ref=37754157",
+      "token_info_url": null,
+      "coin_id": "bitcoin",
+      "target_coin_id": "tether"
+    },
+    {
+      "base": "ETH",
+      "target": "EUR",
+      "market": {
+        "name": "Binance",
+        "identifier": "binance",
+        "has_trading_incentive": false,
+        "logo": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250"
+      },
+      "last": 1689.67,
+      "volume": 12499.793314683933,
+      "cost_to_move_up_usd": 369066.46352302906,
+      "cost_to_move_down_usd": 587647.1537775281,
+      "converted_last": {
+        "btc": 0.06878808,
+        "eth": 1.010391,
+        "usd": 1874.94
+      },
+      "converted_volume": {
+        "btc": 859.837,
+        "eth": 12630,
+        "usd": 23436393
+      },
+      "trust_score": "green",
+      "bid_ask_spread_percentage": 0.011776,
+      "timestamp": "2023-04-22T03:09:52+00:00",
+      "last_traded_at": "2023-04-22T03:09:52+00:00",
+      "last_fetch_at": "2023-04-22T03:09:52+00:00",
+      "is_anomaly": false,
+      "is_stale": false,
+      "trade_url": "https://www.binance.com/en/trade/ETH_EUR?ref=37754157",
+      "token_info_url": null,
+      "coin_id": "ethereum"
+    }
+  ]
+}''';
+
+  static final responseBodyWithIncompleteKeys = r'''{
+  "name": "Binance",
+  "tickers": [
+    {
+      "base": "BTC",
+      "target": "USDT",
+      "last": 27642.71,
+      "volume": 85401.59418823966,
+      "converted_last": {
+        "btc": 1.000116,
+        "eth": 15.682484
+      },
+      "converted_volume": {
+        "btc": 85412,
+        "eth": 1339309
+      },
+      "trust_score": "green",
+      "bid_ask_spread_percentage": 0.010036,
+      "timestamp": "2023-03-25T02:30:36+00:00",
+      "last_fetch_at": "2023-03-25T02:30:36+00:00",
+      "is_anomaly": false,
+      "trade_url": "https://www.binance.com/en/trade/BTC_USDT?ref=37754157",
+      "token_info_url": null,
+      "coin_id": "bitcoin",
+      "target_coin_id": "tether"
+    },
+    {
+      "base": "ETH",
+      "target": "EUR",
+      "market": {
+        "name": "Binance",
+        "identifier": "binance",
+        "has_trading_incentive": false,
+        "logo": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250"
+      },
+      "last": 1689.67,
+      "volume": 12499.793314683933,
+      "cost_to_move_up_usd": 369066.46352302906,
+      "cost_to_move_down_usd": 587647.1537775281,
+      "converted_last": {
+        "btc": 0.06878808,
+        "eth": 1.010391,
+        "usd": 1874.94
+      },
+      "converted_volume": {
+        "btc": 859.837,
+        "eth": 12630,
+        "usd": 23436393
+      },
+      "trust_score": "green",
+      "bid_ask_spread_percentage": 0.011776,
+      "timestamp": "2023-04-22T03:09:52+00:00",
+      "last_traded_at": "2023-04-22T03:09:52+00:00",
+      "last_fetch_at": "2023-04-22T03:09:52+00:00",
+      "is_anomaly": false,
+      "is_stale": false,
+      "trade_url": "https://www.binance.com/en/trade/ETH_EUR?ref=37754157",
+      "token_info_url": null,
+      "coin_id": "ethereum"
+    }
+  ]
+}''';
+  //With comman at the last part
+  static final responseBodyWithInvalidFormat = r'''[
+  {
+    "id": "0chain",
+    "symbol": "zcn",
+    "name": "Zus"
+  },
+]''';
+}

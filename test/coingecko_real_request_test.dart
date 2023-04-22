@@ -9,7 +9,9 @@ import 'package:coingecko_client/src/domain/coins/models/coin_market_chart.dart'
 import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
+import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/exchanges_endpoint.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_data_ordering.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_basic_info.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
@@ -19,6 +21,7 @@ import 'package:test/test.dart';
 
 void main() {
   var httpService = HttpRequestService();
+  var delay = 600;
   group('Test for real request', () {
     test('from AssetPlatformsEndpoint should return a valid response', () async {
       var sut = AssetPlatformsEndpoint(httpService);
@@ -29,12 +32,14 @@ void main() {
 
   group('Test for real request', () {
     test('from CoinsEndpoint for getCoinList should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds:  delay));
       var sut = CoinsEndpoint(httpService);
       var result = await sut.getCoinList();
       expect(result.elementAt(0).runtimeType, Coin);
     });
 
     test('from CoinsEndpoint for getCoinMarkets should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds:  delay));
       var sut = CoinsEndpoint(httpService);
       var result = await sut.getCoinMarkets(
         vsCurrency: Currencies.php,
@@ -58,6 +63,7 @@ void main() {
     });
 
     test('from CoinsEndpoint for getCoinInfo should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds:  delay));
       var sut = CoinsEndpoint(httpService);
       var result = await sut.getCoinInfo(
           id: 'bitcoin',
@@ -71,6 +77,7 @@ void main() {
     });
     
     test('from CoinsEndpoint for getCoinTickers should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds:  delay));
       var sut = CoinsEndpoint(httpService);
       var result = await sut.getCoinTickers(
         id: 'bitcoin'
@@ -79,6 +86,7 @@ void main() {
     });
 
     test('from CoinsEndpoint for getCoinMarketChart should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds:  delay));
       var sut = CoinsEndpoint(httpService);
       var result = await sut.getCoinMarketChart(
         id: 'bitcoin',
@@ -90,6 +98,7 @@ void main() {
     });
 
     test('from CoinsEndpoint for getCoinMarketChartWithRange should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds:  delay));
       var sut = CoinsEndpoint(httpService);
       var result = await sut.getCoinMarketChartWithRange(
         id: 'bitcoin',
@@ -101,6 +110,7 @@ void main() {
     });
 
     test('from CoinsEndpoint for getCoinOhlc should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds:  delay));
       var sut = CoinsEndpoint(httpService);
       var result = await sut.getCoinOhlc(
         id: 'bitcoin',
@@ -113,21 +123,38 @@ void main() {
   
   group('Test for real request', () {
     test('from ExchangesEndpoint for getExchangeList should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds:  delay));
       var sut = ExchangesEndpoint(httpService);
       var result = await sut.getExchangeList();
       expect(result.elementAt(0).runtimeType, MarketExchangeInfo);
     });
 
     test('from ExchangesEndpoint for getMarketExchangeList should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds:  delay));
       var sut = ExchangesEndpoint(httpService);
       var result = await sut.getMarketExchangeList();
       expect(result.elementAt(0).runtimeType, MarketExchangeBasicInfo);
     });
 
     test('from ExchangesEndpoint for getMarketExchangeInfo should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds:  delay));
       var sut = ExchangesEndpoint(httpService);
       var result = await sut.getMarketExchangeInfo(id: 'binance');
       expect(result.runtimeType, MarketExchangeInfo);
+    });
+     
+    test('from ExchangesEndpoint for getMarketExchangeTickers should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds:  delay));
+      var sut = ExchangesEndpoint(httpService);
+      var result = await sut.getMarketExchangeTickers(
+          id: 'binance',
+          coinIds: ['bitcoin', 'ethereum'],
+          includeExchangeLogo: true,
+          page: 1,
+          depth: true,
+          order: MarketExchangeDataOrdering.trustScoreDesc
+        );
+      expect(result?.elementAt(0).runtimeType, TickerInfo);
     });
   });
 }

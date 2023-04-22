@@ -1,4 +1,5 @@
 import 'package:coingecko_client/src/domain/exchanges/exchanges_endpoint.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_data_ordering.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
 import 'package:test/test.dart';
@@ -13,7 +14,7 @@ void main() {
   group('getExchangeList method in', () {
     var basePath = "/exchanges";
     group('ExchangesEndpoint test endpoint path creation', () {
-      sut = ExchangesEndpoint(
+      var sut = ExchangesEndpoint(
         HttpRequestServiceMock(
           statusCode : 200,
           body: ExchangesMockData.validResponseBody
@@ -21,14 +22,14 @@ void main() {
       );
 
       test('with required parameters', () async {
-        await sut?.getExchangeList();
-        expect(sut?.endpointPath, "$apiVersionPath$basePath");
+        await sut.getExchangeList();
+        expect(sut.endpointPath, "$apiVersionPath$basePath");
       });
 
       test('with all parameters', () async {
-        await sut?.getExchangeList(perPage: 1, page: 3);
+        await sut.getExchangeList(perPage: 1, page: 3);
         expect(
-          sut?.endpointPath,
+          sut.endpointPath,
           "$apiVersionPath$basePath?per_page=1&page=3"
         );
       });
@@ -220,8 +221,6 @@ void main() {
     });
   });
 
-
-
   group('getMarketExchangeInfo method in', () {
     var basePath = "/exchanges/binance";
     group('ExchangesEndpoint test endpoint path creation', () {
@@ -389,6 +388,173 @@ void main() {
           )
         );
         await expectLater(sut!.getMarketExchangeInfo(id: 'binance'), throwsA(isA<DataParsingException>()));
+      });
+    });
+  });
+
+  group('getMarketExchangeTickers method in', () {
+    var basePath = "/exchanges/binance/tickers";
+    group('ExchangesEndpoint test endpoint path creation', () {
+      var sut = ExchangesEndpoint(
+        HttpRequestServiceMock(
+          statusCode : 200,
+          body: MarketExchangeTickersMockData.validResponseBody
+        )
+      );
+
+      test('with required parameters', () async {
+        await sut.getMarketExchangeTickers(
+          id: 'binance'
+        );
+        expect(sut.endpointPath, "$apiVersionPath$basePath");
+      });
+
+      test('with all parameters', () async {
+        await sut.getMarketExchangeTickers(
+          id: 'binance',
+          coinIds: ['bitcoin', 'ethereum'],
+          includeExchangeLogo: true,
+          page: 1,
+          depth: true,
+          order: MarketExchangeDataOrdering.trustScoreDesc
+        );
+        expect(
+          sut.endpointPath,
+          "$apiVersionPath$basePath?coin_ids=bitcoin,ethereum&include_exchange_logo=true&page=1&depth=true&order=trust_score_desc"
+        );
+      });
+    });
+
+    group('ExchangesEndpoint test endpoint response', () {
+      test('with data in getting the correct response type', () async {
+        sut = ExchangesEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: MarketExchangeTickersMockData.validResponseBody
+          )
+        );
+        var result = await sut?.getMarketExchangeTickers(
+          id: 'binance',
+          coinIds: ['bitcoin', 'ethereum'],
+          includeExchangeLogo: true,
+          page: 1,
+          depth: true,
+          order: MarketExchangeDataOrdering.trustScoreDesc
+        );
+        var firstItem = result!.elementAt(0);
+        expect(result.length, 2);
+        expect(firstItem.base, "BTC");
+        expect(firstItem.target, "USDT");
+        expect(firstItem.market, {
+          "name": "Binance",
+          "identifier": "binance",
+          "has_trading_incentive": false
+        });
+        expect(firstItem.last, 27642.71);
+        expect(firstItem.volume, 85401.59418823966);
+        expect(firstItem.convertedLast, {
+          "btc": 1.000116,
+          "eth": 15.682484,
+          "usd": 27790
+        });
+        expect(firstItem.convertedVolume, {
+          "btc": 85412,
+          "eth": 1339309,
+          "usd": 2373320029
+        });
+        expect(firstItem.trustScore, "green");
+        expect(firstItem.bidAskSpreadPercentage, 0.010036);
+        expect(firstItem.timestamp, DateTime.parse("2023-03-25T02:30:36+00:00"));
+        expect(firstItem.lastTradedAt, DateTime.parse("2023-03-25T02:30:36+00:00"));
+        expect(firstItem.lastFetchAt,DateTime.parse("2023-03-25T02:30:36+00:00"));
+        expect(firstItem.isAnomaly, false);
+        expect(firstItem.isStale, false);
+        expect(firstItem.tradeUrl, "https://www.binance.com/en/trade/BTC_USDT?ref=37754157");
+        expect(firstItem.tokenInfoUrl, null);
+        expect(firstItem.coinId, "bitcoin");
+        expect(firstItem.targetCoinId, "tether");
+      });
+
+      test('should still return a result for incomplete data format', () async {
+        sut = ExchangesEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: MarketExchangeTickersMockData.responseBodyWithIncompleteKeys
+          )
+        );
+        var result = await sut?.getMarketExchangeTickers(
+          id: 'binance',
+          coinIds: ['bitcoin', 'ethereum'],
+          includeExchangeLogo: true,
+          page: 1,
+          depth: true,
+          order: MarketExchangeDataOrdering.trustScoreDesc
+        );
+        var firstItem = result!.elementAt(0);
+        expect(result.length, 2);
+        expect(firstItem.base, "BTC");
+        expect(firstItem.target, "USDT");
+        expect(firstItem.market, null);
+        expect(firstItem.last, 27642.71);
+        expect(firstItem.volume, 85401.59418823966);
+        expect(firstItem.convertedLast, {
+          "btc": 1.000116,
+          "eth": 15.682484
+        });
+        expect(firstItem.convertedVolume, {
+          "btc": 85412,
+          "eth": 1339309
+        });
+        expect(firstItem.trustScore, "green");
+        expect(firstItem.bidAskSpreadPercentage, 0.010036);
+        expect(firstItem.timestamp, DateTime.parse("2023-03-25T02:30:36+00:00"));
+        expect(firstItem.lastTradedAt, null);
+        expect(firstItem.lastFetchAt,DateTime.parse("2023-03-25T02:30:36+00:00"));
+        expect(firstItem.isAnomaly, false);
+        expect(firstItem.tradeUrl, "https://www.binance.com/en/trade/BTC_USDT?ref=37754157");
+        expect(firstItem.tokenInfoUrl, null);
+        expect(firstItem.coinId, "bitcoin");
+        expect(firstItem.targetCoinId, "tether");
+      });
+    });
+
+    group('ExchangesEndpoint test for error handling', () {
+      test('should throw an exception for failed request', () async {
+        sut = ExchangesEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 500,
+            body: MarketExchangeTickersMockData.validResponseBody
+          )
+        );
+        await expectLater(sut?.getMarketExchangeTickers(id: 'binance'), throwsA(isA<NetworkRequestException>()));
+      });
+
+      test('should return a FormatException when result is error or when parsing failed', () async {
+        sut = ExchangesEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: '''[{
+    "error": "coin not found"
+  }]'''
+          )
+        );
+        await expectLater(sut?.getMarketExchangeTickers(id: 'binance'), throwsA(isA<DataParsingException>()));
+
+        sut = ExchangesEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: MarketExchangeTickersMockData.responseBodyWithInvalidFormat
+          )
+        );
+        await expectLater(sut?.getMarketExchangeTickers(id: 'binance'), throwsA(isA<DataParsingException>()));
+
+        sut = ExchangesEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: ""
+          )
+        );
+        await expectLater(sut?.getMarketExchangeTickers(id: 'binance'), throwsA(isA<DataParsingException>()));
       });
     });
   });
