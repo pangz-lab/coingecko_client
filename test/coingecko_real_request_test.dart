@@ -22,7 +22,7 @@ import 'package:test/test.dart';
 
 void main() {
   var httpService = HttpRequestService();
-  var delay = 800;
+  var delay = 1500;
   group('Test for real request from AssetPlatformsEndpoint', () {
     var sut = AssetPlatformsEndpoint(httpService);
     test('should return a valid response', () async {
