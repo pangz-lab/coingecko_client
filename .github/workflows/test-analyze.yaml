@@ -2,9 +2,13 @@ name: coingecko_client
 
 on:
   push:
-    branches: [main]
+    branches:
+      - 'master'
+      - 'feature/**'
   pull_request:
-    branches: [main]
+    branches:
+      - 'master'
+      - 'feature/**'
 
 jobs:
   test:
