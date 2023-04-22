@@ -500,3 +500,47 @@ class MarketExchangeTickersMockData {
   },
 ]''';
 }
+
+class MarketExchangeVolumeMockData {
+  static final validResponseBody = r'''[
+  [
+    1681302600000,
+    "318420.1017919471596547"
+  ],
+  [
+    1681306200000,
+    "345678.1385449122838244"
+  ],
+  [
+    1681309800000,
+    "355333.8717757840219322"
+  ],
+  [
+    1681313400000,
+    "370331.3879557344616341"
+  ],
+  [
+    1681317000000,
+    "378779.3901295906839115"
+  ]
+]''';
+
+  static final responseBodyWithIncompleteKeys = r'''[
+  [
+    null,
+    "318420.1017919471596547"
+  ],
+  [
+    1681306200000,
+    null
+  ]
+]''';
+  //With comman at the last part
+  static final responseBodyWithInvalidFormat = r'''[
+  {
+    "id": "0chain",
+    "symbol": "zcn",
+    "name": "Zus"
+  },
+]''';
+}

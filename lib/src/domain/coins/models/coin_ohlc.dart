@@ -29,7 +29,7 @@ class CoinOhlc extends BaseModel {
 
   CoinOhlc.fromJson(List<dynamic> json) {
     var map = json.toList().asMap();
-    _time = map.containsKey(0) ? toDateMs(json.elementAt(0)) : null;
+    _time = map.containsKey(0) ? toDateFromMs(json.elementAt(0)) : null;
     _open = map.containsKey(1) ? toDouble(json.elementAt(1)) : null;
     _high = map.containsKey(2) ? toDouble(json.elementAt(2)) : null;
     _low = map.containsKey(3) ? toDouble(json.elementAt(3)) : null;

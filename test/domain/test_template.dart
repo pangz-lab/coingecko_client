@@ -8,23 +8,23 @@
 //   ExchangesEndpoint? sut;
 //   final String apiVersionPath = "/api/v3";
 
-//   group('getMarketExchangeInfo method in', () {
+//   group('getMarketExchangeVolumeChart method in', () {
 //     var basePath = "/exchanges";
 //     group('ExchangesEndpoint test endpoint path creation', () {
-//       sut = ExchangesEndpoint(
+//       var sut = ExchangesEndpoint(
 //         HttpRequestServiceMock(
 //           statusCode : 200,
-//           body: ExchangesMockData.validResponseBody
+//           body: MarketExchangeVolumeMockData.validResponseBody
 //         )
 //       );
 
 //       test('with required parameters', () async {
-//         await sut?.getExchangeList();
+//         await sut?.getMarketExchangeVolumeChart();
 //         expect(sut?.endpointPath, "$apiVersionPath$basePath");
 //       });
 
 //       test('with all parameters', () async {
-//         await sut?.getExchangeList(perPage: 1, page: 3);
+//         await sut?.getMarketExchangeVolumeChart(perPage: 1, page: 3);
 //         expect(
 //           sut?.endpointPath,
 //           "$apiVersionPath$basePath?per_page=1&page=3"
@@ -37,10 +37,10 @@
 //         sut = ExchangesEndpoint(
 //           HttpRequestServiceMock(
 //             statusCode : 200,
-//             body: ExchangesMockData.validResponseBody
+//             body: MarketExchangeVolumeMockData.validResponseBody
 //           )
 //         );
-//         var result = await sut!.getExchangeList(
+//         var result = await sut!.getMarketExchangeVolumeChart(
 //           page: 1,
 //           perPage: 3
 //         );
@@ -64,10 +64,10 @@
 //         sut = ExchangesEndpoint(
 //           HttpRequestServiceMock(
 //             statusCode : 200,
-//             body: ExchangesMockData.responseBodyWithIncompleteKeys
+//             body: MarketExchangeVolumeMockData.responseBodyWithIncompleteKeys
 //           )
 //         );
-//         var result = await sut!.getExchangeList(page: 1, perPage: 3);
+//         var result = await sut!.getMarketExchangeVolumeChart(page: 1, perPage: 3);
 //         var firstItem = result.elementAt(0);
 //         expect(result.length, 1);
 //         expect(firstItem.id, "bybit_spot");
@@ -90,10 +90,10 @@
 //         sut = ExchangesEndpoint(
 //           HttpRequestServiceMock(
 //             statusCode : 500,
-//             body: ExchangesMockData.validResponseBody
+//             body: MarketExchangeVolumeMockData.validResponseBody
 //           )
 //         );
-//         await expectLater(sut!.getExchangeList(), throwsA(isA<NetworkRequestException>()));
+//         await expectLater(sut!.getMarketExchangeVolumeChart(), throwsA(isA<NetworkRequestException>()));
 //       });
 
 //       test('should return a FormatException when result is error or when parsing failed', () async {
@@ -105,15 +105,15 @@
 //   }'''
 //           )
 //         );
-//         await expectLater(sut!.getExchangeList(), throwsA(isA<DataParsingException>()));
+//         await expectLater(sut!.getMarketExchangeVolumeChart(), throwsA(isA<DataParsingException>()));
 
 //         sut = ExchangesEndpoint(
 //           HttpRequestServiceMock(
 //             statusCode : 200,
-//             body: ExchangesMockData.responseBodyWithInvalidFormat
+//             body: MarketExchangeVolumeMockData.responseBodyWithInvalidFormat
 //           )
 //         );
-//         await expectLater(sut!.getExchangeList(), throwsA(isA<DataParsingException>()));
+//         await expectLater(sut!.getMarketExchangeVolumeChart(), throwsA(isA<DataParsingException>()));
 
 //         sut = ExchangesEndpoint(
 //           HttpRequestServiceMock(
@@ -121,7 +121,7 @@
 //             body: ""
 //           )
 //         );
-//         await expectLater(sut!.getExchangeList(), throwsA(isA<DataParsingException>()));
+//         await expectLater(sut!.getMarketExchangeVolumeChart(), throwsA(isA<DataParsingException>()));
 //       });
 //     });
 //   });

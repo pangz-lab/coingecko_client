@@ -1,5 +1,6 @@
 import 'package:coingecko_client/src/domain/exchanges/exchanges_endpoint.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_data_ordering.dart';
+import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
 import 'package:test/test.dart';
@@ -555,6 +556,123 @@ void main() {
           )
         );
         await expectLater(sut?.getMarketExchangeTickers(id: 'binance'), throwsA(isA<DataParsingException>()));
+      });
+    });
+  });
+
+  group('getMarketExchangeVolumeChart method in', () {
+    var basePath = "/exchanges/binance/volume_chart";
+    group('ExchangesEndpoint test endpoint path creation', () {
+      var sut = ExchangesEndpoint(
+        HttpRequestServiceMock(
+          statusCode : 200,
+          body: MarketExchangeVolumeMockData.validResponseBody
+        )
+      );
+
+      test('with all parameters', () async {
+        await sut.getMarketExchangeVolumeChart(
+          id: 'binance',
+          days: DataRange.in1Week
+        );
+        expect(
+          sut.endpointPath,
+          "$apiVersionPath$basePath?days=7"
+        );
+      });
+    });
+
+    group('ExchangesEndpoint test endpoint response', () {
+      test('with data in getting the correct response type', () async {
+        sut = ExchangesEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: MarketExchangeVolumeMockData.validResponseBody
+          )
+        );
+        var result = await sut?.getMarketExchangeVolumeChart(
+          id: 'binance',
+          days: DataRange.in1Week
+        );
+        var firstItem = result?.elementAt(0);
+        var lastItem = result?.elementAt(4);
+        expect(result?.length, 5);
+        expect(firstItem?.timestamp, DateTime.fromMillisecondsSinceEpoch(1681302600000));
+        expect(firstItem?.volume, 318420.1017919471596547);
+        expect(lastItem?.timestamp, DateTime.fromMillisecondsSinceEpoch(1681317000000));
+        expect(lastItem?.volume, 378779.3901295906839115);
+      });
+
+      test('should still return a result for incomplete data format', () async {
+        sut = ExchangesEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: MarketExchangeVolumeMockData.responseBodyWithIncompleteKeys
+          )
+        );
+        var result = await sut?.getMarketExchangeVolumeChart(
+          id: 'binance',
+          days: DataRange.in1Week
+        );
+        var firstItem = result?.elementAt(0);
+        var lastItem = result?.elementAt(1);
+        expect(result?.length, 2);
+        expect(firstItem?.timestamp, null);
+        expect(firstItem?.volume, 318420.1017919471596547);
+        expect(lastItem?.timestamp, DateTime.fromMillisecondsSinceEpoch(1681306200000));
+        expect(lastItem?.volume, null);
+      });
+    });
+
+    group('ExchangesEndpoint test for error handling', () {
+      test('should throw an exception for failed request', () async {
+        sut = ExchangesEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 500,
+            body: MarketExchangeVolumeMockData.validResponseBody
+          )
+        );
+        await expectLater(sut?.getMarketExchangeVolumeChart(
+          id: 'binance',
+          days: DataRange.in1Week
+        ), throwsA(isA<NetworkRequestException>()));
+      });
+
+      test('should return a FormatException when result is error or when parsing failed', () async {
+        sut = ExchangesEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: '''{
+    "error": "coin not found"
+  }'''
+          )
+        );
+        await expectLater(sut?.getMarketExchangeVolumeChart(
+          id: 'binance',
+          days: DataRange.in1Week
+        ), throwsA(isA<DataParsingException>()));
+
+        sut = ExchangesEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: MarketExchangeVolumeMockData.responseBodyWithInvalidFormat
+          )
+        );
+        await expectLater(sut?.getMarketExchangeVolumeChart(
+          id: 'binance',
+          days: DataRange.in1Week
+        ), throwsA(isA<DataParsingException>()));
+
+        sut = ExchangesEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: ""
+          )
+        );
+        await expectLater(sut?.getMarketExchangeVolumeChart(
+          id: 'binance',
+          days: DataRange.in1Week
+        ), throwsA(isA<DataParsingException>()));
       });
     });
   });

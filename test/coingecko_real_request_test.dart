@@ -14,6 +14,7 @@ import 'package:coingecko_client/src/domain/exchanges/exchanges_endpoint.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_data_ordering.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_basic_info.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_volume_chart.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
@@ -155,6 +156,16 @@ void main() {
           order: MarketExchangeDataOrdering.trustScoreDesc
         );
       expect(result?.elementAt(0).runtimeType, TickerInfo);
+    });
+
+    test('from ExchangesEndpoint for getMarketExchangeVolumeChart should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds:  delay));
+      var sut = ExchangesEndpoint(httpService);
+      var result = await sut.getMarketExchangeVolumeChart(
+        id: 'binance',
+        days: DataRange.in1Day
+      );
+      expect(result.elementAt(0).runtimeType, MarketExchangeVolumeChart);
     });
   });
 }

@@ -3,10 +3,10 @@ import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_basic_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_data_ordering.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_volume_chart.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
-import 'package:http/http.dart';
 
 class ExchangesEndpoint extends BaseEndpoint {
   ExchangesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
@@ -143,17 +143,27 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// 
   /// [id] pass the exchange id (can be obtained from /exchanges/list) eg. binance
   /// [days]  Data up to number of days ago (eg. 1,14,30)
-  Future<Response> getExchangeListWithIdVolumeChart({
+  Future<List<MarketExchangeVolumeChart>> getMarketExchangeVolumeChart({
     required String id,
     required DataRange days
   }) async {
-    var path = createEndpointPathUrl(
-      rawQueryItems: {
-        'id': id,
-        'days': days.value
-      },
-      endpointPath: "/exchanges/{id}/volume_chart"
-    );
-    return await send(path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'days': days.value
+        },
+        endpointPath: "/exchanges/{id}/volume_chart"
+      );
+
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => MarketExchangeVolumeChart.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 }
