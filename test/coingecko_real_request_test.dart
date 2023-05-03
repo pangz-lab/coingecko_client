@@ -15,6 +15,7 @@ import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_dat
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_basic_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_volume_chart.dart';
+import 'package:coingecko_client/src/domain/simple/simple_endpoint.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
@@ -156,6 +157,44 @@ void main() {
         days: DataRange.in1Day
       );
       expect(result.elementAt(0).runtimeType, MarketExchangeVolumeChart);
+    });
+  });
+
+  group('Test for real request from SimpleEndpoint for', () {
+    var sut = SimpleEndpoint(httpService);
+    test('getCoinPrice should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getCoinPrice(
+          ids: ['bitcoin', 'ethereum', 'verus-coin'],
+          vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
+          includeMarketCap: true,
+          include24hrVol: true,
+          include24hrChange: true,
+          includeLastUpdatedAt: true,
+          precision: 18
+        );
+      expect(result['verus-coin'].runtimeType.toString(), '_Map<String, dynamic>');
+    });
+
+    test('getTokenPrice should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getTokenPrice(
+          id: 'avalanche',
+          contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
+          vsCurrencies: ['btc', 'eth'],
+          includeMarketCap: true,
+          include24hrVol: true,
+          include24hrChange: true,
+          includeLastUpdatedAt: true,
+          precision: 18
+        );
+      expect(result.runtimeType.toString(), '_Map<String, dynamic>');
+    });
+
+    test('getSupportedVsCurrencies should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getSupportedVsCurrencies();
+      expect(result.runtimeType, List<String>);
     });
   });
 }
