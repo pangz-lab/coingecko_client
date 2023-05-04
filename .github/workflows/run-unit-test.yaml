@@ -1,4 +1,4 @@
-name: coingecko_client
+name: coingecko_client_unit_test
 
 on:
   push:
@@ -26,5 +26,5 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
-      - name: Run tests
-        run: dart test
+      - name: Run unit tests
+        run: dart test test/domain

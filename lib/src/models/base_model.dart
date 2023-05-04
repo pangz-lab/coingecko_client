@@ -4,6 +4,11 @@ class BaseModel {
     return DateTime.tryParse(value.toString());
   }
 
+  DateTime? toDateFromTimestamp(dynamic value) {
+    if(value == null) return null;
+    return DateTime.fromMillisecondsSinceEpoch((int.tryParse(value.toString()) ?? 0) * 1000);
+  }
+
   DateTime? toDateFromMs(dynamic value) {
     value = toInt(value);
     if(value == null) return null;

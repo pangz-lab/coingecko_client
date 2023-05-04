@@ -6,14 +6,14 @@ class NetworkRequestException extends ClientException {
   factory NetworkRequestException.failedResponse(int statusCode, Response response) {
     return NetworkRequestException(
       "[STATUS: $statusCode] Failed to receive the response from the server."
-      "[RESPONSE]"
-      "${response.body}"
-      "${response.reasonPhrase}"
-      "${response.headers}"
-      "[REQUEST]"
-      "${response.request?.url ?? ''}"
-      "${response.request?.headers ?? ''}"
-      "${response.request?.method ?? ''}"
+      "\n\n[RESPONSE]"
+      "\n${response.body}"
+      "\n${response.reasonPhrase}"
+      "\n${response.headers}"
+      "\n\n[REQUEST]"
+      "\n${response.request?.url ?? ''}"
+      "\n${response.request?.headers ?? ''}"
+      "\n${response.request?.method ?? ''}"
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:http/http.dart';
@@ -34,7 +35,11 @@ class BaseEndpoint {
           response
         );
       }
-      return jsonDecode(utf8.decode(response.bodyBytes));
+      var data = utf8.decode(response.bodyBytes);
+      if(data.trim().isEmpty) {
+        throw DataParsingException("Response data is empty");
+      }
+      return jsonDecode(data);
     } catch (_) {
       rethrow;
     }

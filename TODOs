@@ -1,0 +1,22 @@
+4. contract - 3
+8. indexes - 3
+10. nfts - 3
+6. categories - 2
+14. global - 2
+1. ping - 1
+11. exchange_rates - 1
+12. search - 1
+13. trending - 1
+14. companies - 1
+9. derivatives - DONE
+7. exchanges - DONE
+5. asset_platforms - DONE
+3. coins - DONE
+2. simple - DONE
+
+
+1. Convert to BigInt
+2. fix fromJson()
+3. check all data is parsed properly
+4. check method name
+5. convert to main response class

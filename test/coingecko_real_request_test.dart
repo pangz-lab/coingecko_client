@@ -10,6 +10,11 @@ import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
 import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
+import 'package:coingecko_client/src/domain/derivatives/derivatives_endpoint.dart';
+import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange.dart';
+import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange_ordering.dart';
+import 'package:coingecko_client/src/domain/derivatives/models/derivatives_tickers.dart';
+import 'package:coingecko_client/src/domain/derivatives/models/derivatives.dart';
 import 'package:coingecko_client/src/domain/exchanges/exchanges_endpoint.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_data_ordering.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_info.dart';
@@ -23,7 +28,7 @@ import 'package:test/test.dart';
 
 void main() {
   var httpService = HttpRequestService();
-  var delay = 2000;
+  var delay = 5000;
   group('Test for real request from AssetPlatformsEndpoint', () {
     var sut = AssetPlatformsEndpoint(httpService);
     test('should return a valid response', () async {
@@ -195,6 +200,42 @@ void main() {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getSupportedVsCurrencies();
       expect(result.runtimeType, List<String>);
+    });
+  });
+
+  group('Test for real request from DerivativesEndpoint for', () {
+    var sut = DerivativesEndpoint(httpService);
+    test('getDerivatives should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getDerivatives(
+        includeTickers: DerivativesTickers.unexpired
+      );
+      expect(result.runtimeType, List<Derivatives>);
+    });
+
+    test('getExchangeList should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getExchangeList(
+        order: DerivativesExchangeOrdering.nameAsc,
+        perPage: 10,
+        page: 2
+      );
+      expect(result.runtimeType, List<DerivativesExchange>);
+    });
+
+    test('getExchange should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getExchange(
+        id: "bybit",
+        includeTickers: DerivativesTickers.unexpired
+      );
+      expect(result.runtimeType, DerivativesExchange);
+    });
+    
+    test('getSupportedVsCurrencies should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getExchangeBasicInfoList();
+      expect(result.runtimeType, List<MarketExchangeBasicInfo>);
     });
   });
 }
