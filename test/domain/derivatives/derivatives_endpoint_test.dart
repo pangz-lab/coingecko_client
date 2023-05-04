@@ -432,7 +432,7 @@ void main() {
         expect(tickerFirstItem.convertedLast!.length, 3);
         expect(tickerFirstItem.convertedLast!['btc'], "0.00000012788450119020366854678263");
         expect(tickerFirstItem.convertedLast!['usd'], "0.003717813536258691189050514548519798361857");
-        expect(tickerFirstItem.lastTraded, DateTime.parse("2023-05-04 12:46:08.000"));
+        expect(tickerFirstItem.lastTraded!.toUtc(), DateTime.parse("2023-05-04 03:46:08.000Z"));
         expect(tickerFirstItem.expiredAt, null);
       });
 
@@ -479,7 +479,7 @@ void main() {
         expect(tickerFirstItem.convertedLast!.length, 2);
         expect(tickerFirstItem.convertedLast!['btc'], "0.00000012788450119020366854678263");
         expect(tickerFirstItem.convertedLast!['usd'], "0.003717813536258691189050514548519798361857");
-        expect(tickerFirstItem.lastTraded, DateTime.parse("2023-05-04 12:46:08.000"));
+        expect(tickerFirstItem.lastTraded!.toUtc(), DateTime.parse("2023-05-04 03:46:08.000Z"));
         expect(tickerFirstItem.expiredAt, null);
       });
     });
