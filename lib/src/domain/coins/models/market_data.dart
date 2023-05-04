@@ -188,9 +188,7 @@ class MarketData extends BaseModel {
   int? get maxSupply => _maxSupply;
   int? get circulatingSupply => _circulatingSupply;
   Map<String, dynamic>? get sparkline7d => _sparkline7d;
-
   DateTime? get lastUpdated => _lastUpdated;
-
 
   MarketData.fromJson(Map<String, dynamic> json) {
     _currentPrice = toMap<dynamic>(json['current_price']);
@@ -281,99 +279,8 @@ class MarketData extends BaseModel {
     data['market_cap_change_percentage_24h_in_currency'] = _marketCapChangePercentage24hInCurrency;    data['total_supply'] = _totalSupply;
     data['max_supply'] = _maxSupply;
     data['circulating_supply'] = _circulatingSupply;
-    data['sparkline_7d'] = _sparkline7d;    data['last_updated'] = _lastUpdated;
+    data['sparkline_7d'] = _sparkline7d;
+    data['last_updated'] = _lastUpdated;
     return data;
   }
 }
-
-// class CurrentPrice {
-//   int? _aed;
-
-//   CurrentPrice({int? aed}) {
-//     if (aed != null) {
-//       _aed = aed;
-//     }
-//   }
-
-//   int? get aed => _aed;
-//   set aed(int? aed) => _aed = aed;
-
-//   CurrentPrice.fromJson(Map<String, dynamic> json) {
-//     _aed = json['aed'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['aed'] = _aed;
-//     return data;
-//   }
-// }
-
-// class AthChangePercentage {
-//   double? _aed;
-
-//   AthChangePercentage({double? aed}) {
-//     if (aed != null) {
-//       _aed = aed;
-//     }
-//   }
-
-//   double? get aed => _aed;
-//   set aed(double? aed) => _aed = aed;
-
-//   AthChangePercentage.fromJson(Map<String, dynamic> json) {
-//     _aed = json['aed'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['aed'] = _aed;
-//     return data;
-//   }
-// }
-
-// class AthDate {
-//   String? _aed;
-
-//   AthDate({String? aed}) {
-//     if (aed != null) {
-//       _aed = aed;
-//     }
-//   }
-
-//   String? get aed => _aed;
-//   set aed(String? aed) => _aed = aed;
-
-//   AthDate.fromJson(Map<String, dynamic> json) {
-//     _aed = json['aed'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['aed'] = _aed;
-//     return data;
-//   }
-// }
-
-// class Sparkline7d {
-//   List<double>? _price;
-
-//   Sparkline7d({List<double>? price}) {
-//     if (price != null) {
-//       _price = price;
-//     }
-//   }
-
-//   List<double>? get price => _price;
-//   set price(List<double>? price) => _price = price;
-
-//   Sparkline7d.fromJson(Map<String, dynamic> json) {
-//     _price = json['price'].cast<double>();
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['price'] = _price;
-//     return data;
-//   }
-// }
