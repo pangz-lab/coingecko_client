@@ -65,7 +65,7 @@ void main() {
         expect(firstItem.fundingRate, -0.022454);
         expect(firstItem.openInterest, 7498085818.64);
         expect(firstItem.volume24h, 5125742894.90316);
-        expect(firstItem.lastTradedAt, DateTime.parse("2023-05-04 13:44:06.000"));
+        expect(firstItem.lastTradedAt!.toUtc(), DateTime.parse("2023-05-04 04:44:06.000Z"));
         expect(firstItem.lastTradedAt!.year, 2023);
         expect(firstItem.lastTradedAt!.month, 5);
         expect(firstItem.lastTradedAt!.day, 4);
@@ -83,7 +83,7 @@ void main() {
         expect(secondItem.fundingRate, 0.01);
         expect(secondItem.openInterest, 2879409940.61);
         expect(secondItem.volume24h, 19448237664.16787);
-        expect(secondItem.lastTradedAt, DateTime.parse("2023-05-04 13:41:59.000"));
+        expect(secondItem.lastTradedAt!.toUtc(), DateTime.parse("2023-05-04 04:41:59.000Z"));
         expect(secondItem.expiredAt, null);
       });
 
@@ -113,7 +113,7 @@ void main() {
         expect(firstItem.fundingRate, -0.022454);
         expect(firstItem.openInterest, 7498085818.64);
         expect(firstItem.volume24h, null);
-        expect(firstItem.lastTradedAt, DateTime.parse("2023-05-04 13:44:06.000"));
+        expect(firstItem.lastTradedAt!.toUtc(), DateTime.parse("2023-05-04 04:44:06.000Z"));
         expect(firstItem.lastTradedAt!.year, 2023);
         expect(firstItem.lastTradedAt!.month, 5);
         expect(firstItem.lastTradedAt!.day, 4);
@@ -355,77 +355,6 @@ void main() {
         ), throwsA(isA<DataParsingException>()));
       });
     });
-  // });
-  
-  // group('getSupportedVsCurrencies method in', () {
-  //   var basePath = "/simple/supported_vs_currencies";
-  //   group('DerivativesEndpoint test endpoint path creation', () {
-  //     test('with required parameters', () async {
-  //       sut = DerivativesEndpoint(
-  //         HttpRequestServiceMock(
-  //           statusCode : 200,
-  //           body: SimpleSupportedVsCurrencyMockData.validResponseBody
-  //         )
-  //       );
-  //       await sut?.getSupportedVsCurrencies();
-  //       expect(sut?.endpointPath, "$apiVersionPath$basePath");
-  //     });
-  //   });
-
-  //   group('DerivativesEndpoint test endpoint response', () {
-  //     test('with data in getting the correct response type', () async {
-  //       sut = DerivativesEndpoint(
-  //         HttpRequestServiceMock(
-  //           statusCode : 200,
-  //           body: SimpleSupportedVsCurrencyMockData.validResponseBody
-  //         )
-  //       );
-  //       var result = await sut!.getSupportedVsCurrencies();
-  //       expect(result.length, 10);
-  //       expect(result.first, 'vrsc');
-  //       expect(result.last, 'sats');
-  //     });
-  //   });
-
-  //   group('DerivativesEndpoint test for error handling', () {
-  //     test('should throw an exception for failed request', () async {
-  //       sut = DerivativesEndpoint(
-  //         HttpRequestServiceMock(
-  //           statusCode : 500,
-  //           body: SimpleSupportedVsCurrencyMockData.validResponseBody
-  //         )
-  //       );
-  //       await expectLater(sut!.getSupportedVsCurrencies(), throwsA(isA<NetworkRequestException>()));
-  //     });
-
-  //     test('should return a FormatException when result is error or when parsing failed', () async {
-  //       sut = DerivativesEndpoint(
-  //         HttpRequestServiceMock(
-  //           statusCode : 200,
-  //           body: '''{
-  //   "error": "coin not found"
-  // }'''
-  //         )
-  //       );
-  //       await expectLater(sut!.getSupportedVsCurrencies(), throwsA(isA<DataParsingException>()));
-
-  //       sut = DerivativesEndpoint(
-  //         HttpRequestServiceMock(
-  //           statusCode : 200,
-  //           body: SimpleSupportedVsCurrencyMockData.responseBodyWithInvalidFormat
-  //         )
-  //       );
-  //       await expectLater(sut!.getSupportedVsCurrencies(), throwsA(isA<DataParsingException>()));
-
-  //       sut = DerivativesEndpoint(
-  //         HttpRequestServiceMock(
-  //           statusCode : 200,
-  //           body: ""
-  //         )
-  //       );
-  //       await expectLater(sut!.getSupportedVsCurrencies(), throwsA(isA<DataParsingException>()));
-  //     });
-  //   });
   });
 
   group('getExchange method in', () {
