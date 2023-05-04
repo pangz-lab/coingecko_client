@@ -20,6 +20,8 @@ import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_dat
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_basic_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_volume_chart.dart';
+import 'package:coingecko_client/src/domain/indexes/indexes_endpoint.dart';
+import 'package:coingecko_client/src/domain/indexes/models/market_index.dart';
 import 'package:coingecko_client/src/domain/simple/simple_endpoint.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
@@ -236,6 +238,33 @@ void main() {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getExchangeBasicInfoList();
       expect(result.runtimeType, List<MarketExchangeBasicInfo>);
+    });
+  });
+
+  group('Test for real request from IndexesEndpoint for', () {
+    var sut = IndexesEndpoint(httpService);
+    test('getMarketIndexList should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getMarketIndexList(
+        perPage: 10,
+        page: 2
+      );
+      expect(result.runtimeType, List<MarketIndex>);
+    });
+
+    test('getMarketIndex should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getMarketIndex(
+        marketId: 'bybit',
+        id: 'HOT',
+      );
+      expect(result.runtimeType, MarketIndex);
+    });
+    
+    test('getMarketIndexBasicInfoList should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getMarketIndexBasicInfoList();
+      expect(result.runtimeType, List<MarketIndex>);
     });
   });
 }

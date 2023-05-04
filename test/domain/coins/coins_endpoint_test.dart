@@ -137,7 +137,6 @@ void main() {
       });
     });
   });
-
   
   group('getCoinMarkets method in', () {
     var basePath = "/coins/markets";
@@ -363,7 +362,6 @@ void main() {
       });
     });
   });
-
 
   group('getCoinInfo method in', () {
     var basePath = "/coins/bitcoin";
@@ -1247,7 +1245,6 @@ void main() {
     });
   });
 
-
   group('getCoinMarketChart method in', () {
     var basePath = "$apiVersionPath/coins/bitcoin/market_chart";
     group('CoinsEndpoint test endpoint path creation', () {
@@ -1460,7 +1457,6 @@ void main() {
       });
     });
   });
-
 
   group('getCoinMarketChartWithRange method in', () {
     var basePath = "$apiVersionPath/coins/bitcoin/market_chart/range";
@@ -1679,8 +1675,7 @@ void main() {
     });
   });
 
-
-group('getCoinOhlc method in', () {
+  group('getCoinOhlc method in', () {
     var basePath = "$apiVersionPath/coins/bitcoin/ohlc";
     group('CoinsEndpoint test endpoint path creation', () {
       var sut = CoinsEndpoint(
