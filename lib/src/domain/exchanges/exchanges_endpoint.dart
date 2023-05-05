@@ -1,9 +1,9 @@
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_info.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_basic_info.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_data_ordering.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_volume_chart.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_info.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_basic_info.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_data_ordering.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_volume_chart.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
@@ -18,7 +18,7 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// Total results per page
   /// Default value:: 100
   /// [page] page through results
-  Future<List<MarketExchangeInfo>> getExchangeList({
+  Future<List<ExchangeInfo>> getList({
     int? perPage,
     int? page
   }) async {
@@ -32,7 +32,7 @@ class ExchangesEndpoint extends BaseEndpoint {
       );
 
       var result = List<dynamic>.of(await sendBasic(path));
-      return result.map((value) => MarketExchangeInfo.fromJson(value)).toList();
+      return result.map((value) => ExchangeInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
@@ -46,11 +46,11 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// <br/><b>Endpoint </b>: /exchanges/list
   /// 
   /// Use this to obtain all the markets' id in order to make API calls
-  Future<List<MarketExchangeBasicInfo>> getMarketExchangeList() async {
+  Future<List<ExchangeBasicInfo>> getBasicList() async {
     try {
       var path = '/exchanges/list';
       var result = List<dynamic>.of(await sendBasic(path));
-      return result.map((value) => MarketExchangeBasicInfo.fromJson(value)).toList();
+      return result.map((value) => ExchangeBasicInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
@@ -70,7 +70,7 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// You are responsible for managing how you want to display these information (e.g. footnote, different background, change opacity, hide)
   /// 
   /// [id] pass the exchange id (can be obtained from /exchanges/list) eg. binance
-  Future<MarketExchangeInfo> getMarketExchangeInfo({
+  Future<ExchangeInfo> getInfo({
     required String id
   }) async {
     try {
@@ -80,7 +80,7 @@ class ExchangesEndpoint extends BaseEndpoint {
         },
         endpointPath: "/exchanges/{id}"
       );
-      return MarketExchangeInfo.fromJson(await sendBasic(path));
+      return ExchangeInfo.fromJson(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
@@ -104,13 +104,13 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// [page] Page through results
   /// [depth] flag to show 2% orderbook depth i.e., cost_to_move_up_usd and cost_to_move_down_usd. valid values: true, false
   /// [order] valid values: <b>trust_score_desc (default), trust_score_asc and volume_desc</b>
-  Future<List<TickerInfo>?> getMarketExchangeTickers({
+  Future<List<TickerInfo>?> getTickerList({
     required String id,
     List<String>? coinIds,
     bool? includeExchangeLogo,
     int? page,
     bool? depth,
-    MarketExchangeDataOrdering? order
+    ExchangeDataOrdering? order
   }) async {
     try {
       var path = createEndpointPathUrl(
@@ -143,7 +143,7 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// 
   /// [id] pass the exchange id (can be obtained from /exchanges/list) eg. binance
   /// [days]  Data up to number of days ago (eg. 1,14,30)
-  Future<List<MarketExchangeVolumeChart>> getMarketExchangeVolumeChart({
+  Future<List<ExchangeVolumeChart>> getVolumeChartList({
     required String id,
     required DataRange days
   }) async {
@@ -157,7 +157,7 @@ class ExchangesEndpoint extends BaseEndpoint {
       );
 
       var result = List<dynamic>.of(await sendBasic(path));
-      return result.map((value) => MarketExchangeVolumeChart.fromJson(value)).toList();
+      return result.map((value) => ExchangeVolumeChart.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {

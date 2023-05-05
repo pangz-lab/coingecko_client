@@ -17,7 +17,7 @@ class NftsEndpoint extends BaseEndpoint {
   /// [asset_platform_id] The id of the platform issuing tokens (See asset_platforms endpoint for list of options)
   /// [per_page] Total results per page
   /// [page] Page through results
-  Future<List<NftBasicInfo>> getList({
+  Future<List<NftBasicInfo>> getBasicList({
     NftsDataOrdering? order,
     String? assetPlatformId,
     int? perPage,

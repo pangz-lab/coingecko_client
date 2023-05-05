@@ -1,12 +1,12 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
-class Coin extends BaseModel {
+class CoinBasicInfo extends BaseModel {
   String? _id;
   String? _symbol;
   String? _name;
   Map<String, dynamic>? _platforms;
 
-  Coin({String? id, String? symbol, String? name, Map<String, dynamic>? platforms}) {
+  CoinBasicInfo({String? id, String? symbol, String? name, Map<String, dynamic>? platforms}) {
     _id = id;
     _symbol = symbol;
     _name = name;
@@ -18,7 +18,7 @@ class Coin extends BaseModel {
   String? get name => _name;
   Map<String, dynamic>? get platforms => _platforms;
 
-  Coin.fromJson(Map<String, dynamic> json) {
+  CoinBasicInfo.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _symbol = json['symbol'];
     _name = json['name'];

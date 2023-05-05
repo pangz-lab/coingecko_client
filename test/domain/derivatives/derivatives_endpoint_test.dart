@@ -12,7 +12,7 @@ void main() {
   DerivativesEndpoint? sut;
   final String apiVersionPath = "/api/v3";
 
-  group('getDerivatives method in', () {
+  group('getList method in', () {
     var basePath = "/derivatives";
     group('DerivativesEndpoint test endpoint path creation', () {
       var sut = DerivativesEndpoint(
@@ -23,12 +23,12 @@ void main() {
       );
 
       test('without parameters', () async {
-        await sut.getDerivatives();
+        await sut.getList();
         expect(sut.endpointPath, "$apiVersionPath$basePath");
       });
 
       test('with all parameters', () async {
-        await sut.getDerivatives(
+        await sut.getList(
           includeTickers: DerivativesTickers.unexpired
         );
         expect(
@@ -46,7 +46,7 @@ void main() {
             body: DerivativesMockData.validResponseBody
           )
         );
-        var result = await sut!.getDerivatives(
+        var result = await sut!.getList(
           includeTickers: DerivativesTickers.unexpired
         );
 
@@ -94,7 +94,7 @@ void main() {
             body: DerivativesMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut!.getDerivatives(
+        var result = await sut!.getList(
           includeTickers: DerivativesTickers.unexpired
         );
 
@@ -144,7 +144,7 @@ void main() {
             body: DerivativesMockData.validResponseBody
           )
         );
-        await expectLater(sut!.getDerivatives(
+        await expectLater(sut!.getList(
           includeTickers: DerivativesTickers.unexpired
         ), throwsA(isA<NetworkRequestException>()));
       });
@@ -158,7 +158,7 @@ void main() {
   }'''
           )
         );
-        await expectLater(sut!.getDerivatives(
+        await expectLater(sut!.getList(
           includeTickers: DerivativesTickers.unexpired
         ),throwsA(isA<DataParsingException>()));
 
@@ -168,7 +168,7 @@ void main() {
             body: DerivativesMockData.responseBodyWithInvalidFormat
           )
         );
-        await expectLater(sut!.getDerivatives(
+        await expectLater(sut!.getList(
           includeTickers: DerivativesTickers.unexpired
         ), throwsA(isA<DataParsingException>()));
 
@@ -179,7 +179,7 @@ void main() {
           )
         );
         await expectLater(
-          sut!.getDerivatives(
+          sut!.getList(
             includeTickers: DerivativesTickers.unexpired
           ),
           throwsA(isA<DataParsingException>())

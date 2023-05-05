@@ -1,6 +1,6 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
-class MarketExchangeStatus extends BaseModel {
+class ExchangeStatus extends BaseModel {
   String? _description;
   String? _category;
   DateTime? _createdAt;
@@ -9,7 +9,7 @@ class MarketExchangeStatus extends BaseModel {
   bool? _pin;
   Project? _project;
 
-  MarketExchangeStatus({
+  ExchangeStatus({
     String? description,
     String? category,
     DateTime? createdAt,
@@ -35,7 +35,7 @@ class MarketExchangeStatus extends BaseModel {
   bool? get pin => _pin;
   Project? get project => _project;
 
-  MarketExchangeStatus.fromJson(Map<String, dynamic> json) {
+  ExchangeStatus.fromJson(Map<String, dynamic> json) {
     _description = json['description'];
     _category = json['category'];
     _createdAt = toDate(json['created_at']);

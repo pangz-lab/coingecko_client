@@ -1,4 +1,4 @@
-import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_status.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_status.dart';
 import 'package:coingecko_client/src/models/base_model.dart';
 
 class NftInfo extends BaseModel {

@@ -3,7 +3,7 @@ import 'package:coingecko_client/src/domain/derivatives/models/derivatives.dart'
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange_ordering.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_tickers.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_basic_info.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_basic_info.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
@@ -14,7 +14,7 @@ class DerivativesEndpoint extends BaseEndpoint {
   /// <br/><b>Endpoint </b>: /derivatives
   /// 
   /// [include_tickers] ['all', 'unexpired'] - expired to show unexpired tickers, all to list all tickers, defaults to unexpired
-  Future<List<Derivatives>> getDerivatives({
+  Future<List<Derivatives>> getList({
     DerivativesTickers? includeTickers
   }) async {
     try {
@@ -98,12 +98,12 @@ class DerivativesEndpoint extends BaseEndpoint {
 
   /// List all derivative exchanges name and identifier
   /// <br/><b>Endpoint </b>: /derivatives/exchanges/list
-  Future<List<MarketExchangeBasicInfo>> getExchangeBasicInfoList() async {
+  Future<List<ExchangeBasicInfo>> getExchangeBasicInfoList() async {
     try{
       var path = '/derivatives/exchanges/list';
       
       var result = List<dynamic>.of(await sendBasic(path));
-      return result.map((value) => MarketExchangeBasicInfo.fromJson(value)).toList();
+      return result.map((value) => ExchangeBasicInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {

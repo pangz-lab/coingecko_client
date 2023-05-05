@@ -1,5 +1,5 @@
 import 'package:coingecko_client/src/domain/exchanges/exchanges_endpoint.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_data_ordering.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_data_ordering.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
@@ -12,7 +12,7 @@ void main() {
   ExchangesEndpoint? sut;
   final String apiVersionPath = "/api/v3";
 
-  group('getExchangeList method in', () {
+  group('getList method in', () {
     var basePath = "/exchanges";
     group('ExchangesEndpoint test endpoint path creation', () {
       var sut = ExchangesEndpoint(
@@ -23,12 +23,12 @@ void main() {
       );
 
       test('with required parameters', () async {
-        await sut.getExchangeList();
+        await sut.getList();
         expect(sut.endpointPath, "$apiVersionPath$basePath");
       });
 
       test('with all parameters', () async {
-        await sut.getExchangeList(perPage: 1, page: 3);
+        await sut.getList(perPage: 1, page: 3);
         expect(
           sut.endpointPath,
           "$apiVersionPath$basePath?per_page=1&page=3"
@@ -44,7 +44,7 @@ void main() {
             body: ExchangesMockData.validResponseBody
           )
         );
-        var result = await sut!.getExchangeList(
+        var result = await sut!.getList(
           page: 1,
           perPage: 3
         );
@@ -71,7 +71,7 @@ void main() {
             body: ExchangesMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut!.getExchangeList(page: 1, perPage: 3);
+        var result = await sut!.getList(page: 1, perPage: 3);
         var firstItem = result.elementAt(0);
         expect(result.length, 1);
         expect(firstItem.id, "bybit_spot");
@@ -97,7 +97,7 @@ void main() {
             body: ExchangesMockData.validResponseBody
           )
         );
-        await expectLater(sut!.getExchangeList(), throwsA(isA<NetworkRequestException>()));
+        await expectLater(sut!.getList(), throwsA(isA<NetworkRequestException>()));
       });
 
       test('should return a FormatException when result is error or when parsing failed', () async {
@@ -109,7 +109,7 @@ void main() {
   }'''
           )
         );
-        await expectLater(sut!.getExchangeList(), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
 
         sut = ExchangesEndpoint(
           HttpRequestServiceMock(
@@ -117,7 +117,7 @@ void main() {
             body: ExchangesMockData.responseBodyWithInvalidFormat
           )
         );
-        await expectLater(sut!.getExchangeList(), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
 
         sut = ExchangesEndpoint(
           HttpRequestServiceMock(
@@ -125,12 +125,12 @@ void main() {
             body: ""
           )
         );
-        await expectLater(sut!.getExchangeList(), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
       });
     });
   });
   
-  group('getMarketExchangeList method in', () {
+  group('getBasicList method in', () {
     var basePath = "/exchanges/list";
     group('ExchangesEndpoint test endpoint path creation', () {
       test('with required parameters', () async {
@@ -140,7 +140,7 @@ void main() {
             body: MarketExchangeMockData.validResponseBody
           )
         );
-        await sut?.getMarketExchangeList();
+        await sut?.getBasicList();
         expect(sut?.endpointPath, "$apiVersionPath$basePath");
       });
     });
@@ -153,7 +153,7 @@ void main() {
             body: MarketExchangeMockData.validResponseBody
           )
         );
-        var result = await sut!.getMarketExchangeList();
+        var result = await sut!.getBasicList();
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(3);
         expect(result.length, 4);
@@ -170,7 +170,7 @@ void main() {
             body: MarketExchangeMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut!.getMarketExchangeList();
+        var result = await sut!.getBasicList();
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
         expect(result.length, 2);
@@ -189,7 +189,7 @@ void main() {
             body: MarketExchangeMockData.validResponseBody
           )
         );
-        await expectLater(sut!.getMarketExchangeList(), throwsA(isA<NetworkRequestException>()));
+        await expectLater(sut!.getBasicList(), throwsA(isA<NetworkRequestException>()));
       });
 
       test('should return a FormatException when result is error or when parsing failed', () async {
@@ -201,7 +201,7 @@ void main() {
   }'''
           )
         );
-        await expectLater(sut!.getMarketExchangeList(), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getBasicList(), throwsA(isA<DataParsingException>()));
 
         sut = ExchangesEndpoint(
           HttpRequestServiceMock(
@@ -209,7 +209,7 @@ void main() {
             body: MarketExchangeMockData.responseBodyWithInvalidFormat
           )
         );
-        await expectLater(sut!.getMarketExchangeList(), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getBasicList(), throwsA(isA<DataParsingException>()));
 
         sut = ExchangesEndpoint(
           HttpRequestServiceMock(
@@ -217,12 +217,12 @@ void main() {
             body: ""
           )
         );
-        await expectLater(sut!.getMarketExchangeList(), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getBasicList(), throwsA(isA<DataParsingException>()));
       });
     });
   });
 
-  group('getMarketExchangeInfo method in', () {
+  group('getInfo method in', () {
     var basePath = "/exchanges/binance";
     group('ExchangesEndpoint test endpoint path creation', () {
 
@@ -233,7 +233,7 @@ void main() {
             body: MarketExchangeInfoMockData.validResponseBody
           )
         );
-        await sut?.getMarketExchangeInfo(id: 'binance');
+        await sut?.getInfo(id: 'binance');
         expect(
           sut?.endpointPath,
           "$apiVersionPath$basePath"
@@ -249,7 +249,7 @@ void main() {
             body: MarketExchangeInfoMockData.validResponseBody
           )
         );
-        var result = await sut!.getMarketExchangeInfo(id: 'binance');
+        var result = await sut!.getInfo(id: 'binance');
         expect(result.id, null);
         expect(result.name, "Binance");
         expect(result.yearEstablished, 2017);
@@ -308,7 +308,7 @@ void main() {
             body: MarketExchangeInfoMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut!.getMarketExchangeInfo(id: 'binance');
+        var result = await sut!.getInfo(id: 'binance');
         expect(result.id, null);
         expect(result.name, "Binance");
         expect(result.yearEstablished, 2017);
@@ -370,7 +370,7 @@ void main() {
             body: MarketExchangeInfoMockData.validResponseBody
           )
         );
-        await expectLater(sut!.getMarketExchangeInfo(id: 'binance'), throwsA(isA<NetworkRequestException>()));
+        await expectLater(sut!.getInfo(id: 'binance'), throwsA(isA<NetworkRequestException>()));
       });
 
       test('should return a FormatException when result is error or when parsing failed', () async {
@@ -380,7 +380,7 @@ void main() {
             body: MarketExchangeInfoMockData.responseBodyWithInvalidFormat
           )
         );
-        await expectLater(sut!.getMarketExchangeInfo(id: 'binance'), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getInfo(id: 'binance'), throwsA(isA<DataParsingException>()));
 
         sut = ExchangesEndpoint(
           HttpRequestServiceMock(
@@ -388,12 +388,12 @@ void main() {
             body: ""
           )
         );
-        await expectLater(sut!.getMarketExchangeInfo(id: 'binance'), throwsA(isA<DataParsingException>()));
+        await expectLater(sut!.getInfo(id: 'binance'), throwsA(isA<DataParsingException>()));
       });
     });
   });
 
-  group('getMarketExchangeTickers method in', () {
+  group('getTickerList method in', () {
     var basePath = "/exchanges/binance/tickers";
     group('ExchangesEndpoint test endpoint path creation', () {
       var sut = ExchangesEndpoint(
@@ -404,20 +404,20 @@ void main() {
       );
 
       test('with required parameters', () async {
-        await sut.getMarketExchangeTickers(
+        await sut.getTickerList(
           id: 'binance'
         );
         expect(sut.endpointPath, "$apiVersionPath$basePath");
       });
 
       test('with all parameters', () async {
-        await sut.getMarketExchangeTickers(
+        await sut.getTickerList(
           id: 'binance',
           coinIds: ['bitcoin', 'ethereum'],
           includeExchangeLogo: true,
           page: 1,
           depth: true,
-          order: MarketExchangeDataOrdering.trustScoreDesc
+          order: ExchangeDataOrdering.trustScoreDesc
         );
         expect(
           sut.endpointPath,
@@ -434,13 +434,13 @@ void main() {
             body: MarketExchangeTickersMockData.validResponseBody
           )
         );
-        var result = await sut?.getMarketExchangeTickers(
+        var result = await sut?.getTickerList(
           id: 'binance',
           coinIds: ['bitcoin', 'ethereum'],
           includeExchangeLogo: true,
           page: 1,
           depth: true,
-          order: MarketExchangeDataOrdering.trustScoreDesc
+          order: ExchangeDataOrdering.trustScoreDesc
         );
         var firstItem = result!.elementAt(0);
         expect(result.length, 2);
@@ -483,13 +483,13 @@ void main() {
             body: MarketExchangeTickersMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut?.getMarketExchangeTickers(
+        var result = await sut?.getTickerList(
           id: 'binance',
           coinIds: ['bitcoin', 'ethereum'],
           includeExchangeLogo: true,
           page: 1,
           depth: true,
-          order: MarketExchangeDataOrdering.trustScoreDesc
+          order: ExchangeDataOrdering.trustScoreDesc
         );
         var firstItem = result!.elementAt(0);
         expect(result.length, 2);
@@ -527,7 +527,7 @@ void main() {
             body: MarketExchangeTickersMockData.validResponseBody
           )
         );
-        await expectLater(sut?.getMarketExchangeTickers(id: 'binance'), throwsA(isA<NetworkRequestException>()));
+        await expectLater(sut?.getTickerList(id: 'binance'), throwsA(isA<NetworkRequestException>()));
       });
 
       test('should return a FormatException when result is error or when parsing failed', () async {
@@ -539,7 +539,7 @@ void main() {
   }]'''
           )
         );
-        await expectLater(sut?.getMarketExchangeTickers(id: 'binance'), throwsA(isA<DataParsingException>()));
+        await expectLater(sut?.getTickerList(id: 'binance'), throwsA(isA<DataParsingException>()));
 
         sut = ExchangesEndpoint(
           HttpRequestServiceMock(
@@ -547,7 +547,7 @@ void main() {
             body: MarketExchangeTickersMockData.responseBodyWithInvalidFormat
           )
         );
-        await expectLater(sut?.getMarketExchangeTickers(id: 'binance'), throwsA(isA<DataParsingException>()));
+        await expectLater(sut?.getTickerList(id: 'binance'), throwsA(isA<DataParsingException>()));
 
         sut = ExchangesEndpoint(
           HttpRequestServiceMock(
@@ -555,12 +555,12 @@ void main() {
             body: ""
           )
         );
-        await expectLater(sut?.getMarketExchangeTickers(id: 'binance'), throwsA(isA<DataParsingException>()));
+        await expectLater(sut?.getTickerList(id: 'binance'), throwsA(isA<DataParsingException>()));
       });
     });
   });
 
-  group('getMarketExchangeVolumeChart method in', () {
+  group('getVolumeChartList method in', () {
     var basePath = "/exchanges/binance/volume_chart";
     group('ExchangesEndpoint test endpoint path creation', () {
       var sut = ExchangesEndpoint(
@@ -571,7 +571,7 @@ void main() {
       );
 
       test('with all parameters', () async {
-        await sut.getMarketExchangeVolumeChart(
+        await sut.getVolumeChartList(
           id: 'binance',
           days: DataRange.in1Week
         );
@@ -590,7 +590,7 @@ void main() {
             body: MarketExchangeVolumeMockData.validResponseBody
           )
         );
-        var result = await sut?.getMarketExchangeVolumeChart(
+        var result = await sut?.getVolumeChartList(
           id: 'binance',
           days: DataRange.in1Week
         );
@@ -610,7 +610,7 @@ void main() {
             body: MarketExchangeVolumeMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut?.getMarketExchangeVolumeChart(
+        var result = await sut?.getVolumeChartList(
           id: 'binance',
           days: DataRange.in1Week
         );
@@ -632,7 +632,7 @@ void main() {
             body: MarketExchangeVolumeMockData.validResponseBody
           )
         );
-        await expectLater(sut?.getMarketExchangeVolumeChart(
+        await expectLater(sut?.getVolumeChartList(
           id: 'binance',
           days: DataRange.in1Week
         ), throwsA(isA<NetworkRequestException>()));
@@ -647,7 +647,7 @@ void main() {
   }'''
           )
         );
-        await expectLater(sut?.getMarketExchangeVolumeChart(
+        await expectLater(sut?.getVolumeChartList(
           id: 'binance',
           days: DataRange.in1Week
         ), throwsA(isA<DataParsingException>()));
@@ -658,7 +658,7 @@ void main() {
             body: MarketExchangeVolumeMockData.responseBodyWithInvalidFormat
           )
         );
-        await expectLater(sut?.getMarketExchangeVolumeChart(
+        await expectLater(sut?.getVolumeChartList(
           id: 'binance',
           days: DataRange.in1Week
         ), throwsA(isA<DataParsingException>()));
@@ -669,7 +669,7 @@ void main() {
             body: ""
           )
         );
-        await expectLater(sut?.getMarketExchangeVolumeChart(
+        await expectLater(sut?.getVolumeChartList(
           id: 'binance',
           days: DataRange.in1Week
         ), throwsA(isA<DataParsingException>()));

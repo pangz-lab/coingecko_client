@@ -1,11 +1,11 @@
-import 'package:coingecko_client/src/domain/coins/models/coin.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_basic_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_market.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_market_chart.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_market_history.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
@@ -23,7 +23,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// 
   /// [include_platform] flag to include platform contract addresses (eg. 0x.... for Ethereum based tokens). 
   ///  valid values: true, false
-  Future<List<Coin>> getCoinList({
+  Future<List<CoinBasicInfo>> getBasicList({
     bool? includePlatform
   }) async {
     
@@ -36,7 +36,7 @@ class CoinsEndpoint extends BaseEndpoint {
       );
 
       var result = List<dynamic>.of(await sendBasic(path));
-      return result.map((value) => Coin.fromJson(value)).toList();
+      return result.map((value) => CoinBasicInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
@@ -61,7 +61,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [page] Page through results
   /// [sparkline] Include sparkline 7 days data (eg. true, false)
   /// [price_change_percentage] Include price change percentage in <b>1h, 24h, 7d, 14d, 30d, 200d, 1y</b> (eg. '`1h,24h,7d`' comma-separated, invalid values will be discarded)
-  Future<List<CoinMarket>> getCoinMarkets({
+  Future<List<CoinMarket>> getMarketList({
     required Currencies vsCurrency,
     List<String>? ids,
     String? category,
@@ -113,7 +113,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [community_data] Include community_data data (true/false) <b>[default: true]</b>
   /// [developer_data] Include developer_data data (true/false) <b>[default: true]</b>
   /// [sparkline] Include sparkline 7 days data (eg. true, false) <b>[default: false]</b>
-  Future<CoinInfo> getCoinInfo({
+  Future<CoinInfo> getInfo({
     required String id,
     bool? localization,
     bool? tickers,
@@ -160,7 +160,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [page] Page through results
   /// [order] valid values: <b>trust_score_desc (default), trust_score_asc and volume_desc</b>
   /// [depth] flag to show 2% orderbook depth. valid values: true, false
-  Future<CoinTickers> getCoinTickers({
+  Future<CoinTickers> getTickers({
     required String id,
     String? exchangeIds,
     bool? includeExchangeLogo,
@@ -198,7 +198,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [id] pass the coin id (can be obtained from /coins) eg. bitcoin
   /// [date] The date of data snapshot in dd-mm-yyyy eg. 30-12-2017
   /// [localization] Set to false to exclude localized languages in response
-  Future<CoinInfo> getCoinHistory({
+  Future<CoinInfo> getHistory({
     required String id,
     required DateTime date,
     bool? localization
@@ -232,7 +232,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [days] Data up to number of days ago (eg. 1,14,30,max)
   /// [interval] Data interval. Possible value: daily
-  Future<CoinMarketChart> getCoinMarketChart({
+  Future<CoinMarketHistory> getMarketHistory({
     required String id,
     required Currencies vsCurrency,
     required DataRange days,
@@ -249,7 +249,7 @@ class CoinsEndpoint extends BaseEndpoint {
         endpointPath: "/coins/{id}/market_chart"
       );
       
-      return CoinMarketChart.fromJson(await sendBasic(path));
+      return CoinMarketHistory.fromJson(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
@@ -268,7 +268,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [from] From date in UNIX Timestamp (eg. 1392577232)
   /// [to] To date in UNIX Timestamp (eg. 1422577232)
-  Future<CoinMarketChart> getCoinMarketChartWithRange({
+  Future<CoinMarketHistory> getMarketHistoryWithDateRange({
     required String id,
     required Currencies vsCurrency,
     required DateTime from,
@@ -285,7 +285,7 @@ class CoinsEndpoint extends BaseEndpoint {
         endpointPath: "/coins/{id}/market_chart/range"
       );
       
-      return CoinMarketChart.fromJson(await sendBasic(path));
+      return CoinMarketHistory.fromJson(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
@@ -307,7 +307,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [id] pass the coin id (can be obtained from /coins/list) eg. bitcoin
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [days]  Data up to number of days ago (1/7/14/30/90/180/365/max)
-  Future<List<CoinOhlc>> getCoinOhlc({
+  Future<List<CoinOhlc>> getOhlcList({
     required String id,
     required Currencies vsCurrency,
     required DataRange days

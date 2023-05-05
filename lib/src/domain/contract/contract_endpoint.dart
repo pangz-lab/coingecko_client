@@ -1,6 +1,6 @@
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/contract/models/contract_info.dart';
-import 'package:coingecko_client/src/domain/contract/models/contract_market_chart.dart';
+import 'package:coingecko_client/src/domain/contract/models/contract_market_history.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
@@ -44,7 +44,7 @@ class ContractEndpoint extends BaseEndpoint {
   /// [contract_address] Token's contract address
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [days] Data up to number of days ago (eg. 1,14,30,max)
-  Future<ContractMarketChart> getMarketHistory({
+  Future<ContractMarketHistory> getMarketHistory({
     required String id,
     required String contractAddress,
     required Currencies vsCurrency,
@@ -61,7 +61,7 @@ class ContractEndpoint extends BaseEndpoint {
         endpointPath: "/coins/{id}/contract/{contract_address}/market_chart/"
       );
 
-      return ContractMarketChart.fromJson(await sendBasic(path));
+      return ContractMarketHistory.fromJson(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
@@ -79,7 +79,7 @@ class ContractEndpoint extends BaseEndpoint {
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [from] From date in UNIX Timestamp (eg. 1392577232)
   /// [to] To date in UNIX Timestamp (eg. 1422577232)
-  Future<ContractMarketChart> getMarketHistoryWithDateRange({
+  Future<ContractMarketHistory> getMarketHistoryWithDateRange({
     required String id,
     required String contractAddress,
     required Currencies vsCurrency,
@@ -98,7 +98,7 @@ class ContractEndpoint extends BaseEndpoint {
         endpointPath: "/coins/{id}/contract/{contract_address}/market_chart/range"
       );
 
-      return ContractMarketChart.fromJson(await sendBasic(path));
+      return ContractMarketHistory.fromJson(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {

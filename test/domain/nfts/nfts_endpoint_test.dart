@@ -1,4 +1,4 @@
-import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_status.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_status.dart';
 import 'package:coingecko_client/src/domain/nfts/models/nfts_data_ordering.dart';
 import 'package:coingecko_client/src/domain/nfts/nfts_endpoint.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
@@ -12,7 +12,7 @@ void main() {
   NftsEndpoint? sut;
   final String apiVersionPath = "/api/v3";
 
-  group('getList method in', () {
+  group('getBasicList method in', () {
     var basePath = "/nfts/list";
     group('NftsEndpoint test endpoint path creation', () {
       var sut = NftsEndpoint(
@@ -23,12 +23,12 @@ void main() {
       );
 
       test('without parameters', () async {
-        await sut.getList();
+        await sut.getBasicList();
         expect(sut.endpointPath, "$apiVersionPath$basePath");
       });
 
       test('with all parameters', () async {
-        await sut.getList(
+        await sut.getBasicList(
           order: NftsDataOrdering.marketCapUsdDesc,
           assetPlatformId: "ethereum",
           perPage: 10,
@@ -49,7 +49,7 @@ void main() {
             body: NftBasicInfoListMockData.validResponseBody
           )
         );
-        var result = await sut!.getList(
+        var result = await sut!.getBasicList(
           order: NftsDataOrdering.marketCapUsdDesc,
           assetPlatformId: "ethereum",
           perPage: 10,
@@ -78,7 +78,7 @@ void main() {
             body: NftBasicInfoListMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut!.getList(
+        var result = await sut!.getBasicList(
           order: NftsDataOrdering.marketCapUsdDesc,
           assetPlatformId: "ethereum",
           perPage: 10,
@@ -109,7 +109,7 @@ void main() {
             body: NftBasicInfoListMockData.validResponseBody
           )
         );
-        await expectLater(sut!.getList(
+        await expectLater(sut!.getBasicList(
           order: NftsDataOrdering.marketCapUsdDesc,
           assetPlatformId: "ethereum",
           perPage: 10,
@@ -126,7 +126,7 @@ void main() {
   }'''
           )
         );
-        await expectLater(sut!.getList(
+        await expectLater(sut!.getBasicList(
           order: NftsDataOrdering.marketCapUsdDesc,
           assetPlatformId: "ethereum",
           perPage: 10,
@@ -139,7 +139,7 @@ void main() {
             body: NftBasicInfoListMockData.responseBodyWithInvalidFormat
           )
         );
-        await expectLater(sut!.getList(
+        await expectLater(sut!.getBasicList(
           order: NftsDataOrdering.marketCapUsdDesc,
           assetPlatformId: "ethereum",
           perPage: 10,
@@ -153,7 +153,7 @@ void main() {
           )
         );
         await expectLater(
-          sut!.getList(
+          sut!.getBasicList(
             order: NftsDataOrdering.marketCapUsdDesc,
             assetPlatformId: "ethereum",
             perPage: 10,

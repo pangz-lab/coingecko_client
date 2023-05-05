@@ -1,12 +1,12 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 import 'package:coingecko_client/src/models/historical_data.dart';
 
-class CoinMarketChart extends BaseModel {
+class CoinMarketHistory extends BaseModel {
   List<HistoricalData>? _prices;
   List<HistoricalData>? _marketCaps;
   List<HistoricalData>? _totalVolumes;
 
-  CoinMarketChart({
+  CoinMarketHistory({
     List<HistoricalData>? prices,
     List<HistoricalData>? marketCaps,
     List<HistoricalData>? totalVolumes
@@ -20,7 +20,7 @@ class CoinMarketChart extends BaseModel {
   List<HistoricalData>? get marketCaps => _marketCaps;
   List<HistoricalData>? get totalVolumes => _totalVolumes;
 
-  CoinMarketChart.fromJson(Map<String, dynamic> json) {
+  CoinMarketHistory.fromJson(Map<String, dynamic> json) {
     _prices = json['prices'] != null 
       ? List<dynamic>.of(json['prices']).map((e) => HistoricalData.fromJson(e)).toList() 
       : null;

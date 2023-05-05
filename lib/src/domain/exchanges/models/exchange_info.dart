@@ -1,8 +1,8 @@
 import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_status.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_status.dart';
 import 'package:coingecko_client/src/models/base_model.dart';
 
-class MarketExchangeInfo extends BaseModel {
+class ExchangeInfo extends BaseModel {
   String? _id;
   String? _name;
   int? _yearEstablished;
@@ -26,9 +26,9 @@ class MarketExchangeInfo extends BaseModel {
   double? _tradeVolume24hBtc;
   double? _tradeVolume24hBtcNormalized;
   List<TickerInfo>? _tickers;
-  List<MarketExchangeStatus>? _statusUpdates;
+  List<ExchangeStatus>? _statusUpdates;
 
-  MarketExchangeInfo({
+  ExchangeInfo({
     String? id,
     String? name,
     int? yearEstablished,
@@ -52,7 +52,7 @@ class MarketExchangeInfo extends BaseModel {
     double? tradeVolume24hBtc,
     double? tradeVolume24hBtcNormalized,
     List<TickerInfo>? tickers,
-    List<MarketExchangeStatus>? statusUpdates,
+    List<ExchangeStatus>? statusUpdates,
   }) {
     _id = id;
     _name = name;
@@ -103,9 +103,9 @@ class MarketExchangeInfo extends BaseModel {
   double? get tradeVolume24hBtc => _tradeVolume24hBtc;
   double? get tradeVolume24hBtcNormalized => _tradeVolume24hBtcNormalized;
   List<TickerInfo>? get tickers => _tickers;
-  List<MarketExchangeStatus>? get statusUpdates => _statusUpdates;
+  List<ExchangeStatus>? get statusUpdates => _statusUpdates;
 
-  MarketExchangeInfo.fromJson(Map<String?, dynamic> json) {
+  ExchangeInfo.fromJson(Map<String?, dynamic> json) {
     _id = json['id'];
     _name = json['name'];
     _yearEstablished = toInt(json['year_established']);
@@ -129,7 +129,7 @@ class MarketExchangeInfo extends BaseModel {
     _tradeVolume24hBtc = toDouble(json['trade_volume_24h_btc']);
     _tradeVolume24hBtcNormalized = toDouble(json['trade_volume_24h_btc_normalized']);
     _tickers = json['tickers'] != null ? List.from(json['tickers']).map((v) => TickerInfo.fromJson(v)).toList() : null;
-    _statusUpdates = json['status_updates'] != null ? List.from(json['status_updates']).map((v) => MarketExchangeStatus.fromJson(v)).toList() : null;
+    _statusUpdates = json['status_updates'] != null ? List.from(json['status_updates']).map((v) => ExchangeStatus.fromJson(v)).toList() : null;
   }
 
   Map<String?, dynamic> toJson() {
