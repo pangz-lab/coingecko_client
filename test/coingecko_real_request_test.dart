@@ -22,6 +22,9 @@ import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_bas
 import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_volume_chart.dart';
 import 'package:coingecko_client/src/domain/indexes/indexes_endpoint.dart';
 import 'package:coingecko_client/src/domain/indexes/models/market_index.dart';
+import 'package:coingecko_client/src/domain/nfts/models/nft_basic_info.dart';
+import 'package:coingecko_client/src/domain/nfts/models/nft_info.dart';
+import 'package:coingecko_client/src/domain/nfts/nfts_endpoint.dart';
 import 'package:coingecko_client/src/domain/simple/simple_endpoint.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
@@ -265,6 +268,35 @@ void main() {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getMarketIndexBasicInfoList();
       expect(result.runtimeType, List<MarketIndex>);
+    });
+  });
+
+  group('Test for real request from NftsEndpoint for', () {
+    var sut = NftsEndpoint(httpService);
+    test('getList should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getList(
+        perPage: 10,
+        page: 2
+      );
+      expect(result.runtimeType, List<NftBasicInfo>);
+    });
+
+    test('getInfo should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getInfo(
+        id: 'meebits',
+      );
+      expect(result.runtimeType, NftInfo);
+    });
+    
+    test('getContractInfo should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getContractInfo(
+        assetPlatformId: 'ethereum',
+        contractAddress: '0x36F379400DE6c6BCDF4408B282F8b685c56adc60',
+      );
+      expect(result.runtimeType, NftInfo);
     });
   });
 }
