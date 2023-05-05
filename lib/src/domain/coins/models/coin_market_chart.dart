@@ -1,33 +1,34 @@
 import 'package:coingecko_client/src/models/base_model.dart';
+import 'package:coingecko_client/src/models/historical_data.dart';
 
 class CoinMarketChart extends BaseModel {
-  List<dynamic>? _prices;
-  List<dynamic>? _marketCaps;
-  List<dynamic>? _totalVolumes;
+  List<HistoricalData>? _prices;
+  List<HistoricalData>? _marketCaps;
+  List<HistoricalData>? _totalVolumes;
 
   CoinMarketChart({
-    List<dynamic>? prices,
-    List<dynamic>? marketCaps,
-    List<dynamic>? totalVolumes
+    List<HistoricalData>? prices,
+    List<HistoricalData>? marketCaps,
+    List<HistoricalData>? totalVolumes
   }) {
     _prices = prices;
     _marketCaps = marketCaps;
     _totalVolumes = totalVolumes;
   }
   
-  List<dynamic>? get prices => _prices;
-  List<dynamic>? get marketCaps => _marketCaps;
-  List<dynamic>? get totalVolumes => _totalVolumes;
+  List<HistoricalData>? get prices => _prices;
+  List<HistoricalData>? get marketCaps => _marketCaps;
+  List<HistoricalData>? get totalVolumes => _totalVolumes;
 
   CoinMarketChart.fromJson(Map<String, dynamic> json) {
     _prices = json['prices'] != null 
-      ? List<dynamic>.of(json['prices']).map((e) => List<dynamic>.from(e)).toList() 
+      ? List<dynamic>.of(json['prices']).map((e) => HistoricalData.fromJson(e)).toList() 
       : null;
     _marketCaps = json['market_caps'] != null 
-      ? List<dynamic>.of(json['market_caps']).map((e) => List<dynamic>.from(e)).toList() 
+      ? List<dynamic>.of(json['market_caps']).map((e) => HistoricalData.fromJson(e)).toList() 
       : null;
     _totalVolumes = json['total_volumes'] != null 
-      ? List<dynamic>.of(json['total_volumes']).map((e) => List<dynamic>.from(e)).toList() 
+      ? List<dynamic>.of(json['total_volumes']).map((e) => HistoricalData.fromJson(e)).toList() 
       : null;
   }
 

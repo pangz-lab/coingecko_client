@@ -3,9 +3,9 @@ import 'package:coingecko_client/src/models/base_model.dart';
 
 class MarketData extends BaseModel {
   Map<String, dynamic>? _currentPrice;
-  double? _totalValueLocked;
-  String? _mcapToTvlRatio;
-  String? _fdvToTvlRatio;
+  Map<String, dynamic>? _totalValueLocked;
+  double? _mcapToTvlRatio;
+  double? _fdvToTvlRatio;
   Roi? _roi;
   Map<String, dynamic>? _ath;
   Map<String, dynamic>? _athChangePercentage;
@@ -47,49 +47,49 @@ class MarketData extends BaseModel {
   DateTime? _lastUpdated;
 
   MarketData({
-      Map<String, dynamic>? currentPrice,
-      double? totalValueLocked,
-      String? mcapToTvlRatio,
-      String? fdvToTvlRatio,
-      Roi? roi,
-      Map<String, dynamic>? ath,
-      Map<String, dynamic>? athChangePercentage,
-      Map<String, dynamic>? athDate,
-      Map<String, dynamic>? atl,
-      Map<String, dynamic>? atlChangePercentage,
-      Map<String, dynamic>? atlDate,
-      Map<String, dynamic>? marketCap,
-      int? marketCapRank,
-      Map<String, dynamic>? fullyDilutedValuation,
-      Map<String, dynamic>? totalVolume,
-      Map<String, dynamic>? high24h,
-      Map<String, dynamic>? low24h,
-      double? priceChange24h,
-      double? priceChangePercentage24h,
-      double? priceChangePercentage7d,
-      double? priceChangePercentage14d,
-      double? priceChangePercentage30d,
-      double? priceChangePercentage60d,
-      double? priceChangePercentage200d,
-      double? priceChangePercentage1y,
-      double? marketCapChange24h,
-      double? marketCapChangePercentage24h,
-      Map<String, dynamic>? priceChange24hInCurrency,
-      Map<String, dynamic>? priceChangePercentage1hInCurrency,
-      Map<String, dynamic>? priceChangePercentage24hInCurrency,
-      Map<String, dynamic>? priceChangePercentage7dInCurrency,
-      Map<String, dynamic>? priceChangePercentage14dInCurrency,
-      Map<String, dynamic>? priceChangePercentage30dInCurrency,
-      Map<String, dynamic>? priceChangePercentage60dInCurrency,
-      Map<String, dynamic>? priceChangePercentage200dInCurrency,
-      Map<String, dynamic>? priceChangePercentage1yInCurrency,
-      Map<String, dynamic>? marketCapChange24hInCurrency,
-      Map<String, dynamic>? marketCapChangePercentage24hInCurrency,
-      int? totalSupply,
-      int? maxSupply,
-      int? circulatingSupply,
-      Map<String, dynamic>? sparkline7d,
-      DateTime? lastUpdated
+    Map<String, dynamic>? currentPrice,
+    Map<String, dynamic>? totalValueLocked,
+    double? mcapToTvlRatio,
+    double? fdvToTvlRatio,
+    Roi? roi,
+    Map<String, dynamic>? ath,
+    Map<String, dynamic>? athChangePercentage,
+    Map<String, dynamic>? athDate,
+    Map<String, dynamic>? atl,
+    Map<String, dynamic>? atlChangePercentage,
+    Map<String, dynamic>? atlDate,
+    Map<String, dynamic>? marketCap,
+    int? marketCapRank,
+    Map<String, dynamic>? fullyDilutedValuation,
+    Map<String, dynamic>? totalVolume,
+    Map<String, dynamic>? high24h,
+    Map<String, dynamic>? low24h,
+    double? priceChange24h,
+    double? priceChangePercentage24h,
+    double? priceChangePercentage7d,
+    double? priceChangePercentage14d,
+    double? priceChangePercentage30d,
+    double? priceChangePercentage60d,
+    double? priceChangePercentage200d,
+    double? priceChangePercentage1y,
+    double? marketCapChange24h,
+    double? marketCapChangePercentage24h,
+    Map<String, dynamic>? priceChange24hInCurrency,
+    Map<String, dynamic>? priceChangePercentage1hInCurrency,
+    Map<String, dynamic>? priceChangePercentage24hInCurrency,
+    Map<String, dynamic>? priceChangePercentage7dInCurrency,
+    Map<String, dynamic>? priceChangePercentage14dInCurrency,
+    Map<String, dynamic>? priceChangePercentage30dInCurrency,
+    Map<String, dynamic>? priceChangePercentage60dInCurrency,
+    Map<String, dynamic>? priceChangePercentage200dInCurrency,
+    Map<String, dynamic>? priceChangePercentage1yInCurrency,
+    Map<String, dynamic>? marketCapChange24hInCurrency,
+    Map<String, dynamic>? marketCapChangePercentage24hInCurrency,
+    int? totalSupply,
+    int? maxSupply,
+    int? circulatingSupply,
+    Map<String, dynamic>? sparkline7d,
+    DateTime? lastUpdated
   }) {
 
     _currentPrice = currentPrice;
@@ -147,9 +147,9 @@ class MarketData extends BaseModel {
   }
 
   Map<String, dynamic>? get currentPrice => _currentPrice;
-  double? get totalValueLocked => _totalValueLocked;
-  String? get mcapToTvlRatio => _mcapToTvlRatio;
-  String? get fdvToTvlRatio => _fdvToTvlRatio;
+  Map<String, dynamic>? get totalValueLocked => _totalValueLocked;
+  double? get mcapToTvlRatio => _mcapToTvlRatio;
+  double? get fdvToTvlRatio => _fdvToTvlRatio;
   Roi? get roi => _roi;
   Map<String, dynamic>? get ath => _ath;
   Map<String, dynamic>? get athChangePercentage => _athChangePercentage;
@@ -192,9 +192,9 @@ class MarketData extends BaseModel {
 
   MarketData.fromJson(Map<String, dynamic> json) {
     _currentPrice = toMap<dynamic>(json['current_price']);
-    _totalValueLocked = toDouble(json['total_value_locked']);
-    _mcapToTvlRatio = json['mcap_to_tvl_ratio'];
-    _fdvToTvlRatio = json['fdv_to_tvl_ratio'];
+    _totalValueLocked = toMap<dynamic>(json['total_value_locked']);
+    _mcapToTvlRatio = toDouble(json['mcap_to_tvl_ratio']);
+    _fdvToTvlRatio = toDouble(json['fdv_to_tvl_ratio']);
     _roi = json['roi'] != null ? Roi.fromJson(json['roi']) : null;
     _ath = toMap<dynamic>(json['ath']);
     _athChangePercentage = toMap<dynamic>(json['ath_change_percentage']);

@@ -598,9 +598,9 @@ void main() {
         var lastItem = result?.elementAt(4);
         expect(result?.length, 5);
         expect(firstItem?.timestamp, DateTime.fromMillisecondsSinceEpoch(1681302600000));
-        expect(firstItem?.volume, 318420.1017919471596547);
+        expect(firstItem?.value, 318420.1017919471596547);
         expect(lastItem?.timestamp, DateTime.fromMillisecondsSinceEpoch(1681317000000));
-        expect(lastItem?.volume, 378779.3901295906839115);
+        expect(lastItem?.value, 378779.3901295906839115);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -618,9 +618,9 @@ void main() {
         var lastItem = result?.elementAt(1);
         expect(result?.length, 2);
         expect(firstItem?.timestamp, null);
-        expect(firstItem?.volume, 318420.1017919471596547);
+        expect(firstItem?.value, 318420.1017919471596547);
         expect(lastItem?.timestamp, DateTime.fromMillisecondsSinceEpoch(1681306200000));
-        expect(lastItem?.volume, null);
+        expect(lastItem?.value, null);
       });
     });
 

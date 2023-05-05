@@ -75,9 +75,9 @@ class CoinsEndpoint extends BaseEndpoint {
       var path = createEndpointPathUrl(
         rawQueryItems: {
           'vs_currency': vsCurrency.code,
-          'ids': ids?.join(',') ?? '',
+          'ids': ids?.join(','),
           'category': category,
-          'order': order?.value ?? '',
+          'order': order?.value,
           'per_page': perPage,
           'page': page,
           'sparkline': sparkline,
@@ -176,7 +176,7 @@ class CoinsEndpoint extends BaseEndpoint {
           'exchange_ids': exchangeIds,
           'include_exchange_logo': includeExchangeLogo,
           'page': page,
-          'order': order?.value ?? '',
+          'order': order?.value,
           'depth': depth
         },
         endpointPath: "/coins/{id}/tickers"

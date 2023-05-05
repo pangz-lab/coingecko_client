@@ -1,6 +1,7 @@
 import 'package:coingecko_client/src/domain/coins/models/coin_links.dart';
 import 'package:coingecko_client/src/domain/coins/models/market_data.dart';
 import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/market_exchange_status.dart';
 import 'package:coingecko_client/src/models/base_model.dart';
 
 class CoinInfo extends BaseModel {
@@ -18,11 +19,13 @@ class CoinInfo extends BaseModel {
   Map<String, dynamic>? _localization;
   Map<String, dynamic>? _description;
   CoinLinks? _links;
-  Map<String, dynamic>? _image;
+  Image? _image;
   String? _countryOrigin;
   DateTime? _genesisDate;
+  String? _contractAddress;
   double? _sentimentVotesUpPercentage;
   double? _sentimentVotesDownPercentage;
+  int? _watchlistPortfolioUsers;
   int? _marketCapRank;
   int? _coingeckoRank;
   double? _coingeckoScore;
@@ -53,11 +56,13 @@ class CoinInfo extends BaseModel {
     Map<String, dynamic>? localization,
     Map<String, dynamic>? description,
     CoinLinks? links,
-    Map<String, dynamic>? image,
+    Image? image,
     String? countryOrigin,
     DateTime? genesisDate,
+    String? contractAddress,
     double? sentimentVotesUpPercentage,
     double? sentimentVotesDownPercentage,
+    int? watchlistPortfolioUsers,
     int? marketCapRank,
     int? coingeckoRank,
     double? coingeckoScore,
@@ -90,8 +95,10 @@ class CoinInfo extends BaseModel {
     _image = image;
     _countryOrigin = countryOrigin;
     _genesisDate = genesisDate;
+    _contractAddress = contractAddress;
     _sentimentVotesUpPercentage = sentimentVotesUpPercentage;
     _sentimentVotesDownPercentage = sentimentVotesDownPercentage;
+    _watchlistPortfolioUsers = watchlistPortfolioUsers;
     _marketCapRank = marketCapRank;
     _coingeckoRank = coingeckoRank;
     _coingeckoScore = coingeckoScore;
@@ -122,11 +129,13 @@ class CoinInfo extends BaseModel {
   Map<String, dynamic>? get localization => _localization;
   Map<String, dynamic>? get description => _description;
   CoinLinks? get links => _links;
-  Map<String, dynamic>? get image => _image;
+  Image? get image => _image;
   String? get countryOrigin => _countryOrigin;
   DateTime? get genesisDate => _genesisDate;
+  String? get contractAddress => _contractAddress;
   double? get sentimentVotesUpPercentage => _sentimentVotesUpPercentage;
   double? get sentimentVotesDownPercentage => _sentimentVotesDownPercentage;
+  int? get watchlistPortfolioUsers => _watchlistPortfolioUsers;
   int? get marketCapRank => _marketCapRank;
   int? get coingeckoRank => _coingeckoRank;
   double? get coingeckoScore => _coingeckoScore;
@@ -157,11 +166,13 @@ class CoinInfo extends BaseModel {
     _localization = toMap<dynamic>(json['localization']);
     _description = toMap<dynamic>(json['description']);
     _links = json['links'] != null? CoinLinks.fromJson(json['links']) : null;
-    _image = toMap<dynamic>(json['image']);
+    _image = json['image'] != null? Image.fromJson(json['image']) : null;
     _countryOrigin = json['country_origin'];
     _genesisDate = toDate(json['genesis_date']);
+    _contractAddress = json['contract_address'];
     _sentimentVotesUpPercentage = toDouble(json['sentiment_votes_up_percentage']);
     _sentimentVotesDownPercentage = toDouble(json['sentiment_votes_down_percentage']);
+    _watchlistPortfolioUsers = toInt(json['watchlist_portfolio_users']);
     _marketCapRank = toInt(json['market_cap_rank']);
     _coingeckoRank = toInt(json['coingecko_rank']);
     _coingeckoScore = toDouble(json['coingecko_score']);
@@ -196,11 +207,13 @@ class CoinInfo extends BaseModel {
     data['localization'] = _localization;
     data['description'] = _description;
     data['links'] = _links;
-    data['image'] = _image;
+    data['image'] = _image?.toJson();
     data['country_origin'] = _countryOrigin;
     data['genesis_date'] = _genesisDate;
+    data['contract_address'] = _contractAddress;
     data['sentiment_votes_up_percentage'] = _sentimentVotesUpPercentage;
     data['sentiment_votes_down_percentage'] = _sentimentVotesDownPercentage;
+    data['watchlist_portfolio_users'] = _watchlistPortfolioUsers;
     data['market_cap_rank'] = _marketCapRank;
     data['coingecko_rank'] = _coingeckoRank;
     data['coingecko_score'] = _coingeckoScore;

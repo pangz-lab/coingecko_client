@@ -10,6 +10,9 @@ import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
 import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
+import 'package:coingecko_client/src/domain/contract/contract_endpoint.dart';
+import 'package:coingecko_client/src/domain/contract/models/contract_info.dart';
+import 'package:coingecko_client/src/domain/contract/models/contract_market_chart.dart';
 import 'package:coingecko_client/src/domain/derivatives/derivatives_endpoint.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange_ordering.dart';
@@ -297,6 +300,41 @@ void main() {
         contractAddress: '0x36F379400DE6c6BCDF4408B282F8b685c56adc60',
       );
       expect(result.runtimeType, NftInfo);
+    });
+  });
+
+  group('Test for real request from ContractEndpoint for', () {
+    var sut = ContractEndpoint(httpService);
+    test('getInfo should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getInfo(
+        id: 'ethereum',
+        contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'
+      );
+      expect(result.runtimeType, ContractInfo);
+    });
+
+    test('getMarketHistory should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getMarketHistory(
+        id: 'ethereum',
+        contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+        vsCurrency: Currencies.jpy,
+        days : DataRange.in2Weeks,
+      );
+      expect(result.runtimeType, ContractMarketChart);
+    });
+    
+    test('getMarketHistoryWithDateRange should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getMarketHistoryWithDateRange(
+        id: 'ethereum',
+        contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+        vsCurrency: Currencies.php,
+        from: DateTime.fromMillisecondsSinceEpoch(1683175446, isUtc: true),
+        to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
+      );
+      expect(result.runtimeType, ContractMarketChart);
     });
   });
 }

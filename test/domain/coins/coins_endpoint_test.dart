@@ -12,6 +12,7 @@ import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
+import 'package:coingecko_client/src/models/historical_data.dart';
 import 'package:test/test.dart';
 
 import '../../services/http_request_service_mock.dart';
@@ -436,11 +437,10 @@ void main() {
         expect(result.links!.subredditUrl, "https://www.reddit.com/r/Bitcoin/");
         expect(List<String>.from(result.links!.reposUrl!['github']!).elementAt(2), "https://github.com/bitcoin/bips");
         expect(List<String>.from(result.links!.reposUrl!['bitbucket']!).isEmpty, true);
-        expect(result.image, <String, dynamic>{
-          "thumb": "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-          "small": "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579",
-          "large": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
-        });
+        expect(result.image!.thumb, "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579");
+        expect(result.image!.small, "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579");
+        expect(result.image!.large, "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579");
+          
         expect(result.countryOrigin, "");
         expect(result.genesisDate, DateTime.parse("2009-01-03"));
         expect(result.sentimentVotesUpPercentage, 82.84);
@@ -508,11 +508,10 @@ void main() {
         expect(result.links!.subredditUrl, "https://www.reddit.com/r/Bitcoin/");
         expect(List<String>.from(result.links!.reposUrl!['github']!).elementAt(1), "https://github.com/bitcoin/bips");
         expect(List<String>.from(result.links!.reposUrl!['bitbucket']!).isEmpty, true);
-        expect(result.image, <String, dynamic>{
-          "thumb": "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-          "small": "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579",
-          "large": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
-        });
+        expect(result.image!.thumb, "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579");
+        expect(result.image!.small, "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579");
+        expect(result.image!.large, "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579");
+        
         expect(result.countryOrigin, "");
         expect(result.genesisDate, DateTime.parse("2009-01-03"));
         expect(result.sentimentVotesUpPercentage, 79.42);
@@ -839,7 +838,6 @@ void main() {
     });
   });
 
-
   group('getCoinTickers method in', () {
     var basePath = "/coins/bitcoin/tickers";
     group('CoinsEndpoint test endpoint path creation', () {
@@ -996,7 +994,6 @@ void main() {
     });
   });
 
-
   group('getCoinHistory method in', () {
     var basePath = "/coins/bitcoin/history";
     group('CoinsEndpoint test endpoint path creation', () {
@@ -1062,10 +1059,10 @@ void main() {
         expect(result.localization!['ar']!, "بيتكوين");
         expect(result.localization!['th']!, "บิตคอยน์");
         expect(result.localization!['sl']!, "Bitcoin");
-        expect(result.image, {
-          "thumb": "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-          "small": "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
-        });
+        expect(result.image!.large, null);
+        expect(result.image!.thumb, "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579");
+        expect(result.image!.small, "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579");
+        
       });
 
       test('with data in getting the correct response type with complete body', () async {
@@ -1102,10 +1099,10 @@ void main() {
         expect(result.localization!['ar']!, "بيتكوين");
         expect(result.localization!['th']!, "บิตคอยน์");
         expect(result.localization!['sl']!, "Bitcoin");
-        expect(result.image, {
-          "thumb": "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-          "small": "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
-        });
+        expect(result.image!.thumb, "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579");
+        expect(result.image!.small, "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579");
+        expect(result.image!.large, null);
+        
         expect(result.statusUpdates, null);
         expect(result.lastUpdated, null);
         expect(result.countryOrigin, null);
@@ -1279,36 +1276,12 @@ void main() {
           days: DataRange.in1Day,
         );
         expect(result, isA<CoinMarketChart>());
-        expect(result.prices, [
-          [
-            1680134400000,
-            3764825.6157043367
-          ],
-          [
-            1680175636000,
-            3792357.969195695
-          ],
-        ]);
-        expect(result.marketCaps, [
-          [
-            1680134400000,
-            72766031840740.89
-          ],
-          [
-            1680175636000,
-            73372376001887.88
-          ]
-        ]);
-        expect(result.totalVolumes, [
-          [
-            1680134400000,
-            2797280292466.4453
-          ],
-          [
-            1680175636000,
-            2785972479143.1724
-          ]
-        ]);
+        expect(result.prices!.elementAt(0).compareTo(HistoricalData.fromJson([1680134400000,3764825.6157043367])), 0);
+        expect(result.prices!.elementAt(1).compareTo(HistoricalData.fromJson([1680175636000, 3792357.969195695])), 0);
+        expect(result.marketCaps!.elementAt(0).compareTo(HistoricalData.fromJson([1680134400000,72766031840740.89])), 0);
+        expect(result.marketCaps!.elementAt(1).compareTo(HistoricalData.fromJson([1680175636000,73372376001887.88])), 0);
+        expect(result.totalVolumes!.elementAt(0).compareTo(HistoricalData.fromJson([1680134400000,2797280292466.4453])), 0);
+        expect(result.totalVolumes!.elementAt(1).compareTo(HistoricalData.fromJson([1680175636000,2785972479143.1724])), 0);
       });
 
       test('with data in getting the correct response type with complete parameters', () async {
@@ -1325,48 +1298,53 @@ void main() {
           interval: 'daily'
         );
         expect(result, isA<CoinMarketChart>());
-        expect(result.prices, [
-          [
-            1680134400000,
-            3764825.6157043367
-          ],
-          [
-            1680175636000,
-            3792357.969195695
-          ],
-          [
-            null,
-            3792357.969195695
-          ]
-        ]);
-        expect(result.marketCaps, [
-          [
-            1680134400000,
-            72766031840740.89
-          ],
-          [
-            1680175636000,
-            73372376001887.88
-          ],
-          [
-            1680175636000,
-            null
-          ]
-        ]);
-        expect(result.totalVolumes, [
-          [
-            1680134400000,
-            2797280292466.4453
-          ],
-          [
-            1680175636000,
-            2785972479143.1724
-          ],
-          [
-            null,
-            null
-          ]
-        ]);
+        expect(result.prices!.elementAt(0).compareTo(
+        HistoricalData.fromJson([
+          1680134400000,
+          3764825.6157043367
+        ])), 0);
+        expect(result.prices!.elementAt(1).compareTo(
+        HistoricalData.fromJson([
+          1680175636000,
+          3792357.969195695
+        ])), 0);
+        expect(result.prices!.elementAt(2).compareTo(
+        HistoricalData.fromJson([
+          null,
+          3792357.969195695
+        ])), 0);
+      
+        expect(result.marketCaps!.elementAt(0).compareTo(
+        HistoricalData.fromJson([
+          1680134400000,
+          72766031840740.89
+        ])), 0);
+        expect(result.marketCaps!.elementAt(1).compareTo(
+        HistoricalData.fromJson([
+          1680175636000,
+          73372376001887.88
+        ])), 0);
+        expect(result.marketCaps!.elementAt(2).compareTo(
+        HistoricalData.fromJson([
+          1680175636000,
+          null
+        ])), 0);
+        
+        expect(result.totalVolumes!.elementAt(0).compareTo(
+        HistoricalData.fromJson([
+          1680134400000,
+          2797280292466.4453
+        ])), 0);
+        expect(result.totalVolumes!.elementAt(1).compareTo(
+        HistoricalData.fromJson([
+          1680175636000,
+          2785972479143.1724
+        ])), 0);
+        expect(result.totalVolumes!.elementAt(2).compareTo(
+        HistoricalData.fromJson([
+          null,
+          null
+        ])), 0);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -1494,36 +1472,36 @@ void main() {
           to: DateTime.fromMillisecondsSinceEpoch(1396587232)
         );
         expect(result, isA<CoinMarketChart>());
-        expect(result.prices, [
-          [
-            1680134400000,
-            3764825.6157043367
-          ],
-          [
-            1680175636000,
-            3792357.969195695
-          ],
-        ]);
-        expect(result.marketCaps, [
-          [
-            1680134400000,
-            72766031840740.89
-          ],
-          [
-            1680175636000,
-            73372376001887.88
-          ]
-        ]);
-        expect(result.totalVolumes, [
-          [
+        expect(result.prices!.elementAt(0).compareTo(
+        HistoricalData.fromJson([
+          1680134400000,
+          3764825.6157043367
+        ])),0);
+        expect(result.prices!.elementAt(1).compareTo(
+        HistoricalData.fromJson([
+          1680175636000,
+          3792357.969195695
+        ])),0);
+        expect(result.marketCaps!.elementAt(0).compareTo(
+        HistoricalData.fromJson([
+          1680134400000,
+          72766031840740.89
+        ])),0);
+        expect(result.marketCaps!.elementAt(1).compareTo(
+        HistoricalData.fromJson([
+          1680175636000,
+          73372376001887.88
+        ])),0);
+        expect(result.totalVolumes!.elementAt(0).compareTo(
+          HistoricalData.fromJson([
             1680134400000,
             2797280292466.4453
-          ],
-          [
-            1680175636000,
-            2785972479143.1724
-          ]
-        ]);
+        ])),0);
+        expect(result.totalVolumes!.elementAt(1).compareTo(
+        HistoricalData.fromJson([
+          1680175636000,
+          2785972479143.1724
+        ])),0);
       });
 
       test('with data in getting the correct response type with complete parameters', () async {
@@ -1540,48 +1518,52 @@ void main() {
           to: DateTime.fromMillisecondsSinceEpoch(1396587232)
         );
         expect(result, isA<CoinMarketChart>());
-        expect(result.prices, [
-          [
-            1680134400000,
-            3764825.6157043367
-          ],
-          [
-            1680175636000,
-            3792357.969195695
-          ],
-          [
-            null,
-            3792357.969195695
-          ]
-        ]);
-        expect(result.marketCaps, [
-          [
-            1680134400000,
-            72766031840740.89
-          ],
-          [
-            1680175636000,
-            73372376001887.88
-          ],
-          [
-            1680175636000,
-            null
-          ]
-        ]);
-        expect(result.totalVolumes, [
-          [
-            1680134400000,
-            2797280292466.4453
-          ],
-          [
-            1680175636000,
-            2785972479143.1724
-          ],
-          [
-            null,
-            null
-          ]
-        ]);
+
+        expect(result.prices!.elementAt(0).compareTo(
+        HistoricalData.fromJson([
+          1680134400000,
+          3764825.6157043367
+        ])),0);
+        expect(result.prices!.elementAt(1).compareTo(
+        HistoricalData.fromJson([
+          1680175636000,
+          3792357.969195695
+        ])),0);
+        expect(result.prices!.elementAt(2).compareTo(
+        HistoricalData.fromJson([
+          null,
+          3792357.969195695
+        ])),0);
+        expect(result.marketCaps!.elementAt(0).compareTo(
+        HistoricalData.fromJson([
+          1680134400000,
+          72766031840740.89
+          ])),0);
+        expect(result.marketCaps!.elementAt(1).compareTo(
+        HistoricalData.fromJson([
+          1680175636000,
+          73372376001887.88
+        ])),0);
+        expect(result.marketCaps!.elementAt(2).compareTo(
+        HistoricalData.fromJson([
+          1680175636000,
+          null
+        ])),0);
+        expect(result.totalVolumes!.elementAt(0).compareTo(
+        HistoricalData.fromJson([
+          1680134400000,
+          2797280292466.4453
+        ])),0);
+        expect(result.totalVolumes!.elementAt(1).compareTo(
+        HistoricalData.fromJson([
+          1680175636000,
+          2785972479143.1724
+        ])),0);
+        expect(result.totalVolumes!.elementAt(2).compareTo(
+        HistoricalData.fromJson([
+          null,
+          null
+        ])),0);
       });
 
       test('should still return a result for incomplete data format', () async {
