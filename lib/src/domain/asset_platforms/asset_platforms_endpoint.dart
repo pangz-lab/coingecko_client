@@ -17,7 +17,7 @@ class AssetPlatformsEndpoint extends BaseEndpoint {
   /// throws [NetworkRequestException] and [DataParsingException]
   /// [filter] apply relevant filters to results
   ///  valid values: "nft" (asset_platform nft-support)
-  Future<List<AssetPlatform>> call({
+  Future<List<AssetPlatform>> getList({
     AssetPlatformsFilter? filter
   }) async {
     try {

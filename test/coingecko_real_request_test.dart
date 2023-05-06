@@ -14,6 +14,8 @@ import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
 import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
+import 'package:coingecko_client/src/domain/companies/companies_endpoint.dart';
+import 'package:coingecko_client/src/domain/companies/models/company_list.dart';
 import 'package:coingecko_client/src/domain/contract/contract_endpoint.dart';
 import 'package:coingecko_client/src/domain/contract/models/contract_info.dart';
 import 'package:coingecko_client/src/domain/contract/models/contract_market_history.dart';
@@ -37,7 +39,9 @@ import 'package:coingecko_client/src/domain/indexes/models/market_index.dart';
 import 'package:coingecko_client/src/domain/nfts/models/nft_basic_info.dart';
 import 'package:coingecko_client/src/domain/nfts/models/nft_info.dart';
 import 'package:coingecko_client/src/domain/nfts/nfts_endpoint.dart';
+import 'package:coingecko_client/src/domain/search/search_endpoint.dart';
 import 'package:coingecko_client/src/domain/simple/simple_endpoint.dart';
+import 'package:coingecko_client/src/domain/trending/trending_endpoint.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
@@ -49,7 +53,7 @@ void main() {
   group('Integration test for AssetPlatformsEndpoint', () {
     var sut = AssetPlatformsEndpoint(httpService);
     test('should return a valid response', () async {
-      var result = await sut();
+      var result = await sut.getList();
       expect(result.elementAt(0).runtimeType, AssetPlatform);
     });
   });
@@ -385,6 +389,35 @@ void main() {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getList();
       expect(result.runtimeType, List<ExchangeRate>);
+    });
+  });
+
+  group('Integration test for CompaniesEndpoint for', () {
+    var sut = CompaniesEndpoint(httpService);
+    test('getList: request should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getList(
+        coinId: 'ethereum'
+      );
+      expect(result.runtimeType, CompanyList);
+    });
+  });
+  
+  group('Integration test for TrendingEndpoint for', () {
+    var sut = TrendingEndpoint(httpService);
+    test('getResult: request should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getResult();
+      expect(result.runtimeType.toString(), '_Map<String, dynamic>');
+    });
+  });
+
+  group('Integration test for SearchEndpoint for', () {
+    var sut = SearchEndpoint(httpService);
+    test('getResult: request should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getResult(query: 'bybit');
+      expect(result.runtimeType.toString(), '_Map<String, dynamic>');
     });
   });
 }

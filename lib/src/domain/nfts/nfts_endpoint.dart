@@ -87,6 +87,7 @@ class NftsEndpoint extends BaseEndpoint {
         },
         endpointPath: "/nfts/{asset_platform_id}/contract/{contract_address}"
       );
+      
       return NftInfo.fromJson(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();

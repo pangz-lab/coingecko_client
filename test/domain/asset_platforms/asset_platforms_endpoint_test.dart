@@ -8,11 +8,9 @@ import '../../services/http_request_service_mock.dart';
 import 'mock/asset_platforms_mock_data.dart';
 
 
-
 void main() {
   AssetPlatformsEndpoint? sut;
   final String apiVersionPath = "/api/v3";
-
 
   group('AssetPlatformsEndpoint test endpoint path creation', () {
     var sut = AssetPlatformsEndpoint(
@@ -23,12 +21,12 @@ void main() {
     );
 
     test('without parameters', () async {
-      await sut();
+      await sut.getList();
       expect(sut.endpointPath, "$apiVersionPath/asset_platforms");
     });
 
     test('with parameters', () async {
-      await sut(filter: AssetPlatformsFilter.nft);
+      await sut.getList(filter: AssetPlatformsFilter.nft);
       expect(sut.endpointPath, "$apiVersionPath/asset_platforms?filter=nft");
     });
   });
@@ -41,7 +39,7 @@ void main() {
       )
     );
     test('with data in getting the correct response type', () async {
-      var result = await sut!();
+      var result = await sut!.getList();
       expect(result.elementAt(0).id, 'factom');
       expect(result.elementAt(0).chainIdentifier, null);
       expect(result.elementAt(0).name, 'Factom');
@@ -57,7 +55,7 @@ void main() {
           body: AssetPlatformsMockData.responseBodyWithIncompleteKeys
         )
       );
-      var result = await sut!();
+      var result = await sut!.getList();
       expect(result.length, 2);
       expect(result.elementAt(0).id, 'factom');
       expect(result.elementAt(0).name, 'Factom');
@@ -78,7 +76,7 @@ void main() {
           body: AssetPlatformsMockData.validResponseBody
         )
       );
-      await expectLater(sut!(), throwsA(isA<NetworkRequestException>()));
+      await expectLater(sut!.getList(), throwsA(isA<NetworkRequestException>()));
     });
 
     test('should return a FormatException when result is error or when parsing failed', () async {
@@ -90,7 +88,7 @@ void main() {
 }'''
         )
       );
-      await expectLater(sut!(), throwsA(isA<DataParsingException>()));
+      await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
 
       sut = AssetPlatformsEndpoint(
         HttpRequestServiceMock(
@@ -98,7 +96,7 @@ void main() {
           body: AssetPlatformsMockData.responseBodyWithInvalidFormat
         )
       );
-      await expectLater(sut!(), throwsA(isA<DataParsingException>()));
+      await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
 
       sut = AssetPlatformsEndpoint(
         HttpRequestServiceMock(
@@ -106,7 +104,7 @@ void main() {
           body: ""
         )
       );
-      await expectLater(sut!(), throwsA(isA<DataParsingException>()));
+      await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
     });
   });
 }
