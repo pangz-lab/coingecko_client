@@ -22,6 +22,8 @@ import 'package:coingecko_client/src/domain/derivatives/models/derivatives_excha
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange_ordering.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_tickers.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives.dart';
+import 'package:coingecko_client/src/domain/exchange_rates/exchange_rates_endpoint.dart';
+import 'package:coingecko_client/src/domain/exchange_rates/models/exchange_rate.dart';
 import 'package:coingecko_client/src/domain/exchanges/exchanges_endpoint.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/exchange_data_ordering.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/exchange_info.dart';
@@ -374,6 +376,15 @@ void main() {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getDefiInfo();
       expect(result.runtimeType, GlobalDefiInfo);
+    });
+  });
+
+  group('Integration test for ExchangeRatesEndpoint for', () {
+    var sut = ExchangeRatesEndpoint(httpService);
+    test('getList: request should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getList();
+      expect(result.runtimeType, List<ExchangeRate>);
     });
   });
 }

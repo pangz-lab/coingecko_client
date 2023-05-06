@@ -67,7 +67,7 @@ void main() {
           "matic": 0.7245310857878053
         });
         expect(result.marketCapChangePercentage24hUsd, 1.0640913224189947);
-        expect(result.updatedAt.toString(), '2023-05-06 14:28:35.000');
+        expect(result.updatedAt!.toUtc().toString(), '2023-05-06 05:28:35.000Z');
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -88,7 +88,7 @@ void main() {
         expect(result.totalVolume, null);
         expect(result.marketCapPercentage, null);
         expect(result.marketCapChangePercentage24hUsd, 1.0640913224189947);
-        expect(result.updatedAt.toString(), '2023-05-06 14:28:35.000');
+        expect(result.updatedAt!.toUtc().toString(), '2023-05-06 05:28:35.000Z');
 
       });
     });
@@ -131,6 +131,106 @@ void main() {
         );
         await expectLater(
           sut!.getCryptoInfo(),
+          throwsA(isA<DataParsingException>())
+        );
+      });
+    });
+  });
+
+
+  group('getDefiInfo method in', () {
+    var basePath = "/global/decentralized_finance_defi";
+    group('GlobalEndpoint test endpoint path creation', () {
+      var sut = GlobalEndpoint(
+        HttpRequestServiceMock(
+          statusCode : 200,
+          body: GlobalDefiMockData.validResponseBody
+        )
+      );
+
+      test('without parameters', () async {
+        await sut.getDefiInfo();
+        expect(sut.endpointPath, "$apiVersionPath$basePath");
+      });
+    });
+
+    group('GlobalEndpoint test endpoint response', () {
+      test('with data in getting the correct response type', () async {
+        sut = GlobalEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: GlobalDefiMockData.validResponseBody
+          )
+        );
+        var result = await sut!.getDefiInfo();
+
+        expect(result.defiMarketCap, 47865869842.9580810533925392854);
+        expect(result.ethMarketCap, 236815713504.1697382997169007792);
+        expect(result.defiToEthRatio, 20.2122862265705529769901957904537177499923686587544955426674325);
+        expect(result.tradingVolume24h, 2211981874.802457304149984909366);
+        expect(result.defiDominance, 3.7973157237481210812554212782141867546879483948402413255296209);
+        expect(result.topCoinName, "Lido Staked Ether");
+        expect(result.topCoinDefiDominance, 25.924971412066956);
+      });
+
+      test('should still return a result for incomplete data format', () async {
+        sut = GlobalEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: GlobalDefiMockData.responseBodyWithIncompleteKeys
+          )
+        );
+        var result = await sut!.getDefiInfo();
+
+        expect(result.defiMarketCap, null);
+        expect(result.ethMarketCap, null);
+        expect(result.defiToEthRatio, null);
+        expect(result.tradingVolume24h, 2211981874.802457304149984909366);
+        expect(result.defiDominance, 3.7973157237481210812554212782141867546879483948402413255296209);
+        expect(result.topCoinName, "Lido Staked Ether");
+        expect(result.topCoinDefiDominance, 25.924971412066956);
+
+      });
+    });
+
+    group('GlobalEndpoint test for error handling', () {
+      test('should throw an exception for failed request', () async {
+        sut = GlobalEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 500,
+            body: GlobalDefiMockData.validResponseBody
+          )
+        );
+        await expectLater(sut!.getDefiInfo(), throwsA(isA<NetworkRequestException>()));
+      });
+
+      test('should return a FormatException when result is error or when parsing failed', () async {
+        sut = GlobalEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: '''[{
+    "error": "coin not found"
+  }]'''
+          )
+        );
+        await expectLater(sut!.getDefiInfo(),throwsA(isA<DataParsingException>()));
+
+        sut = GlobalEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: GlobalDefiMockData.responseBodyWithInvalidFormat
+          )
+        );
+        await expectLater(sut!.getDefiInfo(), throwsA(isA<DataParsingException>()));
+
+        sut = GlobalEndpoint(
+          HttpRequestServiceMock(
+            statusCode : 200,
+            body: ""
+          )
+        );
+        await expectLater(
+          sut!.getDefiInfo(),
           throwsA(isA<DataParsingException>())
         );
       });
