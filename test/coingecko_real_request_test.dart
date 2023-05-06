@@ -1,5 +1,9 @@
 import 'package:coingecko_client/src/domain/asset_platforms/asset_platforms_endpoint.dart';
 import 'package:coingecko_client/src/domain/asset_platforms/models/asset_platform.dart';
+import 'package:coingecko_client/src/domain/categories/categories_endpoint.dart';
+import 'package:coingecko_client/src/domain/categories/models/coin_categories_data_ordering.dart';
+import 'package:coingecko_client/src/domain/categories/models/coin_category_basic_info.dart';
+import 'package:coingecko_client/src/domain/categories/models/coin_category_info.dart';
 import 'package:coingecko_client/src/domain/coins/coins_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_basic_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
@@ -36,7 +40,7 @@ import 'package:test/test.dart';
 
 void main() {
   var httpService = HttpRequestService();
-  var delay = 5000;
+  var delay = 4200;
   group('Test for real request from AssetPlatformsEndpoint', () {
     var sut = AssetPlatformsEndpoint(httpService);
     test('should return a valid response', () async {
@@ -335,6 +339,23 @@ void main() {
         to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
       );
       expect(result.runtimeType, ContractMarketHistory);
+    });
+  });
+
+  group('Test for real request from CategoriesEndpoint for', () {
+    var sut = CategoriesEndpoint(httpService);
+    test('getBasicList should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getBasicList();
+      expect(result.runtimeType, List<CoinCategoryBasicInfo>);
+    });
+
+    test('getList should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      var result = await sut.getList(
+        order: CoinCategoriesDataOrdering.marketCapAsc
+      );
+      expect(result.runtimeType, List<CoinCategoryInfo>);
     });
   });
 }
