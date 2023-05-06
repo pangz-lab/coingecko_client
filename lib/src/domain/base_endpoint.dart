@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
-import 'package:http/http.dart';
 
 abstract class ResponseDate {
   String get baseEndpoint;
@@ -19,16 +17,48 @@ class BaseEndpoint {
   HttpRequestServiceInterface httpRequestService;
   String? apiKey;
   BaseEndpoint(
-    this.httpRequestService, Map<String?, String?> map,
-    {this.apiKey}
+    this.httpRequestService,
+    Map<String?, String?> map,
+    { this.apiKey }
   );
 
-  Future<dynamic> sendBasic(String path) async {
+  Future<dynamic> sendBasic(String path) {
+    try {
+      return _send(
+        path,
+        apiHost
+      );
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> sendPro(String path) {
+    try {
+      var headers = Map.fromEntries(
+        [MapEntry<String, String>(apiKeyQueryParam, apiKey ?? '')]
+      );
+      return _send(
+        path,
+        apiProHost,
+        headers: headers
+      );
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> _send(String path, String host, {Map<String,String>? headers}) async {
     try {
       _endpointPath = "$version$path";
       var urlComponent = _endpointPath.split("?");
       var query = urlComponent.length > 1 ? urlComponent.elementAt(1) : null;
-      var response = await httpRequestService.sendGet(apiHost, urlComponent.elementAt(0), query);
+      var response = await httpRequestService.sendGet(
+        host,
+        urlComponent.elementAt(0),
+        query,
+        headers: headers
+      );
       if(response.statusCode != 200) {
         throw NetworkRequestException.failedResponse(
           response.statusCode,
@@ -39,16 +69,8 @@ class BaseEndpoint {
       if(data.trim().isEmpty) {
         throw DataParsingException("Response data is empty");
       }
-      return jsonDecode(data);
-    } catch (_) {
-      rethrow;
-    }
-  }
 
-  Future<Response> sendPro(String path) {
-    try {
-      _endpointPath = "$version$path&$apiKeyQueryParam=$apiKey";
-      return httpRequestService.sendGet(apiProHost, _endpointPath, '');
+      return jsonDecode(data);
     } catch (_) {
       rethrow;
     }
