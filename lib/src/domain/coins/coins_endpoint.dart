@@ -81,7 +81,7 @@ class CoinsEndpoint extends BaseEndpoint {
           'per_page': perPage,
           'page': page,
           'sparkline': sparkline,
-          'price_change_percentage': priceChangePercentage?.map((e) => e.value).join(",") ?? ''
+          'price_change_percentage': priceChangePercentage?.map((e) => e.value).join(",")
         },
         endpointPath: "/coins/markets"
       );

@@ -20,7 +20,7 @@ class DerivativesEndpoint extends BaseEndpoint {
     try {
       var path = createEndpointPathUrl(
         rawQueryItems: {
-          'include_tickers': includeTickers?.value ?? ''
+          'include_tickers': includeTickers?.value
         },
         endpointPath: "/derivatives"
       );

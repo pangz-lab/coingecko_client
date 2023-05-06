@@ -35,7 +35,7 @@ class CategoriesEndpoint extends BaseEndpoint {
     try {
       var path = createEndpointPathUrl(
         rawQueryItems: {
-          'order': order?.value ?? ''
+          'order': order?.value
         },
         endpointPath: "/coins/categories"
       );

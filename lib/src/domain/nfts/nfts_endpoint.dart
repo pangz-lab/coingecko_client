@@ -26,7 +26,7 @@ class NftsEndpoint extends BaseEndpoint {
     try {
       var path = createEndpointPathUrl(
         rawQueryItems: {
-          'order': order?.value ?? '',
+          'order': order?.value,
           'asset_platform_id': assetPlatformId,
           'per_page': perPage,
           'page': page

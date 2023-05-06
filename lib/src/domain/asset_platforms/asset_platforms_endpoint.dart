@@ -23,7 +23,7 @@ class AssetPlatformsEndpoint extends BaseEndpoint {
     try {
       var path = createEndpointPathUrl(
         rawQueryItems: {
-          'filter': filter?.name ?? ''
+          'filter': filter?.name
         },
         endpointPath: "/asset_platforms"
       );
