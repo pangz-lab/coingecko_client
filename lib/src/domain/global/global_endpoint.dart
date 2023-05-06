@@ -13,6 +13,7 @@ class GlobalEndpoint extends BaseEndpoint {
     try {
       var path = '/global';
       var response = await sendBasic(path);
+      
       return GlobalCryptoInfo.fromJson(response['data']);
     } on FormatException {
       throw DataParsingException.unreadableData();
@@ -29,6 +30,7 @@ class GlobalEndpoint extends BaseEndpoint {
     try {
       var path = '/global/decentralized_finance_defi';
       var response = await sendBasic(path);
+
       return GlobalDefiInfo.fromJson(response['data']);
     } on FormatException {
       throw DataParsingException.unreadableData();

@@ -51,7 +51,6 @@ class SimpleEndpoint extends BaseEndpoint {
     }
   }
 
-  /// TODO Add unit test
   /// Get current price of tokens (using contract addresses) for a given platform in any other currency that you need.
   /// <br/><b>Endpoint </b>: /simple/token_price/{id}
   /// 

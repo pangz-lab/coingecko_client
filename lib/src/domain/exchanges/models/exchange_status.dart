@@ -1,4 +1,5 @@
 import 'package:coingecko_client/src/models/base_model.dart';
+import 'package:coingecko_client/src/models/image.dart';
 
 class ExchangeStatus extends BaseModel {
   String? _description;
@@ -53,7 +54,7 @@ class ExchangeStatus extends BaseModel {
     data['user'] = _user;
     data['user_title'] = _userTitle;
     data['pin'] = _pin;
-    data['project'] = _project?.toJson();
+    data['project'] = _project;
     return data;
   }
 }
@@ -89,37 +90,7 @@ class Project {
     data['type'] = _type;
     data['id'] = _id;
     data['name'] = _name;
-    data['image'] = _image!.toJson();
-    return data;
-  }
-}
-
-class Image {
-  String? _thumb;
-  String? _small;
-  String? _large;
-  
-  Image({String? thumb, String? small, String? large}) {
-    _thumb = thumb;
-    _small = small;
-    _large = large;
-  }
-
-  String? get thumb => _thumb;
-  String? get small => _small;
-  String? get large => _large;
-
-  Image.fromJson(Map<String, dynamic> json) {
-    _thumb = json['thumb'];
-    _small = json['small'];
-    _large = json['large'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['thumb'] = _thumb;
-    data['small'] = _small;
-    data['large'] = _large;
+    data['image'] = _image;
     return data;
   }
 }

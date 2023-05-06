@@ -276,7 +276,8 @@ class MarketData extends BaseModel {
     data['price_change_percentage_200d_in_currency'] = _priceChangePercentage200dInCurrency;
     data['price_change_percentage_1y_in_currency'] = _priceChangePercentage1yInCurrency;
     data['market_cap_change_24h_in_currency'] = _marketCapChange24hInCurrency;
-    data['market_cap_change_percentage_24h_in_currency'] = _marketCapChangePercentage24hInCurrency;    data['total_supply'] = _totalSupply;
+    data['market_cap_change_percentage_24h_in_currency'] = _marketCapChangePercentage24hInCurrency;
+    data['total_supply'] = _totalSupply;
     data['max_supply'] = _maxSupply;
     data['circulating_supply'] = _circulatingSupply;
     data['sparkline_7d'] = _sparkline7d;

@@ -1,5 +1,5 @@
-import 'package:coingecko_client/src/domain/exchanges/models/exchange_status.dart';
 import 'package:coingecko_client/src/models/base_model.dart';
+import 'package:coingecko_client/src/models/image.dart';
 
 class NftInfo extends BaseModel {
   String? _id;
@@ -100,7 +100,7 @@ class NftInfo extends BaseModel {
     data['asset_platform_id'] = _assetPlatformId;
     data['name'] = _name;
     data['symbol'] = _symbol;
-    data['image'] = _image?.toJson();
+    data['image'] = _image;
     data['description'] = _description;
     data['native_currency'] = _nativeCurrency;
     data['floor_price'] = _floorPrice;

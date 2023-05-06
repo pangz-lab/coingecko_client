@@ -207,9 +207,7 @@ class CoinMarket extends BaseModel {
     data['atl'] = _atl;
     data['atl_change_percentage'] = _atlChangePercentage;
     data['atl_date'] = _atlDate;
-    if (_roi != null) {
-      data['roi'] = _roi!.toJson();
-    }
+    data['roi'] = _roi;
     data['last_updated'] = _lastUpdated;
     data['sparkline_in_7d'] = _sparklineIn7d;
     data['price_change_percentage_14d_in_currency'] = _priceChangePercentage14dInCurrency;

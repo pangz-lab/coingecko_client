@@ -156,8 +156,8 @@ class ExchangeInfo extends BaseModel {
     data['trust_score_rank'] = _trustScoreRank;
     data['trade_volume_24h_btc'] = _tradeVolume24hBtc;
     data['trade_volume_24h_btc_normalized'] = _tradeVolume24hBtcNormalized;
-    data['tickers'] = _tickers?.map((e) => e.toJson()).toList();
-    data['status_updates'] = _statusUpdates?.map((e) => e.toJson()).toList();
+    data['tickers'] = _tickers;
+    data['status_updates'] = _statusUpdates;
     return data;
   }
 }

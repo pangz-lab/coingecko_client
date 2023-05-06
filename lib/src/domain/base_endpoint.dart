@@ -45,16 +45,6 @@ class BaseEndpoint {
     }
   }
 
-  /// Remove this
-  Future<Response> send(String path) async {
-    try {
-      _endpointPath = "$version$path";
-      return await httpRequestService.sendGet(apiHost, _endpointPath, '');
-    } catch (_) {
-      rethrow;
-    }
-  }
-
   Future<Response> sendPro(String path) {
     try {
       _endpointPath = "$version$path&$apiKeyQueryParam=$apiKey";
@@ -90,6 +80,7 @@ class BaseEndpoint {
     return "${_replaceEndpointPathWithValue(endpointPath, defaultRawQueryItems)}$path";
   }
 
+  /// TODO : Simplify this
   List<String?> _getPathParameters(String path, Map<String, dynamic>? parameters) {
     if(!path.contains("{")) { return []; }
     if(parameters?.isEmpty ?? true) { return []; }

@@ -10,6 +10,7 @@ class PingEndpoint extends BaseEndpoint {
   Future<Map<String, dynamic>> getResult() async {
     try {
       var path = '/ping';
+      
       return Map<String, dynamic>.of(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();
