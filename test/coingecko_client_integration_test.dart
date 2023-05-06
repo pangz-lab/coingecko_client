@@ -1,10 +1,8 @@
-import 'package:coingecko_client/src/domain/asset_platforms/asset_platforms_endpoint.dart';
+import 'package:coingecko_client/src/coingecko_client_base.dart';
 import 'package:coingecko_client/src/domain/asset_platforms/models/asset_platform.dart';
-import 'package:coingecko_client/src/domain/categories/categories_endpoint.dart';
 import 'package:coingecko_client/src/domain/categories/models/coin_categories_data_ordering.dart';
 import 'package:coingecko_client/src/domain/categories/models/coin_category_basic_info.dart';
 import 'package:coingecko_client/src/domain/categories/models/coin_category_info.dart';
-import 'package:coingecko_client/src/domain/coins/coins_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_basic_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
@@ -14,44 +12,32 @@ import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
 import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
-import 'package:coingecko_client/src/domain/companies/companies_endpoint.dart';
 import 'package:coingecko_client/src/domain/companies/models/company_list.dart';
-import 'package:coingecko_client/src/domain/contract/contract_endpoint.dart';
 import 'package:coingecko_client/src/domain/contract/models/contract_info.dart';
 import 'package:coingecko_client/src/domain/contract/models/contract_market_history.dart';
-import 'package:coingecko_client/src/domain/derivatives/derivatives_endpoint.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange_ordering.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_tickers.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives.dart';
-import 'package:coingecko_client/src/domain/exchange_rates/exchange_rates_endpoint.dart';
 import 'package:coingecko_client/src/domain/exchange_rates/models/exchange_rate.dart';
-import 'package:coingecko_client/src/domain/exchanges/exchanges_endpoint.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/exchange_data_ordering.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/exchange_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/exchange_basic_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/exchange_volume_chart.dart';
-import 'package:coingecko_client/src/domain/global/global_endpoint.dart';
 import 'package:coingecko_client/src/domain/global/models/global_crypto_info.dart';
 import 'package:coingecko_client/src/domain/global/models/global_defi_info.dart';
-import 'package:coingecko_client/src/domain/indexes/indexes_endpoint.dart';
 import 'package:coingecko_client/src/domain/indexes/models/market_index.dart';
 import 'package:coingecko_client/src/domain/nfts/models/nft_basic_info.dart';
 import 'package:coingecko_client/src/domain/nfts/models/nft_info.dart';
-import 'package:coingecko_client/src/domain/nfts/nfts_endpoint.dart';
-import 'package:coingecko_client/src/domain/search/search_endpoint.dart';
-import 'package:coingecko_client/src/domain/simple/simple_endpoint.dart';
-import 'package:coingecko_client/src/domain/trending/trending_endpoint.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
-import 'package:coingecko_client/src/services/http_request_service.dart';
 import 'package:test/test.dart';
 
 void main() {
-  var httpService = HttpRequestService();
+  var client = CoinGeckoClient();
   var delay = 4200;
   group('Integration test for AssetPlatformsEndpoint', () {
-    var sut = AssetPlatformsEndpoint(httpService);
+    var sut = client.assetPlatforms;
     test('should return a valid response', () async {
       var result = await sut.getList();
       expect(result.elementAt(0).runtimeType, AssetPlatform);
@@ -59,7 +45,7 @@ void main() {
   });
 
   group('Integration test for CoinsEndpoint for', () {
-    var sut = CoinsEndpoint(httpService);
+    var sut = client.coins;
     test('getBasicList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getBasicList();
@@ -71,7 +57,6 @@ void main() {
       var result = await sut.getHistory(id: 'bitcoin', date: DateTime.now());
       expect(result.runtimeType, CoinInfo);
     });
-
 
     test('getMarketList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
@@ -151,7 +136,7 @@ void main() {
   });
   
   group('Integration test for ExchangesEndpoint for', () {
-    var sut = ExchangesEndpoint(httpService);
+    var sut = client.exchanges;
     test('getList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getList();
@@ -194,7 +179,7 @@ void main() {
   });
 
   group('Integration test for SimpleEndpoint for', () {
-    var sut = SimpleEndpoint(httpService);
+    var sut = client.simple;
     test('getCoinPrice: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getCoinPrice(
@@ -232,7 +217,7 @@ void main() {
   });
 
   group('Integration test for DerivativesEndpoint for', () {
-    var sut = DerivativesEndpoint(httpService);
+    var sut = client.derivatives;
     test('getList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getList(
@@ -268,7 +253,7 @@ void main() {
   });
 
   group('Integration test for IndexesEndpoint for', () {
-    var sut = IndexesEndpoint(httpService);
+    var sut = client.indexes;
     test('getList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getList(
@@ -295,7 +280,7 @@ void main() {
   });
 
   group('Integration test for NftsEndpoint for', () {
-    var sut = NftsEndpoint(httpService);
+    var sut = client.nfts;
     test('getBasicList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getBasicList(
@@ -324,7 +309,7 @@ void main() {
   });
 
   group('Integration test for ContractEndpoint for', () {
-    var sut = ContractEndpoint(httpService);
+    var sut = client.contract;
     test('getInfo: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getInfo(
@@ -359,7 +344,7 @@ void main() {
   });
 
   group('Integration test for CategoriesEndpoint for', () {
-    var sut = CategoriesEndpoint(httpService);
+    var sut = client.categories;
     test('getBasicList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getBasicList();
@@ -376,7 +361,7 @@ void main() {
   });
 
   group('Integration test for GlobalEndpoint for', () {
-    var sut = GlobalEndpoint(httpService);
+    var sut = client.global;
     test('getCryptoInfo: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getCryptoInfo();
@@ -391,7 +376,7 @@ void main() {
   });
 
   group('Integration test for ExchangeRatesEndpoint for', () {
-    var sut = ExchangeRatesEndpoint(httpService);
+    var sut = client.exchangeRates;
     test('getList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getList();
@@ -400,7 +385,7 @@ void main() {
   });
 
   group('Integration test for CompaniesEndpoint for', () {
-    var sut = CompaniesEndpoint(httpService);
+    var sut = client.companies;
     test('getList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getList(
@@ -411,7 +396,7 @@ void main() {
   });
   
   group('Integration test for TrendingEndpoint for', () {
-    var sut = TrendingEndpoint(httpService);
+    var sut = client.trending;
     test('getResult: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getResult();
@@ -420,7 +405,7 @@ void main() {
   });
 
   group('Integration test for SearchEndpoint for', () {
-    var sut = SearchEndpoint(httpService);
+    var sut = client.search;
     test('getResult: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getResult(query: 'bybit');

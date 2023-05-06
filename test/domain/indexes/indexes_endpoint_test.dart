@@ -10,7 +10,7 @@ void main() {
   IndexesEndpoint? sut;
   final String apiVersionPath = "/api/v3";
 
-  group('getMarketIndexList method in', () {
+  group('getList method in', () {
     var basePath = "/indexes";
     group('IndexesEndpoint test endpoint path creation', () {
       var sut = IndexesEndpoint(
@@ -21,12 +21,12 @@ void main() {
       );
 
       test('without parameters', () async {
-        await sut.getMarketIndexList();
+        await sut.getList();
         expect(sut.endpointPath, "$apiVersionPath$basePath");
       });
 
       test('with all parameters', () async {
-        await sut.getMarketIndexList(
+        await sut.getList(
           perPage: 10,
           page: 2
         );
@@ -45,7 +45,7 @@ void main() {
             body: MarketIndexListMockData.validResponseBody
           )
         );
-        var result = await sut!.getMarketIndexList(
+        var result = await sut!.getList(
           perPage: 10,
           page: 2
         );
@@ -67,7 +67,7 @@ void main() {
             body: MarketIndexListMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut!.getMarketIndexList(
+        var result = await sut!.getList(
           perPage: 10,
           page: 2
         );
@@ -90,7 +90,7 @@ void main() {
             body: MarketIndexListMockData.validResponseBody
           )
         );
-        await expectLater(sut!.getMarketIndexList(
+        await expectLater(sut!.getList(
           perPage: 10,
           page: 2
         ), throwsA(isA<NetworkRequestException>()));
@@ -105,7 +105,7 @@ void main() {
   }'''
           )
         );
-        await expectLater(sut!.getMarketIndexList(
+        await expectLater(sut!.getList(
           perPage: 10,
           page: 2
         ),throwsA(isA<DataParsingException>()));
@@ -116,7 +116,7 @@ void main() {
             body: MarketIndexListMockData.responseBodyWithInvalidFormat
           )
         );
-        await expectLater(sut!.getMarketIndexList(
+        await expectLater(sut!.getList(
           perPage: 10,
           page: 2
         ), throwsA(isA<DataParsingException>()));
@@ -128,7 +128,7 @@ void main() {
           )
         );
         await expectLater(
-          sut!.getMarketIndexList(
+          sut!.getList(
             perPage: 10,
             page: 2
           ),
@@ -138,7 +138,7 @@ void main() {
     });
   });
 
-  group('getMarketIndex method in', () {
+  group('getInfo method in', () {
     var basePath = "/indexes/bybit/HOT";
     group('IndexesEndpoint test endpoint path creation', () {
       var sut = IndexesEndpoint(
@@ -149,7 +149,7 @@ void main() {
       );
 
       test('with all parameters', () async {
-        await sut.getMarketIndex(
+        await sut.getInfo(
           marketId: 'bybit',
           id: 'HOT',
         );
@@ -168,7 +168,7 @@ void main() {
             body: MarketIndexMockData.validResponseBody
           )
         );
-        var result = await sut!.getMarketIndex(
+        var result = await sut!.getInfo(
           marketId: 'bybit',
           id: 'HOT',
         );
@@ -186,7 +186,7 @@ void main() {
             body: MarketIndexMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut!.getMarketIndex(
+        var result = await sut!.getInfo(
           marketId: 'bybit',
           id: 'HOT',
         );
@@ -205,7 +205,7 @@ void main() {
             body: MarketIndexMockData.validResponseBody
           )
         );
-        await expectLater(sut!.getMarketIndex(
+        await expectLater(sut!.getInfo(
           marketId: 'bybit',
           id: 'HOT',
         ), throwsA(isA<NetworkRequestException>()));
@@ -220,7 +220,7 @@ void main() {
   }]'''
           )
         );
-        await expectLater(sut!.getMarketIndex(
+        await expectLater(sut!.getInfo(
           marketId: 'bybit',
           id: 'HOT',
         ),throwsA(isA<DataParsingException>()));
@@ -231,7 +231,7 @@ void main() {
             body: MarketIndexMockData.responseBodyWithInvalidFormat
           )
         );
-        await expectLater(sut!.getMarketIndex(
+        await expectLater(sut!.getInfo(
           marketId: 'bybit',
           id: 'HOT',
         ), throwsA(isA<DataParsingException>()));
@@ -242,7 +242,7 @@ void main() {
             body: ""
           )
         );
-        await expectLater(sut!.getMarketIndex(
+        await expectLater(sut!.getInfo(
           marketId: 'bybit',
           id: 'HOT',
         ), throwsA(isA<DataParsingException>()));
@@ -250,7 +250,7 @@ void main() {
     });
   });
 
-  group('getMarketIndexBasicInfoList method in', () {
+  group('getBasicInfo method in', () {
     var basePath = "/indexes/list";
     group('IndexesEndpoint test endpoint path creation', () {
       var sut = IndexesEndpoint(
@@ -261,7 +261,7 @@ void main() {
       );
 
       test('without parameters', () async {
-        await sut.getMarketIndexBasicInfoList();
+        await sut.getBasicInfo();
         expect(
           sut.endpointPath,
           "$apiVersionPath$basePath"
@@ -277,7 +277,7 @@ void main() {
             body: MarketIndexBasicInfoMockData.validResponseBody
           )
         );
-        var result = await sut!.getMarketIndexBasicInfoList();
+        var result = await sut!.getBasicInfo();
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
@@ -295,7 +295,7 @@ void main() {
             body: MarketIndexBasicInfoMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut!.getMarketIndexBasicInfoList();
+        var result = await sut!.getBasicInfo();
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
@@ -316,7 +316,7 @@ void main() {
           )
         );
         await expectLater(
-          sut!.getMarketIndexBasicInfoList(),
+          sut!.getBasicInfo(),
           throwsA(isA<NetworkRequestException>())
         );
       });
@@ -331,7 +331,7 @@ void main() {
           )
         );
         await expectLater(
-          sut!.getMarketIndexBasicInfoList(),
+          sut!.getBasicInfo(),
           throwsA(isA<DataParsingException>())
         );
 
@@ -342,7 +342,7 @@ void main() {
           )
         );
         await expectLater(
-          sut!.getMarketIndexBasicInfoList(),
+          sut!.getBasicInfo(),
           throwsA(isA<DataParsingException>())
         );
 
@@ -353,7 +353,7 @@ void main() {
           )
         );
         await expectLater(
-          sut!.getMarketIndexBasicInfoList(),
+          sut!.getBasicInfo(),
           throwsA(isA<DataParsingException>())
         );
       });

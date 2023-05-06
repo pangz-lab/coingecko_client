@@ -11,7 +11,7 @@ class IndexesEndpoint extends BaseEndpoint {
   /// 
   /// [per_page] Total results per page
   /// [page] Page through results
-  Future<List<MarketIndex>> getMarketIndexList({
+  Future<List<MarketIndex>> getList({
     int? perPage,
     int? page
   }) async {
@@ -40,7 +40,7 @@ class IndexesEndpoint extends BaseEndpoint {
   /// 
   /// [market_id] pass the market id (can be obtained from /exchanges/list)
   /// [id] pass the index id (can be obtained from /indexes/list)
-  Future<MarketIndex> getMarketIndex({
+  Future<MarketIndex> getInfo({
     required String marketId,
     required String id
   }) async {
@@ -65,7 +65,7 @@ class IndexesEndpoint extends BaseEndpoint {
 
   /// List market indexes id and name
   /// <br/><b>Endpoint </b>: /indexes/list
-  Future<List<MarketIndex>> getMarketIndexBasicInfoList() async {
+  Future<List<MarketIndex>> getBasicInfo() async {
     try {
       var path = '/indexes/list';
 

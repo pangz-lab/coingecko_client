@@ -15,12 +15,14 @@ class BaseEndpoint {
   String _endpointPath = "";
   String get endpointPath => _endpointPath;
   HttpRequestServiceInterface httpRequestService;
-  String? apiKey;
+  String? _apiKey;
   BaseEndpoint(
     this.httpRequestService,
     Map<String?, String?> map,
-    { this.apiKey }
-  );
+    { String? apiKey }
+  ) {
+    _apiKey = apiKey;
+  }
 
   Future<dynamic> sendBasic(String path) {
     try {
@@ -36,7 +38,7 @@ class BaseEndpoint {
   Future<dynamic> sendPro(String path) {
     try {
       var headers = Map.fromEntries(
-        [MapEntry<String, String>(apiKeyQueryParam, apiKey ?? '')]
+        [MapEntry<String, String>(apiKeyQueryParam, _apiKey ?? '')]
       );
       return _send(
         path,

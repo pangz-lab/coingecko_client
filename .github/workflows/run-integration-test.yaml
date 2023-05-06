@@ -20,5 +20,8 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
-      - name: Run integration tests
+      - name: Run per class integration tests
         run: dart test test/coingecko_real_request_test.dart
+      
+      - name: Run coingecko_client integration tests
+        run: dart test test/coingecko_client_integration_test.dart
