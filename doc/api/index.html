@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="generator" content="made with love by dartdoc 6.2.1">
+  <meta name="description" content="coingecko_client API docs, for the Dart programming language.">
+  <title>coingecko_client - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li class="self-crumb">coingecko_client package</li>
+  </ol>
+  <div class="self-name">coingecko_client</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <p align="center">
+    <img src="https://lh3.googleusercontent.com/fife/APg5EOY3h1MG5I3ny2d3X9NITN9GNuyx8uPlEu50W6GhYw-CsCPY7h_8DN1l9uYw8J7YjmUl9pDhuUhv6yrh5gv9jENoaWQcPebQ4NcsweTAtsFB2ehWWa9ETrSWCLoRTEVax27GsKGKVB6lLYNN1776Mytpv0RlNXgsnA-1eP30YQopud2cqf0YOTudo-heagG4oieBKBGr2A4ChIrQ5t0UglNYpmz8Q_F57k9mdq8hrBzuDmyUhdFI40tFZtg_vUKIZTY_vd2BIJmGkZZ3nuMMyZbOOMhgSTMxzlpb3dA23Gd2ymBGfNobQZOa4hBOpd_XxibFox5EOQOd9XpSbhdPt0EIAzXEb4qVsMJ4_NMW7OEdk0JQAjaAsFzZvVYL-uKFu-vzWSFg_GRWteDkUUYhv60V1H2zrmAfDdN10lE5Y9aiMbyc-62XSzaCtGBwSmmfP8iCdMP_RsJquvqWHJTEHKW6mIC8BXbMqDu8ieTsUqc8veRBfHRgn1iA1lUywABUELyAANMCqZ450v6nDYOCiRXFVeIh9-O3G9PzGgYu7V0o7MSDBhL-3Y0kENycsIqzvnPSBQX38BOKgP77in8aXU9uBzS275CDoeCValoNwx2pZOXVmLFk7y_yBHArm3VD7ctfwP_NzOkC84zNcn2QVycgmBdsXlULj_Q-POX2W_LM7T4TxLQkoAn5B4SvBikTN-Le_Ge2WkQkIcA7U3_j8GUywRSYXr8m78xeZODWi9zJEFUfc8zYt-19PYcrx0YFSivwOqOxpIm-IEm6x4vyapjB-7X-ljxc2TzeWqOShXkyl5gKK0Evd-0U6hTVN_mL_uPWAlvWLs3LCKu9IZ5bVDEmJVtBspEhxdrjQQjNqur01g4VMy3Yy_KhNientu_AJm7ndNAeAQAoKfgiUtQNrtY306648slrRdKDOt5nTLWiHUWvXcUqh6u5KyTI1YNBneHQyWk2ExhxIUFPAi2QUnzeu21IBKUoele9BDGKEoOz4dV3J1qgi0-7C1kvvWtoxxnL5z-9LSwtAEW1vaw5iEy3yhAcbN9nrKtEC0O75e3XHR2eXt4NKxBF7dgdWX9lS_llslIsvw3rFx9VOLfcCM71HTCO3tczlf8abxHg1R6TlKWOGfqaYOBdqIRqPPF1sagLZvbe75uIjRbnCwBaRtVl4Z1s7Q30I_8Jeq2oJRCnYQcgbjpXRvpClEfhlJT76ybo9hT2aG_QFE01SwptYQ2A-btnwo9jimH0hc4vIQXR1_pMFHQa62rd2hSiTla5qo95WqTQWoVtbW55hN2h7LTF4IBm1ETYo81KFpM1HTzYR7LZQOQMs2_BaUaCQBetOmIWZKhLWRZC8_X3OVSRokTj6xuXtotwcHbXln661ITXs-1yCxdgWmpIL92mPjMlljMUA_kQJru0s_lm-DEqdZaFqmuj4fdNqGjZuEN1-FQgVRd-coSHPKd4F2RY2djuATNBtQU5nIwWgm-tuXM6YHX3KzliOp1glQzUURkKVaUq3-lxgfhY4IxRBgmHrw=w1862-h968" height="200">
+</p>
+<h1 id="coingecko_client">coingecko_client</h1>
+<h2 id="coingecko-api-client-for-the-dart-language">Coingecko API client for the Dart Language</h2>
+<br>
+<p align="center">
+    <img src="https://dart.dev/assets/shared/dart-logo-for-shares.png" height="100">
+</p>
+<p>A simple and intuitive API Client for the <a href="https://www.coingecko.com/en/api/documentation">CoinGecko REST API Service</a>.</p>
+<h2 id="api-version-support">API Version Support</h2>
+<ul>
+<li>✔️ API v3</li>
+<li>✔️ Community Endpoint</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>✔️ dart sdk: &gt;= 2.19.3</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>Add the dependency to your Dart / Flutter project:</p>
+<pre class="language-yaml"><code class="language-yaml">dependencies:
+  coingecko_api: ^1.0.0
+</code></pre>
+<hr>
+<h1 id="usage">Usage</h1>
+<ul>
+<li>Initialize the client class</li>
+<li>Use the client properties to send the request
+**</li>
+</ul>
+<pre class="language-dart"><code class="language-dart">import 'package:coingecko_client/coingecko_client.dart';
+
+var client = CoinGeckoClient();
+</code></pre>
+<hr>
+<h2 id="---ping-endpoint-">🌐  <code> ping endpoint </code></h2>
+<h3 id="-ping">📤 <strong>/ping</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.ping.getResult():
+</code></pre>
+<hr>
+<h2 id="---coins-endpoint-">🌐  <code> coins endpoint </code></h2>
+<h3 id="-coinslist">📤 <strong>/coins/list</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.coins.getBasicList():
+</code></pre>
+<h3 id="-coinsidhistory">📤 <strong>/coins/{id}/history</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.coins.getHistory(
+    id: 'bitcoin',
+    date: DateTime.now()
+):
+</code></pre>
+<h3 id="-coinsmarkets">📤 <strong>/coins/markets</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.coins.getMarketList(
+    vsCurrency: Currencies.php
+):
+</code></pre>
+<h3 id="-coinsid">📤 <strong>/coins/{id}</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.coins.getInfo(id: 'verus-coin'):
+</code></pre>
+<h3 id="-coinsidtickers">📤 <strong>/coins/{id}/tickers</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.coins.getTickers(id: 'bitcoin'):
+</code></pre>
+<h3 id="-coinsidmarket_chart">📤 <strong>/coins/{id}/market_chart</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.coins.getMarketHistory(
+    id: 'bitcoin',
+    vsCurrency: Currencies.php,
+    days: DataRange.in1Day,
+    interval: 'daily'
+):
+</code></pre>
+<h3 id="-coinsidmarket_chartrange">📤 <strong>/coins/{id}/market_chart/range</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.coins.getMarketHistoryWithDateRange(
+    id: 'bitcoin',
+    vsCurrency: Currencies.php,
+    from: DateTime.fromMillisecondsSinceEpoch(1392577232),
+    to: DateTime.fromMillisecondsSinceEpoch(1396587232)
+):
+</code></pre>
+<h3 id="-coinsidohlc">📤 <strong>/coins/{id}/ohlc</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.coins.getOhlcList(
+    id: 'bitcoin',
+    vsCurrency: Currencies.php,
+    days: DataRange.max
+):
+</code></pre>
+<hr>
+<h2 id="---exchanges-endpoint-">🌐  <code> exchanges endpoint </code></h2>
+<h3 id="-exchanges">📤 <strong>/exchanges</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.exchanges.getList():
+</code></pre>
+<h3 id="-exchangeslist">📤 <strong>/exchanges/list</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.exchanges.getBasicList():
+</code></pre>
+<h3 id="-exchangesid">📤 <strong>/exchanges/{id}</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.exchanges.getInfo(id: 'binance'):
+</code></pre>
+<h3 id="-exchangesidtickers">📤 <strong>/exchanges/{id}/tickers</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.exchanges.getTickerList(
+    id: 'binance',
+    coinIds: ['bitcoin', 'ethereum'],
+    includeExchangeLogo: true,
+    page: 1,
+    depth: true,
+    order: ExchangeDataOrdering.trustScoreDesc
+):
+</code></pre>
+<h3 id="-exchangesidvolume_chart">📤 <strong>/exchanges/{id}/volume_chart</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.exchanges.getVolumeChartList(
+    id: 'binance',
+    days: DataRange.in1Day
+):
+</code></pre>
+<hr>
+<h2 id="---simple-endpoint-">🌐  <code> simple endpoint </code></h2>
+<h3 id="-simpleprice">📤 <strong>/simple/price</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.simple.getCoinPrice(
+    ids: ['bitcoin', 'ethereum', 'verus-coin'],
+    vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
+    includeMarketCap: true,
+    include24hrVol: true,
+    include24hrChange: true,
+    includeLastUpdatedAt: true,
+    precision: 18
+):
+</code></pre>
+<h3 id="-simpletoken_priceid">📤 <strong>/simple/token_price/{id}</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.simple.getTokenPrice(
+    id: 'avalanche',
+    contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
+    vsCurrencies: ['btc', 'eth'],
+    includeMarketCap: true,
+    include24hrVol: true,
+    include24hrChange: true,
+    includeLastUpdatedAt: true,
+    precision: 18
+):
+</code></pre>
+<h3 id="-simplesupported_vs_currencies">📤 <strong>/simple/supported_vs_currencies</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.simple.getSupportedVsCurrencies():
+</code></pre>
+<hr>
+<h2 id="---derivatives-endpoint-">🌐  <code> derivatives endpoint </code></h2>
+<h3 id="-derivatives">📤 <strong>/derivatives</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.derivatives.getList(
+    includeTickers: DerivativesTickers.unexpired
+):
+</code></pre>
+<h3 id="-derivativesexchanges">📤 <strong>/derivatives/exchanges</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.derivatives.getExchangeList(
+    order: DerivativesExchangeOrdering.nameAsc,
+    perPage: 10,
+    page: 2
+):
+</code></pre>
+<h3 id="-derivativesexchangesid">📤 <strong>/derivatives/exchanges/{id}</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.derivatives.getExchange(
+    id: "bybit",
+    includeTickers: DerivativesTickers.unexpired
+):
+</code></pre>
+<h3 id="-derivativesexchangeslist">📤 <strong>/derivatives/exchanges/list</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.derivatives.getExchangeBasicInfoList():
+</code></pre>
+<hr>
+<h2 id="---indexes-endpoint-">🌐  <code> indexes endpoint </code></h2>
+<h3 id="-indexes">📤 <strong>/indexes</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.indexes.getList(
+    perPage: 10,
+    page: 2
+):
+</code></pre>
+<h3 id="-indexesmarket_idid">📤 <strong>/indexes/{market_id}/{id}</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.indexes.getInfo(
+    marketId: 'bybit',
+    id: 'HOT',
+):
+</code></pre>
+<h3 id="-indexeslist">📤 <strong>/indexes/list</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.indexes.getBasicInfo():
+</code></pre>
+<hr>
+<h2 id="---nfts-endpoint-">🌐  <code> nfts endpoint </code></h2>
+<h3 id="-nftslist">📤 <strong>/nfts/list</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.nfts.getBasicList(
+    perPage: 10,
+    page: 2
+):
+</code></pre>
+<h3 id="-nftsid">📤 <strong>/nfts/{id}</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.nfts.getInfo(
+    id: 'meebits',
+):
+</code></pre>
+<h3 id="-nftsasset_platform_idcontractcontract_address">📤 <strong>/nfts/{asset_platform_id}/contract/{contract_address}</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.nfts.getContractInfo(
+    assetPlatformId: 'ethereum',
+    contractAddress: '0x36F379400DE6c6BCDF4408B282F8b685c56adc60',
+):
+</code></pre>
+<hr>
+<h2 id="---contract-endpoint-">🌐  <code> contract endpoint </code></h2>
+<h3 id="-coinsidcontractcontract_addressmarket_chart">📤 <strong>/coins/{id}/contract/{contract_address}/market_chart</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.contract.getMarketHistory(
+    id: 'ethereum',
+    contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+    vsCurrency: Currencies.jpy,
+    days : DataRange.in2Weeks,
+):
+</code></pre>
+<h3 id="-coinsidcontractcontract_addressmarket_chartrange">📤 <strong>/coins/{id}/contract/{contract_address}/market_chart/range</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.contract.getMarketHistoryWithDateRange(
+    id: 'ethereum',
+    contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+    vsCurrency: Currencies.php,
+    from: DateTime.fromMillisecondsSinceEpoch(1683175446, isUtc: true),
+    to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
+):
+</code></pre>
+<hr>
+<h2 id="---categories-endpoint-">🌐  <code> categories endpoint </code></h2>
+<h3 id="-coinscategorieslist">📤 <strong>/coins/categories/list</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.categories.getBasicList():
+</code></pre>
+<h3 id="-coinscategories">📤 <strong>/coins/categories</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.categories.getList(
+    order: CoinCategoriesDataOrdering.marketCapAsc
+):
+</code></pre>
+<hr>
+<h2 id="---global-endpoint-">🌐  <code> global endpoint </code></h2>
+<h3 id="-global">📤 <strong>/global</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.global.getCryptoInfo():
+</code></pre>
+<h3 id="-globaldecentralized_finance_defi">📤 <strong>/global/decentralized_finance_defi</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.global.getDefiInfo():
+</code></pre>
+<hr>
+<h2 id="---exchange-rates-endpoint-">🌐  <code> exchange rates endpoint </code></h2>
+<h3 id="-exchange_rates">📤 <strong>/exchange_rates</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.exchangeRates.getList():
+</code></pre>
+<hr>
+<h2 id="---companies-endpoint-">🌐  <code> companies endpoint </code></h2>
+<h3 id="-companiespublic_treasurycoin_id">📤 <strong>/companies/public_treasury/{coin_id}</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.companies.getList(
+    coinId: 'ethereum'
+):
+</code></pre>
+<hr>
+<h2 id="---trending-endpoint-">🌐  <code> trending endpoint </code></h2>
+<h3 id="-searchtrending">📤 <strong>/search/trending</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.trending.getResult():
+</code></pre>
+<hr>
+<h2 id="---search-endpoint-">🌐  <code> search endpoint </code></h2>
+<h3 id="-search">📤 <strong>/search</strong></h3>
+<pre class="language-dart"><code class="language-dart">client.search.getResult(query: 'bybit'):
+</code></pre>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="coingecko_client">
+  <span class="name"><a href="coingecko_client/coingecko_client-library.html">coingecko_client</a></span> 
+
+</dt>
+<dd>CoinGecko API client.
+</dd>
+
+        </dl>
+      </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li class="self-crumb">coingecko_client package</li>
+</ol>
+
+
+    <h5 class="hidden-xs"><span class="package-name">coingecko_client</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="coingecko_client/coingecko_client-library.html">coingecko_client</a></li>
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    coingecko_client
+      1.0.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+
