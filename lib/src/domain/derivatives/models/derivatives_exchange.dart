@@ -15,20 +15,19 @@ class DerivativesExchange extends BaseModel {
   String? _url;
   List<DerivativesTickerInfo>? _tickers;
 
-  DerivativesExchange({
-    String? name,
-    String? id,
-    double? openInterestBtc,
-    double? tradeVolume24hBtc,
-    int? numberOfPerpetualPairs,
-    int? numberOfFuturesPairs,
-    String? image,
-    int? yearEstablished,
-    String? country,
-    String? description,
-    String? url,
-    List<DerivativesTickerInfo>? tickers
-  }) {
+  DerivativesExchange(
+      {String? name,
+      String? id,
+      double? openInterestBtc,
+      double? tradeVolume24hBtc,
+      int? numberOfPerpetualPairs,
+      int? numberOfFuturesPairs,
+      String? image,
+      int? yearEstablished,
+      String? country,
+      String? description,
+      String? url,
+      List<DerivativesTickerInfo>? tickers}) {
     _name = name;
     _id = id;
     _openInterestBtc = openInterestBtc;
@@ -55,7 +54,7 @@ class DerivativesExchange extends BaseModel {
   String? get description => _description;
   String? get url => _url;
   List<DerivativesTickerInfo>? get tickers => _tickers;
-  
+
   DerivativesExchange.fromJson(Map<String, dynamic> json) {
     _name = json['name'];
     _id = json['id'];
@@ -68,9 +67,11 @@ class DerivativesExchange extends BaseModel {
     _country = json['country'];
     _description = json['description'];
     _url = json['url'];
-    _tickers = json['tickers'] != null 
-      ? List<dynamic>.of(json['tickers']).map((e) => DerivativesTickerInfo.fromJson(e)).toList() 
-      : null;
+    _tickers = json['tickers'] != null
+        ? List<dynamic>.of(json['tickers'])
+            .map((e) => DerivativesTickerInfo.fromJson(e))
+            .toList()
+        : null;
   }
 
   Map<String, dynamic> toJson() {

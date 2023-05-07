@@ -10,17 +10,15 @@ class CoinCategoryInfo extends BaseModel {
   double? _volume24h;
   DateTime? _updatedAt;
 
-  CoinCategoryInfo({
-    String? id,
-    String? name,
-    double? marketCap,
-    double? marketCapChange24h,
-    String? content,
-    List<String?>? top3Coins,
-    double? volume24h,
-    DateTime? updatedAt
-  }) {
-
+  CoinCategoryInfo(
+      {String? id,
+      String? name,
+      double? marketCap,
+      double? marketCapChange24h,
+      String? content,
+      List<String?>? top3Coins,
+      double? volume24h,
+      DateTime? updatedAt}) {
     _id = id;
     _name = name;
     _marketCap = marketCap;
@@ -39,7 +37,7 @@ class CoinCategoryInfo extends BaseModel {
   List<String?>? get top3Coins => _top3Coins;
   double? get volume24h => _volume24h;
   DateTime? get updatedAt => _updatedAt;
-  
+
   CoinCategoryInfo.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _name = json['name'];

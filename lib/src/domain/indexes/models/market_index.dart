@@ -7,13 +7,12 @@ class MarketIndex extends BaseModel {
   double? _last;
   bool? _isMultiAssetComposite;
 
-  MarketIndex({
-    String? name,
-    String? id,
-    String? market,
-    double? last,
-    bool? isMultiAssetComposite
-  }) {
+  MarketIndex(
+      {String? name,
+      String? id,
+      String? market,
+      double? last,
+      bool? isMultiAssetComposite}) {
     _name = name;
     _id = id;
     _market = market;

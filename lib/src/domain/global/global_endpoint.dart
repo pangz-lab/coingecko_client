@@ -4,8 +4,14 @@ import 'package:coingecko_client/src/domain/global/models/global_defi_info.dart'
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
+///
+/// - Get cryptocurrency global data<br>
+/// - Get Top 100 Cryptocurrency Global Eecentralized Finance(defi) data<br>
+///
 class GlobalEndpoint extends BaseEndpoint {
-  GlobalEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
+  GlobalEndpoint(HttpRequestServiceInterface httpRequestService,
+      {String? apiKey})
+      : super(httpRequestService, {apiKey: apiKey});
 
   /// Get cryptocurrency global data
   /// <br/><b>Endpoint </b>: /global
@@ -13,13 +19,13 @@ class GlobalEndpoint extends BaseEndpoint {
     try {
       var path = '/global';
       var response = await sendBasic(path);
-      
+
       return GlobalCryptoInfo.fromJson(response['data']);
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
       throw DataParsingException.mismatchedType();
-    } catch(_) {
+    } catch (_) {
       rethrow;
     }
   }
@@ -36,7 +42,7 @@ class GlobalEndpoint extends BaseEndpoint {
       throw DataParsingException.unreadableData();
     } on TypeError {
       throw DataParsingException.mismatchedType();
-    } catch(_) {
+    } catch (_) {
       rethrow;
     }
   }

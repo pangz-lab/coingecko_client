@@ -69,6 +69,28 @@
 </section>
 
 
+<section class="desc markdown">
+  <ul>
+<li>Use this to obtain all the coins, coins market data (price, market cap, volume)<br></li>
+<li>Get current data (name, price, market, ... including exchange tickers) for a coin.<br>
+<b>IMPORTANT:</b><br>
+Ticker object is limited to 100 items, to get more tickers, use <code>/coins/{id}/tickers</code><br>
+Ticker is_stale is true when ticker that has not been updated/unchanged from the exchange for a while.<br>
+Ticker is_anomaly is true if ticker's price is outliered by our system.<br>
+You are responsible for managing how you want to display these information (e.g. footnote, different background, change opacity, hide)<br></li>
+<li>Get historical data (price, market cap, 24hr volume, ..) at a given date for a coin.<br>
+The data returned is at 00:00:00 UTC.<br></li>
+<li>Get historical market data include price, market cap, and 24h volume (granularity auto)<br><br>
+Data granularity is automatic (cannot be adjusted)<br>
+1 day from current time = 5 minute interval data<br>
+1 - 90 days from current time = hourly data<br>
+above 90 days from current time = daily data (00:00 UTC)<br><br></li>
+</ul>
+<p>Candle's body:<br>
+1 - 2 days: 30 minutes<br>
+3 - 30 days: 4 hours<br>
+31 days and beyond: 4 days<br></p>
+</section>
 
 
 <section class="summary source-code" id="source">
@@ -146,7 +168,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

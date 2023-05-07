@@ -79,20 +79,19 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">DerivativesExchange({
-  String? name,
-  String? id,
-  double? openInterestBtc,
-  double? tradeVolume24hBtc,
-  int? numberOfPerpetualPairs,
-  int? numberOfFuturesPairs,
-  String? image,
-  int? yearEstablished,
-  String? country,
-  String? description,
-  String? url,
-  List&lt;DerivativesTickerInfo&gt;? tickers
-}) {
+  <pre class="language-dart"><code class="language-dart">DerivativesExchange(
+    {String? name,
+    String? id,
+    double? openInterestBtc,
+    double? tradeVolume24hBtc,
+    int? numberOfPerpetualPairs,
+    int? numberOfFuturesPairs,
+    String? image,
+    int? yearEstablished,
+    String? country,
+    String? description,
+    String? url,
+    List&lt;DerivativesTickerInfo&gt;? tickers}) {
   _name = name;
   _id = id;
   _openInterestBtc = openInterestBtc;
@@ -182,7 +181,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

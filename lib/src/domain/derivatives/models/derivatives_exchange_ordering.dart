@@ -5,6 +5,7 @@ enum DerivativesExchangeOrdering {
   openInterestBtcDesc('open_interest_btc_desc'),
   tradeVolume24hBtcAsc('trade_volume_24h_btc_asc'),
   tradeVolume24hBtcDesc('trade_volume_24h_btc_desc');
+
   const DerivativesExchangeOrdering(this.value);
   final String value;
 }

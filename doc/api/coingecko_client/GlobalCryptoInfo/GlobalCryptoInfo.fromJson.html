@@ -77,7 +77,8 @@
   _totalMarketCap = toMap&lt;dynamic&gt;(json[&#39;total_market_cap&#39;]);
   _totalVolume = toMap&lt;dynamic&gt;(json[&#39;total_volume&#39;]);
   _marketCapPercentage = toMap&lt;dynamic&gt;(json[&#39;market_cap_percentage&#39;]);
-  _marketCapChangePercentage24hUsd = toDouble(json[&#39;market_cap_change_percentage_24h_usd&#39;]);
+  _marketCapChangePercentage24hUsd =
+      toDouble(json[&#39;market_cap_change_percentage_24h_usd&#39;]);
   _updatedAt = toDateFromTimestamp(json[&#39;updated_at&#39;]);
 }</code></pre>
 </section>
@@ -154,7 +155,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

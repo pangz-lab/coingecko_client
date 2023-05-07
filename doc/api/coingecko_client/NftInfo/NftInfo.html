@@ -83,25 +83,23 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">NftInfo({
-  String? id,
-  String? contractAddress,
-  String? assetPlatformId,
-  String? name,
-  String? symbol,
-  Image? image,
-  String? description,
-  String? nativeCurrency,
-  Map&lt;String, dynamic&gt;? floorPrice,
-  Map&lt;String, dynamic&gt;? marketCap,
-  Map&lt;String, dynamic&gt;? volume24h,
-  double? floorPriceInUsd24hPercentageChange,
-  int? numberOfUniqueAddresses,
-  double? numberOfUniqueAddresses24hPercentageChange,
-  int? totalSupply,
-  Map&lt;String, dynamic&gt;? links
-}) {
-
+  <pre class="language-dart"><code class="language-dart">NftInfo(
+    {String? id,
+    String? contractAddress,
+    String? assetPlatformId,
+    String? name,
+    String? symbol,
+    Image? image,
+    String? description,
+    String? nativeCurrency,
+    Map&lt;String, dynamic&gt;? floorPrice,
+    Map&lt;String, dynamic&gt;? marketCap,
+    Map&lt;String, dynamic&gt;? volume24h,
+    double? floorPriceInUsd24hPercentageChange,
+    int? numberOfUniqueAddresses,
+    double? numberOfUniqueAddresses24hPercentageChange,
+    int? totalSupply,
+    Map&lt;String, dynamic&gt;? links}) {
   _id = id;
   _contractAddress = contractAddress;
   _assetPlatformId = assetPlatformId;
@@ -115,7 +113,8 @@
   _volume24h = volume24h;
   _floorPriceInUsd24hPercentageChange = floorPriceInUsd24hPercentageChange;
   _numberOfUniqueAddresses = numberOfUniqueAddresses;
-  _numberOfUniqueAddresses24hPercentageChange = numberOfUniqueAddresses24hPercentageChange;
+  _numberOfUniqueAddresses24hPercentageChange =
+      numberOfUniqueAddresses24hPercentageChange;
   _totalSupply = totalSupply;
   _links = links;
 }</code></pre>
@@ -199,7 +198,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

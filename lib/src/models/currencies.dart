@@ -1,11 +1,14 @@
-/// Base class for the currency classes.
+/// Base class for the currency classes.<br>
 /// `Currencies` and `CryptoCurrencies` can be used for
-/// explicit values while `CustomCurrency` is used for
-/// non standard ones.
+/// explicit values while `CustomCurrency` is used to
+/// specify non standard values.
 abstract class BaseCurrency {
   String getCode();
 }
 
+///
+/// Collection of known world currencies.
+///
 enum Currencies implements BaseCurrency {
   afn('afn'),
   eur('eur'),
@@ -186,15 +189,19 @@ enum Currencies implements BaseCurrency {
   xpd('xpd'),
   xpt('xpt'),
   xag('xag');
+
   const Currencies(this.code);
   final String code;
-  
+
   @override
   String getCode() {
     return code;
   }
 }
 
+///
+/// Collection of known cryptocurrencies.
+///
 enum CryptoCurrencies implements BaseCurrency {
   btc('btc'),
   eth('eth'),
@@ -260,20 +267,25 @@ enum CryptoCurrencies implements BaseCurrency {
 
   const CryptoCurrencies(this.code);
   final String code;
-  
+
   @override
   String getCode() {
     return code;
   }
 }
 
+///
+/// You might need to use currencies that does not exist<br>
+/// in either `Currencies` or `CryptoCurrencies` enum/clas. You can use this do define
+/// custom currencies.
+///
 class CustomCurrency implements BaseCurrency {
   String? _code;
 
   CustomCurrency.from(String code) {
     _code = code;
   }
-  
+
   @override
   String getCode() {
     return _code ?? '';

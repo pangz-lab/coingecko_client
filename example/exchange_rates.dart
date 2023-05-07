@@ -1,7 +1,6 @@
 import 'package:coingecko_client/coingecko_client.dart';
 
 void main() async {
-
   try {
     var client = CoinGeckoClient();
 
@@ -11,14 +10,13 @@ void main() async {
     print(list.first);
     print(list.first.name);
     print(list.first.type);
-
-  } on NetworkRequestException catch (e, _){
+  } on NetworkRequestException catch (e, _) {
     print(e.message);
-  } on FormatException catch (e, _){
+  } on FormatException catch (e, _) {
     print(e.message);
-  } on TypeError catch (e, _){
+  } on TypeError catch (e, _) {
     print(e.stackTrace);
-  } catch(_) {
+  } catch (_) {
     /// Do something here or just rethrow
     rethrow;
   }

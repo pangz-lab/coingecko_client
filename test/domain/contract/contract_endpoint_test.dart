@@ -14,40 +14,28 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getInfo method in', () {
-    var basePath = "/coins/ethereum/contract/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984";
+    var basePath =
+        "/coins/ethereum/contract/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984";
     group('ContractEndpoint test endpoint path creation', () {
-      var sut = ContractEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: ContractInfoMockData.validResponseBody
-        )
-      );
+      var sut = ContractEndpoint(HttpRequestServiceMock(
+          statusCode: 200, body: ContractInfoMockData.validResponseBody));
 
       test('with parameters', () async {
         await sut.getInfo(
-          id: 'ethereum',
-          contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'
-        );
-        expect(
-          sut.endpointPath,
-          "$apiVersionPath$basePath"
-        );
+            id: 'ethereum',
+            contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984');
+        expect(sut.endpointPath, "$apiVersionPath$basePath");
       });
     });
 
     group('ContractEndpoint test endpoint response', () {
       test('with data in getting the correct response type', () async {
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ContractInfoMockData.validResponseBody
-          )
-        );
+        sut = ContractEndpoint(HttpRequestServiceMock(
+            statusCode: 200, body: ContractInfoMockData.validResponseBody));
 
         var result = await sut!.getInfo(
-          id: 'ethereum',
-          contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'
-        );
+            id: 'ethereum',
+            contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984');
 
         expect(result.id, 'uniswap');
         expect(result.symbol, 'uni');
@@ -55,7 +43,8 @@ void main() {
         expect(result.assetPlatformId, "ethereum");
         expect(result.platforms, {
           "ethereum": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
-          "near-protocol": "1f9840a85d5af5bf1d1762f925bdaddc4201f984.factory.bridge.near",
+          "near-protocol":
+              "1f9840a85d5af5bf1d1762f925bdaddc4201f984.factory.bridge.near",
           "xdai": "0x4537e328bf7e4efa29d05caea260d7fe26af9d74",
           "binance-smart-chain": "0xbf5140a22578168fd562dccf235e5d43a02ce9b1",
           "polygon-pos": "0xb33eaad8d922b1083446dc23f610c2567fb5180f",
@@ -64,7 +53,8 @@ void main() {
           "harmony-shard-0": "0x90d81749da8867962c760414c1c25ec926e889b6",
           "optimistic-ethereum": "0x6fd9d7ad17242c41f7131d257212c54a0e816691",
           "arbitrum-one": "0xfa7f8980b0f1e64a2062791cc3b0871572f1f7f0",
-          "sora": "0x009be848df92a400da2f217256c88d1a9b1a0304f9b3e90991a67418e1d3b08c",
+          "sora":
+              "0x009be848df92a400da2f217256c88d1a9b1a0304f9b3e90991a67418e1d3b08c",
           "energi": "0x665b3a802979ec24e076c80025bff33c18eb6007"
         });
         expect(result.detailPlatforms, {
@@ -74,7 +64,8 @@ void main() {
           },
           "near-protocol": {
             "decimal_place": 18,
-            "contract_address": "1f9840a85d5af5bf1d1762f925bdaddc4201f984.factory.bridge.near"
+            "contract_address":
+                "1f9840a85d5af5bf1d1762f925bdaddc4201f984.factory.bridge.near"
           },
           "xdai": {
             "decimal_place": 18,
@@ -99,13 +90,17 @@ void main() {
         expect(result.localization!['ko'], "비트코인");
         expect(result.localization!['ar'], "بيتكوين");
         expect(result.localization!['th'], "บิตคอยน์");
-        expect(result.description!['en'], "UNI is the governance token for Uniswap, an Automated Market Marker DEX on the Ethereum blockchain. The UNI token allows token holders to participate in the governance of the protocol. Key decisions such as usage of the treasury or future upgrades can be decided through a governance vote.");
-        
+        expect(result.description!['en'],
+            "UNI is the governance token for Uniswap, an Automated Market Marker DEX on the Ethereum blockchain. The UNI token allows token holders to participate in the governance of the protocol. Key decisions such as usage of the treasury or future upgrades can be decided through a governance vote.");
+
         expect(result.links!.homepage!.elementAt(0), "https://uniswap.org/");
-        expect(result.links!.blockchainSite!.elementAt(2), "https://blockscout.com/poa/xdai/tokens/0x4537e328Bf7e4eFA29D05CAeA260D7fE26af9D74/token-transfers");
+        expect(result.links!.blockchainSite!.elementAt(2),
+            "https://blockscout.com/poa/xdai/tokens/0x4537e328Bf7e4eFA29D05CAeA260D7fE26af9D74/token-transfers");
         expect(result.links!.officialForumUrl!.elementAt(1), "test");
-        expect(result.links!.chatUrl!.elementAt(0), "https://discord.gg/FCfyBSbCU5");
-        expect(result.links!.announcementUrl!.elementAt(1), "https://uniswap.org/blog/");
+        expect(result.links!.chatUrl!.elementAt(0),
+            "https://discord.gg/FCfyBSbCU5");
+        expect(result.links!.announcementUrl!.elementAt(1),
+            "https://uniswap.org/blog/");
         expect(result.links!.twitterScreenName, "Uniswap");
         expect(result.links!.facebookUsername, "Uniswap");
         expect(result.links!.bitcointalkThreadIdentifier, null);
@@ -113,13 +108,17 @@ void main() {
         expect(result.links!.subredditUrl, "https://www.reddit.com/r/Uniswap");
         expect(List<String>.from(result.links!.reposUrl!['github']!), []);
         expect(List<String>.from(result.links!.reposUrl!['bitbucket']!), []);
-        expect(result.image!.thumb, "https://assets.coingecko.com/coins/images/12504/thumb/uniswap-uni.png?1600306604");
-        expect(result.image!.small, "https://assets.coingecko.com/coins/images/12504/small/uniswap-uni.png?1600306604");
-        expect(result.image!.large, "https://assets.coingecko.com/coins/images/12504/large/uniswap-uni.png?1600306604");
-        
+        expect(result.image!.thumb,
+            "https://assets.coingecko.com/coins/images/12504/thumb/uniswap-uni.png?1600306604");
+        expect(result.image!.small,
+            "https://assets.coingecko.com/coins/images/12504/small/uniswap-uni.png?1600306604");
+        expect(result.image!.large,
+            "https://assets.coingecko.com/coins/images/12504/large/uniswap-uni.png?1600306604");
+
         expect(result.countryOrigin, "");
         expect(result.genesisDate, null);
-        expect(result.contractAddress,"0x1f9840a85d5af5bf1d1762f925bdaddc4201f984");
+        expect(result.contractAddress,
+            "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984");
         expect(result.sentimentVotesUpPercentage, 77.78);
         expect(result.sentimentVotesDownPercentage, 22.22);
         expect(result.watchlistPortfolioUsers, 206823);
@@ -137,10 +136,8 @@ void main() {
           "bch": 0.04482259,
           "bdt": 567.33
         });
-        expect(result.marketData!.totalValueLocked, {
-          "btc": 236155,
-          "usd": 4534644444
-        });
+        expect(result.marketData!.totalValueLocked,
+            {"btc": 236155, "usd": 4534644444});
         expect(result.marketData!.mcapToTvlRatio, 0.88);
         expect(result.marketData!.fdvToTvlRatio, 1.17);
         expect(result.marketData!.roi, null);
@@ -169,12 +166,8 @@ void main() {
           "bhd": "2021-05-03T05:25:04.822Z",
           "bmd": "2021-05-03T05:25:04.822Z"
         });
-        expect(result.marketData!.atl, {
-          "aed": 3.78,
-          "ars": 77.44,
-          "aud": 1.41,
-          "bch": 0.00433785
-        });
+        expect(result.marketData!.atl,
+            {"aed": 3.78, "ars": 77.44, "aud": 1.41, "bch": 0.00433785});
         expect(result.marketData!.atlChangePercentage, {
           "aed": 415.29126,
           "ars": 1447.27602,
@@ -194,11 +187,8 @@ void main() {
           "bch": 33823211
         });
         expect(result.marketData!.marketCapRank, 20);
-        expect(result.marketData!.fullyDilutedValuation, {
-          "aed": 19521699317,
-          "ars": 1199629181193,
-          "aud": 7892424649
-        });
+        expect(result.marketData!.fullyDilutedValuation,
+            {"aed": 19521699317, "ars": 1199629181193, "aud": 7892424649});
         expect(result.marketData!.totalVolume, {
           "aed": 222865338,
           "ars": 13696302123,
@@ -312,7 +302,8 @@ void main() {
         expect(result.marketData!.maxSupply, 1000000000);
         expect(result.marketData!.circulatingSupply, 753766667);
         expect(result.marketData!.sparkline7d, null);
-        expect(result.marketData!.lastUpdated, DateTime.parse("2023-05-05T04:56:28.825Z"));
+        expect(result.marketData!.lastUpdated,
+            DateTime.parse("2023-05-05T04:56:28.825Z"));
         expect(result.communitydata, {
           "facebook_likes": null,
           "twitter_followers": 1020856,
@@ -338,10 +329,8 @@ void main() {
           "last_4_weeks_commit_activity_series": []
         });
 
-        expect(result.publicInterestStats, {
-          "alexa_rank": 3614,
-          "bing_matches": null
-        });
+        expect(result.publicInterestStats,
+            {"alexa_rank": 3614, "bing_matches": null});
         expect(result.statusUpdates, []);
         expect(result.lastUpdated!, DateTime.parse("2023-05-05T04:56:28.825Z"));
         expect(result.tickers!.length, 2);
@@ -354,22 +343,19 @@ void main() {
         });
         expect(result.tickers!.elementAt(0).last, 5.3208);
         expect(result.tickers!.elementAt(0).volume, 71789.465284104);
-        expect(result.tickers!.elementAt(0).convertedLast, {
-          "btc": 0.00018183,
-          "eth": 0.0028022,
-          "usd": 5.32
-        });
-        expect(result.tickers!.elementAt(0).convertedVolume, {
-          "btc": 12.989212,
-          "eth": 200.173,
-          "usd": 380256
-        });
+        expect(result.tickers!.elementAt(0).convertedLast,
+            {"btc": 0.00018183, "eth": 0.0028022, "usd": 5.32});
+        expect(result.tickers!.elementAt(0).convertedVolume,
+            {"btc": 12.989212, "eth": 200.173, "usd": 380256});
         var firstTicker = result.tickers!.elementAt(0);
         expect(firstTicker.trustScore, "green");
         expect(firstTicker.bidAskSpreadPercentage, 0.063911);
-        expect(firstTicker.timestamp, DateTime.parse("2023-05-05T04:52:02+00:00"));
-        expect(firstTicker.lastTradedAt, DateTime.parse("2023-05-05T04:52:02+00:00"));
-        expect(firstTicker.lastFetchAt, DateTime.parse("2023-05-05T04:52:02+00:00"));
+        expect(
+            firstTicker.timestamp, DateTime.parse("2023-05-05T04:52:02+00:00"));
+        expect(firstTicker.lastTradedAt,
+            DateTime.parse("2023-05-05T04:52:02+00:00"));
+        expect(firstTicker.lastFetchAt,
+            DateTime.parse("2023-05-05T04:52:02+00:00"));
         expect(firstTicker.isAnomaly, false);
         expect(firstTicker.isStale, false);
         expect(firstTicker.tradeUrl, "https://gate.io/trade/UNI_USDT");
@@ -379,17 +365,13 @@ void main() {
       });
 
       test('should still return a result for incomplete data format', () async {
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ContractInfoMockData.responseBodyWithIncompleteKeys
-          )
-        );
+        sut = ContractEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: ContractInfoMockData.responseBodyWithIncompleteKeys));
 
         var result = await sut!.getInfo(
-          id: 'ethereum',
-          contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'
-        );
+            id: 'ethereum',
+            contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984');
 
         expect(result.id, 'uniswap');
         expect(result.symbol, 'uni');
@@ -397,7 +379,8 @@ void main() {
         expect(result.assetPlatformId, "ethereum");
         expect(result.platforms, {
           "ethereum": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
-          "near-protocol": "1f9840a85d5af5bf1d1762f925bdaddc4201f984.factory.bridge.near",
+          "near-protocol":
+              "1f9840a85d5af5bf1d1762f925bdaddc4201f984.factory.bridge.near",
           "xdai": "0x4537e328bf7e4efa29d05caea260d7fe26af9d74",
           "binance-smart-chain": "0xbf5140a22578168fd562dccf235e5d43a02ce9b1",
           "polygon-pos": "0xb33eaad8d922b1083446dc23f610c2567fb5180f",
@@ -406,7 +389,8 @@ void main() {
           "harmony-shard-0": "0x90d81749da8867962c760414c1c25ec926e889b6",
           "optimistic-ethereum": "0x6fd9d7ad17242c41f7131d257212c54a0e816691",
           "arbitrum-one": "0xfa7f8980b0f1e64a2062791cc3b0871572f1f7f0",
-          "sora": "0x009be848df92a400da2f217256c88d1a9b1a0304f9b3e90991a67418e1d3b08c",
+          "sora":
+              "0x009be848df92a400da2f217256c88d1a9b1a0304f9b3e90991a67418e1d3b08c",
           "energi": "0x665b3a802979ec24e076c80025bff33c18eb6007"
         });
         expect(result.detailPlatforms, {
@@ -416,7 +400,8 @@ void main() {
           },
           "near-protocol": {
             "decimal_place": 18,
-            "contract_address": "1f9840a85d5af5bf1d1762f925bdaddc4201f984.factory.bridge.near"
+            "contract_address":
+                "1f9840a85d5af5bf1d1762f925bdaddc4201f984.factory.bridge.near"
           },
           "xdai": {
             "decimal_place": 18,
@@ -438,97 +423,78 @@ void main() {
 
     group('ContractEndpoint test for error handling', () {
       test('should throw an exception for failed request', () async {
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 500,
-            body: ContractInfoMockData.validResponseBody
-          )
-        );
-        await expectLater(sut!.getInfo(
-          id: 'ethereum',
-          contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'
-        ), throwsA(isA<NetworkRequestException>()));
+        sut = ContractEndpoint(HttpRequestServiceMock(
+            statusCode: 500, body: ContractInfoMockData.validResponseBody));
+        await expectLater(
+            sut!.getInfo(
+                id: 'ethereum',
+                contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'),
+            throwsA(isA<NetworkRequestException>()));
       });
 
-      test('should return a FormatException when result is error or when parsing failed', () async {
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: '''[{
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
+        sut =
+            ContractEndpoint(HttpRequestServiceMock(statusCode: 200, body: '''[{
     "error": "coin not found"
-  }]'''
-          )
-        );
-        await expectLater(sut!.getInfo(
-          id: 'ethereum',
-          contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'
-        ),throwsA(isA<DataParsingException>()));
-
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ContractInfoMockData.responseBodyWithInvalidFormat
-          )
-        );
-        await expectLater(sut!.getInfo(
-          id: 'ethereum',
-          contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'
-        ), throwsA(isA<DataParsingException>()));
-
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ""
-          )
-        );
+  }]'''));
         await expectLater(
-          sut!.getInfo(
-            id: 'ethereum',
-            contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'
-          ),
-          throwsA(isA<DataParsingException>())
-        );
+            sut!.getInfo(
+                id: 'ethereum',
+                contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'),
+            throwsA(isA<DataParsingException>()));
+
+        sut = ContractEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: ContractInfoMockData.responseBodyWithInvalidFormat));
+        await expectLater(
+            sut!.getInfo(
+                id: 'ethereum',
+                contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'),
+            throwsA(isA<DataParsingException>()));
+
+        sut =
+            ContractEndpoint(HttpRequestServiceMock(statusCode: 200, body: ""));
+        await expectLater(
+            sut!.getInfo(
+                id: 'ethereum',
+                contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'),
+            throwsA(isA<DataParsingException>()));
       });
     });
   });
 
   group('getMarketHistory method in', () {
-    var basePath = "/coins/ethereum/contract/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984/market_chart/";
+    var basePath =
+        "/coins/ethereum/contract/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984/market_chart/";
     group('ContractEndpoint test endpoint path creation', () {
-      var sut = ContractEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: ContractMarketHistoryMockData.validResponseBody
-        )
-      );
+      var sut = ContractEndpoint(HttpRequestServiceMock(
+          statusCode: 200,
+          body: ContractMarketHistoryMockData.validResponseBody));
 
       test('with all parameters', () async {
         await sut.getMarketHistory(
           id: 'ethereum',
           contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
           vsCurrency: Currencies.jpy,
-          days : DataRange.in2Weeks,
+          days: DataRange.in2Weeks,
         );
-        expect(
-          sut.endpointPath,
-          "$apiVersionPath$basePath?vs_currency=jpy&days=14"
-        );
+        expect(sut.endpointPath,
+            "$apiVersionPath$basePath?vs_currency=jpy&days=14");
       });
     });
 
     group('ContractEndpoint test endpoint response', () {
       test('with data in getting the correct response type', () async {
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ContractMarketHistoryMockData.validResponseBody
-          )
-        );
+        sut = ContractEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: ContractMarketHistoryMockData.validResponseBody));
         var result = await sut!.getMarketHistory(
           id: 'ethereum',
           contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
           vsCurrency: Currencies.jpy,
-          days : DataRange.in2Weeks,
+          days: DataRange.in2Weeks,
         );
         var prices = result.prices;
         var marketCaps = result.marketCaps;
@@ -536,175 +502,150 @@ void main() {
         expect(prices!.length, 2);
         expect(marketCaps!.length, 2);
         expect(totalVolumes!.length, 2);
-        expect(result.prices!.elementAt(0).compareTo(
-        HistoricalData.fromJson([
-          1680134400000,
-          3764825.6157043367
-        ])), 0);
-        expect(result.prices!.elementAt(1).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          3792357.969195695
-        ])), 0);
-        expect(result.marketCaps!.elementAt(0).compareTo(
-        HistoricalData.fromJson([
-          1680134400000,
-          72766031840740.89
-        ])), 0);
-        expect(result.marketCaps!.elementAt(1).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          73372376001887.88
-        ])), 0);
-        expect(result.totalVolumes!.elementAt(0).compareTo(
-        HistoricalData.fromJson([
-          1680134400000,
-          2797280292466.4453
-        ])), 0);
-        expect(result.totalVolumes!.elementAt(1).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          2785972479143.1724
-        ])), 0);
+        expect(
+            result.prices!.elementAt(0).compareTo(
+                HistoricalData.fromJson([1680134400000, 3764825.6157043367])),
+            0);
+        expect(
+            result.prices!.elementAt(1).compareTo(
+                HistoricalData.fromJson([1680175636000, 3792357.969195695])),
+            0);
+        expect(
+            result.marketCaps!.elementAt(0).compareTo(
+                HistoricalData.fromJson([1680134400000, 72766031840740.89])),
+            0);
+        expect(
+            result.marketCaps!.elementAt(1).compareTo(
+                HistoricalData.fromJson([1680175636000, 73372376001887.88])),
+            0);
+        expect(
+            result.totalVolumes!.elementAt(0).compareTo(
+                HistoricalData.fromJson([1680134400000, 2797280292466.4453])),
+            0);
+        expect(
+            result.totalVolumes!.elementAt(1).compareTo(
+                HistoricalData.fromJson([1680175636000, 2785972479143.1724])),
+            0);
       });
 
       test('should still return a result for incomplete data format', () async {
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ContractMarketHistoryMockData.responseBodyWithIncompleteKeys
-          )
-        );
+        sut = ContractEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body:
+                ContractMarketHistoryMockData.responseBodyWithIncompleteKeys));
         var result = await sut!.getMarketHistory(
           id: 'ethereum',
           contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
           vsCurrency: Currencies.jpy,
-          days : DataRange.in2Weeks,
+          days: DataRange.in2Weeks,
         );
 
-        expect(result.prices!.elementAt(0).compareTo(
-        HistoricalData.fromJson([
-          1680134400000,
-          3764825.6157043367
-        ])),0);
-        expect(result.prices!.elementAt(1).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          3792357.969195695
-        ])),0);
-        expect(result.prices!.elementAt(2).compareTo(
-        HistoricalData.fromJson([
-          null,
-          3792357.969195695
-        ])),0);
-        expect(result.marketCaps!.elementAt(0).compareTo(
-        HistoricalData.fromJson([
-          1680134400000,
-          72766031840740.89
-          ])),0);
-        expect(result.marketCaps!.elementAt(1).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          73372376001887.88
-        ])),0);
-        expect(result.marketCaps!.elementAt(2).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          null
-        ])),0);
-        expect(result.totalVolumes!.elementAt(0).compareTo(
-        HistoricalData.fromJson([
-          1680134400000,
-          2797280292466.4453
-        ])),0);
-        expect(result.totalVolumes!.elementAt(1).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          2785972479143.1724
-        ])),0);
-        expect(result.totalVolumes!.elementAt(2).compareTo(
-        HistoricalData.fromJson([
-          null,
-          null
-        ])),0);
-        
+        expect(
+            result.prices!.elementAt(0).compareTo(
+                HistoricalData.fromJson([1680134400000, 3764825.6157043367])),
+            0);
+        expect(
+            result.prices!.elementAt(1).compareTo(
+                HistoricalData.fromJson([1680175636000, 3792357.969195695])),
+            0);
+        expect(
+            result.prices!
+                .elementAt(2)
+                .compareTo(HistoricalData.fromJson([null, 3792357.969195695])),
+            0);
+        expect(
+            result.marketCaps!.elementAt(0).compareTo(
+                HistoricalData.fromJson([1680134400000, 72766031840740.89])),
+            0);
+        expect(
+            result.marketCaps!.elementAt(1).compareTo(
+                HistoricalData.fromJson([1680175636000, 73372376001887.88])),
+            0);
+        expect(
+            result.marketCaps!
+                .elementAt(2)
+                .compareTo(HistoricalData.fromJson([1680175636000, null])),
+            0);
+        expect(
+            result.totalVolumes!.elementAt(0).compareTo(
+                HistoricalData.fromJson([1680134400000, 2797280292466.4453])),
+            0);
+        expect(
+            result.totalVolumes!.elementAt(1).compareTo(
+                HistoricalData.fromJson([1680175636000, 2785972479143.1724])),
+            0);
+        expect(
+            result.totalVolumes!
+                .elementAt(2)
+                .compareTo(HistoricalData.fromJson([null, null])),
+            0);
       });
     });
 
     group('ContractEndpoint test for error handling', () {
       test('should throw an exception for failed request', () async {
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 500,
-            body: ContractMarketHistoryMockData.validResponseBody
-          )
-        );
+        sut = ContractEndpoint(HttpRequestServiceMock(
+            statusCode: 500,
+            body: ContractMarketHistoryMockData.validResponseBody));
         await expectLater(
-          sut!.getMarketHistory(
-            id: 'ethereum',
-            contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
-            vsCurrency: Currencies.jpy,
-            days : DataRange.in2Weeks,
-          ), throwsA(isA<NetworkRequestException>()));
+            sut!.getMarketHistory(
+              id: 'ethereum',
+              contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+              vsCurrency: Currencies.jpy,
+              days: DataRange.in2Weeks,
+            ),
+            throwsA(isA<NetworkRequestException>()));
       });
 
-      test('should return a FormatException when result is error or when parsing failed', () async {
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: '''[{
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
+        sut =
+            ContractEndpoint(HttpRequestServiceMock(statusCode: 200, body: '''[{
     "error": "coin not found"
-  }]'''
-          )
-        );
+  }]'''));
         await expectLater(
-          sut!.getMarketHistory(
-            id: 'ethereum',
-            contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
-            vsCurrency: Currencies.jpy,
-            days : DataRange.in2Weeks,
-          ), throwsA(isA<DataParsingException>()));
+            sut!.getMarketHistory(
+              id: 'ethereum',
+              contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+              vsCurrency: Currencies.jpy,
+              days: DataRange.in2Weeks,
+            ),
+            throwsA(isA<DataParsingException>()));
 
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ContractMarketHistoryMockData.responseBodyWithInvalidFormat
-          )
-        );
+        sut = ContractEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: ContractMarketHistoryMockData.responseBodyWithInvalidFormat));
         await expectLater(
-          sut!.getMarketHistory(
-            id: 'ethereum',
-            contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
-            vsCurrency: Currencies.jpy,
-            days : DataRange.in2Weeks,
-          ), throwsA(isA<DataParsingException>()));
+            sut!.getMarketHistory(
+              id: 'ethereum',
+              contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+              vsCurrency: Currencies.jpy,
+              days: DataRange.in2Weeks,
+            ),
+            throwsA(isA<DataParsingException>()));
 
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ""
-          )
-        );
+        sut =
+            ContractEndpoint(HttpRequestServiceMock(statusCode: 200, body: ""));
         await expectLater(
-          sut!.getMarketHistory(
-            id: 'ethereum',
-            contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
-            vsCurrency: Currencies.jpy,
-            days : DataRange.in2Weeks,
-          ), throwsA(isA<DataParsingException>()));
+            sut!.getMarketHistory(
+              id: 'ethereum',
+              contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+              vsCurrency: Currencies.jpy,
+              days: DataRange.in2Weeks,
+            ),
+            throwsA(isA<DataParsingException>()));
       });
     });
   });
 
   group('getMarketHistoryWithDateRange method in', () {
-    var basePath = "/coins/ethereum/contract/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984/market_chart/range";
+    var basePath =
+        "/coins/ethereum/contract/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984/market_chart/range";
     group('ContractEndpoint test endpoint path creation', () {
-      var sut = ContractEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: ContractMarketHistoryMockData.validResponseBody
-        )
-      );
+      var sut = ContractEndpoint(HttpRequestServiceMock(
+          statusCode: 200,
+          body: ContractMarketHistoryMockData.validResponseBody));
 
       test('with all parameters', () async {
         await sut.getMarketHistoryWithDateRange(
@@ -714,21 +655,16 @@ void main() {
           from: DateTime.fromMillisecondsSinceEpoch(1683175446, isUtc: true),
           to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
         );
-        expect(
-          sut.endpointPath,
-          "$apiVersionPath$basePath?vs_currency=php&from=1683175446&to=1683262856"
-        );
+        expect(sut.endpointPath,
+            "$apiVersionPath$basePath?vs_currency=php&from=1683175446&to=1683262856");
       });
     });
 
     group('ContractEndpoint test endpoint response', () {
       test('with data in getting the correct response type', () async {
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ContractMarketHistoryMockData.validResponseBody
-          )
-        );
+        sut = ContractEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: ContractMarketHistoryMockData.validResponseBody));
         var result = await sut!.getMarketHistoryWithDateRange(
           id: 'ethereum',
           contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
@@ -742,45 +678,37 @@ void main() {
         expect(prices!.length, 2);
         expect(marketCaps!.length, 2);
         expect(totalVolumes!.length, 2);
-        expect(result.prices!.elementAt(0).compareTo(
-        HistoricalData.fromJson([
-          1680134400000,
-          3764825.6157043367
-        ])), 0);
-        expect(result.prices!.elementAt(1).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          3792357.969195695
-        ])), 0);
-        expect(result.marketCaps!.elementAt(0).compareTo(
-        HistoricalData.fromJson([
-          1680134400000,
-          72766031840740.89
-        ])), 0);
-        expect(result.marketCaps!.elementAt(1).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          73372376001887.88
-        ])), 0);
-        expect(result.totalVolumes!.elementAt(0).compareTo(
-        HistoricalData.fromJson([
-          1680134400000,
-          2797280292466.4453
-        ])), 0);
-        expect(result.totalVolumes!.elementAt(1).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          2785972479143.1724
-        ])), 0);
+        expect(
+            result.prices!.elementAt(0).compareTo(
+                HistoricalData.fromJson([1680134400000, 3764825.6157043367])),
+            0);
+        expect(
+            result.prices!.elementAt(1).compareTo(
+                HistoricalData.fromJson([1680175636000, 3792357.969195695])),
+            0);
+        expect(
+            result.marketCaps!.elementAt(0).compareTo(
+                HistoricalData.fromJson([1680134400000, 72766031840740.89])),
+            0);
+        expect(
+            result.marketCaps!.elementAt(1).compareTo(
+                HistoricalData.fromJson([1680175636000, 73372376001887.88])),
+            0);
+        expect(
+            result.totalVolumes!.elementAt(0).compareTo(
+                HistoricalData.fromJson([1680134400000, 2797280292466.4453])),
+            0);
+        expect(
+            result.totalVolumes!.elementAt(1).compareTo(
+                HistoricalData.fromJson([1680175636000, 2785972479143.1724])),
+            0);
       });
 
       test('should still return a result for incomplete data format', () async {
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ContractMarketHistoryMockData.responseBodyWithIncompleteKeys
-          )
-        );
+        sut = ContractEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body:
+                ContractMarketHistoryMockData.responseBodyWithIncompleteKeys));
         var result = await sut!.getMarketHistoryWithDateRange(
           id: 'ethereum',
           contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
@@ -789,122 +717,110 @@ void main() {
           to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
         );
 
-        expect(result.prices!.elementAt(0).compareTo(
-        HistoricalData.fromJson([
-          1680134400000,
-          3764825.6157043367
-        ])),0);
-        expect(result.prices!.elementAt(1).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          3792357.969195695
-        ])),0);
-        expect(result.prices!.elementAt(2).compareTo(
-        HistoricalData.fromJson([
-          null,
-          3792357.969195695
-        ])),0);
-        expect(result.marketCaps!.elementAt(0).compareTo(
-        HistoricalData.fromJson([
-          1680134400000,
-          72766031840740.89
-          ])),0);
-        expect(result.marketCaps!.elementAt(1).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          73372376001887.88
-        ])),0);
-        expect(result.marketCaps!.elementAt(2).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          null
-        ])),0);
-        expect(result.totalVolumes!.elementAt(0).compareTo(
-        HistoricalData.fromJson([
-          1680134400000,
-          2797280292466.4453
-        ])),0);
-        expect(result.totalVolumes!.elementAt(1).compareTo(
-        HistoricalData.fromJson([
-          1680175636000,
-          2785972479143.1724
-        ])),0);
-        expect(result.totalVolumes!.elementAt(2).compareTo(
-        HistoricalData.fromJson([
-          null,
-          null
-        ])),0);
-        
+        expect(
+            result.prices!.elementAt(0).compareTo(
+                HistoricalData.fromJson([1680134400000, 3764825.6157043367])),
+            0);
+        expect(
+            result.prices!.elementAt(1).compareTo(
+                HistoricalData.fromJson([1680175636000, 3792357.969195695])),
+            0);
+        expect(
+            result.prices!
+                .elementAt(2)
+                .compareTo(HistoricalData.fromJson([null, 3792357.969195695])),
+            0);
+        expect(
+            result.marketCaps!.elementAt(0).compareTo(
+                HistoricalData.fromJson([1680134400000, 72766031840740.89])),
+            0);
+        expect(
+            result.marketCaps!.elementAt(1).compareTo(
+                HistoricalData.fromJson([1680175636000, 73372376001887.88])),
+            0);
+        expect(
+            result.marketCaps!
+                .elementAt(2)
+                .compareTo(HistoricalData.fromJson([1680175636000, null])),
+            0);
+        expect(
+            result.totalVolumes!.elementAt(0).compareTo(
+                HistoricalData.fromJson([1680134400000, 2797280292466.4453])),
+            0);
+        expect(
+            result.totalVolumes!.elementAt(1).compareTo(
+                HistoricalData.fromJson([1680175636000, 2785972479143.1724])),
+            0);
+        expect(
+            result.totalVolumes!
+                .elementAt(2)
+                .compareTo(HistoricalData.fromJson([null, null])),
+            0);
       });
     });
 
     group('ContractEndpoint test for error handling', () {
       test('should throw an exception for failed request', () async {
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 500,
-            body: ContractMarketHistoryMockData.validResponseBody
-          )
-        );
+        sut = ContractEndpoint(HttpRequestServiceMock(
+            statusCode: 500,
+            body: ContractMarketHistoryMockData.validResponseBody));
         await expectLater(
-          sut!.getMarketHistoryWithDateRange(
-            id: 'ethereum',
-            contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
-            vsCurrency: Currencies.php,
-            from: DateTime.fromMillisecondsSinceEpoch(1683175446, isUtc: true),
-            to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
-          ), throwsA(isA<NetworkRequestException>()));
+            sut!.getMarketHistoryWithDateRange(
+              id: 'ethereum',
+              contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+              vsCurrency: Currencies.php,
+              from:
+                  DateTime.fromMillisecondsSinceEpoch(1683175446, isUtc: true),
+              to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
+            ),
+            throwsA(isA<NetworkRequestException>()));
       });
 
-      test('should return a FormatException when result is error or when parsing failed', () async {
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: '''[{
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
+        sut =
+            ContractEndpoint(HttpRequestServiceMock(statusCode: 200, body: '''[{
     "error": "coin not found"
-  }]'''
-          )
-        );
+  }]'''));
         await expectLater(
-          sut!.getMarketHistoryWithDateRange(
-            id: 'ethereum',
-            contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
-            vsCurrency: Currencies.php,
-            from: DateTime.fromMillisecondsSinceEpoch(1683175446, isUtc: true),
-            to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
-          ), throwsA(isA<DataParsingException>()));
+            sut!.getMarketHistoryWithDateRange(
+              id: 'ethereum',
+              contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+              vsCurrency: Currencies.php,
+              from:
+                  DateTime.fromMillisecondsSinceEpoch(1683175446, isUtc: true),
+              to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
+            ),
+            throwsA(isA<DataParsingException>()));
 
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ContractMarketHistoryMockData.responseBodyWithInvalidFormat
-          )
-        );
+        sut = ContractEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: ContractMarketHistoryMockData.responseBodyWithInvalidFormat));
         await expectLater(
-          sut!.getMarketHistoryWithDateRange(
-            id: 'ethereum',
-            contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
-            vsCurrency: Currencies.php,
-            from: DateTime.fromMillisecondsSinceEpoch(1683175446, isUtc: true),
-            to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
-          ), throwsA(isA<DataParsingException>()));
+            sut!.getMarketHistoryWithDateRange(
+              id: 'ethereum',
+              contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+              vsCurrency: Currencies.php,
+              from:
+                  DateTime.fromMillisecondsSinceEpoch(1683175446, isUtc: true),
+              to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
+            ),
+            throwsA(isA<DataParsingException>()));
 
-        sut = ContractEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ""
-          )
-        );
+        sut =
+            ContractEndpoint(HttpRequestServiceMock(statusCode: 200, body: ""));
         await expectLater(
-          sut!.getMarketHistoryWithDateRange(
-            id: 'ethereum',
-            contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
-            vsCurrency: Currencies.php,
-            from: DateTime.fromMillisecondsSinceEpoch(1683175446, isUtc: true),
-            to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
-          ), throwsA(isA<DataParsingException>()));
+            sut!.getMarketHistoryWithDateRange(
+              id: 'ethereum',
+              contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+              vsCurrency: Currencies.php,
+              from:
+                  DateTime.fromMillisecondsSinceEpoch(1683175446, isUtc: true),
+              to: DateTime.fromMillisecondsSinceEpoch(1683262856, isUtc: true),
+            ),
+            throwsA(isA<DataParsingException>()));
       });
     });
   });
-  
 }

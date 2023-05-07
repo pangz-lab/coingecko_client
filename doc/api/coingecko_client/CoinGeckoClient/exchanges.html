@@ -69,11 +69,42 @@
 </section>
 
 
+<section class="desc markdown">
+  <ul>
+<li>
+<p>List all exchanges<br></p>
+</li>
+<li>
+<p>Use this to obtain all the markets' id in order to make API calls<br></p>
+</li>
+<li>
+<p>Get exchange volume in BTC and tickers<br>
+<b>IMPORTANT:</b><br>
+Ticker object is limited to 100 items, to get more tickers, use <code>/exchanges/{id}/tickers</code><br>
+Ticker is_stale is true when ticker that has not been updated/unchanged from the exchange for a while.<br>
+Ticker is_anomaly is true if ticker's price is outliered by our system.<br>
+You are responsible for managing how you want to display these information<br>
+(e.g. footnote, different background, change opacity, hide)<br><br></p>
+</li>
+<li>
+<p>Get exchange tickers<br>
+<b>IMPORTANT:</b><br>
+Ticker is_stale is true when ticker that has not been updated/unchanged from the exchange for a while.<br>
+Ticker is_anomaly is true if ticker's price is outliered by our system.<br>
+You are responsible for managing how you want to display these information<br>
+(e.g. footnote, different background, change opacity, hide)<br></p>
+</li>
+<li>
+<p>Get volume_chart data (in BTC) for a given exchange<br></p>
+</li>
+</ul>
+</section>
 
 
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">ExchangesEndpoint get exchanges =&gt; ExchangesEndpoint(_httpService, apiKey: _apiKey);</code></pre>
+  <pre class="language-dart"><code class="language-dart">ExchangesEndpoint get exchanges =&gt;
+    ExchangesEndpoint(_httpService, apiKey: _apiKey);</code></pre>
 </section>
 
 </section>
@@ -146,7 +177,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

@@ -1,3 +1,6 @@
+///
+/// Use to specify data for a specific date ranges.
+///
 enum DataRange {
   in1Day('1'),
   in1Week('7'),
@@ -7,6 +10,7 @@ enum DataRange {
   in6Month('180'),
   in1Year('365'),
   max('max');
+
   const DataRange(this.value);
   final String value;
 }

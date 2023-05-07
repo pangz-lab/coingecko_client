@@ -15,55 +15,44 @@ void main() {
   group('getSimpleCoinPrice method in', () {
     var basePath = "/simple/price";
     group('SimpleEndpoint test endpoint path creation', () {
-      var sut = SimpleEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: SimpleCoinPriceMockData.validResponseBody
-        )
-      );
+      var sut = SimpleEndpoint(HttpRequestServiceMock(
+          statusCode: 200, body: SimpleCoinPriceMockData.validResponseBody));
 
       test('with required parameters', () async {
         await sut.getCoinPrice(
           ids: ['bitcoin'],
           vsCurrencies: [Currencies.jpy],
         );
-        expect(sut.endpointPath, "$apiVersionPath$basePath?ids=bitcoin&vs_currencies=jpy");
+        expect(sut.endpointPath,
+            "$apiVersionPath$basePath?ids=bitcoin&vs_currencies=jpy");
       });
 
       test('with all parameters', () async {
         await sut.getCoinPrice(
-          ids: ['bitcoin', 'ethereum', 'verus-coin'],
-          vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
-          includeMarketCap: true,
-          include24hrVol: true,
-          include24hrChange: true,
-          includeLastUpdatedAt: true,
-          precision: 18
-        );
-        expect(
-          sut.endpointPath,
-          "$apiVersionPath$basePath?ids=bitcoin,ethereum,verus-coin&vs_currencies=jpy,usd,php&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true&precision=18"
-        );
+            ids: ['bitcoin', 'ethereum', 'verus-coin'],
+            vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
+            includeMarketCap: true,
+            include24hrVol: true,
+            include24hrChange: true,
+            includeLastUpdatedAt: true,
+            precision: 18);
+        expect(sut.endpointPath,
+            "$apiVersionPath$basePath?ids=bitcoin,ethereum,verus-coin&vs_currencies=jpy,usd,php&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true&precision=18");
       });
     });
 
     group('SimpleEndpoint test endpoint response', () {
       test('with data in getting the correct response type', () async {
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: SimpleCoinPriceMockData.validResponseBody
-          )
-        );
+        sut = SimpleEndpoint(HttpRequestServiceMock(
+            statusCode: 200, body: SimpleCoinPriceMockData.validResponseBody));
         var result = await sut!.getCoinPrice(
-          ids: ['bitcoin', 'ethereum', 'verus-coin'],
-          vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
-          includeMarketCap: true,
-          include24hrVol: true,
-          include24hrChange: true,
-          includeLastUpdatedAt: true,
-          precision: 18
-        );
+            ids: ['bitcoin', 'ethereum', 'verus-coin'],
+            vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
+            includeMarketCap: true,
+            include24hrVol: true,
+            include24hrChange: true,
+            includeLastUpdatedAt: true,
+            precision: 18);
 
         var firstItem = result["bitcoin"];
         var secondItem = result["ethereum"];
@@ -86,21 +75,17 @@ void main() {
       });
 
       test('should still return a result for incomplete data format', () async {
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: SimpleCoinPriceMockData.responseBodyWithIncompleteKeys
-          )
-        );
+        sut = SimpleEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: SimpleCoinPriceMockData.responseBodyWithIncompleteKeys));
         var result = await sut!.getCoinPrice(
-          ids: ['bitcoin', 'ethereum', 'verus-coin'],
-          vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
-          includeMarketCap: true,
-          include24hrVol: true,
-          include24hrChange: true,
-          includeLastUpdatedAt: true,
-          precision: 18
-        );
+            ids: ['bitcoin', 'ethereum', 'verus-coin'],
+            vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
+            includeMarketCap: true,
+            include24hrVol: true,
+            include24hrChange: true,
+            includeLastUpdatedAt: true,
+            precision: 18);
 
         var firstItem = result["bitcoin"];
         var secondItem = result["ethereum"];
@@ -125,53 +110,46 @@ void main() {
 
     group('SimpleEndpoint test for error handling', () {
       test('should throw an exception for failed request', () async {
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 500,
-            body: SimpleCoinPriceMockData.validResponseBody
-          )
-        );
-        await expectLater(sut!.getCoinPrice(
-          ids: ['bitcoin'],
-          vsCurrencies: [Currencies.jpy],
-        ), throwsA(isA<NetworkRequestException>()));
+        sut = SimpleEndpoint(HttpRequestServiceMock(
+            statusCode: 500, body: SimpleCoinPriceMockData.validResponseBody));
+        await expectLater(
+            sut!.getCoinPrice(
+              ids: ['bitcoin'],
+              vsCurrencies: [Currencies.jpy],
+            ),
+            throwsA(isA<NetworkRequestException>()));
       });
 
-      test('should return a FormatException when result is error or when parsing failed', () async {
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: '''[{
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
+        sut = SimpleEndpoint(HttpRequestServiceMock(statusCode: 200, body: '''[{
     "error": "coin not found"
-  }]'''
-          )
-        );
-        await expectLater(sut!.getCoinPrice(
-          ids: ['bitcoin'],
-          vsCurrencies: [Currencies.jpy],
-        ),throwsA(isA<DataParsingException>()));
+  }]'''));
+        await expectLater(
+            sut!.getCoinPrice(
+              ids: ['bitcoin'],
+              vsCurrencies: [Currencies.jpy],
+            ),
+            throwsA(isA<DataParsingException>()));
 
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: SimpleCoinPriceMockData.responseBodyWithInvalidFormat
-          )
-        );
-        await expectLater(sut!.getCoinPrice(
-          ids: ['bitcoin'],
-          vsCurrencies: [Currencies.jpy],
-        ), throwsA(isA<DataParsingException>()));
+        sut = SimpleEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: SimpleCoinPriceMockData.responseBodyWithInvalidFormat));
+        await expectLater(
+            sut!.getCoinPrice(
+              ids: ['bitcoin'],
+              vsCurrencies: [Currencies.jpy],
+            ),
+            throwsA(isA<DataParsingException>()));
 
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ""
-          )
-        );
-        await expectLater(sut!.getCoinPrice(
-          ids: ['bitcoin'],
-          vsCurrencies: [Currencies.jpy],
-        ), throwsA(isA<DataParsingException>()));
+        sut = SimpleEndpoint(HttpRequestServiceMock(statusCode: 200, body: ""));
+        await expectLater(
+            sut!.getCoinPrice(
+              ids: ['bitcoin'],
+              vsCurrencies: [Currencies.jpy],
+            ),
+            throwsA(isA<DataParsingException>()));
       });
     });
   });
@@ -179,58 +157,47 @@ void main() {
   group('getTokenPrice method in', () {
     var basePath = "/simple/token_price/avalanche";
     group('SimpleEndpoint test endpoint path creation', () {
-      var sut = SimpleEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: SimpleTokenPriceMockData.validResponseBody
-        )
-      );
+      var sut = SimpleEndpoint(HttpRequestServiceMock(
+          statusCode: 200, body: SimpleTokenPriceMockData.validResponseBody));
 
       test('with required parameters', () async {
         await sut.getTokenPrice(
           id: 'avalanche',
           contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ CryptoCurrencies.btc ],
+          vsCurrencies: [CryptoCurrencies.btc],
         );
-        expect(
-          sut.endpointPath,
-          "$apiVersionPath$basePath?contract_addresses=0x2098fABE9C82eb5280AF4841a5000f373E99a498&vs_currencies=btc"
-        );
+        expect(sut.endpointPath,
+            "$apiVersionPath$basePath?contract_addresses=0x2098fABE9C82eb5280AF4841a5000f373E99a498&vs_currencies=btc");
       });
 
       test('with all parameters', () async {
         await sut.getTokenPrice(
-          id: 'avalanche',
-          contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ CryptoCurrencies.btc ],
-          includeMarketCap: true,
-          include24hrVol: true,
-          include24hrChange: true,
-          includeLastUpdatedAt: true,
-          precision: 18
-        );
-        expect(sut.endpointPath, "$apiVersionPath$basePath?contract_addresses=0x2098fABE9C82eb5280AF4841a5000f373E99a498&vs_currencies=btc&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true&precision=18");
+            id: 'avalanche',
+            contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
+            vsCurrencies: [CryptoCurrencies.btc],
+            includeMarketCap: true,
+            include24hrVol: true,
+            include24hrChange: true,
+            includeLastUpdatedAt: true,
+            precision: 18);
+        expect(sut.endpointPath,
+            "$apiVersionPath$basePath?contract_addresses=0x2098fABE9C82eb5280AF4841a5000f373E99a498&vs_currencies=btc&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true&precision=18");
       });
     });
 
     group('SimpleEndpoint test endpoint response', () {
       test('with data in getting the correct response type', () async {
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: SimpleTokenPriceMockData.validResponseBody
-          )
-        );
+        sut = SimpleEndpoint(HttpRequestServiceMock(
+            statusCode: 200, body: SimpleTokenPriceMockData.validResponseBody));
         var result = await sut!.getTokenPrice(
-          id: 'avalanche',
-          contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ CryptoCurrencies.btc ],
-          includeMarketCap: true,
-          include24hrVol: true,
-          include24hrChange: true,
-          includeLastUpdatedAt: true,
-          precision: 18
-        );
+            id: 'avalanche',
+            contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
+            vsCurrencies: [CryptoCurrencies.btc],
+            includeMarketCap: true,
+            include24hrVol: true,
+            include24hrChange: true,
+            includeLastUpdatedAt: true,
+            precision: 18);
 
         var firstItem = result["0x2098fABE9C82eb5280AF4841a5000f373E99a498"];
         expect(result.length, 1);
@@ -241,22 +208,18 @@ void main() {
       });
 
       test('should still return a result for incomplete data format', () async {
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: SimpleTokenPriceMockData.responseBodyWithIncompleteKeys
-          )
-        );
+        sut = SimpleEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: SimpleTokenPriceMockData.responseBodyWithIncompleteKeys));
         var result = await sut!.getTokenPrice(
-          id: 'avalanche',
-          contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ CryptoCurrencies.btc ],
-          includeMarketCap: true,
-          include24hrVol: true,
-          include24hrChange: true,
-          includeLastUpdatedAt: true,
-          precision: 18
-        );
+            id: 'avalanche',
+            contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
+            vsCurrencies: [CryptoCurrencies.btc],
+            includeMarketCap: true,
+            include24hrVol: true,
+            include24hrChange: true,
+            includeLastUpdatedAt: true,
+            precision: 18);
 
         var firstItem = result["0x2098fABE9C82eb5280AF4841a5000f373E99a498"];
         expect(result.length, 1);
@@ -269,71 +232,61 @@ void main() {
 
     group('SimpleEndpoint test for error handling', () {
       test('should throw an exception for failed request', () async {
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 500,
-            body: SimpleTokenPriceMockData.validResponseBody
-          )
-        );
-        await expectLater(sut!.getTokenPrice(
-          id: 'avalanche',
-          contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ CryptoCurrencies.btc ]
-        ), throwsA(isA<NetworkRequestException>()));
+        sut = SimpleEndpoint(HttpRequestServiceMock(
+            statusCode: 500, body: SimpleTokenPriceMockData.validResponseBody));
+        await expectLater(
+            sut!.getTokenPrice(id: 'avalanche', contractAddresses: [
+              '0x2098fABE9C82eb5280AF4841a5000f373E99a498'
+            ], vsCurrencies: [
+              CryptoCurrencies.btc
+            ]),
+            throwsA(isA<NetworkRequestException>()));
       });
 
-      test('should return a FormatException when result is error or when parsing failed', () async {
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: '''[{
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
+        sut = SimpleEndpoint(HttpRequestServiceMock(statusCode: 200, body: '''[{
     "error": "coin not found"
-  }]'''
-          )
-        );
-        await expectLater(sut!.getTokenPrice(
-          id: 'avalanche',
-          contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ CryptoCurrencies.btc ]
-        ),throwsA(isA<DataParsingException>()));
+  }]'''));
+        await expectLater(
+            sut!.getTokenPrice(id: 'avalanche', contractAddresses: [
+              '0x2098fABE9C82eb5280AF4841a5000f373E99a498'
+            ], vsCurrencies: [
+              CryptoCurrencies.btc
+            ]),
+            throwsA(isA<DataParsingException>()));
 
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: SimpleTokenPriceMockData.responseBodyWithInvalidFormat
-          )
-        );
-        await expectLater(sut!.getTokenPrice(
-          id: 'avalanche',
-          contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ CryptoCurrencies.btc ]
-        ), throwsA(isA<DataParsingException>()));
+        sut = SimpleEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: SimpleTokenPriceMockData.responseBodyWithInvalidFormat));
+        await expectLater(
+            sut!.getTokenPrice(id: 'avalanche', contractAddresses: [
+              '0x2098fABE9C82eb5280AF4841a5000f373E99a498'
+            ], vsCurrencies: [
+              CryptoCurrencies.btc
+            ]),
+            throwsA(isA<DataParsingException>()));
 
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ""
-          )
-        );
-        await expectLater(sut!.getTokenPrice(
-          id: 'avalanche',
-          contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ CryptoCurrencies.btc ]
-        ), throwsA(isA<DataParsingException>()));
+        sut = SimpleEndpoint(HttpRequestServiceMock(statusCode: 200, body: ""));
+        await expectLater(
+            sut!.getTokenPrice(id: 'avalanche', contractAddresses: [
+              '0x2098fABE9C82eb5280AF4841a5000f373E99a498'
+            ], vsCurrencies: [
+              CryptoCurrencies.btc
+            ]),
+            throwsA(isA<DataParsingException>()));
       });
     });
   });
-  
+
   group('getSupportedVsCurrencies method in', () {
     var basePath = "/simple/supported_vs_currencies";
     group('SimpleEndpoint test endpoint path creation', () {
       test('with required parameters', () async {
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: SimpleSupportedVsCurrencyMockData.validResponseBody
-          )
-        );
+        sut = SimpleEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: SimpleSupportedVsCurrencyMockData.validResponseBody));
         await sut?.getSupportedVsCurrencies();
         expect(sut?.endpointPath, "$apiVersionPath$basePath");
       });
@@ -341,12 +294,9 @@ void main() {
 
     group('SimpleEndpoint test endpoint response', () {
       test('with data in getting the correct response type', () async {
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: SimpleSupportedVsCurrencyMockData.validResponseBody
-          )
-        );
+        sut = SimpleEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: SimpleSupportedVsCurrencyMockData.validResponseBody));
         var result = await sut!.getSupportedVsCurrencies();
         expect(result.length, 10);
         expect(result.first, 'vrsc');
@@ -356,41 +306,32 @@ void main() {
 
     group('SimpleEndpoint test for error handling', () {
       test('should throw an exception for failed request', () async {
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 500,
-            body: SimpleSupportedVsCurrencyMockData.validResponseBody
-          )
-        );
-        await expectLater(sut!.getSupportedVsCurrencies(), throwsA(isA<NetworkRequestException>()));
+        sut = SimpleEndpoint(HttpRequestServiceMock(
+            statusCode: 500,
+            body: SimpleSupportedVsCurrencyMockData.validResponseBody));
+        await expectLater(sut!.getSupportedVsCurrencies(),
+            throwsA(isA<NetworkRequestException>()));
       });
 
-      test('should return a FormatException when result is error or when parsing failed', () async {
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: '''{
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
+        sut = SimpleEndpoint(HttpRequestServiceMock(statusCode: 200, body: '''{
     "error": "coin not found"
-  }'''
-          )
-        );
-        await expectLater(sut!.getSupportedVsCurrencies(), throwsA(isA<DataParsingException>()));
+  }'''));
+        await expectLater(sut!.getSupportedVsCurrencies(),
+            throwsA(isA<DataParsingException>()));
 
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: SimpleSupportedVsCurrencyMockData.responseBodyWithInvalidFormat
-          )
-        );
-        await expectLater(sut!.getSupportedVsCurrencies(), throwsA(isA<DataParsingException>()));
+        sut = SimpleEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: SimpleSupportedVsCurrencyMockData
+                .responseBodyWithInvalidFormat));
+        await expectLater(sut!.getSupportedVsCurrencies(),
+            throwsA(isA<DataParsingException>()));
 
-        sut = SimpleEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ""
-          )
-        );
-        await expectLater(sut!.getSupportedVsCurrencies(), throwsA(isA<DataParsingException>()));
+        sut = SimpleEndpoint(HttpRequestServiceMock(statusCode: 200, body: ""));
+        await expectLater(sut!.getSupportedVsCurrencies(),
+            throwsA(isA<DataParsingException>()));
       });
     });
   });

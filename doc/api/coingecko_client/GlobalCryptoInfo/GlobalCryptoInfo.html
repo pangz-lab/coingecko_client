@@ -77,18 +77,17 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">GlobalCryptoInfo({
-  int? activeCryptocurrencies,
-  int? upcomingIcos,
-  int? ongoingIcos,
-  int? endedIcos,
-  int? markets,
-  Map&lt;String, dynamic&gt;? totalMarketCap,
-  Map&lt;String, dynamic&gt;? totalVolume,
-  Map&lt;String, dynamic&gt;? marketCapPercentage,
-  double? marketCapChangePercentage24hUsd,
-  DateTime? updatedAt
-}) {
+  <pre class="language-dart"><code class="language-dart">GlobalCryptoInfo(
+    {int? activeCryptocurrencies,
+    int? upcomingIcos,
+    int? ongoingIcos,
+    int? endedIcos,
+    int? markets,
+    Map&lt;String, dynamic&gt;? totalMarketCap,
+    Map&lt;String, dynamic&gt;? totalVolume,
+    Map&lt;String, dynamic&gt;? marketCapPercentage,
+    double? marketCapChangePercentage24hUsd,
+    DateTime? updatedAt}) {
   _activeCryptocurrencies = activeCryptocurrencies;
   _upcomingIcos = upcomingIcos;
   _ongoingIcos = ongoingIcos;
@@ -174,7 +173,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

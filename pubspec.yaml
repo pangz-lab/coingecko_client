@@ -1,6 +1,6 @@
 name: coingecko_client
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
+description: A simple and intuitive package to access the CoinGecko REST API Service
+version: 1.0.1
 repository: https://github.com/pangz-lab/coingecko_client
 license: BSD 3-Clause
 

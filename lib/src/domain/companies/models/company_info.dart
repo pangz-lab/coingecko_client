@@ -9,16 +9,14 @@ class CompanyInfo extends BaseModel {
   int? _totalCurrentValueUsd;
   double? _percentageOfTotalSupply;
 
-  CompanyInfo({
-    String? name,
-    String? symbol,
-    String? country,
-    int? totalHoldings,
-    int? totalEntryValueUsd,
-    int? totalCurrentValueUsd,
-    double? percentageOfTotalSupply
-  }) {
-
+  CompanyInfo(
+      {String? name,
+      String? symbol,
+      String? country,
+      int? totalHoldings,
+      int? totalEntryValueUsd,
+      int? totalCurrentValueUsd,
+      double? percentageOfTotalSupply}) {
     _name = name;
     _symbol = symbol;
     _country = country;

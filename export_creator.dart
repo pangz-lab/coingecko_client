@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 void main() {
@@ -6,7 +5,7 @@ void main() {
   var ls = dir.list(recursive: true);
   print(ls);
   ls.forEach((e) {
-    if(e.path.contains('.dart') && e.path.contains('model')) {
+    if (e.path.contains('.dart') && e.path.contains('model')) {
       print(e);
     }
   });

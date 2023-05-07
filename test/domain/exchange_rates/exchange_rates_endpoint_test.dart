@@ -13,12 +13,8 @@ void main() {
   group('getList method in', () {
     var basePath = "/exchange_rates";
     group('ExchangeRatesEndpoint test endpoint path creation', () {
-      var sut = ExchangeRatesEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: ExchangeRatesMockData.validResponseBody
-        )
-      );
+      var sut = ExchangeRatesEndpoint(HttpRequestServiceMock(
+          statusCode: 200, body: ExchangeRatesMockData.validResponseBody));
 
       test('without parameters', () async {
         await sut.getList();
@@ -28,12 +24,8 @@ void main() {
 
     group('ExchangeRatesEndpoint test endpoint response', () {
       test('with data in getting the correct response type', () async {
-        sut = ExchangeRatesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ExchangeRatesMockData.validResponseBody
-          )
-        );
+        sut = ExchangeRatesEndpoint(HttpRequestServiceMock(
+            statusCode: 200, body: ExchangeRatesMockData.validResponseBody));
         var result = await sut!.getList();
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(2);
@@ -50,12 +42,9 @@ void main() {
       });
 
       test('should still return a result for incomplete data format', () async {
-        sut = ExchangeRatesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ExchangeRatesMockData.responseBodyWithIncompleteKeys
-          )
-        );
+        sut = ExchangeRatesEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: ExchangeRatesMockData.responseBodyWithIncompleteKeys));
 
         var result = await sut!.getList();
         var firstItem = result.elementAt(0);
@@ -75,46 +64,30 @@ void main() {
 
     group('ExchangeRatesEndpoint test for error handling', () {
       test('should throw an exception for failed request', () async {
-        sut = ExchangeRatesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 500,
-            body: ExchangeRatesMockData.validResponseBody
-          )
-        );
-        await expectLater(sut!.getList(), throwsA(isA<NetworkRequestException>()));
+        sut = ExchangeRatesEndpoint(HttpRequestServiceMock(
+            statusCode: 500, body: ExchangeRatesMockData.validResponseBody));
+        await expectLater(
+            sut!.getList(), throwsA(isA<NetworkRequestException>()));
       });
 
-      test('should return a FormatException when result is error or when parsing failed', () async {
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
         sut = ExchangeRatesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: '''[{
+            HttpRequestServiceMock(statusCode: 200, body: '''[{
     "error": "coin not found"
-  }]'''
-          )
-        );
-        await expectLater(sut!.getList(),throwsA(isA<DataParsingException>()));
+  }]'''));
+        await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
 
-        sut = ExchangeRatesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ExchangeRatesMockData.responseBodyWithInvalidFormat
-          )
-        );
+        sut = ExchangeRatesEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: ExchangeRatesMockData.responseBodyWithInvalidFormat));
         await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
 
         sut = ExchangeRatesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ""
-          )
-        );
-        await expectLater(
-          sut!.getList(),
-          throwsA(isA<DataParsingException>())
-        );
+            HttpRequestServiceMock(statusCode: 200, body: ""));
+        await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
       });
     });
   });
-
 }

@@ -1,20 +1,17 @@
 import 'package:coingecko_client/coingecko_client.dart';
 
 void main() async {
-
   try {
     var client = CoinGeckoClient();
 
     /// sample call for - /nfts/list
-    var list = await client.nfts.getBasicList(
-      perPage: 10,
-      page: 2
-    );
+    var list = await client.nfts.getBasicList(perPage: 10, page: 2);
     print(list.length);
     print(list.first.runtimeType);
     print(list.first.id);
     print(list.first.name);
     print(list.first.symbol);
+
     /// sample call for - /nfts/{id}
     var info = await client.nfts.getInfo(
       id: 'meebits',
@@ -35,17 +32,14 @@ void main() async {
     print(contractInfo.name);
     print(contractInfo.assetPlatformId);
     print(contractInfo.description);
-  
-
-  } on NetworkRequestException catch (e, _){
+  } on NetworkRequestException catch (e, _) {
     print(e.message);
-  } on FormatException catch (e, _){
+  } on FormatException catch (e, _) {
     print(e.message);
-  } on TypeError catch (e, _){
+  } on TypeError catch (e, _) {
     print(e.stackTrace);
-  } catch(_) {
+  } catch (_) {
     /// Do something here or just rethrow
     rethrow;
   }
-
 }

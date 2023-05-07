@@ -38,7 +38,6 @@ class NftBasicInfoListMockData {
 ]''';
 }
 
-
 class NftInfoMockData {
   static final validResponseBody = r'''{
   "id": "meebits",

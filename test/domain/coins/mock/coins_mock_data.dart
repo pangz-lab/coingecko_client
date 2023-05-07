@@ -1031,7 +1031,6 @@ class CoinHistoryMockData {
 },''';
 }
 
-
 class CoinMarketChartMockData {
   static final validResponseBody = r'''{
   "prices": [
@@ -1138,7 +1137,6 @@ class CoinMarketChartMockData {
   "name": "bitcoin",
 },''';
 }
-
 
 class CoinOhlcMockData {
   static final validResponseBody = r'''[

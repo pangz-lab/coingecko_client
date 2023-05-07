@@ -7,18 +7,13 @@ import 'package:test/test.dart';
 import '../../services/http_request_service_mock.dart';
 import 'mock/asset_platforms_mock_data.dart';
 
-
 void main() {
   AssetPlatformsEndpoint? sut;
   final String apiVersionPath = "/api/v3";
 
   group('AssetPlatformsEndpoint test endpoint path creation', () {
-    var sut = AssetPlatformsEndpoint(
-      HttpRequestServiceMock(
-        statusCode : 200,
-        body: AssetPlatformsMockData.validResponseBody
-      )
-    );
+    var sut = AssetPlatformsEndpoint(HttpRequestServiceMock(
+        statusCode: 200, body: AssetPlatformsMockData.validResponseBody));
 
     test('without parameters', () async {
       await sut.getList();
@@ -32,12 +27,8 @@ void main() {
   });
 
   group('AssetPlatformsEndpoint test endpoint response', () {
-    sut = AssetPlatformsEndpoint(
-      HttpRequestServiceMock(
-        statusCode : 200,
-        body: AssetPlatformsMockData.validResponseBody
-      )
-    );
+    sut = AssetPlatformsEndpoint(HttpRequestServiceMock(
+        statusCode: 200, body: AssetPlatformsMockData.validResponseBody));
     test('with data in getting the correct response type', () async {
       var result = await sut!.getList();
       expect(result.elementAt(0).id, 'factom');
@@ -49,12 +40,9 @@ void main() {
     });
 
     test('should still return a result for incomplete data format', () async {
-      sut = AssetPlatformsEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: AssetPlatformsMockData.responseBodyWithIncompleteKeys
-        )
-      );
+      sut = AssetPlatformsEndpoint(HttpRequestServiceMock(
+          statusCode: 200,
+          body: AssetPlatformsMockData.responseBodyWithIncompleteKeys));
       var result = await sut!.getList();
       expect(result.length, 2);
       expect(result.elementAt(0).id, 'factom');
@@ -70,40 +58,28 @@ void main() {
 
   group('AssetPlatformsEndpoint test for error handling', () {
     test('should throw an exception for failed request', () async {
-      sut = AssetPlatformsEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 500,
-          body: AssetPlatformsMockData.validResponseBody
-        )
-      );
-      await expectLater(sut!.getList(), throwsA(isA<NetworkRequestException>()));
+      sut = AssetPlatformsEndpoint(HttpRequestServiceMock(
+          statusCode: 500, body: AssetPlatformsMockData.validResponseBody));
+      await expectLater(
+          sut!.getList(), throwsA(isA<NetworkRequestException>()));
     });
 
-    test('should return a FormatException when result is error or when parsing failed', () async {
+    test(
+        'should return a FormatException when result is error or when parsing failed',
+        () async {
       sut = AssetPlatformsEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: '''{
+          HttpRequestServiceMock(statusCode: 200, body: '''{
   "error": "coin not found"
-}'''
-        )
-      );
+}'''));
+      await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
+
+      sut = AssetPlatformsEndpoint(HttpRequestServiceMock(
+          statusCode: 200,
+          body: AssetPlatformsMockData.responseBodyWithInvalidFormat));
       await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
 
       sut = AssetPlatformsEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: AssetPlatformsMockData.responseBodyWithInvalidFormat
-        )
-      );
-      await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
-
-      sut = AssetPlatformsEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: ""
-        )
-      );
+          HttpRequestServiceMock(statusCode: 200, body: ""));
       await expectLater(sut!.getList(), throwsA(isA<DataParsingException>()));
     });
   });

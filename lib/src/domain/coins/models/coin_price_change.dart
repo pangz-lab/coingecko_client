@@ -6,6 +6,7 @@ enum CoinPriceChange {
   in30Days('30d'),
   in200Days('200d'),
   in1Year('1y');
+
   const CoinPriceChange(this.value);
   final String value;
 }

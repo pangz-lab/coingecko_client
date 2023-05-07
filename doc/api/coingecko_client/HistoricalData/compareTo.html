@@ -88,9 +88,7 @@ and zero if <code>this</code> and <code>other</code> are ordered together.</p>
   <pre class="language-dart"><code class="language-dart">@override
 int compareTo(dynamic otherData) {
   var other = otherData as HistoricalData;
-  return (
-    other.timestamp == timestamp &amp;&amp; other.value == value
-  ) ? 0 : 1;
+  return (other.timestamp == timestamp &amp;&amp; other.value == value) ? 0 : 1;
 }</code></pre>
 </section>
 
@@ -159,7 +157,7 @@ int compareTo(dynamic otherData) {
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

@@ -10,15 +10,14 @@ class ExchangeStatus extends BaseModel {
   bool? _pin;
   Project? _project;
 
-  ExchangeStatus({
-    String? description,
-    String? category,
-    DateTime? createdAt,
-    String? user,
-    String? userTitle,
-    bool? pin,
-    Project? project
-  }) {
+  ExchangeStatus(
+      {String? description,
+      String? category,
+      DateTime? createdAt,
+      String? user,
+      String? userTitle,
+      bool? pin,
+      Project? project}) {
     _description = description;
     _category = category;
     _createdAt = createdAt;
@@ -43,7 +42,8 @@ class ExchangeStatus extends BaseModel {
     _user = json['user'];
     _userTitle = json['user_title'];
     _pin = json['pin'];
-    _project = json['project'] != null ? Project.fromJson(json['project']) : null;
+    _project =
+        json['project'] != null ? Project.fromJson(json['project']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -76,7 +76,6 @@ class Project {
   String? get id => _id;
   String? get name => _name;
   Image? get image => _image;
-
 
   Project.fromJson(Map<String, dynamic> json) {
     _type = json['type'];

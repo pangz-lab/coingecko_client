@@ -7,12 +7,11 @@ class CompanyList extends BaseModel {
   double? _marketCapDominance;
   List<CompanyInfo>? _companies;
 
-  CompanyList({
-    double? totalHoldings,
-    double? totalValueUsd,
-    double? marketCapDominance,
-    List<CompanyInfo>? companies
-  }) {
+  CompanyList(
+      {double? totalHoldings,
+      double? totalValueUsd,
+      double? marketCapDominance,
+      List<CompanyInfo>? companies}) {
     _totalHoldings = totalHoldings;
     _totalValueUsd = totalValueUsd;
     _marketCapDominance = marketCapDominance;
@@ -28,9 +27,11 @@ class CompanyList extends BaseModel {
     _totalHoldings = toDouble(json['total_holdings']);
     _totalValueUsd = toDouble(json['total_value_usd']);
     _marketCapDominance = toDouble(json['market_cap_dominance']);
-    _companies = json['companies'] != null ?
-      List<dynamic>.of(json['companies']).map((e) => CompanyInfo.fromJson(e)).toList() : 
-      null;
+    _companies = json['companies'] != null
+        ? List<dynamic>.of(json['companies'])
+            .map((e) => CompanyInfo.fromJson(e))
+            .toList()
+        : null;
   }
 
   Map<String, dynamic> toJson() {

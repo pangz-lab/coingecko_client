@@ -74,15 +74,17 @@
   _assetPlatformId = json[&#39;asset_platform_id&#39;];
   _name = json[&#39;name&#39;];
   _symbol = json[&#39;symbol&#39;];
-  _image = json[&#39;image&#39;] != null? Image.fromJson(json[&#39;image&#39;]) : null;
+  _image = json[&#39;image&#39;] != null ? Image.fromJson(json[&#39;image&#39;]) : null;
   _description = json[&#39;description&#39;];
   _nativeCurrency = json[&#39;native_currency&#39;];
   _floorPrice = toMap&lt;dynamic&gt;(json[&#39;floor_price&#39;]);
   _marketCap = toMap&lt;dynamic&gt;(json[&#39;market_cap&#39;]);
   _volume24h = toMap&lt;dynamic&gt;(json[&#39;volume_24h&#39;]);
-  _floorPriceInUsd24hPercentageChange = toDouble(json[&#39;floor_price_in_usd_24h_percentage_change&#39;]);
+  _floorPriceInUsd24hPercentageChange =
+      toDouble(json[&#39;floor_price_in_usd_24h_percentage_change&#39;]);
   _numberOfUniqueAddresses = toInt(json[&#39;number_of_unique_addresses&#39;]);
-  _numberOfUniqueAddresses24hPercentageChange = toDouble(json[&#39;number_of_unique_addresses_24h_percentage_change&#39;]);
+  _numberOfUniqueAddresses24hPercentageChange =
+      toDouble(json[&#39;number_of_unique_addresses_24h_percentage_change&#39;]);
   _totalSupply = toInt(json[&#39;total_supply&#39;]);
   _links = toMap&lt;dynamic&gt;(json[&#39;links&#39;]);
 }</code></pre>
@@ -166,7 +168,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

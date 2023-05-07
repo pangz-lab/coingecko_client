@@ -84,7 +84,7 @@
 
 </dt>
 <dd>
-  
+  List all asset platforms
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -95,7 +95,7 @@
 
 </dt>
 <dd>
-  
+  List all coin categories and categories with market data
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -107,6 +107,21 @@
 </dt>
 <dd>
   
+<li>Use this to obtain all the coins, coins market data (price, market cap, volume)<br></li>
+<li>Get current data (name, price, market, ... including exchange tickers) for a coin.<br>
+<b>IMPORTANT:</b><br>
+Ticker object is limited to 100 items, to get more tickers, use <code>/coins/{id}/tickers</code><br>
+Ticker is_stale is true when ticker that has not been updated/unchanged from the exchange for a while.<br>
+Ticker is_anomaly is true if ticker's price is outliered by our system.<br>
+You are responsible for managing how you want to display these information (e.g. footnote, different background, change opacity, hide)<br></li>
+<li>Get historical data (price, market cap, 24hr volume, ..) at a given date for a coin.<br>
+The data returned is at 00:00:00 UTC.<br></li>
+<li>Get historical market data include price, market cap, and 24h volume (granularity auto)<br><br>
+Data granularity is automatic (cannot be adjusted)<br>
+1 day from current time = 5 minute interval data<br>
+1 - 90 days from current time = hourly data<br>
+above 90 days from current time = daily data (00:00 UTC)<br><br></li>
+
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -117,7 +132,7 @@
 
 </dt>
 <dd>
-  
+  Get public companies bitcoin or ethereum holdings (Ordered by total holdings descending)<br>
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -129,6 +144,9 @@
 </dt>
 <dd>
   
+<li>Get coin info from contract address<br></li>
+<li>Get historical market data include price, market cap, and 24h volume or within a range of timestamp (granularity auto)<br></li>
+
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -140,6 +158,11 @@
 </dt>
 <dd>
   
+<li>List all derivative tickers<br></li>
+<li>List all derivative exchanges<br></li>
+<li>Get derivative exchange info<br></li>
+<li>List all derivative exchanges name and identifier<br></li>
+
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -150,7 +173,7 @@
 
 </dt>
 <dd>
-  
+  Get BTC-to-Currency exchange rates
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -162,6 +185,33 @@
 </dt>
 <dd>
   
+<li>
+<p>List all exchanges<br></p>
+</li>
+<li>
+<p>Use this to obtain all the markets' id in order to make API calls<br></p>
+</li>
+<li>
+<p>Get exchange volume in BTC and tickers<br>
+<b>IMPORTANT:</b><br>
+Ticker object is limited to 100 items, to get more tickers, use <code>/exchanges/{id}/tickers</code><br>
+Ticker is_stale is true when ticker that has not been updated/unchanged from the exchange for a while.<br>
+Ticker is_anomaly is true if ticker's price is outliered by our system.<br>
+You are responsible for managing how you want to display these information<br>
+(e.g. footnote, different background, change opacity, hide)<br><br></p>
+</li>
+<li>
+<p>Get exchange tickers<br>
+<b>IMPORTANT:</b><br>
+Ticker is_stale is true when ticker that has not been updated/unchanged from the exchange for a while.<br>
+Ticker is_anomaly is true if ticker's price is outliered by our system.<br>
+You are responsible for managing how you want to display these information<br>
+(e.g. footnote, different background, change opacity, hide)<br></p>
+</li>
+<li>
+<p>Get volume_chart data (in BTC) for a given exchange<br></p>
+</li>
+
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -173,6 +223,9 @@
 </dt>
 <dd>
   
+<li>Get cryptocurrency global data<br></li>
+<li>Get Top 100 Cryptocurrency Global Eecentralized Finance(defi) data<br></li>
+
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -195,6 +248,9 @@
 </dt>
 <dd>
   
+<li>List all market indexes<br></li>
+<li>Use to get market index by market id and index id<br></li>
+
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -206,6 +262,10 @@
 </dt>
 <dd>
   
+<li>Use this to obtain all the NFT ids in order to make API calls, paginated to 100 items<br></li>
+<li>Get current data (name, price_floor, volume_24h ...) for an NFT collection. native_currency (string) is only a representative of the currency.<br></li>
+<li><code>Solana NFT</code> &amp; <code>Art Blocks</code> are not supported for this endpoint, please use <code>/nfts/{id}</code> endpoint instead.<br></li>
+
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -216,7 +276,7 @@
 
 </dt>
 <dd>
-  
+  Use to check API server status
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -238,7 +298,7 @@
 
 </dt>
 <dd>
-  
+  Use to search for coins, categories and markets listed on CoinGecko ordered by largest Market Cap first
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -250,6 +310,10 @@
 </dt>
 <dd>
   
+<li>Get the current price of any cryptocurrencies in any other supported currencies that you need.<br></li>
+<li>Get current price of tokens (using contract addresses) for a given platform in any other currency that you need.<br></li>
+<li>Get list of supported_vs_currencies.<br></li>
+
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -260,7 +324,7 @@
 
 </dt>
 <dd>
-  
+  Top-7 trending coins on CoinGecko as searched by users in the last 24 hours (Ordered by most popular first)
   <div class="features"><span class="feature">read-only</span></div>
 
 </dd>
@@ -458,7 +522,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

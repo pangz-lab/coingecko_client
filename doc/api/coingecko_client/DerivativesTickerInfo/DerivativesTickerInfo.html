@@ -84,26 +84,24 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">DerivativesTickerInfo({
-  String? symbol,
-  String? base,
-  String? target,
-  String? tradeUrl,
-  String? contractType,
-  double? last,
-  double? h24PercentageChange,
-  double? index,
-  double? indexBasisPercentage,
-  double? bidAskSpread,
-  double? fundingRate,
-  double? openInterestUsd,
-  double? h24Volume,
-  Map&lt;String, dynamic&gt;? convertedVolume,
-  Map&lt;String, dynamic&gt;? convertedLast,
-  DateTime? lastTraded,
-  DateTime? expiredAt
-}) {
-
+  <pre class="language-dart"><code class="language-dart">DerivativesTickerInfo(
+    {String? symbol,
+    String? base,
+    String? target,
+    String? tradeUrl,
+    String? contractType,
+    double? last,
+    double? h24PercentageChange,
+    double? index,
+    double? indexBasisPercentage,
+    double? bidAskSpread,
+    double? fundingRate,
+    double? openInterestUsd,
+    double? h24Volume,
+    Map&lt;String, dynamic&gt;? convertedVolume,
+    Map&lt;String, dynamic&gt;? convertedLast,
+    DateTime? lastTraded,
+    DateTime? expiredAt}) {
   _symbol = symbol;
   _base = base;
   _target = target;
@@ -203,7 +201,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

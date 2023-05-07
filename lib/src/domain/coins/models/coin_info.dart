@@ -165,13 +165,15 @@ class CoinInfo extends BaseModel {
     _additionalNotices = toList(json['additional_notices']);
     _localization = toMap<dynamic>(json['localization']);
     _description = toMap<dynamic>(json['description']);
-    _links = json['links'] != null? CoinLinks.fromJson(json['links']) : null;
-    _image = json['image'] != null? Image.fromJson(json['image']) : null;
+    _links = json['links'] != null ? CoinLinks.fromJson(json['links']) : null;
+    _image = json['image'] != null ? Image.fromJson(json['image']) : null;
     _countryOrigin = json['country_origin'];
     _genesisDate = toDate(json['genesis_date']);
     _contractAddress = json['contract_address'];
-    _sentimentVotesUpPercentage = toDouble(json['sentiment_votes_up_percentage']);
-    _sentimentVotesDownPercentage = toDouble(json['sentiment_votes_down_percentage']);
+    _sentimentVotesUpPercentage =
+        toDouble(json['sentiment_votes_up_percentage']);
+    _sentimentVotesDownPercentage =
+        toDouble(json['sentiment_votes_down_percentage']);
     _watchlistPortfolioUsers = toInt(json['watchlist_portfolio_users']);
     _marketCapRank = toInt(json['market_cap_rank']);
     _coingeckoRank = toInt(json['coingecko_rank']);
@@ -180,15 +182,19 @@ class CoinInfo extends BaseModel {
     _communityScore = toDouble(json['community_score']);
     _liquidityScore = toDouble(json['liquidity_score']);
     _publicInterestScore = toDouble(json['public_interest_score']);
-    _marketData = json['market_data'] != null ? MarketData.fromJson(json['market_data']) : null;
+    _marketData = json['market_data'] != null
+        ? MarketData.fromJson(json['market_data'])
+        : null;
     _communitydata = toMap<dynamic>(json['community_data']);
     _developerdata = toMap<dynamic>(json['developer_data']);
     _publicInterestStats = toMap<dynamic>(json['public_interest_stats']);
     _statusUpdates = toList<String>(json['status_updates']);
     _lastUpdated = toDate(json['last_updated']);
-    _tickers = json['tickers'] != null 
-      ? List<dynamic>.of(json['tickers']).map((e) => TickerInfo.fromJson(e)).toList() 
-      : null;
+    _tickers = json['tickers'] != null
+        ? List<dynamic>.of(json['tickers'])
+            .map((e) => TickerInfo.fromJson(e))
+            .toList()
+        : null;
   }
 
   Map<String, dynamic> toJson() {

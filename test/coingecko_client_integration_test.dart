@@ -62,13 +62,13 @@ void main() {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getMarketList(
         vsCurrency: Currencies.php,
-        ids: ['bitcoin','verus-coin'],
+        ids: ['bitcoin', 'verus-coin'],
         category: 'aave-tokens',
         order: CoinMarketDataOrdering.marketCapDesc,
         perPage: 20,
         page: 1,
         sparkline: true,
-        priceChangePercentage: [ 
+        priceChangePercentage: [
           CoinPriceChange.in1Hour,
           CoinPriceChange.in24Hours,
           CoinPriceChange.in7Days,
@@ -89,52 +89,46 @@ void main() {
           tickers: true,
           communityData: true,
           developerData: true,
-          sparkline: true
-        );
+          sparkline: true);
       expect(result.runtimeType, CoinInfo);
     });
-    
+
     test('getTickers: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
-      var result = await sut.getTickers(
-        id: 'bitcoin'
-      );
+      var result = await sut.getTickers(id: 'bitcoin');
       expect(result.runtimeType, CoinTickers);
     });
 
     test('getMarketHistory: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getMarketHistory(
-        id: 'bitcoin',
-        vsCurrency: Currencies.php,
-        days: DataRange.in1Day,
-        interval: 'daily'
-      );
+          id: 'bitcoin',
+          vsCurrency: Currencies.php,
+          days: DataRange.in1Day,
+          interval: 'daily');
       expect(result.runtimeType, CoinMarketHistory);
     });
 
-    test('getMarketHistoryWithDateRange: request should return a valid response', () async {
+    test(
+        'getMarketHistoryWithDateRange: request should return a valid response',
+        () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getMarketHistoryWithDateRange(
-        id: 'bitcoin',
-        vsCurrency: Currencies.php,
-        from: DateTime.fromMillisecondsSinceEpoch(1392577232),
-        to: DateTime.fromMillisecondsSinceEpoch(1396587232)
-      );
+          id: 'bitcoin',
+          vsCurrency: Currencies.php,
+          from: DateTime.fromMillisecondsSinceEpoch(1392577232),
+          to: DateTime.fromMillisecondsSinceEpoch(1396587232));
       expect(result.runtimeType, CoinMarketHistory);
     });
 
     test('getOhlcList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getOhlcList(
-        id: 'bitcoin',
-        vsCurrency: Currencies.php,
-        days: DataRange.max
-      );
+          id: 'bitcoin', vsCurrency: Currencies.php, days: DataRange.max);
       expect(result.elementAt(0).runtimeType, CoinOhlc);
     });
   });
-  
+
   group('Integration test for ExchangesEndpoint for', () {
     var sut = client.exchanges;
     test('getList: request should return a valid response', () async {
@@ -154,7 +148,7 @@ void main() {
       var result = await sut.getInfo(id: 'binance');
       expect(result.runtimeType, ExchangeInfo);
     });
-     
+
     test('getTickerList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getTickerList(
@@ -163,17 +157,15 @@ void main() {
           includeExchangeLogo: true,
           page: 1,
           depth: true,
-          order: ExchangeDataOrdering.trustScoreDesc
-        );
+          order: ExchangeDataOrdering.trustScoreDesc);
       expect(result?.elementAt(0).runtimeType, TickerInfo);
     });
 
-    test('getVolumeChartList: request should return a valid response', () async {
+    test('getVolumeChartList: request should return a valid response',
+        () async {
       await Future.delayed(Duration(milliseconds: delay));
-      var result = await sut.getVolumeChartList(
-        id: 'binance',
-        days: DataRange.in1Day
-      );
+      var result =
+          await sut.getVolumeChartList(id: 'binance', days: DataRange.in1Day);
       expect(result.elementAt(0).runtimeType, ExchangeVolumeChart);
     });
   });
@@ -189,9 +181,9 @@ void main() {
           include24hrVol: true,
           include24hrChange: true,
           includeLastUpdatedAt: true,
-          precision: 18
-        );
-      expect(result['verus-coin'].runtimeType.toString(), '_Map<String, dynamic>');
+          precision: 18);
+      expect(
+          result['verus-coin'].runtimeType.toString(), '_Map<String, dynamic>');
     });
 
     test('getTokenPrice: request should return a valid response', () async {
@@ -199,17 +191,17 @@ void main() {
       var result = await sut.getTokenPrice(
           id: 'avalanche',
           contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ CryptoCurrencies.btc, CryptoCurrencies.eth ],
+          vsCurrencies: [CryptoCurrencies.btc, CryptoCurrencies.eth],
           includeMarketCap: true,
           include24hrVol: true,
           include24hrChange: true,
           includeLastUpdatedAt: true,
-          precision: 18
-        );
+          precision: 18);
       expect(result.runtimeType.toString(), '_Map<String, dynamic>');
     });
 
-    test('getSupportedVsCurrencies: request should return a valid response', () async {
+    test('getSupportedVsCurrencies: request should return a valid response',
+        () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getSupportedVsCurrencies();
       expect(result.runtimeType, List<String>);
@@ -220,32 +212,27 @@ void main() {
     var sut = client.derivatives;
     test('getList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
-      var result = await sut.getList(
-        includeTickers: DerivativesTickers.unexpired
-      );
+      var result =
+          await sut.getList(includeTickers: DerivativesTickers.unexpired);
       expect(result.runtimeType, List<Derivatives>);
     });
 
     test('getExchangeList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getExchangeList(
-        order: DerivativesExchangeOrdering.nameAsc,
-        perPage: 10,
-        page: 2
-      );
+          order: DerivativesExchangeOrdering.nameAsc, perPage: 10, page: 2);
       expect(result.runtimeType, List<DerivativesExchange>);
     });
 
     test('getExchange: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getExchange(
-        id: "bybit",
-        includeTickers: DerivativesTickers.unexpired
-      );
+          id: "bybit", includeTickers: DerivativesTickers.unexpired);
       expect(result.runtimeType, DerivativesExchange);
     });
-    
-    test('getSupportedVsCurrencies: request should return a valid response', () async {
+
+    test('getSupportedVsCurrencies: request should return a valid response',
+        () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getExchangeBasicInfoList();
       expect(result.runtimeType, List<ExchangeBasicInfo>);
@@ -256,10 +243,7 @@ void main() {
     var sut = client.indexes;
     test('getList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
-      var result = await sut.getList(
-        perPage: 10,
-        page: 2
-      );
+      var result = await sut.getList(perPage: 10, page: 2);
       expect(result.runtimeType, List<MarketIndex>);
     });
 
@@ -271,7 +255,7 @@ void main() {
       );
       expect(result.runtimeType, MarketIndex);
     });
-    
+
     test('getBasicInfoList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getBasicInfoList();
@@ -283,10 +267,7 @@ void main() {
     var sut = client.nfts;
     test('getBasicList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
-      var result = await sut.getBasicList(
-        perPage: 10,
-        page: 2
-      );
+      var result = await sut.getBasicList(perPage: 10, page: 2);
       expect(result.runtimeType, List<NftBasicInfo>);
     });
 
@@ -297,7 +278,7 @@ void main() {
       );
       expect(result.runtimeType, NftInfo);
     });
-    
+
     test('getContractInfo: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getContractInfo(
@@ -313,9 +294,8 @@ void main() {
     test('getInfo: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getInfo(
-        id: 'ethereum',
-        contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'
-      );
+          id: 'ethereum',
+          contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984');
       expect(result.runtimeType, ContractInfo);
     });
 
@@ -325,12 +305,14 @@ void main() {
         id: 'ethereum',
         contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
         vsCurrency: Currencies.jpy,
-        days : DataRange.in2Weeks,
+        days: DataRange.in2Weeks,
       );
       expect(result.runtimeType, ContractMarketHistory);
     });
-    
-    test('getMarketHistoryWithDateRange: request should return a valid response', () async {
+
+    test(
+        'getMarketHistoryWithDateRange: request should return a valid response',
+        () async {
       await Future.delayed(Duration(milliseconds: delay));
       var result = await sut.getMarketHistoryWithDateRange(
         id: 'ethereum',
@@ -353,9 +335,8 @@ void main() {
 
     test('getList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
-      var result = await sut.getList(
-        order: CoinCategoriesDataOrdering.marketCapAsc
-      );
+      var result =
+          await sut.getList(order: CoinCategoriesDataOrdering.marketCapAsc);
       expect(result.runtimeType, List<CoinCategoryInfo>);
     });
   });
@@ -388,13 +369,11 @@ void main() {
     var sut = client.companies;
     test('getList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
-      var result = await sut.getList(
-        coinId: 'ethereum'
-      );
+      var result = await sut.getList(coinId: 'ethereum');
       expect(result.runtimeType, CompanyList);
     });
   });
-  
+
   group('Integration test for TrendingEndpoint for', () {
     var sut = client.trending;
     test('getResult: request should return a valid response', () async {

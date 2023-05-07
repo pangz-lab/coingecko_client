@@ -15,9 +15,11 @@ class CoinTickers extends BaseModel {
 
   CoinTickers.fromJson(Map<String, dynamic> json) {
     _name = json['name'];
-    _tickers = json['tickers'] != null 
-      ? List<dynamic>.of(json['tickers']).map((e) => TickerInfo.fromJson(e)).toList() 
-      : null;
+    _tickers = json['tickers'] != null
+        ? List<dynamic>.of(json['tickers'])
+            .map((e) => TickerInfo.fromJson(e))
+            .toList()
+        : null;
   }
 
   Map<String, dynamic> toJson() {

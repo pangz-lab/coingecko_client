@@ -20,26 +20,25 @@ class TickerInfo extends BaseModel {
   String? _coinId;
   String? _targetCoinId;
 
-  TickerInfo({
-    String? base,
-    String? target,
-    Map<String, dynamic>? market,
-    double? last,
-    double? volume,
-    Map<String, dynamic>? convertedLast,
-    Map<String, dynamic>? convertedVolume,
-    dynamic trustScore,
-    double? bidAskSpreadPercentage,
-    DateTime? timestamp,
-    DateTime? lastTradedAt,
-    DateTime? lastFetchAt,
-    bool? isAnomaly,
-    bool? isStale,
-    String? tradeUrl,
-    String? tokenInfoUrl,
-    String? coinId,
-    String? targetCoinId
-  }) {
+  TickerInfo(
+      {String? base,
+      String? target,
+      Map<String, dynamic>? market,
+      double? last,
+      double? volume,
+      Map<String, dynamic>? convertedLast,
+      Map<String, dynamic>? convertedVolume,
+      dynamic trustScore,
+      double? bidAskSpreadPercentage,
+      DateTime? timestamp,
+      DateTime? lastTradedAt,
+      DateTime? lastFetchAt,
+      bool? isAnomaly,
+      bool? isStale,
+      String? tradeUrl,
+      String? tokenInfoUrl,
+      String? coinId,
+      String? targetCoinId}) {
     _base = base;
     _target = target;
     _market = market;

@@ -5,6 +5,7 @@ enum CoinMarketDataOrdering {
   volumeDesc('volume_desc'),
   idAsc('id_asc'),
   idDesc('id_desc');
+
   const CoinMarketDataOrdering(this.value);
   final String value;
 }
@@ -13,6 +14,7 @@ enum CoinTickersDataOrdering {
   trustScoreDesc('trust_score_desc'),
   trustScoreAsc('trust_score_asc'),
   volumeDesc('volume_desc');
+
   const CoinTickersDataOrdering(this.value);
   final String value;
 }

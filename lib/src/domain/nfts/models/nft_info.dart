@@ -19,25 +19,23 @@ class NftInfo extends BaseModel {
   int? _totalSupply;
   Map<String, dynamic>? _links;
 
-  NftInfo({
-    String? id,
-    String? contractAddress,
-    String? assetPlatformId,
-    String? name,
-    String? symbol,
-    Image? image,
-    String? description,
-    String? nativeCurrency,
-    Map<String, dynamic>? floorPrice,
-    Map<String, dynamic>? marketCap,
-    Map<String, dynamic>? volume24h,
-    double? floorPriceInUsd24hPercentageChange,
-    int? numberOfUniqueAddresses,
-    double? numberOfUniqueAddresses24hPercentageChange,
-    int? totalSupply,
-    Map<String, dynamic>? links
-  }) {
-
+  NftInfo(
+      {String? id,
+      String? contractAddress,
+      String? assetPlatformId,
+      String? name,
+      String? symbol,
+      Image? image,
+      String? description,
+      String? nativeCurrency,
+      Map<String, dynamic>? floorPrice,
+      Map<String, dynamic>? marketCap,
+      Map<String, dynamic>? volume24h,
+      double? floorPriceInUsd24hPercentageChange,
+      int? numberOfUniqueAddresses,
+      double? numberOfUniqueAddresses24hPercentageChange,
+      int? totalSupply,
+      Map<String, dynamic>? links}) {
     _id = id;
     _contractAddress = contractAddress;
     _assetPlatformId = assetPlatformId;
@@ -51,7 +49,8 @@ class NftInfo extends BaseModel {
     _volume24h = volume24h;
     _floorPriceInUsd24hPercentageChange = floorPriceInUsd24hPercentageChange;
     _numberOfUniqueAddresses = numberOfUniqueAddresses;
-    _numberOfUniqueAddresses24hPercentageChange = numberOfUniqueAddresses24hPercentageChange;
+    _numberOfUniqueAddresses24hPercentageChange =
+        numberOfUniqueAddresses24hPercentageChange;
     _totalSupply = totalSupply;
     _links = links;
   }
@@ -67,12 +66,13 @@ class NftInfo extends BaseModel {
   Map<String, dynamic>? get floorPrice => _floorPrice;
   Map<String, dynamic>? get marketCap => _marketCap;
   Map<String, dynamic>? get volume24h => _volume24h;
-  double? get floorPriceInUsd24hPercentageChange => _floorPriceInUsd24hPercentageChange;
+  double? get floorPriceInUsd24hPercentageChange =>
+      _floorPriceInUsd24hPercentageChange;
   int? get numberOfUniqueAddresses => _numberOfUniqueAddresses;
-  double? get numberOfUniqueAddresses24hPercentageChange => _numberOfUniqueAddresses24hPercentageChange;
+  double? get numberOfUniqueAddresses24hPercentageChange =>
+      _numberOfUniqueAddresses24hPercentageChange;
   int? get totalSupply => _totalSupply;
   Map<String, dynamic>? get links => _links;
-
 
   NftInfo.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
@@ -80,15 +80,17 @@ class NftInfo extends BaseModel {
     _assetPlatformId = json['asset_platform_id'];
     _name = json['name'];
     _symbol = json['symbol'];
-    _image = json['image'] != null? Image.fromJson(json['image']) : null;
+    _image = json['image'] != null ? Image.fromJson(json['image']) : null;
     _description = json['description'];
     _nativeCurrency = json['native_currency'];
     _floorPrice = toMap<dynamic>(json['floor_price']);
     _marketCap = toMap<dynamic>(json['market_cap']);
     _volume24h = toMap<dynamic>(json['volume_24h']);
-    _floorPriceInUsd24hPercentageChange = toDouble(json['floor_price_in_usd_24h_percentage_change']);
+    _floorPriceInUsd24hPercentageChange =
+        toDouble(json['floor_price_in_usd_24h_percentage_change']);
     _numberOfUniqueAddresses = toInt(json['number_of_unique_addresses']);
-    _numberOfUniqueAddresses24hPercentageChange = toDouble(json['number_of_unique_addresses_24h_percentage_change']);
+    _numberOfUniqueAddresses24hPercentageChange =
+        toDouble(json['number_of_unique_addresses_24h_percentage_change']);
     _totalSupply = toInt(json['total_supply']);
     _links = toMap<dynamic>(json['links']);
   }
@@ -106,9 +108,11 @@ class NftInfo extends BaseModel {
     data['floor_price'] = _floorPrice;
     data['market_cap'] = _marketCap;
     data['volume_24h'] = _volume24h;
-    data['floor_price_in_usd_24h_percentage_change'] = _floorPriceInUsd24hPercentageChange;
+    data['floor_price_in_usd_24h_percentage_change'] =
+        _floorPriceInUsd24hPercentageChange;
     data['number_of_unique_addresses'] = _numberOfUniqueAddresses;
-    data['number_of_unique_addresses_24h_percentage_change'] = _numberOfUniqueAddresses24hPercentageChange;
+    data['number_of_unique_addresses_24h_percentage_change'] =
+        _numberOfUniqueAddresses24hPercentageChange;
     data['total_supply'] = _totalSupply;
     data['links'] = _links;
     return data;
