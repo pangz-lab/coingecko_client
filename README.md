@@ -1,5 +1,6 @@
 ![version](https://img.shields.io/badge/version-v1.0.0-blue)
 ![coverage](https://img.shields.io/badge/coverage-100%25-success)
+![version](https://img.shields.io/badge/sdk-v2.19.3-blue)
 ![license](https://img.shields.io/badge/license-BSD--3-blue)
 [![GitHub issues by-label](https://img.shields.io/github/issues/badges/shields/open)](https://github.com/pangz-lab/coingecko_client/issues)
 
