@@ -14,15 +14,6 @@
 14. companies - DONE
 15. global - DONE
 
-
-1. Convert to BigInt
-2. fix fromJson()
-3. check all data is parsed properly
-4. check method name
-5. convert to main response class
-6. convert class to other class like - image class
-
-Contract
-ethereum
-  0x1f9840a85d5af5bf1d1762f925bdaddc4201f984
-https://api.coingecko.com/api/v3/coins/ethereum/contract/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984
+Roadmap
+1. Add Pro API endpoints
+2. Improve response object of some methods - currently using as Map, should use a data model
