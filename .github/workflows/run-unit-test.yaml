@@ -5,6 +5,7 @@ on:
     branches:
       - 'master'
       - 'feature/**'
+      - 'release/**'
   pull_request:
     branches:
       - 'master'
@@ -20,6 +21,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: dart-lang/setup-dart@v1
+      - uses: testspace-com/setup-testspace@v1
+        with:
+          domain: ${{ github.repository_owner }
+      
         with:
           sdk: ${{ matrix.sdk }}
 
@@ -27,4 +32,9 @@ jobs:
         run: dart pub get
 
       - name: Run unit tests
-        run: dart test test/domain
+        run: dart test --coverage=./test_coverage test/domain
+
+      - name: Push result to Testspace server
+        run: |
+          testspace ./test_coverage/**/*.json coverage.xml
+        if: always()
