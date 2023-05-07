@@ -2,7 +2,7 @@
 ![coverage](https://img.shields.io/badge/coverage-100%25-success)
 ![license](https://img.shields.io/badge/license-BSD--3-blue)
 [![GitHub issues by-label](https://img.shields.io/github/issues/badges/shields/open)](https://github.com/pangz-lab/coingecko_client/issues)
-<iframe src="https://discord.com/widget?id=1104687758301204512&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+
 <a href="https://discord.gg/TK3WHBMk">
     <img src="https://img.shields.io/discord/1104687758301204512?logo=discord" alt="chat on Discord">
 </a>
@@ -28,7 +28,7 @@ A simple and intuitive package to access the [CoinGecko REST API Service](https:
 API Version Support
 ---------------
 - ✔️ API v3
-- ✔️ Community Endpoint
+- ✔️ Community
 
 
 Requirements
@@ -57,14 +57,18 @@ var client = CoinGeckoClient();
 ```
 
 ___
-### 🌐 ping endpoint
+<br>
+
+# 🌐 ping
 ### 📤 */ping*
 ```dart
 client.ping.getResult();
 ```
 
 ___
-### 🌐 coins endpoint
+<br>
+
+# 🌐 coins
 ### 📤 */coins/list*
 ```dart
 client.coins.getBasicList();
@@ -118,7 +122,9 @@ client.coins.getOhlcList(
 ```
 
 ___
-### 🌐 exchanges endpoint
+<br>
+
+# 🌐 exchanges
 ### 📤 */exchanges*
 ```dart
 client.exchanges.getList();
@@ -151,7 +157,9 @@ client.exchanges.getVolumeChartList(
 ```
 
 ___
-### 🌐 simple endpoint
+<br>
+
+# 🌐 simple
 ### 📤 */simple/price*
 ```dart
 client.simple.getCoinPrice(
@@ -184,7 +192,9 @@ client.simple.getSupportedVsCurrencies();
 
 
 ___
-### 🌐 derivatives endpoint
+<br>
+
+# 🌐 derivatives
 ### 📤 */derivatives*
 ```dart
 client.derivatives.getList(
@@ -212,7 +222,9 @@ client.derivatives.getExchangeBasicInfoList();
 ```
 
 ___
-### 🌐 indexes endpoint
+<br>
+
+# 🌐 indexes
 ### 📤 */indexes*
 ```dart
 client.indexes.getList(
@@ -233,7 +245,9 @@ client.indexes.getBasicInfo();
 ```
 
 ___
-### 🌐 nfts endpoint
+<br>
+
+# 🌐 nfts
 ### 📤 */nfts/list*
 ```dart
 client.nfts.getBasicList(
@@ -257,7 +271,9 @@ client.nfts.getContractInfo(
 
 
 ___
-### 🌐 contract endpoint
+<br>
+
+# 🌐 contract
 ### 📤 */coins/{id}/contract/{contract_address}/market_chart*
 ```dart
 client.contract.getMarketHistory(
@@ -280,7 +296,9 @@ client.contract.getMarketHistoryWithDateRange(
 
 
 ___
-### 🌐 categories endpoint
+<br>
+
+# 🌐 categories
 ### 📤 */coins/categories/list*
 ```dart
 client.categories.getBasicList();
@@ -294,7 +312,9 @@ client.categories.getList(
 
 
 ___
-### 🌐 global endpoint
+<br>
+
+# 🌐 global
 ### 📤 */global*
 ```dart
 client.global.getCryptoInfo();
@@ -305,7 +325,9 @@ client.global.getDefiInfo();
 ```
 
 ___
-### 🌐 exchange rates endpoint
+<br>
+
+# 🌐 exchange rates
 ### 📤 */exchange_rates*
 ```dart
 client.exchangeRates.getList();
@@ -313,7 +335,9 @@ client.exchangeRates.getList();
 
 
 ___
-### 🌐 companies endpoint
+<br>
+
+# 🌐 companies
 ### 📤 */companies/public_treasury/{coin_id}*
 ```dart
 client.companies.getList(
@@ -322,7 +346,9 @@ client.companies.getList(
 ```
 
 ___
-### 🌐 trending endpoint
+<br>
+
+# 🌐 trending
 ### 📤 */search/trending*
 ```dart
 client.trending.getResult();
@@ -330,7 +356,9 @@ client.trending.getResult();
 
 
 ___
-### 🌐 search endpoint
+<br>
+
+# 🌐 search
 ### 📤 */search*
 ```dart
 client.search.getResult(query: 'bybit');
@@ -346,7 +374,7 @@ client.search.getResult(query: 'bybit');
 
 <br>
 
-👨🏽‍💻 Contacts
+Contacts
 ---------------
 
 <p>
