@@ -190,7 +190,7 @@ void main() {
         await sut.getTokenPrice(
           id: 'avalanche',
           contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ 'btc' ],
+          vsCurrencies: [ CryptoCurrencies.btc ],
         );
         expect(
           sut.endpointPath,
@@ -202,7 +202,7 @@ void main() {
         await sut.getTokenPrice(
           id: 'avalanche',
           contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ 'btc' ],
+          vsCurrencies: [ CryptoCurrencies.btc ],
           includeMarketCap: true,
           include24hrVol: true,
           include24hrChange: true,
@@ -224,7 +224,7 @@ void main() {
         var result = await sut!.getTokenPrice(
           id: 'avalanche',
           contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ 'btc' ],
+          vsCurrencies: [ CryptoCurrencies.btc ],
           includeMarketCap: true,
           include24hrVol: true,
           include24hrChange: true,
@@ -250,7 +250,7 @@ void main() {
         var result = await sut!.getTokenPrice(
           id: 'avalanche',
           contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ 'btc' ],
+          vsCurrencies: [ CryptoCurrencies.btc ],
           includeMarketCap: true,
           include24hrVol: true,
           include24hrChange: true,
@@ -278,7 +278,7 @@ void main() {
         await expectLater(sut!.getTokenPrice(
           id: 'avalanche',
           contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ 'btc' ]
+          vsCurrencies: [ CryptoCurrencies.btc ]
         ), throwsA(isA<NetworkRequestException>()));
       });
 
@@ -294,7 +294,7 @@ void main() {
         await expectLater(sut!.getTokenPrice(
           id: 'avalanche',
           contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ 'btc' ]
+          vsCurrencies: [ CryptoCurrencies.btc ]
         ),throwsA(isA<DataParsingException>()));
 
         sut = SimpleEndpoint(
@@ -306,7 +306,7 @@ void main() {
         await expectLater(sut!.getTokenPrice(
           id: 'avalanche',
           contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ 'btc' ]
+          vsCurrencies: [ CryptoCurrencies.btc ]
         ), throwsA(isA<DataParsingException>()));
 
         sut = SimpleEndpoint(
@@ -318,7 +318,7 @@ void main() {
         await expectLater(sut!.getTokenPrice(
           id: 'avalanche',
           contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: [ 'btc' ]
+          vsCurrencies: [ CryptoCurrencies.btc ]
         ), throwsA(isA<DataParsingException>()));
       });
     });

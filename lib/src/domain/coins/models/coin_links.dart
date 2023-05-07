@@ -8,7 +8,7 @@ class CoinLinks extends BaseModel {
   List<String>? _announcementUrl;
   String? _twitterScreenName;
   String? _facebookUsername;
-  String? _bitcointalkThreadIdentifier;
+  int? _bitcointalkThreadIdentifier;
   String? _telegramChannelIdentifier;
   String? _subredditUrl;
   Map<String, dynamic>? _reposUrl;
@@ -21,7 +21,7 @@ class CoinLinks extends BaseModel {
     List<String>? announcementUrl,
     String? twitterScreenName,
     String? facebookUsername,
-    String? bitcointalkThreadIdentifier,
+    int? bitcointalkThreadIdentifier,
     String? telegramChannelIdentifier,
     String? subredditUrl,
     Map<String, dynamic>? reposUrl
@@ -46,7 +46,7 @@ class CoinLinks extends BaseModel {
   List<String>? get announcementUrl => _announcementUrl;
   String? get twitterScreenName => _twitterScreenName;
   String? get facebookUsername => _facebookUsername;
-  String? get bitcointalkThreadIdentifier => _bitcointalkThreadIdentifier;
+  int? get bitcointalkThreadIdentifier => _bitcointalkThreadIdentifier;
   String? get telegramChannelIdentifier => _telegramChannelIdentifier;
   String? get subredditUrl => _subredditUrl;
   Map<String, dynamic>? get reposUrl => _reposUrl;
@@ -59,7 +59,7 @@ class CoinLinks extends BaseModel {
     _announcementUrl = toList<String>(json['announcement_url']);
     _twitterScreenName = json['twitter_screen_name'];
     _facebookUsername = json['facebook_username'];
-    _bitcointalkThreadIdentifier = json['bitcointalk_thread_identifier'];
+    _bitcointalkThreadIdentifier = toInt(json['bitcointalk_thread_identifier']);
     _telegramChannelIdentifier = json['telegram_channel_identifier'];
     _subredditUrl = json['subreddit_url'];
     _reposUrl = toMap<dynamic>(json['repos_url']);

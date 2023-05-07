@@ -261,7 +261,7 @@ void main() {
       );
 
       test('without parameters', () async {
-        await sut.getBasicInfo();
+        await sut.getBasicInfoList();
         expect(
           sut.endpointPath,
           "$apiVersionPath$basePath"
@@ -277,7 +277,7 @@ void main() {
             body: MarketIndexBasicInfoMockData.validResponseBody
           )
         );
-        var result = await sut!.getBasicInfo();
+        var result = await sut!.getBasicInfoList();
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
@@ -295,7 +295,7 @@ void main() {
             body: MarketIndexBasicInfoMockData.responseBodyWithIncompleteKeys
           )
         );
-        var result = await sut!.getBasicInfo();
+        var result = await sut!.getBasicInfoList();
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
@@ -316,7 +316,7 @@ void main() {
           )
         );
         await expectLater(
-          sut!.getBasicInfo(),
+          sut!.getBasicInfoList(),
           throwsA(isA<NetworkRequestException>())
         );
       });
@@ -331,7 +331,7 @@ void main() {
           )
         );
         await expectLater(
-          sut!.getBasicInfo(),
+          sut!.getBasicInfoList(),
           throwsA(isA<DataParsingException>())
         );
 
@@ -342,7 +342,7 @@ void main() {
           )
         );
         await expectLater(
-          sut!.getBasicInfo(),
+          sut!.getBasicInfoList(),
           throwsA(isA<DataParsingException>())
         );
 
@@ -353,7 +353,7 @@ void main() {
           )
         );
         await expectLater(
-          sut!.getBasicInfo(),
+          sut!.getBasicInfoList(),
           throwsA(isA<DataParsingException>())
         );
       });

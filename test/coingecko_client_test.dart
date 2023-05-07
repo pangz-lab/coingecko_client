@@ -1,34 +1,10 @@
 import 'package:coingecko_client/coingecko_client.dart';
-import 'package:coingecko_client/src/domain/categories/models/coin_categories_data_ordering.dart';
-import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange_ordering.dart';
-import 'package:coingecko_client/src/domain/derivatives/models/derivatives_tickers.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/exchange_data_ordering.dart';
-import 'package:coingecko_client/src/models/currencies.dart';
-import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:test/scaffolding.dart';
 
 void main() {
   group('CoinGeckoClient test', () {
     var client = CoinGeckoClient();
 
-    //## /ping
-    client.ping.getResult();
-
-    //## /simple/price
-    client.simple.getCoinPrice(ids: ['bitcoin'], vsCurrencies: [Currencies.php, Currencies.jpy]);
-    //##  /simple/token_price/{id}
-    client.simple.getTokenPrice(id: 'avalanche', contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'], vsCurrencies: ['btc', 'eth']);
-    //##  /simple/supported_vs_currencies
-    client.simple.getSupportedVsCurrencies();
-    
-
-    //## /coins/list
-    client.coins.getBasicList();
-    //## /coins/{id}/history
-    client.coins.getHistory(id: 'bitcoin', date: DateTime.now());
-    //## /coins/markets
-    client.coins.getMarketList(vsCurrency: Currencies.php);
-    //## /coins/{id}
     client.coins.getInfo(id: 'verus-coin');
     //## /coins/{id}/tickers
     client.coins.getTickers(id: 'bitcoin');
@@ -78,7 +54,7 @@ void main() {
     //## /simple/price
     client.simple.getCoinPrice(
       ids: ['bitcoin', 'ethereum', 'verus-coin'],
-      vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
+      vsCurrencies: [ Currencies.jpy, Currencies.usd, Currencies.php ],
       includeMarketCap: true,
       include24hrVol: true,
       include24hrChange: true,
@@ -89,7 +65,7 @@ void main() {
     client.simple.getTokenPrice(
       id: 'avalanche',
       contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-      vsCurrencies: ['btc', 'eth'],
+      vsCurrencies: [ CryptoCurrencies.btc, CryptoCurrencies.eth ],
       includeMarketCap: true,
       include24hrVol: true,
       include24hrChange: true,
@@ -130,7 +106,7 @@ void main() {
       id: 'HOT',
     );
     //## /indexes/list
-    client.indexes.getBasicInfo();
+    client.indexes.getBasicInfoList();
 
 
     //## /nfts/list

@@ -20,7 +20,7 @@ class SimpleEndpoint extends BaseEndpoint {
   /// [precision] <b>full</b> or any value between 0 - 18 to specify decimal place for currency price value, <b>default: 2</b>
   Future<Map<String, dynamic>> getCoinPrice({
     required List<String> ids,
-    required List<Currencies> vsCurrencies,
+    required List<BaseCurrency> vsCurrencies,
     bool? includeMarketCap,
     bool? include24hrVol,
     bool? include24hrChange,
@@ -31,7 +31,7 @@ class SimpleEndpoint extends BaseEndpoint {
       var path = createEndpointPathUrl(
         rawQueryItems: {
           'ids': ids.join(','),
-          'vs_currencies': vsCurrencies.map((e) => e.code).join(','),
+          'vs_currencies': vsCurrencies.map((e) => e.getCode()).join(','),
           'include_market_cap': includeMarketCap,
           'include_24hr_vol': include24hrVol,
           'include_24hr_change': include24hrChange,
@@ -66,7 +66,7 @@ class SimpleEndpoint extends BaseEndpoint {
   Future<Map<String, dynamic>> getTokenPrice({
     required String id,
     required List<String> contractAddresses,
-    required List<String> vsCurrencies,
+    required List<BaseCurrency> vsCurrencies,
     bool? includeMarketCap,
     bool? include24hrVol,
     bool? include24hrChange,
@@ -78,7 +78,7 @@ class SimpleEndpoint extends BaseEndpoint {
         rawQueryItems: {
           'id': id,
           'contract_addresses': contractAddresses.join(','),
-          'vs_currencies': vsCurrencies.join(','),
+          'vs_currencies': vsCurrencies.map((e) => e.getCode()).join(','),
           'include_market_cap': includeMarketCap,
           'include_24hr_vol': include24hrVol,
           'include_24hr_change': include24hrChange,

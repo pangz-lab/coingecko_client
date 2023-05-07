@@ -65,7 +65,7 @@ class IndexesEndpoint extends BaseEndpoint {
 
   /// List market indexes id and name
   /// <br/><b>Endpoint </b>: /indexes/list
-  Future<List<MarketIndex>> getBasicInfo() async {
+  Future<List<MarketIndex>> getBasicInfoList() async {
     try {
       var path = '/indexes/list';
 

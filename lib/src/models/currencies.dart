@@ -1,4 +1,12 @@
-enum Currencies {
+/// Base class for the currency classes.
+/// `Currencies` and `CryptoCurrencies` can be used for
+/// explicit values while `CustomCurrency` is used for
+/// non standard ones.
+abstract class BaseCurrency {
+  String getCode();
+}
+
+enum Currencies implements BaseCurrency {
   afn('afn'),
   eur('eur'),
   all('all'),
@@ -180,4 +188,94 @@ enum Currencies {
   xag('xag');
   const Currencies(this.code);
   final String code;
+  
+  @override
+  String getCode() {
+    return code;
+  }
+}
+
+enum CryptoCurrencies implements BaseCurrency {
+  btc('btc'),
+  eth('eth'),
+  ltc('ltc'),
+  bch('bch'),
+  bnb('bnb'),
+  eos('eos'),
+  xrp('xrp'),
+  xlm('xlm'),
+  link('link'),
+  dot('dot'),
+  yfi('yfi'),
+  usd('usd'),
+  aed('aed'),
+  ars('ars'),
+  aud('aud'),
+  bdt('bdt'),
+  bhd('bhd'),
+  bmd('bmd'),
+  brl('brl'),
+  cad('cad'),
+  chf('chf'),
+  clp('clp'),
+  cny('cny'),
+  czk('czk'),
+  dkk('dkk'),
+  eur('eur'),
+  gbp('gbp'),
+  hkd('hkd'),
+  huf('huf'),
+  idr('idr'),
+  ils('ils'),
+  inr('inr'),
+  jpy('jpy'),
+  krw('krw'),
+  kwd('kwd'),
+  lkr('lkr'),
+  mmk('mmk'),
+  mxn('mxn'),
+  myr('myr'),
+  ngn('ngn'),
+  nok('nok'),
+  nzd('nzd'),
+  php('php'),
+  pkr('pkr'),
+  pln('pln'),
+  rub('rub'),
+  sar('sar'),
+  sek('sek'),
+  sgd('sgd'),
+  thb('thb'),
+  twd('twd'),
+  uah('uah'),
+  vef('vef'),
+  vnd('vnd'),
+  vrsc('vrsc'),
+  zar('zar'),
+  xdr('xdr'),
+  xag('xag'),
+  xau('xau'),
+  bits('bits'),
+  sats('sats');
+
+  const CryptoCurrencies(this.code);
+  final String code;
+  
+  @override
+  String getCode() {
+    return code;
+  }
+}
+
+class CustomCurrency implements BaseCurrency {
+  String? _code;
+
+  CustomCurrency.from(String code) {
+    _code = code;
+  }
+  
+  @override
+  String getCode() {
+    return _code ?? '';
+  }
 }

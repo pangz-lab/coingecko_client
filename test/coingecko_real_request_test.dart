@@ -214,7 +214,7 @@ void main() {
       var result = await sut.getTokenPrice(
           id: 'avalanche',
           contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
-          vsCurrencies: ['btc', 'eth'],
+          vsCurrencies: [ CryptoCurrencies.btc, CryptoCurrencies.eth ],
           includeMarketCap: true,
           include24hrVol: true,
           include24hrChange: true,
@@ -287,9 +287,9 @@ void main() {
       expect(result.runtimeType, MarketIndex);
     });
     
-    test('getBasicInfo: request should return a valid response', () async {
+    test('getBasicInfoList: request should return a valid response', () async {
       await Future.delayed(Duration(milliseconds: delay));
-      var result = await sut.getBasicInfo();
+      var result = await sut.getBasicInfoList();
       expect(result.runtimeType, List<MarketIndex>);
     });
   });
