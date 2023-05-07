@@ -44,7 +44,7 @@ dependencies:
   coingecko_client: ^1.0.0
 ```
 
-<p></p>Go to <a href="pub.dev/packages/coingecko_client">pub.dev</a> for more details.</p>
+<p></p>Go to <a href="https://pub.dev/packages/coingecko_client">pub.dev</a> for more details.</p>
 ---
 
 
