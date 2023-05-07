@@ -23,7 +23,7 @@ jobs:
       - uses: dart-lang/setup-dart@v1
       - uses: testspace-com/setup-testspace@v1
         with:
-          domain: ${{ github.repository_owner }
+          domain: ${{ github.repository_owner }}
           sdk: ${{ matrix.sdk }}
 
       - name: Install dependencies
