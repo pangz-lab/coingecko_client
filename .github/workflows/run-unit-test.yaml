@@ -5,6 +5,7 @@ on:
     branches:
       - 'master'
       - 'feature/**'
+      - 'release/**'
   pull_request:
     branches:
       - 'master'
@@ -20,11 +21,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: dart-lang/setup-dart@v1
+      - uses: testspace-com/setup-testspace@v1
         with:
+          domain: ${{ github.repository_owner }}
           sdk: ${{ matrix.sdk }}
 
       - name: Install dependencies
         run: dart pub get
 
       - name: Run unit tests
-        run: dart test test/domain
+        run: dart test --coverage=./test_coverage test/domain
