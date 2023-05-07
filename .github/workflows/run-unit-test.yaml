@@ -24,8 +24,6 @@ jobs:
       - uses: testspace-com/setup-testspace@v1
         with:
           domain: ${{ github.repository_owner }
-      
-        with:
           sdk: ${{ matrix.sdk }}
 
       - name: Install dependencies
