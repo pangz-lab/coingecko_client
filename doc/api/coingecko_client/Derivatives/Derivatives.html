@@ -81,23 +81,21 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Derivatives({
-  String? market,
-  String? symbol,
-  String? indexId,
-  double? price,
-  double? pricePercentageChange24h,
-  String? contractType,
-  double? index,
-  double? basis,
-  double? spread,
-  double? fundingRate,
-  double? openInterest,
-  double? volume24h,
-  DateTime? lastTradedAt,
-  DateTime? expiredAt
-}) {
-
+  <pre class="language-dart"><code class="language-dart">Derivatives(
+    {String? market,
+    String? symbol,
+    String? indexId,
+    double? price,
+    double? pricePercentageChange24h,
+    String? contractType,
+    double? index,
+    double? basis,
+    double? spread,
+    double? fundingRate,
+    double? openInterest,
+    double? volume24h,
+    DateTime? lastTradedAt,
+    DateTime? expiredAt}) {
   _market = market;
   _symbol = symbol;
   _indexId = indexId;
@@ -191,7 +189,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

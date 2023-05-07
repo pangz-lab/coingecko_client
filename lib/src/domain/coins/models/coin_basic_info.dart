@@ -6,7 +6,11 @@ class CoinBasicInfo extends BaseModel {
   String? _name;
   Map<String, dynamic>? _platforms;
 
-  CoinBasicInfo({String? id, String? symbol, String? name, Map<String, dynamic>? platforms}) {
+  CoinBasicInfo(
+      {String? id,
+      String? symbol,
+      String? name,
+      Map<String, dynamic>? platforms}) {
     _id = id;
     _symbol = symbol;
     _name = name;

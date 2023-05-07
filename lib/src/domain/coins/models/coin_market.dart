@@ -136,13 +136,20 @@ class CoinMarket extends BaseModel {
   Roi? get roi => _roi;
   DateTime? get lastUpdated => _lastUpdated;
   Map<String, dynamic>? get sparklineIn7d => _sparklineIn7d;
-  double? get priceChangePercentage14dInCurrency => _priceChangePercentage14dInCurrency;
-  double? get priceChangePercentage1hInCurrency => _priceChangePercentage1hInCurrency;
-  double? get priceChangePercentage1yInCurrency => _priceChangePercentage1yInCurrency;
-  double? get priceChangePercentage200dInCurrency => _priceChangePercentage200dInCurrency;
-  double? get priceChangePercentage24hInCurrency => _priceChangePercentage24hInCurrency;
-  double? get priceChangePercentage30dInCurrency => _priceChangePercentage30dInCurrency;
-  double? get priceChangePercentage7dInCurrency => _priceChangePercentage7dInCurrency;
+  double? get priceChangePercentage14dInCurrency =>
+      _priceChangePercentage14dInCurrency;
+  double? get priceChangePercentage1hInCurrency =>
+      _priceChangePercentage1hInCurrency;
+  double? get priceChangePercentage1yInCurrency =>
+      _priceChangePercentage1yInCurrency;
+  double? get priceChangePercentage200dInCurrency =>
+      _priceChangePercentage200dInCurrency;
+  double? get priceChangePercentage24hInCurrency =>
+      _priceChangePercentage24hInCurrency;
+  double? get priceChangePercentage30dInCurrency =>
+      _priceChangePercentage30dInCurrency;
+  double? get priceChangePercentage7dInCurrency =>
+      _priceChangePercentage7dInCurrency;
 
   CoinMarket.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
@@ -159,7 +166,8 @@ class CoinMarket extends BaseModel {
     _priceChange24h = toDouble(json['price_change_24h']);
     _priceChangePercentage24h = toDouble(json['price_change_percentage_24h']);
     _marketCapChange24h = toDouble(json['market_cap_change_24h']);
-    _marketCapChangePercentage24h = toDouble(json['market_cap_change_percentage_24h']);
+    _marketCapChangePercentage24h =
+        toDouble(json['market_cap_change_percentage_24h']);
     _circulatingSupply = toDouble(json['circulating_supply']);
     _totalSupply = toDouble(json['total_supply']);
     _maxSupply = toDouble(json['max_supply']);
@@ -172,13 +180,20 @@ class CoinMarket extends BaseModel {
     _roi = json['roi'] != null ? Roi.fromJson(json['roi']) : null;
     _lastUpdated = toDate(json['last_updated']);
     _sparklineIn7d = toMap<dynamic>(json['sparkline_in_7d']);
-    _priceChangePercentage14dInCurrency = toDouble(json['price_change_percentage_14d_in_currency']);
-    _priceChangePercentage1hInCurrency = toDouble(json['price_change_percentage_1h_in_currency']);
-    _priceChangePercentage1yInCurrency = toDouble(json['price_change_percentage_1y_in_currency']);
-    _priceChangePercentage200dInCurrency = toDouble(json['price_change_percentage_200d_in_currency']);
-    _priceChangePercentage24hInCurrency = toDouble(json['price_change_percentage_24h_in_currency']);
-    _priceChangePercentage30dInCurrency = toDouble(json['price_change_percentage_30d_in_currency']);
-    _priceChangePercentage7dInCurrency = toDouble(json['price_change_percentage_7d_in_currency']);
+    _priceChangePercentage14dInCurrency =
+        toDouble(json['price_change_percentage_14d_in_currency']);
+    _priceChangePercentage1hInCurrency =
+        toDouble(json['price_change_percentage_1h_in_currency']);
+    _priceChangePercentage1yInCurrency =
+        toDouble(json['price_change_percentage_1y_in_currency']);
+    _priceChangePercentage200dInCurrency =
+        toDouble(json['price_change_percentage_200d_in_currency']);
+    _priceChangePercentage24hInCurrency =
+        toDouble(json['price_change_percentage_24h_in_currency']);
+    _priceChangePercentage30dInCurrency =
+        toDouble(json['price_change_percentage_30d_in_currency']);
+    _priceChangePercentage7dInCurrency =
+        toDouble(json['price_change_percentage_7d_in_currency']);
   }
 
   Map<String, dynamic> toJson() {
@@ -210,13 +225,20 @@ class CoinMarket extends BaseModel {
     data['roi'] = _roi;
     data['last_updated'] = _lastUpdated;
     data['sparkline_in_7d'] = _sparklineIn7d;
-    data['price_change_percentage_14d_in_currency'] = _priceChangePercentage14dInCurrency;
-    data['price_change_percentage_1h_in_currency'] = _priceChangePercentage1hInCurrency;
-    data['price_change_percentage_1y_in_currency'] = _priceChangePercentage1yInCurrency;
-    data['price_change_percentage_200d_in_currency'] = _priceChangePercentage200dInCurrency;
-    data['price_change_percentage_24h_in_currency'] = _priceChangePercentage24hInCurrency;
-    data['price_change_percentage_30d_in_currency'] = _priceChangePercentage30dInCurrency;
-    data['price_change_percentage_7d_in_currency'] = _priceChangePercentage7dInCurrency;
+    data['price_change_percentage_14d_in_currency'] =
+        _priceChangePercentage14dInCurrency;
+    data['price_change_percentage_1h_in_currency'] =
+        _priceChangePercentage1hInCurrency;
+    data['price_change_percentage_1y_in_currency'] =
+        _priceChangePercentage1yInCurrency;
+    data['price_change_percentage_200d_in_currency'] =
+        _priceChangePercentage200dInCurrency;
+    data['price_change_percentage_24h_in_currency'] =
+        _priceChangePercentage24hInCurrency;
+    data['price_change_percentage_30d_in_currency'] =
+        _priceChangePercentage30dInCurrency;
+    data['price_change_percentage_7d_in_currency'] =
+        _priceChangePercentage7dInCurrency;
     return data;
   }
 }

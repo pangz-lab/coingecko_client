@@ -436,7 +436,7 @@ class ContractInfoMockData {
 }
 
 class ContractMarketHistoryMockData {
-  static final validResponseBody =  r'''{
+  static final validResponseBody = r'''{
   "prices": [
     [
       1680134400000,

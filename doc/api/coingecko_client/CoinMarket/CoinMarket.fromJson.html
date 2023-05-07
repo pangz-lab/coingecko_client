@@ -83,7 +83,8 @@
   _priceChange24h = toDouble(json[&#39;price_change_24h&#39;]);
   _priceChangePercentage24h = toDouble(json[&#39;price_change_percentage_24h&#39;]);
   _marketCapChange24h = toDouble(json[&#39;market_cap_change_24h&#39;]);
-  _marketCapChangePercentage24h = toDouble(json[&#39;market_cap_change_percentage_24h&#39;]);
+  _marketCapChangePercentage24h =
+      toDouble(json[&#39;market_cap_change_percentage_24h&#39;]);
   _circulatingSupply = toDouble(json[&#39;circulating_supply&#39;]);
   _totalSupply = toDouble(json[&#39;total_supply&#39;]);
   _maxSupply = toDouble(json[&#39;max_supply&#39;]);
@@ -96,13 +97,20 @@
   _roi = json[&#39;roi&#39;] != null ? Roi.fromJson(json[&#39;roi&#39;]) : null;
   _lastUpdated = toDate(json[&#39;last_updated&#39;]);
   _sparklineIn7d = toMap&lt;dynamic&gt;(json[&#39;sparkline_in_7d&#39;]);
-  _priceChangePercentage14dInCurrency = toDouble(json[&#39;price_change_percentage_14d_in_currency&#39;]);
-  _priceChangePercentage1hInCurrency = toDouble(json[&#39;price_change_percentage_1h_in_currency&#39;]);
-  _priceChangePercentage1yInCurrency = toDouble(json[&#39;price_change_percentage_1y_in_currency&#39;]);
-  _priceChangePercentage200dInCurrency = toDouble(json[&#39;price_change_percentage_200d_in_currency&#39;]);
-  _priceChangePercentage24hInCurrency = toDouble(json[&#39;price_change_percentage_24h_in_currency&#39;]);
-  _priceChangePercentage30dInCurrency = toDouble(json[&#39;price_change_percentage_30d_in_currency&#39;]);
-  _priceChangePercentage7dInCurrency = toDouble(json[&#39;price_change_percentage_7d_in_currency&#39;]);
+  _priceChangePercentage14dInCurrency =
+      toDouble(json[&#39;price_change_percentage_14d_in_currency&#39;]);
+  _priceChangePercentage1hInCurrency =
+      toDouble(json[&#39;price_change_percentage_1h_in_currency&#39;]);
+  _priceChangePercentage1yInCurrency =
+      toDouble(json[&#39;price_change_percentage_1y_in_currency&#39;]);
+  _priceChangePercentage200dInCurrency =
+      toDouble(json[&#39;price_change_percentage_200d_in_currency&#39;]);
+  _priceChangePercentage24hInCurrency =
+      toDouble(json[&#39;price_change_percentage_24h_in_currency&#39;]);
+  _priceChangePercentage30dInCurrency =
+      toDouble(json[&#39;price_change_percentage_30d_in_currency&#39;]);
+  _priceChangePercentage7dInCurrency =
+      toDouble(json[&#39;price_change_percentage_7d_in_currency&#39;]);
 }</code></pre>
 </section>
 
@@ -202,7 +210,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

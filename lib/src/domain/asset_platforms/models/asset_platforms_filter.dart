@@ -1,3 +1,1 @@
-enum AssetPlatformsFilter {
-  nft
-}
+enum AssetPlatformsFilter { nft }

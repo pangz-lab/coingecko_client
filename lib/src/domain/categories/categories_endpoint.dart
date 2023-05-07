@@ -5,48 +5,52 @@ import 'package:coingecko_client/src/domain/categories/models/coin_category_info
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
+
+///
+/// List all coin categories and categories with market data
+///
 class CategoriesEndpoint extends BaseEndpoint {
-  CategoriesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
+  CategoriesEndpoint(HttpRequestServiceInterface httpRequestService,
+      {String? apiKey})
+      : super(httpRequestService, {apiKey: apiKey});
 
   /// List all categories
   /// <br/><b>Endpoint </b>: /coins/categories/list
   Future<List<CoinCategoryBasicInfo>> getBasicList() async {
     try {
       var path = '/coins/categories/list';
-      
+
       var result = List<dynamic>.of(await sendBasic(path));
-      return result.map((value) => CoinCategoryBasicInfo.fromJson(value)).toList();
+      return result
+          .map((value) => CoinCategoryBasicInfo.fromJson(value))
+          .toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
       throw DataParsingException.mismatchedType();
-    } catch(_) {
+    } catch (_) {
       rethrow;
     }
   }
 
   /// List all categories with market data
   /// <br/><b>Endpoint </b>: /coins/categories
-  /// 
+  ///
   /// [order] valid values: <b>market_cap_desc (default), market_cap_asc, name_desc, name_asc, market_cap_change_24h_desc and market_cap_change_24h_asc</b>
-  Future<List<CoinCategoryInfo>> getList({
-    CoinCategoriesDataOrdering? order
-  }) async {
+  Future<List<CoinCategoryInfo>> getList(
+      {CoinCategoriesDataOrdering? order}) async {
     try {
       var path = createEndpointPathUrl(
-        rawQueryItems: {
-          'order': order?.value
-        },
-        endpointPath: "/coins/categories"
-      );
-    
+          rawQueryItems: {'order': order?.value},
+          endpointPath: "/coins/categories");
+
       var result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => CoinCategoryInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
       throw DataParsingException.mismatchedType();
-    } catch(_) {
+    } catch (_) {
       rethrow;
     }
   }

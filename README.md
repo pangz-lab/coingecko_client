@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/version-v1.0.0-blue)
+![version](https://img.shields.io/badge/version-v1.0.1-blue)
 ![coverage](https://img.shields.io/badge/coverage-100%25-success)
 ![version](https://img.shields.io/badge/sdk-v2.19.3-blue)
 ![license](https://img.shields.io/badge/license-BSD--3-blue)
@@ -41,10 +41,11 @@ Installation
 Add the dependency to your Dart / Flutter project:
 ```yaml
 dependencies:
-  coingecko_client: ^1.0.0
+  coingecko_client: ^1.0.1
 ```
 
 <p></p>Go to <a href="https://pub.dev/packages/coingecko_client">pub.dev</a> for more details.</p>
+
 ---
 
 
@@ -379,10 +380,11 @@ client.search.getResult(query: 'bybit');
 
 Contacts
 ---------------
-
+<i>
 <p>
 <img src="https://static-00.iconduck.com/assets.00/gmail-icon-512x389-x9sg6cf6.png" height="15"> pangz.lab@gmail.com
 </p>
 <p>
 <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/6266bc493fb42d4e27bb8393_847541504914fd33810e70a0ea73177e.ico" height="25"> Pangz#4102
 </p>
+</i>

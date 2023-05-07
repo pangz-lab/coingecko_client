@@ -110,52 +110,50 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">MarketData({
-  Map&lt;String, dynamic&gt;? currentPrice,
-  Map&lt;String, dynamic&gt;? totalValueLocked,
-  double? mcapToTvlRatio,
-  double? fdvToTvlRatio,
-  Roi? roi,
-  Map&lt;String, dynamic&gt;? ath,
-  Map&lt;String, dynamic&gt;? athChangePercentage,
-  Map&lt;String, dynamic&gt;? athDate,
-  Map&lt;String, dynamic&gt;? atl,
-  Map&lt;String, dynamic&gt;? atlChangePercentage,
-  Map&lt;String, dynamic&gt;? atlDate,
-  Map&lt;String, dynamic&gt;? marketCap,
-  int? marketCapRank,
-  Map&lt;String, dynamic&gt;? fullyDilutedValuation,
-  Map&lt;String, dynamic&gt;? totalVolume,
-  Map&lt;String, dynamic&gt;? high24h,
-  Map&lt;String, dynamic&gt;? low24h,
-  double? priceChange24h,
-  double? priceChangePercentage24h,
-  double? priceChangePercentage7d,
-  double? priceChangePercentage14d,
-  double? priceChangePercentage30d,
-  double? priceChangePercentage60d,
-  double? priceChangePercentage200d,
-  double? priceChangePercentage1y,
-  double? marketCapChange24h,
-  double? marketCapChangePercentage24h,
-  Map&lt;String, dynamic&gt;? priceChange24hInCurrency,
-  Map&lt;String, dynamic&gt;? priceChangePercentage1hInCurrency,
-  Map&lt;String, dynamic&gt;? priceChangePercentage24hInCurrency,
-  Map&lt;String, dynamic&gt;? priceChangePercentage7dInCurrency,
-  Map&lt;String, dynamic&gt;? priceChangePercentage14dInCurrency,
-  Map&lt;String, dynamic&gt;? priceChangePercentage30dInCurrency,
-  Map&lt;String, dynamic&gt;? priceChangePercentage60dInCurrency,
-  Map&lt;String, dynamic&gt;? priceChangePercentage200dInCurrency,
-  Map&lt;String, dynamic&gt;? priceChangePercentage1yInCurrency,
-  Map&lt;String, dynamic&gt;? marketCapChange24hInCurrency,
-  Map&lt;String, dynamic&gt;? marketCapChangePercentage24hInCurrency,
-  int? totalSupply,
-  int? maxSupply,
-  int? circulatingSupply,
-  Map&lt;String, dynamic&gt;? sparkline7d,
-  DateTime? lastUpdated
-}) {
-
+  <pre class="language-dart"><code class="language-dart">MarketData(
+    {Map&lt;String, dynamic&gt;? currentPrice,
+    Map&lt;String, dynamic&gt;? totalValueLocked,
+    double? mcapToTvlRatio,
+    double? fdvToTvlRatio,
+    Roi? roi,
+    Map&lt;String, dynamic&gt;? ath,
+    Map&lt;String, dynamic&gt;? athChangePercentage,
+    Map&lt;String, dynamic&gt;? athDate,
+    Map&lt;String, dynamic&gt;? atl,
+    Map&lt;String, dynamic&gt;? atlChangePercentage,
+    Map&lt;String, dynamic&gt;? atlDate,
+    Map&lt;String, dynamic&gt;? marketCap,
+    int? marketCapRank,
+    Map&lt;String, dynamic&gt;? fullyDilutedValuation,
+    Map&lt;String, dynamic&gt;? totalVolume,
+    Map&lt;String, dynamic&gt;? high24h,
+    Map&lt;String, dynamic&gt;? low24h,
+    double? priceChange24h,
+    double? priceChangePercentage24h,
+    double? priceChangePercentage7d,
+    double? priceChangePercentage14d,
+    double? priceChangePercentage30d,
+    double? priceChangePercentage60d,
+    double? priceChangePercentage200d,
+    double? priceChangePercentage1y,
+    double? marketCapChange24h,
+    double? marketCapChangePercentage24h,
+    Map&lt;String, dynamic&gt;? priceChange24hInCurrency,
+    Map&lt;String, dynamic&gt;? priceChangePercentage1hInCurrency,
+    Map&lt;String, dynamic&gt;? priceChangePercentage24hInCurrency,
+    Map&lt;String, dynamic&gt;? priceChangePercentage7dInCurrency,
+    Map&lt;String, dynamic&gt;? priceChangePercentage14dInCurrency,
+    Map&lt;String, dynamic&gt;? priceChangePercentage30dInCurrency,
+    Map&lt;String, dynamic&gt;? priceChangePercentage60dInCurrency,
+    Map&lt;String, dynamic&gt;? priceChangePercentage200dInCurrency,
+    Map&lt;String, dynamic&gt;? priceChangePercentage1yInCurrency,
+    Map&lt;String, dynamic&gt;? marketCapChange24hInCurrency,
+    Map&lt;String, dynamic&gt;? marketCapChangePercentage24hInCurrency,
+    int? totalSupply,
+    int? maxSupply,
+    int? circulatingSupply,
+    Map&lt;String, dynamic&gt;? sparkline7d,
+    DateTime? lastUpdated}) {
   _currentPrice = currentPrice;
   _totalValueLocked = totalValueLocked;
   _mcapToTvlRatio = mcapToTvlRatio;
@@ -184,22 +182,14 @@
   _marketCapChange24h = marketCapChange24h;
   _marketCapChangePercentage24h = marketCapChangePercentage24h;
   _priceChange24hInCurrency = priceChange24hInCurrency;
-  _priceChangePercentage1hInCurrency =
-      priceChangePercentage1hInCurrency;
-  _priceChangePercentage24hInCurrency =
-      priceChangePercentage24hInCurrency;
-  _priceChangePercentage7dInCurrency =
-      priceChangePercentage7dInCurrency;
-  _priceChangePercentage14dInCurrency =
-      priceChangePercentage14dInCurrency;
-  _priceChangePercentage30dInCurrency =
-      priceChangePercentage30dInCurrency;
-  _priceChangePercentage60dInCurrency =
-      priceChangePercentage60dInCurrency;
-  _priceChangePercentage200dInCurrency =
-      priceChangePercentage200dInCurrency;
-  _priceChangePercentage1yInCurrency =
-      priceChangePercentage1yInCurrency;
+  _priceChangePercentage1hInCurrency = priceChangePercentage1hInCurrency;
+  _priceChangePercentage24hInCurrency = priceChangePercentage24hInCurrency;
+  _priceChangePercentage7dInCurrency = priceChangePercentage7dInCurrency;
+  _priceChangePercentage14dInCurrency = priceChangePercentage14dInCurrency;
+  _priceChangePercentage30dInCurrency = priceChangePercentage30dInCurrency;
+  _priceChangePercentage60dInCurrency = priceChangePercentage60dInCurrency;
+  _priceChangePercentage200dInCurrency = priceChangePercentage200dInCurrency;
+  _priceChangePercentage1yInCurrency = priceChangePercentage1yInCurrency;
   _marketCapChange24hInCurrency = marketCapChange24hInCurrency;
   _marketCapChangePercentage24hInCurrency =
       marketCapChangePercentage24hInCurrency;
@@ -316,7 +306,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

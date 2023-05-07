@@ -74,16 +74,14 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">GlobalDefiInfo({
-  double? defiMarketCap,
-  double? ethMarketCap,
-  double? defiToEthRatio,
-  double? tradingVolume24h,
-  double? defiDominance,
-  String? topCoinName,
-  double? topCoinDefiDominance
-}) {
-
+  <pre class="language-dart"><code class="language-dart">GlobalDefiInfo(
+    {double? defiMarketCap,
+    double? ethMarketCap,
+    double? defiToEthRatio,
+    double? tradingVolume24h,
+    double? defiDominance,
+    String? topCoinName,
+    double? topCoinDefiDominance}) {
   _defiMarketCap = defiMarketCap;
   _ethMarketCap = ethMarketCap;
   _defiToEthRatio = defiToEthRatio;
@@ -163,7 +161,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

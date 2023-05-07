@@ -102,7 +102,6 @@ class MarketExchangeMockData {
 ]''';
 }
 
-
 class MarketExchangeInfoMockData {
   static final validResponseBody = r'''{
   "name": "Binance",
@@ -356,6 +355,7 @@ class MarketExchangeInfoMockData {
   },
 ]''';
 }
+
 class MarketExchangeTickersMockData {
   static final validResponseBody = r'''{
   "name": "Binance",

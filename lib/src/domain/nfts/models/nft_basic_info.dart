@@ -7,14 +7,12 @@ class NftBasicInfo extends BaseModel {
   String? _assetPlatformId;
   String? _symbol;
 
-  NftBasicInfo({
-    String? id,
-    String? contractAddress,
-    String? name,
-    String? assetPlatformId,
-    String? symbol
-  }) {
-
+  NftBasicInfo(
+      {String? id,
+      String? contractAddress,
+      String? name,
+      String? assetPlatformId,
+      String? symbol}) {
     _id = id;
     _contractAddress = contractAddress;
     _name = name;

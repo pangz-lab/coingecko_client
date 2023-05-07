@@ -46,52 +46,50 @@ class MarketData extends BaseModel {
   Map<String, dynamic>? _sparkline7d;
   DateTime? _lastUpdated;
 
-  MarketData({
-    Map<String, dynamic>? currentPrice,
-    Map<String, dynamic>? totalValueLocked,
-    double? mcapToTvlRatio,
-    double? fdvToTvlRatio,
-    Roi? roi,
-    Map<String, dynamic>? ath,
-    Map<String, dynamic>? athChangePercentage,
-    Map<String, dynamic>? athDate,
-    Map<String, dynamic>? atl,
-    Map<String, dynamic>? atlChangePercentage,
-    Map<String, dynamic>? atlDate,
-    Map<String, dynamic>? marketCap,
-    int? marketCapRank,
-    Map<String, dynamic>? fullyDilutedValuation,
-    Map<String, dynamic>? totalVolume,
-    Map<String, dynamic>? high24h,
-    Map<String, dynamic>? low24h,
-    double? priceChange24h,
-    double? priceChangePercentage24h,
-    double? priceChangePercentage7d,
-    double? priceChangePercentage14d,
-    double? priceChangePercentage30d,
-    double? priceChangePercentage60d,
-    double? priceChangePercentage200d,
-    double? priceChangePercentage1y,
-    double? marketCapChange24h,
-    double? marketCapChangePercentage24h,
-    Map<String, dynamic>? priceChange24hInCurrency,
-    Map<String, dynamic>? priceChangePercentage1hInCurrency,
-    Map<String, dynamic>? priceChangePercentage24hInCurrency,
-    Map<String, dynamic>? priceChangePercentage7dInCurrency,
-    Map<String, dynamic>? priceChangePercentage14dInCurrency,
-    Map<String, dynamic>? priceChangePercentage30dInCurrency,
-    Map<String, dynamic>? priceChangePercentage60dInCurrency,
-    Map<String, dynamic>? priceChangePercentage200dInCurrency,
-    Map<String, dynamic>? priceChangePercentage1yInCurrency,
-    Map<String, dynamic>? marketCapChange24hInCurrency,
-    Map<String, dynamic>? marketCapChangePercentage24hInCurrency,
-    int? totalSupply,
-    int? maxSupply,
-    int? circulatingSupply,
-    Map<String, dynamic>? sparkline7d,
-    DateTime? lastUpdated
-  }) {
-
+  MarketData(
+      {Map<String, dynamic>? currentPrice,
+      Map<String, dynamic>? totalValueLocked,
+      double? mcapToTvlRatio,
+      double? fdvToTvlRatio,
+      Roi? roi,
+      Map<String, dynamic>? ath,
+      Map<String, dynamic>? athChangePercentage,
+      Map<String, dynamic>? athDate,
+      Map<String, dynamic>? atl,
+      Map<String, dynamic>? atlChangePercentage,
+      Map<String, dynamic>? atlDate,
+      Map<String, dynamic>? marketCap,
+      int? marketCapRank,
+      Map<String, dynamic>? fullyDilutedValuation,
+      Map<String, dynamic>? totalVolume,
+      Map<String, dynamic>? high24h,
+      Map<String, dynamic>? low24h,
+      double? priceChange24h,
+      double? priceChangePercentage24h,
+      double? priceChangePercentage7d,
+      double? priceChangePercentage14d,
+      double? priceChangePercentage30d,
+      double? priceChangePercentage60d,
+      double? priceChangePercentage200d,
+      double? priceChangePercentage1y,
+      double? marketCapChange24h,
+      double? marketCapChangePercentage24h,
+      Map<String, dynamic>? priceChange24hInCurrency,
+      Map<String, dynamic>? priceChangePercentage1hInCurrency,
+      Map<String, dynamic>? priceChangePercentage24hInCurrency,
+      Map<String, dynamic>? priceChangePercentage7dInCurrency,
+      Map<String, dynamic>? priceChangePercentage14dInCurrency,
+      Map<String, dynamic>? priceChangePercentage30dInCurrency,
+      Map<String, dynamic>? priceChangePercentage60dInCurrency,
+      Map<String, dynamic>? priceChangePercentage200dInCurrency,
+      Map<String, dynamic>? priceChangePercentage1yInCurrency,
+      Map<String, dynamic>? marketCapChange24hInCurrency,
+      Map<String, dynamic>? marketCapChangePercentage24hInCurrency,
+      int? totalSupply,
+      int? maxSupply,
+      int? circulatingSupply,
+      Map<String, dynamic>? sparkline7d,
+      DateTime? lastUpdated}) {
     _currentPrice = currentPrice;
     _totalValueLocked = totalValueLocked;
     _mcapToTvlRatio = mcapToTvlRatio;
@@ -120,22 +118,14 @@ class MarketData extends BaseModel {
     _marketCapChange24h = marketCapChange24h;
     _marketCapChangePercentage24h = marketCapChangePercentage24h;
     _priceChange24hInCurrency = priceChange24hInCurrency;
-    _priceChangePercentage1hInCurrency =
-        priceChangePercentage1hInCurrency;
-    _priceChangePercentage24hInCurrency =
-        priceChangePercentage24hInCurrency;
-    _priceChangePercentage7dInCurrency =
-        priceChangePercentage7dInCurrency;
-    _priceChangePercentage14dInCurrency =
-        priceChangePercentage14dInCurrency;
-    _priceChangePercentage30dInCurrency =
-        priceChangePercentage30dInCurrency;
-    _priceChangePercentage60dInCurrency =
-        priceChangePercentage60dInCurrency;
-    _priceChangePercentage200dInCurrency =
-        priceChangePercentage200dInCurrency;
-    _priceChangePercentage1yInCurrency =
-        priceChangePercentage1yInCurrency;
+    _priceChangePercentage1hInCurrency = priceChangePercentage1hInCurrency;
+    _priceChangePercentage24hInCurrency = priceChangePercentage24hInCurrency;
+    _priceChangePercentage7dInCurrency = priceChangePercentage7dInCurrency;
+    _priceChangePercentage14dInCurrency = priceChangePercentage14dInCurrency;
+    _priceChangePercentage30dInCurrency = priceChangePercentage30dInCurrency;
+    _priceChangePercentage60dInCurrency = priceChangePercentage60dInCurrency;
+    _priceChangePercentage200dInCurrency = priceChangePercentage200dInCurrency;
+    _priceChangePercentage1yInCurrency = priceChangePercentage1yInCurrency;
     _marketCapChange24hInCurrency = marketCapChange24hInCurrency;
     _marketCapChangePercentage24hInCurrency =
         marketCapChangePercentage24hInCurrency;
@@ -173,17 +163,28 @@ class MarketData extends BaseModel {
   double? get priceChangePercentage1y => _priceChangePercentage1y;
   double? get marketCapChange24h => _marketCapChange24h;
   double? get marketCapChangePercentage24h => _marketCapChangePercentage24h;
-  Map<String, dynamic>? get priceChange24hInCurrency => _priceChange24hInCurrency;
-  Map<String, dynamic>? get priceChangePercentage1hInCurrency =>_priceChangePercentage1hInCurrency;
-  Map<String, dynamic>? get priceChangePercentage24hInCurrency => _priceChangePercentage24hInCurrency;
-  Map<String, dynamic>? get priceChangePercentage7dInCurrency => _priceChangePercentage7dInCurrency;
-  Map<String, dynamic>? get priceChangePercentage14dInCurrency => _priceChangePercentage14dInCurrency;
-  Map<String, dynamic>? get priceChangePercentage30dInCurrency => _priceChangePercentage30dInCurrency;
-  Map<String, dynamic>? get priceChangePercentage60dInCurrency => _priceChangePercentage60dInCurrency;
-  Map<String, dynamic>? get priceChangePercentage200dInCurrency => _priceChangePercentage200dInCurrency;
-  Map<String, dynamic>? get priceChangePercentage1yInCurrency => _priceChangePercentage1yInCurrency;
-  Map<String, dynamic>? get marketCapChange24hInCurrency => _marketCapChange24hInCurrency;
-  Map<String, dynamic>? get marketCapChangePercentage24hInCurrency => _marketCapChangePercentage24hInCurrency;
+  Map<String, dynamic>? get priceChange24hInCurrency =>
+      _priceChange24hInCurrency;
+  Map<String, dynamic>? get priceChangePercentage1hInCurrency =>
+      _priceChangePercentage1hInCurrency;
+  Map<String, dynamic>? get priceChangePercentage24hInCurrency =>
+      _priceChangePercentage24hInCurrency;
+  Map<String, dynamic>? get priceChangePercentage7dInCurrency =>
+      _priceChangePercentage7dInCurrency;
+  Map<String, dynamic>? get priceChangePercentage14dInCurrency =>
+      _priceChangePercentage14dInCurrency;
+  Map<String, dynamic>? get priceChangePercentage30dInCurrency =>
+      _priceChangePercentage30dInCurrency;
+  Map<String, dynamic>? get priceChangePercentage60dInCurrency =>
+      _priceChangePercentage60dInCurrency;
+  Map<String, dynamic>? get priceChangePercentage200dInCurrency =>
+      _priceChangePercentage200dInCurrency;
+  Map<String, dynamic>? get priceChangePercentage1yInCurrency =>
+      _priceChangePercentage1yInCurrency;
+  Map<String, dynamic>? get marketCapChange24hInCurrency =>
+      _marketCapChange24hInCurrency;
+  Map<String, dynamic>? get marketCapChangePercentage24hInCurrency =>
+      _marketCapChangePercentage24hInCurrency;
   int? get totalSupply => _totalSupply;
   int? get maxSupply => _maxSupply;
   int? get circulatingSupply => _circulatingSupply;
@@ -217,18 +218,30 @@ class MarketData extends BaseModel {
     _priceChangePercentage200d = toDouble(json['price_change_percentage_200d']);
     _priceChangePercentage1y = toDouble(json['price_change_percentage_1y']);
     _marketCapChange24h = toDouble(json['market_cap_change_24h']);
-    _marketCapChangePercentage24h = toDouble(json['market_cap_change_percentage_24h']);
-    _priceChange24hInCurrency = toMap<dynamic>(json['price_change_24h_in_currency']);
-    _priceChangePercentage1hInCurrency = toMap<dynamic>(json['price_change_percentage_1h_in_currency']);
-    _priceChangePercentage24hInCurrency = toMap<dynamic>(json['price_change_percentage_24h_in_currency']);
-    _priceChangePercentage7dInCurrency = toMap<dynamic>(json['price_change_percentage_7d_in_currency']);
-    _priceChangePercentage14dInCurrency = toMap<dynamic>(json['price_change_percentage_14d_in_currency']);
-    _priceChangePercentage30dInCurrency = toMap<dynamic>(json['price_change_percentage_30d_in_currency']);
-    _priceChangePercentage60dInCurrency = toMap<dynamic>(json['price_change_percentage_60d_in_currency']);
-    _priceChangePercentage200dInCurrency = toMap<dynamic>(json['price_change_percentage_200d_in_currency']);
-    _priceChangePercentage1yInCurrency = toMap<dynamic>(json['price_change_percentage_1y_in_currency']);
-    _marketCapChange24hInCurrency = toMap<dynamic>(json['market_cap_change_24h_in_currency']);
-    _marketCapChangePercentage24hInCurrency = toMap<dynamic>(json['market_cap_change_percentage_24h_in_currency']);
+    _marketCapChangePercentage24h =
+        toDouble(json['market_cap_change_percentage_24h']);
+    _priceChange24hInCurrency =
+        toMap<dynamic>(json['price_change_24h_in_currency']);
+    _priceChangePercentage1hInCurrency =
+        toMap<dynamic>(json['price_change_percentage_1h_in_currency']);
+    _priceChangePercentage24hInCurrency =
+        toMap<dynamic>(json['price_change_percentage_24h_in_currency']);
+    _priceChangePercentage7dInCurrency =
+        toMap<dynamic>(json['price_change_percentage_7d_in_currency']);
+    _priceChangePercentage14dInCurrency =
+        toMap<dynamic>(json['price_change_percentage_14d_in_currency']);
+    _priceChangePercentage30dInCurrency =
+        toMap<dynamic>(json['price_change_percentage_30d_in_currency']);
+    _priceChangePercentage60dInCurrency =
+        toMap<dynamic>(json['price_change_percentage_60d_in_currency']);
+    _priceChangePercentage200dInCurrency =
+        toMap<dynamic>(json['price_change_percentage_200d_in_currency']);
+    _priceChangePercentage1yInCurrency =
+        toMap<dynamic>(json['price_change_percentage_1y_in_currency']);
+    _marketCapChange24hInCurrency =
+        toMap<dynamic>(json['market_cap_change_24h_in_currency']);
+    _marketCapChangePercentage24hInCurrency =
+        toMap<dynamic>(json['market_cap_change_percentage_24h_in_currency']);
     _totalSupply = toInt(json['total_supply']);
     _maxSupply = toInt(json['max_supply']);
     _circulatingSupply = toInt(json['circulating_supply']);
@@ -267,16 +280,25 @@ class MarketData extends BaseModel {
     data['market_cap_change_24h'] = _marketCapChange24h;
     data['market_cap_change_percentage_24h'] = _marketCapChangePercentage24h;
     data['price_change_24h_in_currency'] = _priceChange24hInCurrency;
-    data['price_change_percentage_1h_in_currency'] = _priceChangePercentage1hInCurrency;
-    data['price_change_percentage_24h_in_currency'] = _priceChangePercentage24hInCurrency;
-    data['price_change_percentage_7d_in_currency'] = _priceChangePercentage7dInCurrency;
-    data['price_change_percentage_14d_in_currency'] = _priceChangePercentage14dInCurrency;
-    data['price_change_percentage_30d_in_currency'] = _priceChangePercentage30dInCurrency;
-    data['price_change_percentage_60d_in_currency'] = _priceChangePercentage60dInCurrency;
-    data['price_change_percentage_200d_in_currency'] = _priceChangePercentage200dInCurrency;
-    data['price_change_percentage_1y_in_currency'] = _priceChangePercentage1yInCurrency;
+    data['price_change_percentage_1h_in_currency'] =
+        _priceChangePercentage1hInCurrency;
+    data['price_change_percentage_24h_in_currency'] =
+        _priceChangePercentage24hInCurrency;
+    data['price_change_percentage_7d_in_currency'] =
+        _priceChangePercentage7dInCurrency;
+    data['price_change_percentage_14d_in_currency'] =
+        _priceChangePercentage14dInCurrency;
+    data['price_change_percentage_30d_in_currency'] =
+        _priceChangePercentage30dInCurrency;
+    data['price_change_percentage_60d_in_currency'] =
+        _priceChangePercentage60dInCurrency;
+    data['price_change_percentage_200d_in_currency'] =
+        _priceChangePercentage200dInCurrency;
+    data['price_change_percentage_1y_in_currency'] =
+        _priceChangePercentage1yInCurrency;
     data['market_cap_change_24h_in_currency'] = _marketCapChange24hInCurrency;
-    data['market_cap_change_percentage_24h_in_currency'] = _marketCapChangePercentage24hInCurrency;
+    data['market_cap_change_percentage_24h_in_currency'] =
+        _marketCapChangePercentage24hInCurrency;
     data['total_supply'] = _totalSupply;
     data['max_supply'] = _maxSupply;
     data['circulating_supply'] = _circulatingSupply;

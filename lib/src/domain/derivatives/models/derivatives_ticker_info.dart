@@ -19,26 +19,24 @@ class DerivativesTickerInfo extends BaseModel {
   DateTime? _lastTraded;
   DateTime? _expiredAt;
 
-  DerivativesTickerInfo({
-    String? symbol,
-    String? base,
-    String? target,
-    String? tradeUrl,
-    String? contractType,
-    double? last,
-    double? h24PercentageChange,
-    double? index,
-    double? indexBasisPercentage,
-    double? bidAskSpread,
-    double? fundingRate,
-    double? openInterestUsd,
-    double? h24Volume,
-    Map<String, dynamic>? convertedVolume,
-    Map<String, dynamic>? convertedLast,
-    DateTime? lastTraded,
-    DateTime? expiredAt
-  }) {
-
+  DerivativesTickerInfo(
+      {String? symbol,
+      String? base,
+      String? target,
+      String? tradeUrl,
+      String? contractType,
+      double? last,
+      double? h24PercentageChange,
+      double? index,
+      double? indexBasisPercentage,
+      double? bidAskSpread,
+      double? fundingRate,
+      double? openInterestUsd,
+      double? h24Volume,
+      Map<String, dynamic>? convertedVolume,
+      Map<String, dynamic>? convertedLast,
+      DateTime? lastTraded,
+      DateTime? expiredAt}) {
     _symbol = symbol;
     _base = base;
     _target = target;

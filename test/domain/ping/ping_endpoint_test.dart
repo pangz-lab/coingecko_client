@@ -13,12 +13,8 @@ void main() {
   group('getResult method in', () {
     var basePath = "/ping";
     group('PingEndpoint test endpoint path creation', () {
-      var sut = PingEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: PingMockData.validResponseBody
-        )
-      );
+      var sut = PingEndpoint(HttpRequestServiceMock(
+          statusCode: 200, body: PingMockData.validResponseBody));
 
       test('with required parameters', () async {
         await sut.getResult();
@@ -28,26 +24,17 @@ void main() {
 
     group('PingEndpoint test endpoint response', () {
       test('with data in getting the correct response type', () async {
-        sut = PingEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: PingMockData.validResponseBody
-          )
-        );
+        sut = PingEndpoint(HttpRequestServiceMock(
+            statusCode: 200, body: PingMockData.validResponseBody));
         var result = await sut!.getResult();
 
-        expect(result, {
-          "gecko_says": "(V3) To the Moon!"
-        });
+        expect(result, {"gecko_says": "(V3) To the Moon!"});
       });
 
       test('should still return a result for incomplete data format', () async {
-        sut = PingEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: PingMockData.responseBodyWithIncompleteKeys
-          )
-        );
+        sut = PingEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: PingMockData.responseBodyWithIncompleteKeys));
         var result = await sut!.getResult();
 
         expect(result, {});
@@ -56,44 +43,29 @@ void main() {
 
     group('PingEndpoint test for error handling', () {
       test('should throw an exception for failed request', () async {
-        sut = PingEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 500,
-            body: PingMockData.validResponseBody
-          )
-        );
-        await expectLater(sut!.getResult(), throwsA(isA<NetworkRequestException>()));
+        sut = PingEndpoint(HttpRequestServiceMock(
+            statusCode: 500, body: PingMockData.validResponseBody));
+        await expectLater(
+            sut!.getResult(), throwsA(isA<NetworkRequestException>()));
       });
 
-      test('should return a FormatException when result is error or when parsing failed', () async {
-        sut = PingEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: '''[{
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
+        sut = PingEndpoint(HttpRequestServiceMock(statusCode: 200, body: '''[{
     "error": "coin not found"
-  }]'''
-          )
-        );
-        await expectLater(sut!.getResult(),throwsA(isA<DataParsingException>()));
-
-        sut = PingEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: PingMockData.responseBodyWithInvalidFormat
-          )
-        );
-        await expectLater(sut!.getResult(), throwsA(isA<DataParsingException>()));
-
-        sut = PingEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ""
-          )
-        );
+  }]'''));
         await expectLater(
-          sut!.getResult(),
-          throwsA(isA<DataParsingException>())
-        );
+            sut!.getResult(), throwsA(isA<DataParsingException>()));
+
+        sut = PingEndpoint(HttpRequestServiceMock(
+            statusCode: 200, body: PingMockData.responseBodyWithInvalidFormat));
+        await expectLater(
+            sut!.getResult(), throwsA(isA<DataParsingException>()));
+
+        sut = PingEndpoint(HttpRequestServiceMock(statusCode: 200, body: ""));
+        await expectLater(
+            sut!.getResult(), throwsA(isA<DataParsingException>()));
       });
     });
   });

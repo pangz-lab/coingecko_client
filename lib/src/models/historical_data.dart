@@ -1,5 +1,9 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+///
+/// Used by several classes to represent collection with date and value.
+/// It could be price, ticker or some other data that requires this format.
+///
 class HistoricalData extends BaseModel implements Comparable {
   DateTime? _timestamp;
   double? _value;
@@ -27,8 +31,6 @@ class HistoricalData extends BaseModel implements Comparable {
   @override
   int compareTo(dynamic otherData) {
     var other = otherData as HistoricalData;
-    return (
-      other.timestamp == timestamp && other.value == value
-    ) ? 0 : 1;
+    return (other.timestamp == timestamp && other.value == value) ? 0 : 1;
   }
 }

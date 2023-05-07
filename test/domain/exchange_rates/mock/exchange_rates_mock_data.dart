@@ -1,5 +1,4 @@
 class ExchangeRatesMockData {
-  
   static final validResponseBody = r'''{
   "rates": {
     "btc": {

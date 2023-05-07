@@ -7,13 +7,12 @@ class CoinOhlc extends BaseModel {
   double? _low;
   double? _close;
 
-  CoinOhlc({
-    DateTime? time,
-    double? open,
-    double? high,
-    double? low,
-    double? close
-  }) {
+  CoinOhlc(
+      {DateTime? time,
+      double? open,
+      double? high,
+      double? low,
+      double? close}) {
     _time = time;
     _open = open;
     _high = high;

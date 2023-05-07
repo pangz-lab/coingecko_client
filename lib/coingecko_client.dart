@@ -1,6 +1,6 @@
 /// CoinGecko API client.
 ///
-/// More dartdocs go here.
+/// Main library
 library coingecko_client;
 
 export 'src/coingecko_client_base.dart';

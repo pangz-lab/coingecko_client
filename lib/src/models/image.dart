@@ -1,9 +1,11 @@
-
+///
+/// Used by several classes to represent image urls.
+///
 class Image {
   String? _thumb;
   String? _small;
   String? _large;
-  
+
   Image({String? thumb, String? small, String? large}) {
     _thumb = thumb;
     _small = small;

@@ -16,23 +16,21 @@ class Derivatives extends BaseModel {
   DateTime? _lastTradedAt;
   DateTime? _expiredAt;
 
-  Derivatives({
-    String? market,
-    String? symbol,
-    String? indexId,
-    double? price,
-    double? pricePercentageChange24h,
-    String? contractType,
-    double? index,
-    double? basis,
-    double? spread,
-    double? fundingRate,
-    double? openInterest,
-    double? volume24h,
-    DateTime? lastTradedAt,
-    DateTime? expiredAt
-  }) {
-
+  Derivatives(
+      {String? market,
+      String? symbol,
+      String? indexId,
+      double? price,
+      double? pricePercentageChange24h,
+      String? contractType,
+      double? index,
+      double? basis,
+      double? spread,
+      double? fundingRate,
+      double? openInterest,
+      double? volume24h,
+      DateTime? lastTradedAt,
+      DateTime? expiredAt}) {
     _market = market;
     _symbol = symbol;
     _indexId = indexId;

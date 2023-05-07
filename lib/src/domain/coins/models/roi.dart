@@ -1,4 +1,3 @@
-
 import 'package:coingecko_client/src/models/base_model.dart';
 
 class Roi extends BaseModel {
@@ -15,7 +14,6 @@ class Roi extends BaseModel {
   double? get times => _times;
   String? get currency => _currency;
   double? get percentage => _percentage;
-  
 
   Roi.fromJson(Map<String, dynamic> json) {
     _times = toDouble(json['times']);

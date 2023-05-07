@@ -14,12 +14,9 @@ void main() {
   group('getBasicList method in', () {
     var basePath = "/coins/categories/list";
     group('CategoriesEndpoint test endpoint path creation', () {
-      var sut = CategoriesEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: CategoriesBasicInfoListMockData.validResponseBody
-        )
-      );
+      var sut = CategoriesEndpoint(HttpRequestServiceMock(
+          statusCode: 200,
+          body: CategoriesBasicInfoListMockData.validResponseBody));
 
       test('without parameters', () async {
         await sut.getBasicList();
@@ -29,30 +26,25 @@ void main() {
 
     group('CategoriesEndpoint test endpoint response', () {
       test('with data in getting the correct response type', () async {
-        sut = CategoriesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: CategoriesBasicInfoListMockData.validResponseBody
-          )
-        );
+        sut = CategoriesEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: CategoriesBasicInfoListMockData.validResponseBody));
         var result = await sut!.getBasicList();
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
         expect(result.length, 4);
-        expect(firstItem.id,"aave-tokens");
-        expect(firstItem.name,"Aave Tokens");
-        expect(lastItem.id,"algorand-ecosystem");
-        expect(lastItem.name,"Algorand Ecosystem");
+        expect(firstItem.id, "aave-tokens");
+        expect(firstItem.name, "Aave Tokens");
+        expect(lastItem.id, "algorand-ecosystem");
+        expect(lastItem.name, "Algorand Ecosystem");
       });
 
       test('should still return a result for incomplete data format', () async {
-        sut = CategoriesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: CategoriesBasicInfoListMockData.responseBodyWithIncompleteKeys
-          )
-        );
+        sut = CategoriesEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: CategoriesBasicInfoListMockData
+                .responseBodyWithIncompleteKeys));
         var result = await sut!.getBasicList();
 
         var firstItem = result.elementAt(0);
@@ -61,50 +53,40 @@ void main() {
         expect(firstItem.id, "aave-tokens");
         expect(firstItem.name, null);
         expect(lastItem.id, null);
-        expect(lastItem.name,"Aptos Ecosystem");
+        expect(lastItem.name, "Aptos Ecosystem");
       });
     });
 
     group('CategoriesEndpoint test for error handling', () {
       test('should throw an exception for failed request', () async {
-        sut = CategoriesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 500,
-            body: CategoriesBasicInfoListMockData.validResponseBody
-          )
-        );
-        await expectLater(sut!.getBasicList(), throwsA(isA<NetworkRequestException>()));
+        sut = CategoriesEndpoint(HttpRequestServiceMock(
+            statusCode: 500,
+            body: CategoriesBasicInfoListMockData.validResponseBody));
+        await expectLater(
+            sut!.getBasicList(), throwsA(isA<NetworkRequestException>()));
       });
 
-      test('should return a FormatException when result is error or when parsing failed', () async {
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
         sut = CategoriesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: '''{
+            HttpRequestServiceMock(statusCode: 200, body: '''{
     "error": "coin not found"
-  }'''
-          )
-        );
-        await expectLater(sut!.getBasicList(),throwsA(isA<DataParsingException>()));
-
-        sut = CategoriesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: CategoriesBasicInfoListMockData.responseBodyWithInvalidFormat
-          )
-        );
-        await expectLater(sut!.getBasicList(), throwsA(isA<DataParsingException>()));
-
-        sut = CategoriesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ""
-          )
-        );
+  }'''));
         await expectLater(
-          sut!.getBasicList(),
-          throwsA(isA<DataParsingException>())
-        );
+            sut!.getBasicList(), throwsA(isA<DataParsingException>()));
+
+        sut = CategoriesEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body:
+                CategoriesBasicInfoListMockData.responseBodyWithInvalidFormat));
+        await expectLater(
+            sut!.getBasicList(), throwsA(isA<DataParsingException>()));
+
+        sut = CategoriesEndpoint(
+            HttpRequestServiceMock(statusCode: 200, body: ""));
+        await expectLater(
+            sut!.getBasicList(), throwsA(isA<DataParsingException>()));
       });
     });
   });
@@ -112,12 +94,8 @@ void main() {
   group('getList method in', () {
     var basePath = "/coins/categories";
     group('CategoriesEndpoint test endpoint path creation', () {
-      var sut = CategoriesEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: CategoriesInfoListMockData.validResponseBody
-        )
-      );
+      var sut = CategoriesEndpoint(HttpRequestServiceMock(
+          statusCode: 200, body: CategoriesInfoListMockData.validResponseBody));
 
       test('without parameters', () async {
         await sut.getList();
@@ -125,27 +103,19 @@ void main() {
       });
 
       test('with all parameters', () async {
-        await sut.getList(
-          order: CoinCategoriesDataOrdering.marketCapAsc
-        );
+        await sut.getList(order: CoinCategoriesDataOrdering.marketCapAsc);
         expect(
-          sut.endpointPath,
-          "$apiVersionPath$basePath?order=market_cap_asc"
-        );
+            sut.endpointPath, "$apiVersionPath$basePath?order=market_cap_asc");
       });
     });
 
     group('CategoriesEndpoint test endpoint response', () {
       test('with data in getting the correct response type', () async {
-        sut = CategoriesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: CategoriesInfoListMockData.validResponseBody
-          )
-        );
-        var result = await sut!.getList(
-          order: CoinCategoriesDataOrdering.marketCapAsc
-        );
+        sut = CategoriesEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: CategoriesInfoListMockData.validResponseBody));
+        var result =
+            await sut!.getList(order: CoinCategoriesDataOrdering.marketCapAsc);
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
@@ -163,11 +133,12 @@ void main() {
         expect(firstItem.volume24h, 108322.37183734335);
         expect(firstItem.updatedAt, DateTime.parse("2023-05-06T04:10:29.372Z"));
 
-        expect(lastItem.id,"fan-token");
-        expect(lastItem.name,"Fan Token");
-        expect(lastItem.marketCap,332506254.94806916);
-        expect(lastItem.marketCapChange24h,-2.9315845722063925);
-        expect(lastItem.content,"Fan tokens let sporting organizations and other celebrities engage with their communities, where holders can access exclusive benefits.");
+        expect(lastItem.id, "fan-token");
+        expect(lastItem.name, "Fan Token");
+        expect(lastItem.marketCap, 332506254.94806916);
+        expect(lastItem.marketCapChange24h, -2.9315845722063925);
+        expect(lastItem.content,
+            "Fan tokens let sporting organizations and other celebrities engage with their communities, where holders can access exclusive benefits.");
         expect(lastItem.top3Coins, [
           "https://assets.coingecko.com/coins/images/15799/small/mJgwTHzCVVCJlqo1tF0NWP57igOYSXr5k1Vqvomd.png?1621929124",
           null,
@@ -178,15 +149,11 @@ void main() {
       });
 
       test('should still return a result for incomplete data format', () async {
-        sut = CategoriesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: CategoriesInfoListMockData.responseBodyWithIncompleteKeys
-          )
-        );
-        var result = await sut!.getList(
-          order: CoinCategoriesDataOrdering.marketCapAsc
-        );
+        sut = CategoriesEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: CategoriesInfoListMockData.responseBodyWithIncompleteKeys));
+        var result =
+            await sut!.getList(order: CoinCategoriesDataOrdering.marketCapAsc);
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
@@ -200,11 +167,12 @@ void main() {
         expect(firstItem.volume24h, 108322.37183734335);
         expect(firstItem.updatedAt, DateTime.parse("2023-05-06T04:10:29.372Z"));
 
-        expect(lastItem.id,"fan-token");
-        expect(lastItem.name,"Fan Token");
-        expect(lastItem.marketCap,332506254.94806916);
-        expect(lastItem.marketCapChange24h,-2.9315845722063925);
-        expect(lastItem.content,"Fan tokens let sporting organizations and other celebrities engage with their communities, where holders can access exclusive benefits.");
+        expect(lastItem.id, "fan-token");
+        expect(lastItem.name, "Fan Token");
+        expect(lastItem.marketCap, 332506254.94806916);
+        expect(lastItem.marketCapChange24h, -2.9315845722063925);
+        expect(lastItem.content,
+            "Fan tokens let sporting organizations and other celebrities engage with their communities, where holders can access exclusive benefits.");
         expect(lastItem.top3Coins, [
           null,
           null,
@@ -217,54 +185,38 @@ void main() {
 
     group('CategoriesEndpoint test for error handling', () {
       test('should throw an exception for failed request', () async {
-        sut = CategoriesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 500,
-            body: CategoriesInfoListMockData.validResponseBody
-          )
-        );
-        await expectLater(sut!.getList(
-          order: CoinCategoriesDataOrdering.marketCapAsc
-        ), throwsA(isA<NetworkRequestException>()));
+        sut = CategoriesEndpoint(HttpRequestServiceMock(
+            statusCode: 500,
+            body: CategoriesInfoListMockData.validResponseBody));
+        await expectLater(
+            sut!.getList(order: CoinCategoriesDataOrdering.marketCapAsc),
+            throwsA(isA<NetworkRequestException>()));
       });
 
-      test('should return a FormatException when result is error or when parsing failed', () async {
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
         sut = CategoriesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: '''{
+            HttpRequestServiceMock(statusCode: 200, body: '''{
     "error": "coin not found"
-  }'''
-          )
-        );
-        await expectLater(sut!.getList(
-          order: CoinCategoriesDataOrdering.marketCapAsc
-        ),throwsA(isA<DataParsingException>()));
-
-        sut = CategoriesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: CategoriesInfoListMockData.responseBodyWithInvalidFormat
-          )
-        );
-        await expectLater(sut!.getList(
-          order: CoinCategoriesDataOrdering.marketCapAsc
-        ), throwsA(isA<DataParsingException>()));
-
-        sut = CategoriesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ""
-          )
-        );
+  }'''));
         await expectLater(
-          sut!.getList(
-            order: CoinCategoriesDataOrdering.marketCapAsc
-          ),
-          throwsA(isA<DataParsingException>())
-        );
+            sut!.getList(order: CoinCategoriesDataOrdering.marketCapAsc),
+            throwsA(isA<DataParsingException>()));
+
+        sut = CategoriesEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: CategoriesInfoListMockData.responseBodyWithInvalidFormat));
+        await expectLater(
+            sut!.getList(order: CoinCategoriesDataOrdering.marketCapAsc),
+            throwsA(isA<DataParsingException>()));
+
+        sut = CategoriesEndpoint(
+            HttpRequestServiceMock(statusCode: 200, body: ""));
+        await expectLater(
+            sut!.getList(order: CoinCategoriesDataOrdering.marketCapAsc),
+            throwsA(isA<DataParsingException>()));
       });
     });
   });
-
 }

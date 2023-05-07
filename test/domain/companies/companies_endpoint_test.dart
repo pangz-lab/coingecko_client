@@ -13,32 +13,20 @@ void main() {
   group('getList method in', () {
     var basePath = "/companies/public_treasury/ethereum";
     group('CompaniesEndpoint test endpoint path creation', () {
-      var sut = CompaniesEndpoint(
-        HttpRequestServiceMock(
-          statusCode : 200,
-          body: CompaniesMockData.validResponseBody
-        )
-      );
+      var sut = CompaniesEndpoint(HttpRequestServiceMock(
+          statusCode: 200, body: CompaniesMockData.validResponseBody));
 
       test('with required parameters', () async {
-        await sut.getList(
-          coinId: 'ethereum'
-        );
+        await sut.getList(coinId: 'ethereum');
         expect(sut.endpointPath, "$apiVersionPath$basePath");
       });
     });
 
     group('CompaniesEndpoint test endpoint response', () {
       test('with data in getting the correct response type', () async {
-        sut = CompaniesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: CompaniesMockData.validResponseBody
-          )
-        );
-        var result = await sut!.getList(
-          coinId: 'ethereum'
-        );
+        sut = CompaniesEndpoint(HttpRequestServiceMock(
+            statusCode: 200, body: CompaniesMockData.validResponseBody));
+        var result = await sut!.getList(coinId: 'ethereum');
 
         expect(result.totalHoldings, 80026.1);
         expect(result.totalValueUsd, 152884386.10418233);
@@ -53,7 +41,7 @@ void main() {
         expect(firstCompany.totalEntryValueUsd, 165400000);
         expect(firstCompany.totalCurrentValueUsd, 93382085);
         expect(firstCompany.percentageOfTotalSupply, 0.041);
-        
+
         expect(lastCompany.name, "Mogo Inc.");
         expect(lastCompany.symbol, "NASDAQ:MOGO");
         expect(lastCompany.country, "CA");
@@ -64,15 +52,10 @@ void main() {
       });
 
       test('should still return a result for incomplete data format', () async {
-        sut = CompaniesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: CompaniesMockData.responseBodyWithIncompleteKeys
-          )
-        );
-        var result = await sut!.getList(
-          coinId: 'ethereum'
-        );
+        sut = CompaniesEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: CompaniesMockData.responseBodyWithIncompleteKeys));
+        var result = await sut!.getList(coinId: 'ethereum');
 
         expect(result.totalHoldings, 80026.1);
         expect(result.totalValueUsd, 152884386.10418233);
@@ -87,7 +70,7 @@ void main() {
         expect(firstCompany.totalEntryValueUsd, null);
         expect(firstCompany.totalCurrentValueUsd, null);
         expect(firstCompany.percentageOfTotalSupply, null);
-        
+
         expect(lastCompany.name, null);
         expect(lastCompany.symbol, null);
         expect(lastCompany.country, null);
@@ -100,54 +83,33 @@ void main() {
 
     group('CompaniesEndpoint test for error handling', () {
       test('should throw an exception for failed request', () async {
-        sut = CompaniesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 500,
-            body: CompaniesMockData.validResponseBody
-          )
-        );
-        await expectLater(sut!.getList(
-          coinId: 'ethereum'
-        ), throwsA(isA<NetworkRequestException>()));
+        sut = CompaniesEndpoint(HttpRequestServiceMock(
+            statusCode: 500, body: CompaniesMockData.validResponseBody));
+        await expectLater(sut!.getList(coinId: 'ethereum'),
+            throwsA(isA<NetworkRequestException>()));
       });
 
-      test('should return a FormatException when result is error or when parsing failed', () async {
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
         sut = CompaniesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: '''[{
+            HttpRequestServiceMock(statusCode: 200, body: '''[{
     "error": "coin not found"
-  }]'''
-          )
-        );
-        await expectLater(sut!.getList(
-          coinId: 'ethereum'
-        ),throwsA(isA<DataParsingException>()));
+  }]'''));
+        await expectLater(sut!.getList(coinId: 'ethereum'),
+            throwsA(isA<DataParsingException>()));
+
+        sut = CompaniesEndpoint(HttpRequestServiceMock(
+            statusCode: 200,
+            body: CompaniesMockData.responseBodyWithInvalidFormat));
+        await expectLater(sut!.getList(coinId: 'ethereum'),
+            throwsA(isA<DataParsingException>()));
 
         sut = CompaniesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: CompaniesMockData.responseBodyWithInvalidFormat
-          )
-        );
-        await expectLater(sut!.getList(
-          coinId: 'ethereum'
-        ), throwsA(isA<DataParsingException>()));
-
-        sut = CompaniesEndpoint(
-          HttpRequestServiceMock(
-            statusCode : 200,
-            body: ""
-          )
-        );
-        await expectLater(
-          sut!.getList(
-          coinId: 'ethereum'
-        ),
-          throwsA(isA<DataParsingException>())
-        );
+            HttpRequestServiceMock(statusCode: 200, body: ""));
+        await expectLater(sut!.getList(coinId: 'ethereum'),
+            throwsA(isA<DataParsingException>()));
       });
     });
   });
-
 }

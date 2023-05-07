@@ -119,7 +119,6 @@ class DerivativesExchangeListMockData {
 ]''';
 }
 
-
 class DerivativesExchangeMockData {
   static final validResponseBody = r'''
   {

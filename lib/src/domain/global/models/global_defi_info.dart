@@ -9,16 +9,14 @@ class GlobalDefiInfo extends BaseModel {
   String? _topCoinName;
   double? _topCoinDefiDominance;
 
-  GlobalDefiInfo({
-    double? defiMarketCap,
-    double? ethMarketCap,
-    double? defiToEthRatio,
-    double? tradingVolume24h,
-    double? defiDominance,
-    String? topCoinName,
-    double? topCoinDefiDominance
-  }) {
-
+  GlobalDefiInfo(
+      {double? defiMarketCap,
+      double? ethMarketCap,
+      double? defiToEthRatio,
+      double? tradingVolume24h,
+      double? defiDominance,
+      String? topCoinName,
+      double? topCoinDefiDominance}) {
     _defiMarketCap = defiMarketCap;
     _ethMarketCap = ethMarketCap;
     _defiToEthRatio = defiToEthRatio;

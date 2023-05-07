@@ -1,5 +1,5 @@
 class AssetPlatformsMockData {
-    static final validResponseBody = '''[
+  static final validResponseBody = '''[
   {
     "id": "factom",
     "chain_identifier": null,

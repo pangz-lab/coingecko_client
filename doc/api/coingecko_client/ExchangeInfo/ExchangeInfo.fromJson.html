@@ -90,9 +90,16 @@
   _trustScore = toInt(json[&#39;trust_score&#39;]);
   _trustScoreRank = toInt(json[&#39;trust_score_rank&#39;]);
   _tradeVolume24hBtc = toDouble(json[&#39;trade_volume_24h_btc&#39;]);
-  _tradeVolume24hBtcNormalized = toDouble(json[&#39;trade_volume_24h_btc_normalized&#39;]);
-  _tickers = json[&#39;tickers&#39;] != null ? List.from(json[&#39;tickers&#39;]).map((v) =&gt; TickerInfo.fromJson(v)).toList() : null;
-  _statusUpdates = json[&#39;status_updates&#39;] != null ? List.from(json[&#39;status_updates&#39;]).map((v) =&gt; ExchangeStatus.fromJson(v)).toList() : null;
+  _tradeVolume24hBtcNormalized =
+      toDouble(json[&#39;trade_volume_24h_btc_normalized&#39;]);
+  _tickers = json[&#39;tickers&#39;] != null
+      ? List.from(json[&#39;tickers&#39;]).map((v) =&gt; TickerInfo.fromJson(v)).toList()
+      : null;
+  _statusUpdates = json[&#39;status_updates&#39;] != null
+      ? List.from(json[&#39;status_updates&#39;])
+          .map((v) =&gt; ExchangeStatus.fromJson(v))
+          .toList()
+      : null;
 }</code></pre>
 </section>
 
@@ -182,7 +189,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

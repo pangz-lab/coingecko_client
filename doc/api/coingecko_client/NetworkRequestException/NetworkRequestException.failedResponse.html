@@ -69,18 +69,18 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">factory NetworkRequestException.failedResponse(int statusCode, Response response) {
+  <pre class="language-dart"><code class="language-dart">factory NetworkRequestException.failedResponse(
+    int statusCode, Response response) {
   return NetworkRequestException(
-    &quot;[STATUS: $statusCode] Failed to receive the response from the server.&quot;
-    &quot;\n\n[RESPONSE]&quot;
-    &quot;\n${response.body}&quot;
-    &quot;\n${response.reasonPhrase}&quot;
-    &quot;\n${response.headers}&quot;
-    &quot;\n\n[REQUEST]&quot;
-    &quot;\n${response.request?.url ?? &#39;&#39;}&quot;
-    &quot;\n${response.request?.headers ?? &#39;&#39;}&quot;
-    &quot;\n${response.request?.method ?? &#39;&#39;}&quot;
-  );
+      &quot;[STATUS: $statusCode] Failed to receive the response from the server.&quot;
+      &quot;\n\n[RESPONSE]&quot;
+      &quot;\n${response.body}&quot;
+      &quot;\n${response.reasonPhrase}&quot;
+      &quot;\n${response.headers}&quot;
+      &quot;\n\n[REQUEST]&quot;
+      &quot;\n${response.request?.url ?? &#39;&#39;}&quot;
+      &quot;\n${response.request?.headers ?? &#39;&#39;}&quot;
+      &quot;\n${response.request?.method ?? &#39;&#39;}&quot;);
 }</code></pre>
 </section>
 
@@ -140,7 +140,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

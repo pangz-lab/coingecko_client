@@ -13,19 +13,18 @@ class CoinLinks extends BaseModel {
   String? _subredditUrl;
   Map<String, dynamic>? _reposUrl;
 
-  CoinLinks({
-    List<String>? homepage,
-    List<String>? blockchainSite,
-    List<String>? officialForumUrl,
-    List<String>? chatUrl,
-    List<String>? announcementUrl,
-    String? twitterScreenName,
-    String? facebookUsername,
-    int? bitcointalkThreadIdentifier,
-    String? telegramChannelIdentifier,
-    String? subredditUrl,
-    Map<String, dynamic>? reposUrl
-  }) {
+  CoinLinks(
+      {List<String>? homepage,
+      List<String>? blockchainSite,
+      List<String>? officialForumUrl,
+      List<String>? chatUrl,
+      List<String>? announcementUrl,
+      String? twitterScreenName,
+      String? facebookUsername,
+      int? bitcointalkThreadIdentifier,
+      String? telegramChannelIdentifier,
+      String? subredditUrl,
+      Map<String, dynamic>? reposUrl}) {
     _homepage = homepage;
     _blockchainSite = blockchainSite;
     _officialForumUrl = officialForumUrl;

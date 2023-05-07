@@ -81,8 +81,10 @@
   _description = json[&#39;description&#39;];
   _url = json[&#39;url&#39;];
   _tickers = json[&#39;tickers&#39;] != null
-    ? List&lt;dynamic&gt;.of(json[&#39;tickers&#39;]).map((e) =&gt; DerivativesTickerInfo.fromJson(e)).toList()
-    : null;
+      ? List&lt;dynamic&gt;.of(json[&#39;tickers&#39;])
+          .map((e) =&gt; DerivativesTickerInfo.fromJson(e))
+          .toList()
+      : null;
 }</code></pre>
 </section>
 
@@ -160,7 +162,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

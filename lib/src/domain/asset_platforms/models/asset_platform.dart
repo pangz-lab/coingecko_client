@@ -22,7 +22,7 @@ class AssetPlatform extends BaseModel {
   int? get chainIdentifier => _chainIdentifier;
   String? get name => _name;
   String? get shortName => _shortName;
-  
+
   AssetPlatform.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _chainIdentifier = toInt(json['chain_identifier']);

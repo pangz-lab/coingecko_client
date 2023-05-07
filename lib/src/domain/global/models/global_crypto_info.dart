@@ -12,18 +12,17 @@ class GlobalCryptoInfo extends BaseModel {
   double? _marketCapChangePercentage24hUsd;
   DateTime? _updatedAt;
 
-  GlobalCryptoInfo({
-    int? activeCryptocurrencies,
-    int? upcomingIcos,
-    int? ongoingIcos,
-    int? endedIcos,
-    int? markets,
-    Map<String, dynamic>? totalMarketCap,
-    Map<String, dynamic>? totalVolume,
-    Map<String, dynamic>? marketCapPercentage,
-    double? marketCapChangePercentage24hUsd,
-    DateTime? updatedAt
-  }) {
+  GlobalCryptoInfo(
+      {int? activeCryptocurrencies,
+      int? upcomingIcos,
+      int? ongoingIcos,
+      int? endedIcos,
+      int? markets,
+      Map<String, dynamic>? totalMarketCap,
+      Map<String, dynamic>? totalVolume,
+      Map<String, dynamic>? marketCapPercentage,
+      double? marketCapChangePercentage24hUsd,
+      DateTime? updatedAt}) {
     _activeCryptocurrencies = activeCryptocurrencies;
     _upcomingIcos = upcomingIcos;
     _ongoingIcos = ongoingIcos;
@@ -44,7 +43,8 @@ class GlobalCryptoInfo extends BaseModel {
   Map<String, dynamic>? get totalMarketCap => _totalMarketCap;
   Map<String, dynamic>? get totalVolume => _totalVolume;
   Map<String, dynamic>? get marketCapPercentage => _marketCapPercentage;
-  double? get marketCapChangePercentage24hUsd => _marketCapChangePercentage24hUsd;
+  double? get marketCapChangePercentage24hUsd =>
+      _marketCapChangePercentage24hUsd;
   DateTime? get updatedAt => _updatedAt;
 
   GlobalCryptoInfo.fromJson(Map<String, dynamic> json) {
@@ -56,7 +56,8 @@ class GlobalCryptoInfo extends BaseModel {
     _totalMarketCap = toMap<dynamic>(json['total_market_cap']);
     _totalVolume = toMap<dynamic>(json['total_volume']);
     _marketCapPercentage = toMap<dynamic>(json['market_cap_percentage']);
-    _marketCapChangePercentage24hUsd = toDouble(json['market_cap_change_percentage_24h_usd']);
+    _marketCapChangePercentage24hUsd =
+        toDouble(json['market_cap_change_percentage_24h_usd']);
     _updatedAt = toDateFromTimestamp(json['updated_at']);
   }
 
@@ -70,7 +71,8 @@ class GlobalCryptoInfo extends BaseModel {
     data['total_market_cap'] = _totalMarketCap;
     data['total_volume'] = _totalVolume;
     data['market_cap_percentage'] = _marketCapPercentage;
-    data['market_cap_change_percentage_24h_usd'] = _marketCapChangePercentage24hUsd;
+    data['market_cap_change_percentage_24h_usd'] =
+        _marketCapChangePercentage24hUsd;
     data['updated_at'] = _updatedAt;
     return data;
   }

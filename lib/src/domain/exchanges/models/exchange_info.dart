@@ -127,9 +127,16 @@ class ExchangeInfo extends BaseModel {
     _trustScore = toInt(json['trust_score']);
     _trustScoreRank = toInt(json['trust_score_rank']);
     _tradeVolume24hBtc = toDouble(json['trade_volume_24h_btc']);
-    _tradeVolume24hBtcNormalized = toDouble(json['trade_volume_24h_btc_normalized']);
-    _tickers = json['tickers'] != null ? List.from(json['tickers']).map((v) => TickerInfo.fromJson(v)).toList() : null;
-    _statusUpdates = json['status_updates'] != null ? List.from(json['status_updates']).map((v) => ExchangeStatus.fromJson(v)).toList() : null;
+    _tradeVolume24hBtcNormalized =
+        toDouble(json['trade_volume_24h_btc_normalized']);
+    _tickers = json['tickers'] != null
+        ? List.from(json['tickers']).map((v) => TickerInfo.fromJson(v)).toList()
+        : null;
+    _statusUpdates = json['status_updates'] != null
+        ? List.from(json['status_updates'])
+            .map((v) => ExchangeStatus.fromJson(v))
+            .toList()
+        : null;
   }
 
   Map<String?, dynamic> toJson() {

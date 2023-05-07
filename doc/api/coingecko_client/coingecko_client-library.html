@@ -59,7 +59,7 @@
     
 <section class="desc markdown">
   <p>CoinGecko API client.</p>
-<p>More dartdocs go here.</p>
+<p>Main library</p>
 </section>
 
 
@@ -80,10 +80,10 @@
 
 </dt>
 <dd>
-  Base class for the currency classes.
+  Base class for the currency classes.<br>
 <code>Currencies</code> and <code>CryptoCurrencies</code> can be used for
-explicit values while <code>CustomCurrency</code> is used for
-non standard ones.
+explicit values while <code>CustomCurrency</code> is used to
+specify non standard values.
 </dd>
 
         <dt id="BaseModel">
@@ -91,7 +91,10 @@ non standard ones.
 
 </dt>
 <dd>
-  
+  Base class of model classes. <br>
+Can be extended to create model class for other data formats.<br>
+This provides utiliy methods to explcitly convert data to it's target type
+to avoid formatting error in runtime
 </dd>
 
         <dt id="CoinBasicInfo">
@@ -211,7 +214,9 @@ non standard ones.
 
 </dt>
 <dd>
-  
+  You might need to use currencies that does not exist<br>
+in either <code>Currencies</code> or <code>CryptoCurrencies</code> enum/clas. You can use this do define
+custom currencies.
 </dd>
 
         <dt id="Derivatives">
@@ -299,7 +304,8 @@ non standard ones.
 
 </dt>
 <dd>
-  
+  Used by several classes to represent collection with date and value.
+It could be price, ticker or some other data that requires this format.
 </dd>
 
         <dt id="MarketData">
@@ -415,7 +421,7 @@ non standard ones.
 
 </dt>
 <dd>
-  
+  Collection of known cryptocurrencies.
 </dd>
 
         <dt id="Currencies">
@@ -423,7 +429,7 @@ non standard ones.
 
 </dt>
 <dd>
-  
+  Collection of known world currencies.
 </dd>
 
         <dt id="DataRange">
@@ -431,7 +437,7 @@ non standard ones.
 
 </dt>
 <dd>
-  
+  Use to specify data for a specific date ranges.
 </dd>
 
         <dt id="DerivativesExchangeOrdering">
@@ -479,7 +485,8 @@ non standard ones.
 
 </dt>
 <dd>
-  
+  This exception is raised when issue occured during the parsing of the json data.<br>
+Data can be unreadable or have an incorrect formatting.
 </dd>
 
         <dt id="NetworkRequestException">
@@ -487,7 +494,9 @@ non standard ones.
 
 </dt>
 <dd>
-  
+  Used to raise when a network issue has occurred while sending the request.<br>
+to the server. Request and response will be loogged as a result which help
+to determine the main cause of the error.
 </dd>
 
       </dl>
@@ -589,7 +598,7 @@ non standard ones.
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

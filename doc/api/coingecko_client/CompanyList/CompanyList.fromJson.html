@@ -72,9 +72,11 @@
   _totalHoldings = toDouble(json[&#39;total_holdings&#39;]);
   _totalValueUsd = toDouble(json[&#39;total_value_usd&#39;]);
   _marketCapDominance = toDouble(json[&#39;market_cap_dominance&#39;]);
-  _companies = json[&#39;companies&#39;] != null ?
-    List&lt;dynamic&gt;.of(json[&#39;companies&#39;]).map((e) =&gt; CompanyInfo.fromJson(e)).toList() :
-    null;
+  _companies = json[&#39;companies&#39;] != null
+      ? List&lt;dynamic&gt;.of(json[&#39;companies&#39;])
+          .map((e) =&gt; CompanyInfo.fromJson(e))
+          .toList()
+      : null;
 }</code></pre>
 </section>
 
@@ -144,7 +146,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

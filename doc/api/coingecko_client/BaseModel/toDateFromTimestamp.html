@@ -73,8 +73,9 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">DateTime? toDateFromTimestamp(dynamic value) {
-  if(value == null) return null;
-  return DateTime.fromMillisecondsSinceEpoch((int.tryParse(value.toString()) ?? 0) * 1000);
+  if (value == null) return null;
+  return DateTime.fromMillisecondsSinceEpoch(
+      (int.tryParse(value.toString()) ?? 0) * 1000);
 }</code></pre>
 </section>
 
@@ -138,7 +139,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   

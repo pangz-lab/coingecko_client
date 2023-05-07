@@ -82,13 +82,15 @@
   _additionalNotices = toList(json[&#39;additional_notices&#39;]);
   _localization = toMap&lt;dynamic&gt;(json[&#39;localization&#39;]);
   _description = toMap&lt;dynamic&gt;(json[&#39;description&#39;]);
-  _links = json[&#39;links&#39;] != null? CoinLinks.fromJson(json[&#39;links&#39;]) : null;
-  _image = json[&#39;image&#39;] != null? Image.fromJson(json[&#39;image&#39;]) : null;
+  _links = json[&#39;links&#39;] != null ? CoinLinks.fromJson(json[&#39;links&#39;]) : null;
+  _image = json[&#39;image&#39;] != null ? Image.fromJson(json[&#39;image&#39;]) : null;
   _countryOrigin = json[&#39;country_origin&#39;];
   _genesisDate = toDate(json[&#39;genesis_date&#39;]);
   _contractAddress = json[&#39;contract_address&#39;];
-  _sentimentVotesUpPercentage = toDouble(json[&#39;sentiment_votes_up_percentage&#39;]);
-  _sentimentVotesDownPercentage = toDouble(json[&#39;sentiment_votes_down_percentage&#39;]);
+  _sentimentVotesUpPercentage =
+      toDouble(json[&#39;sentiment_votes_up_percentage&#39;]);
+  _sentimentVotesDownPercentage =
+      toDouble(json[&#39;sentiment_votes_down_percentage&#39;]);
   _watchlistPortfolioUsers = toInt(json[&#39;watchlist_portfolio_users&#39;]);
   _marketCapRank = toInt(json[&#39;market_cap_rank&#39;]);
   _coingeckoRank = toInt(json[&#39;coingecko_rank&#39;]);
@@ -97,15 +99,19 @@
   _communityScore = toDouble(json[&#39;community_score&#39;]);
   _liquidityScore = toDouble(json[&#39;liquidity_score&#39;]);
   _publicInterestScore = toDouble(json[&#39;public_interest_score&#39;]);
-  _marketData = json[&#39;market_data&#39;] != null ? MarketData.fromJson(json[&#39;market_data&#39;]) : null;
+  _marketData = json[&#39;market_data&#39;] != null
+      ? MarketData.fromJson(json[&#39;market_data&#39;])
+      : null;
   _communitydata = toMap&lt;dynamic&gt;(json[&#39;community_data&#39;]);
   _developerdata = toMap&lt;dynamic&gt;(json[&#39;developer_data&#39;]);
   _publicInterestStats = toMap&lt;dynamic&gt;(json[&#39;public_interest_stats&#39;]);
   _statusUpdates = toList&lt;String&gt;(json[&#39;status_updates&#39;]);
   _lastUpdated = toDate(json[&#39;last_updated&#39;]);
   _tickers = json[&#39;tickers&#39;] != null
-    ? List&lt;dynamic&gt;.of(json[&#39;tickers&#39;]).map((e) =&gt; TickerInfo.fromJson(e)).toList()
-    : null;
+      ? List&lt;dynamic&gt;.of(json[&#39;tickers&#39;])
+          .map((e) =&gt; TickerInfo.fromJson(e))
+          .toList()
+      : null;
 }</code></pre>
 </section>
 
@@ -206,7 +212,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.0
+      1.0.1
   </span>
 
   
