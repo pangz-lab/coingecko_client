@@ -4,14 +4,14 @@
 </p>
 
 # coingecko_client
-## Coingecko API client for the Dart Language
+## Coingecko API client for Dart Lang
 <br>
-<p align="center">
+<p>
     <img src="https://dart.dev/assets/shared/dart-logo-for-shares.png" height="100" />
 </p>
 
 
-A simple and intuitive API Client for the [CoinGecko REST API Service](https://www.coingecko.com/en/api/documentation).
+A simple and intuitive package for the [CoinGecko REST API Service](https://www.coingecko.com/en/api/documentation).
 
 API Version Support
 ---------------
@@ -28,14 +28,16 @@ Installation
 Add the dependency to your Dart / Flutter project:
 ```yaml
 dependencies:
-  coingecko_api: ^1.0.0
+  coingecko_client: ^1.0.0
 ```
 ---
+
 
 # Usage 
 - Initialize the client class
 - Use the client properties to send the request
-**
+- ( Checkout the example folder for more samples )
+
 ```dart
 import 'package:coingecko_client/coingecko_client.dart';
 
@@ -43,40 +45,40 @@ var client = CoinGeckoClient();
 ```
 
 ___
-## 🌐  [ ping endpoint ]
-### 📤 **/ping**
+### 🌐 ping endpoint
+### 📤 */ping*
 ```dart
 client.ping.getResult():
 ```
 
 ___
-## 🌐  [ coins endpoint ]
-### 📤 **/coins/list**
+### 🌐 coins endpoint
+### 📤 */coins/list*
 ```dart
 client.coins.getBasicList():
 ```
-### 📤 **/coins/{id}/history**
+### 📤 */coins/{id}/history*
 ```dart
 client.coins.getHistory(
     id: 'bitcoin',
     date: DateTime.now()
 ):
 ```
-### 📤 **/coins/markets**
+### 📤 */coins/markets*
 ```dart
 client.coins.getMarketList(
     vsCurrency: Currencies.php
 ):
 ```
-### 📤 **/coins/{id}**
+### 📤 */coins/{id}*
 ```dart
 client.coins.getInfo(id: 'verus-coin'):
 ```
-### 📤 **/coins/{id}/tickers**
+### 📤 */coins/{id}/tickers*
 ```dart
 client.coins.getTickers(id: 'bitcoin'):
 ```
-### 📤 **/coins/{id}/market_chart**
+### 📤 */coins/{id}/market_chart*
 ```dart
 client.coins.getMarketHistory(
     id: 'bitcoin',
@@ -85,7 +87,7 @@ client.coins.getMarketHistory(
     interval: 'daily'
 ):
 ```
-### 📤 **/coins/{id}/market_chart/range**
+### 📤 */coins/{id}/market_chart/range*
 ```dart
 client.coins.getMarketHistoryWithDateRange(
     id: 'bitcoin',
@@ -94,7 +96,7 @@ client.coins.getMarketHistoryWithDateRange(
     to: DateTime.fromMillisecondsSinceEpoch(1396587232)
 ):
 ```
-### 📤 **/coins/{id}/ohlc**
+### 📤 */coins/{id}/ohlc*
 ```dart
 client.coins.getOhlcList(
     id: 'bitcoin',
@@ -104,20 +106,20 @@ client.coins.getOhlcList(
 ```
 
 ___
-## 🌐  [ exchanges endpoint ]
-### 📤 **/exchanges**
+### 🌐 exchanges endpoint
+### 📤 */exchanges*
 ```dart
 client.exchanges.getList():
 ```
-### 📤 **/exchanges/list**
+### 📤 */exchanges/list*
 ```dart
 client.exchanges.getBasicList():
 ```
-### 📤 **/exchanges/{id}**
+### 📤 */exchanges/{id}*
 ```dart
 client.exchanges.getInfo(id: 'binance'):
 ```
-### 📤 **/exchanges/{id}/tickers**
+### 📤 */exchanges/{id}/tickers*
 ```dart
 client.exchanges.getTickerList(
     id: 'binance',
@@ -128,7 +130,7 @@ client.exchanges.getTickerList(
     order: ExchangeDataOrdering.trustScoreDesc
 ):
 ```
-### 📤 **/exchanges/{id}/volume_chart**
+### 📤 */exchanges/{id}/volume_chart*
 ```dart
 client.exchanges.getVolumeChartList(
     id: 'binance',
@@ -137,8 +139,8 @@ client.exchanges.getVolumeChartList(
 ```
 
 ___
-## 🌐  [ simple endpoint ]
-### 📤 **/simple/price**
+### 🌐 simple endpoint
+### 📤 */simple/price*
 ```dart
 client.simple.getCoinPrice(
     ids: ['bitcoin', 'ethereum', 'verus-coin'],
@@ -150,7 +152,7 @@ client.simple.getCoinPrice(
     precision: 18
 ):
 ```
-### 📤 **/simple/token_price/{id}**
+### 📤 */simple/token_price/{id}*
 ```dart
 client.simple.getTokenPrice(
     id: 'avalanche',
@@ -163,21 +165,21 @@ client.simple.getTokenPrice(
     precision: 18
 ):
 ```
-### 📤 **/simple/supported_vs_currencies**
+### 📤 */simple/supported_vs_currencies*
 ```dart
 client.simple.getSupportedVsCurrencies():
 ```
 
 
 ___
-## 🌐  [ derivatives endpoint ]
-### 📤 **/derivatives**
+### 🌐 derivatives endpoint
+### 📤 */derivatives*
 ```dart
 client.derivatives.getList(
     includeTickers: DerivativesTickers.unexpired
 ):
 ```
-### 📤 **/derivatives/exchanges**
+### 📤 */derivatives/exchanges*
 ```dart
 client.derivatives.getExchangeList(
     order: DerivativesExchangeOrdering.nameAsc,
@@ -185,55 +187,55 @@ client.derivatives.getExchangeList(
     page: 2
 ):
 ```
-### 📤 **/derivatives/exchanges/{id}**
+### 📤 */derivatives/exchanges/{id}*
 ```dart
 client.derivatives.getExchange(
     id: "bybit",
     includeTickers: DerivativesTickers.unexpired
 ):
 ```
-### 📤 **/derivatives/exchanges/list**
+### 📤 */derivatives/exchanges/list*
 ```dart
 client.derivatives.getExchangeBasicInfoList():
 ```
 
 ___
-## 🌐  [ indexes endpoint ]
-### 📤 **/indexes**
+### 🌐 indexes endpoint
+### 📤 */indexes*
 ```dart
 client.indexes.getList(
     perPage: 10,
     page: 2
 ):
 ```
-### 📤 **/indexes/{market_id}/{id}**
+### 📤 */indexes/{market_id}/{id}*
 ```dart
 client.indexes.getInfo(
     marketId: 'bybit',
     id: 'HOT',
 ):
 ```
-### 📤 **/indexes/list**
+### 📤 */indexes/list*
 ```dart
 client.indexes.getBasicInfo():
 ```
 
 ___
-## 🌐  [ nfts endpoint ]
-### 📤 **/nfts/list**
+### 🌐 nfts endpoint
+### 📤 */nfts/list*
 ```dart
 client.nfts.getBasicList(
     perPage: 10,
     page: 2
 ):
 ```
-### 📤 **/nfts/{id}**
+### 📤 */nfts/{id}*
 ```dart
 client.nfts.getInfo(
     id: 'meebits',
 ):
 ```
-### 📤 **/nfts/{asset_platform_id}/contract/{contract_address}**
+### 📤 */nfts/{asset_platform_id}/contract/{contract_address}*
 ```dart
 client.nfts.getContractInfo(
     assetPlatformId: 'ethereum',
@@ -243,8 +245,8 @@ client.nfts.getContractInfo(
 
 
 ___
-## 🌐  [ contract endpoint ]
-### 📤 **/coins/{id}/contract/{contract_address}/market_chart**
+### 🌐 contract endpoint
+### 📤 */coins/{id}/contract/{contract_address}/market_chart*
 ```dart
 client.contract.getMarketHistory(
     id: 'ethereum',
@@ -253,7 +255,7 @@ client.contract.getMarketHistory(
     days : DataRange.in2Weeks,
 ):
 ```
-### 📤 **/coins/{id}/contract/{contract_address}/market_chart/range**
+### 📤 */coins/{id}/contract/{contract_address}/market_chart/range*
 ```dart
 client.contract.getMarketHistoryWithDateRange(
     id: 'ethereum',
@@ -266,12 +268,12 @@ client.contract.getMarketHistoryWithDateRange(
 
 
 ___
-## 🌐  [ categories endpoint ]
-### 📤 **/coins/categories/list**
+### 🌐 categories endpoint
+### 📤 */coins/categories/list*
 ```dart
 client.categories.getBasicList():
 ```
-### 📤 **/coins/categories**
+### 📤 */coins/categories*
 ```dart
 client.categories.getList(
     order: CoinCategoriesDataOrdering.marketCapAsc
@@ -280,27 +282,27 @@ client.categories.getList(
 
 
 ___
-## 🌐  [ global endpoint ]
-### 📤 **/global**
+### 🌐 global endpoint
+### 📤 */global*
 ```dart
 client.global.getCryptoInfo():
 ```
-### 📤 **/global/decentralized_finance_defi**
+### 📤 */global/decentralized_finance_defi*
 ```dart
 client.global.getDefiInfo():
 ```
 
 ___
-## 🌐  [ exchange rates endpoint ]
-### 📤 **/exchange_rates**
+### 🌐 exchange rates endpoint
+### 📤 */exchange_rates*
 ```dart
 client.exchangeRates.getList():
 ```
 
 
 ___
-## 🌐  [ companies endpoint ]
-### 📤 **/companies/public_treasury/{coin_id}**
+### 🌐 companies endpoint
+### 📤 */companies/public_treasury/{coin_id}*
 ```dart
 client.companies.getList(
     coinId: 'ethereum'
@@ -308,16 +310,34 @@ client.companies.getList(
 ```
 
 ___
-## 🌐  [ trending endpoint ]
-### 📤 **/search/trending**
+### 🌐 trending endpoint
+### 📤 */search/trending*
 ```dart
 client.trending.getResult():
 ```
 
 
 ___
-## 🌐  [ search endpoint ]
-### 📤 **/search**
+### 🌐 search endpoint
+### 📤 */search*
 ```dart
 client.search.getResult(query: 'bybit'):
 ```
+
+<br><br>
+Issues/Bugs/Improvements
+---------------
+- If you found any issues or bugs or any concerns, please reach me out using the following contacts.
+- If you require an urgent fix, raise an issue and I'll try to find time to resolve it.
+- Should you decide to make your own change, raise your PR to the main branch and let me know.
+
+<br><br>
+Contacts
+---------------
+<p>
+<img src="https://static-00.iconduck.com/assets.00/gmail-icon-512x389-x9sg6cf6.png" height="15"> pangz.lab@gmail.com<br>
+</p>
+<p>
+<img src="
+https://assets-global.website-files.com/6257adef93867e50d84d30e2/6266bc493fb42d4e27bb8393_847541504914fd33810e70a0ea73177e.ico" height="20"> Pangz#4102
+</p>
