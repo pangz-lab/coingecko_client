@@ -1,6 +1,8 @@
-![coverage](https://img.shields.io/badge/coverage-100%25-success)
 ![version](https://img.shields.io/badge/version-v1.0.0-blue)
+![coverage](https://img.shields.io/badge/coverage-100%25-success)
+![license](https://img.shields.io/badge/license-BSD--3-blue)
 [![GitHub issues by-label](https://img.shields.io/github/issues/badges/shields/open)](https://github.com/pangz-lab/coingecko_client/issues)
+<iframe src="https://discord.com/widget?id=1104687758301204512&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
 <a href="https://discord.gg/TK3WHBMk">
     <img src="https://img.shields.io/discord/1104687758301204512?logo=discord" alt="chat on Discord">
 </a>
