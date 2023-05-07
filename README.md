@@ -4,7 +4,7 @@
 <a href="https://discord.gg/TK3WHBMk">
     <img src="https://img.shields.io/discord/1104687758301204512?logo=discord" alt="chat on Discord">
 </a>
-<a href="https://twitter.com/intent/follow?screen_name=shields_io">
+<a href="https://twitter.com/intent/follow?screen_name=Pangz55192569">
     <img src="https://img.shields.io/twitter/follow/Pangz55192569?style=social&logo=twitter" alt="follow on witter">
 </a>
 
