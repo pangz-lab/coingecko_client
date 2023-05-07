@@ -1,0 +1,27 @@
+name: coingecko_client_integration_test
+
+on:
+  push:
+    branches:
+      - 'master'
+      - 'feature/**'
+  pull_request:
+    branches:
+      - 'master'
+      - 'feature/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Run per class integration tests
+        run: dart test test/coingecko_real_request_test.dart
+      
+      - name: Run coingecko_client integration tests
+        run: dart test test/coingecko_client_integration_test.dart

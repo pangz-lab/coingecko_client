@@ -1,32 +1,53 @@
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
-import 'package:coingecko_client/src/domain/categories/models/categories_data_ordering.dart';
+import 'package:coingecko_client/src/domain/categories/models/coin_categories_data_ordering.dart';
+import 'package:coingecko_client/src/domain/categories/models/coin_category_basic_info.dart';
+import 'package:coingecko_client/src/domain/categories/models/coin_category_info.dart';
+import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
-import 'package:http/http.dart';
 
 class CategoriesEndpoint extends BaseEndpoint {
-  String _path = "";
   CategoriesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// List all categories
   /// <br/><b>Endpoint </b>: /coins/categories/list
-  Future<Response> getCoinsCategoriesList() async {
-    _path = '/coins/categories/list';
-    return await send(_path);
+  Future<List<CoinCategoryBasicInfo>> getBasicList() async {
+    try {
+      var path = '/coins/categories/list';
+      
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => CoinCategoryBasicInfo.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// List all categories with market data
   /// <br/><b>Endpoint </b>: /coins/categories
   /// 
   /// [order] valid values: <b>market_cap_desc (default), market_cap_asc, name_desc, name_asc, market_cap_change_24h_desc and market_cap_change_24h_asc</b>
-  Future<Response> getCoinsCategories({
-    CategoriesCoinDataOrdering? order
+  Future<List<CoinCategoryInfo>> getList({
+    CoinCategoriesDataOrdering? order
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'order': order?.value ?? ''
-      },
-      endpointPath: "/coins/categories"
-    );
-    return await send(_path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'order': order?.value
+        },
+        endpointPath: "/coins/categories"
+      );
+    
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => CoinCategoryInfo.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 }

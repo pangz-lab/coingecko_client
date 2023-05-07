@@ -1,15 +1,23 @@
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
+import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
-import 'package:http/http.dart';
 
 class PingEndpoint extends BaseEndpoint {
-  String _path = "";
   PingEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// Check API server status
   /// <br/><b>Endpoint </b>: /ping
-  Future<Response> call() async {
-    _path = '/ping';
-    return await send(_path);
+  Future<Map<String, dynamic>> getResult() async {
+    try {
+      var path = '/ping';
+      
+      return Map<String, dynamic>.of(await sendBasic(path));
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 }

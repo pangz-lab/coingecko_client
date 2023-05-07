@@ -6,7 +6,6 @@ import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.da
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
 class AssetPlatformsEndpoint extends BaseEndpoint {
-  String _path = "";
   AssetPlatformsEndpoint(
     HttpRequestServiceInterface httpRequestService,
     {String? apiKey}
@@ -18,17 +17,18 @@ class AssetPlatformsEndpoint extends BaseEndpoint {
   /// throws [NetworkRequestException] and [DataParsingException]
   /// [filter] apply relevant filters to results
   ///  valid values: "nft" (asset_platform nft-support)
-  Future<List<AssetPlatform>> call({
+  Future<List<AssetPlatform>> getList({
     AssetPlatformsFilter? filter
   }) async {
     try {
-      _path = createEndpointUrlPath(
+      var path = createEndpointPathUrl(
         rawQueryItems: {
-          'filter': filter?.name ?? ''
+          'filter': filter?.name
         },
         endpointPath: "/asset_platforms"
       );
-      var result = List<dynamic>.of(await sendBasic(_path));
+      
+      var result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => AssetPlatform.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();

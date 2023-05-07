@@ -1,14 +1,19 @@
+import 'package:coingecko_client/src/domain/coins/models/coin_basic_info.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_market.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_market_history.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
+import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/date_service.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
-import 'package:http/http.dart';
 
 class CoinsEndpoint extends BaseEndpoint {
-  String _path = "";
   CoinsEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// List all supported coins id, name and symbol (no pagination required)
@@ -18,16 +23,27 @@ class CoinsEndpoint extends BaseEndpoint {
   /// 
   /// [include_platform] flag to include platform contract addresses (eg. 0x.... for Ethereum based tokens). 
   ///  valid values: true, false
-  Future<Response> getCoinsList({
+  Future<List<CoinBasicInfo>> getBasicList({
     bool? includePlatform
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'include_platform': includePlatform
-      },
-      endpointPath: "/coins/list"
-    );
-    return await send(_path);
+    
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'include_platform': includePlatform
+        },
+        endpointPath: "/coins/list"
+      );
+
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => CoinBasicInfo.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// List all supported coins price, market cap, volume, and market related data
@@ -38,14 +54,14 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [ids] The ids of the coin, comma separated crytocurrency symbols (base). refers to `/coins/list`.
   /// [category] filter by coin category. Refer to /coin/categories/list
-  /// [order] valid values: <b>market_cap_desc, gecko_desc, gecko_asc, market_cap_asc, market_cap_desc, volume_asc, volume_desc, id_asc, id_desc</b>
+  /// [order] valid values: <b>market_cap_asc, market_cap_desc, volume_asc, volume_desc, id_asc, id_desc</b>
   /// sort results by field.
   /// [per_page] valid values: 1..250
   ///  Total results per page
   /// [page] Page through results
   /// [sparkline] Include sparkline 7 days data (eg. true, false)
   /// [price_change_percentage] Include price change percentage in <b>1h, 24h, 7d, 14d, 30d, 200d, 1y</b> (eg. '`1h,24h,7d`' comma-separated, invalid values will be discarded)
-  Future<Response> getCoinsMarkets({
+  Future<List<CoinMarket>> getMarketList({
     required Currencies vsCurrency,
     List<String>? ids,
     String? category,
@@ -55,20 +71,30 @@ class CoinsEndpoint extends BaseEndpoint {
     bool? sparkline,
     List<CoinPriceChange>? priceChangePercentage
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'vs_currency': vsCurrency.code,
-        'ids': ids?.join(',') ?? '',
-        'category': category,
-        'order': order?.value ?? '',
-        'per_page': perPage,
-        'page': page,
-        'sparkline': sparkline,
-        'price_change_percentage': priceChangePercentage?.map((e) => e.value).join(",") ?? ''
-      },
-      endpointPath: "/coins/markets"
-    );
-    return await send(_path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'vs_currency': vsCurrency.code,
+          'ids': ids?.join(','),
+          'category': category,
+          'order': order?.value,
+          'per_page': perPage,
+          'page': page,
+          'sparkline': sparkline,
+          'price_change_percentage': priceChangePercentage?.map((e) => e.value).join(",")
+        },
+        endpointPath: "/coins/markets"
+      );
+    
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => CoinMarket.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get current data (name, price, market, ... including exchange tickers) for a coin
@@ -87,7 +113,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [community_data] Include community_data data (true/false) <b>[default: true]</b>
   /// [developer_data] Include developer_data data (true/false) <b>[default: true]</b>
   /// [sparkline] Include sparkline 7 days data (eg. true, false) <b>[default: false]</b>
-  Future<Response> getCoinsWithId({
+  Future<CoinInfo> getInfo({
     required String id,
     bool? localization,
     bool? tickers,
@@ -96,19 +122,28 @@ class CoinsEndpoint extends BaseEndpoint {
     bool? developerData,
     bool? sparkline
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'id': id,
-        'localization': localization,
-        'tickers': tickers,
-        'market_data': marketData,
-        'community_data': communityData,
-        'developer_data': developerData,
-        'sparkline': sparkline
-      },
-      endpointPath: "/coins/{id}"
-    );
-    return await send(_path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'localization': localization,
+          'tickers': tickers,
+          'market_data': marketData,
+          'community_data': communityData,
+          'developer_data': developerData,
+          'sparkline': sparkline
+        },
+        endpointPath: "/coins/{id}"
+      );
+
+      return CoinInfo.fromJson(await sendBasic(path));
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get coin tickers (paginated to 100 items)
@@ -125,7 +160,7 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [page] Page through results
   /// [order] valid values: <b>trust_score_desc (default), trust_score_asc and volume_desc</b>
   /// [depth] flag to show 2% orderbook depth. valid values: true, false
-  Future<Response> getCoinsWithIdTickers({
+  Future<CoinTickers> getTickers({
     required String id,
     String? exchangeIds,
     bool? includeExchangeLogo,
@@ -133,18 +168,28 @@ class CoinsEndpoint extends BaseEndpoint {
     CoinTickersDataOrdering? order,
     bool? depth
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'id': id,
-        'exchange_ids': exchangeIds,
-        'include_exchange_logo': includeExchangeLogo,
-        'page': page,
-        'order': order?.value ?? '',
-        'depth': depth
-      },
-      endpointPath: "/coins/{id}/tickers"
-    );
-    return await send(_path);
+
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'exchange_ids': exchangeIds,
+          'include_exchange_logo': includeExchangeLogo,
+          'page': page,
+          'order': order?.value,
+          'depth': depth
+        },
+        endpointPath: "/coins/{id}/tickers"
+      );
+
+      return CoinTickers.fromJson(await sendBasic(path));
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get historical data (name, price, market, stats) at a given date for a coin
@@ -153,20 +198,29 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [id] pass the coin id (can be obtained from /coins) eg. bitcoin
   /// [date] The date of data snapshot in dd-mm-yyyy eg. 30-12-2017
   /// [localization] Set to false to exclude localized languages in response
-  Future<Response> getCoinsWithIdHistory({
+  Future<CoinInfo> getHistory({
     required String id,
     required DateTime date,
     bool? localization
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'id': id,
-        'date': DateService.formatAsDefault(date),
-        'localization': localization
-      },
-      endpointPath: "/coins/{id}/history"
-    );
-    return await send(_path);
+    try{
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'date': DateService.formatAsDefault(date),
+          'localization': localization
+        },
+        endpointPath: "/coins/{id}/history"
+      );
+
+      return CoinInfo.fromJson(await sendBasic(path));
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get historical market data include price, market cap, and 24h volume (granularity auto)
@@ -178,22 +232,31 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [days] Data up to number of days ago (eg. 1,14,30,max)
   /// [interval] Data interval. Possible value: daily
-  Future<Response> getCoinsWithIdMarketChart({
+  Future<CoinMarketHistory> getMarketHistory({
     required String id,
     required Currencies vsCurrency,
     required DataRange days,
     String? interval
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'id': id,
-        'vs_currency': vsCurrency.code,
-        'days': days.value,
-        'interval': interval
-      },
-      endpointPath: "/coins/{id}/market_chart"
-    );
-    return await send(_path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'vs_currency': vsCurrency.code,
+          'days': days.value,
+          'interval': interval
+        },
+        endpointPath: "/coins/{id}/market_chart"
+      );
+      
+      return CoinMarketHistory.fromJson(await sendBasic(path));
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)
@@ -205,22 +268,31 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [from] From date in UNIX Timestamp (eg. 1392577232)
   /// [to] To date in UNIX Timestamp (eg. 1422577232)
-  Future<Response> getCoinsWithIdMarketChartRange({
+  Future<CoinMarketHistory> getMarketHistoryWithDateRange({
     required String id,
     required Currencies vsCurrency,
     required DateTime from,
     required DateTime to
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'id': id,
-        'vs_currency': vsCurrency.code,
-        'from': from.millisecondsSinceEpoch,
-        'to': to.millisecondsSinceEpoch
-      },
-      endpointPath: "/coins/{id}/market_chart/range"
-    );
-    return await send(_path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'vs_currency': vsCurrency.code,
+          'from': from.millisecondsSinceEpoch,
+          'to': to.millisecondsSinceEpoch
+        },
+        endpointPath: "/coins/{id}/market_chart/range"
+      );
+      
+      return CoinMarketHistory.fromJson(await sendBasic(path));
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get coin's OHLC
@@ -235,19 +307,29 @@ class CoinsEndpoint extends BaseEndpoint {
   /// [id] pass the coin id (can be obtained from /coins/list) eg. bitcoin
   /// [vs_currency] The target currency of market data (usd, eur, jpy, etc.)
   /// [days]  Data up to number of days ago (1/7/14/30/90/180/365/max)
-  Future<Response> getCoinsWithIdOhlc({
+  Future<List<CoinOhlc>> getOhlcList({
     required String id,
     required Currencies vsCurrency,
     required DataRange days
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'id': id,
-        'vs_currency': vsCurrency.code,
-        'days': days.value
-      },
-      endpointPath: "/coins/{id}/ohlc"
-    );
-    return await send(_path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'vs_currency': vsCurrency.code,
+          'days': days.value
+        },
+        endpointPath: "/coins/{id}/ohlc"
+      );
+
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => CoinOhlc.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 }

@@ -1,10 +1,35 @@
-class AssetPlatform {
-  String? id;
-  int? chainIdentifier;
-  String? name;
-  String? shortName;
+import 'package:coingecko_client/src/models/base_model.dart';
 
-  AssetPlatform({this.id, this.chainIdentifier, this.name, this.shortName});
+class AssetPlatform extends BaseModel {
+  String? _id;
+  int? _chainIdentifier;
+  String? _name;
+  String? _shortName;
+
+  AssetPlatform({
+    String? id,
+    int? chainIdentifier,
+    String? name,
+    String? shortName,
+  }) {
+    _id = id;
+    _chainIdentifier = chainIdentifier;
+    _name = name;
+    _shortName = shortName;
+  }
+
+  String? get id => _id;
+  int? get chainIdentifier => _chainIdentifier;
+  String? get name => _name;
+  String? get shortName => _shortName;
+  
+  AssetPlatform.fromJson(Map<String, dynamic> json) {
+    _id = json['id'];
+    _chainIdentifier = toInt(json['chain_identifier']);
+    _name = json['name'];
+    _shortName = json['shortname'];
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = id;
@@ -12,12 +37,5 @@ class AssetPlatform {
     data['name'] = name;
     data['shortname'] = shortName;
     return data;
-  }
-  
-  AssetPlatform.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    chainIdentifier = json['chain_identifier'];
-    name = json['name'];
-    shortName = json['shortname'];
   }
 }

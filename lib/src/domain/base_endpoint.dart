@@ -1,8 +1,7 @@
 import 'dart:convert';
-
+import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
-import 'package:http/http.dart';
 
 abstract class ResponseDate {
   String get baseEndpoint;
@@ -16,68 +15,96 @@ class BaseEndpoint {
   String _endpointPath = "";
   String get endpointPath => _endpointPath;
   HttpRequestServiceInterface httpRequestService;
-  String? apiKey;
+  String? _apiKey;
   BaseEndpoint(
-    this.httpRequestService, Map<String?, String?> map,
-    {this.apiKey}
-  );
+    this.httpRequestService,
+    Map<String?, String?> map,
+    { String? apiKey }
+  ) {
+    _apiKey = apiKey;
+  }
 
-  Future<dynamic> sendBasic(String path) async {
+  Future<dynamic> sendBasic(String path) {
+    try {
+      return _send(
+        path,
+        apiHost
+      );
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> sendPro(String path) {
+    try {
+      var headers = Map.fromEntries(
+        [MapEntry<String, String>(apiKeyQueryParam, _apiKey ?? '')]
+      );
+      return _send(
+        path,
+        apiProHost,
+        headers: headers
+      );
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> _send(String path, String host, {Map<String,String>? headers}) async {
     try {
       _endpointPath = "$version$path";
-      var response = await httpRequestService.sendGet(apiHost, _endpointPath);
+      var urlComponent = _endpointPath.split("?");
+      var query = urlComponent.length > 1 ? urlComponent.elementAt(1) : null;
+      var response = await httpRequestService.sendGet(
+        host,
+        urlComponent.elementAt(0),
+        query,
+        headers: headers
+      );
       if(response.statusCode != 200) {
-        throw NetworkRequestException('Failed sending the request.');
+        throw NetworkRequestException.failedResponse(
+          response.statusCode,
+          response
+        );
+      }
+      var data = utf8.decode(response.bodyBytes);
+      if(data.trim().isEmpty) {
+        throw DataParsingException("Response data is empty");
       }
 
-      // if(response.body.trim().isEmpty) {
-      //   throw FormatException('Result is empty');
-      // }
-      return jsonDecode(response.body);
+      return jsonDecode(data);
     } catch (_) {
       rethrow;
     }
   }
 
-  /// Remove this
-  Future<Response> send(String path) async {
-    try {
-      _endpointPath = "$version$path";
-      return await httpRequestService.sendGet(apiHost, _endpointPath);
-    } catch (_) {
-      rethrow;
-    }
-  }
-
-  Future<Response> sendPro(String path) {
-    try {
-      _endpointPath = "$version$path&$apiKeyQueryParam=$apiKey";
-      return httpRequestService.sendGet(apiProHost, _endpointPath);
-    } catch (_) {
-      rethrow;
-    }
-  }
-
-  String createEndpointUrlPath({
+  String createEndpointPathUrl({
     required String endpointPath,
     Map<String, dynamic>? rawQueryItems
   }) {
+    var defaultRawQueryItems = Map<String, dynamic>.from(rawQueryItems ?? {});
     var pathParameters = _getPathParameters(endpointPath, rawQueryItems);
     if(pathParameters.isNotEmpty && rawQueryItems != null) {
       rawQueryItems.removeWhere((key, value) => pathParameters.contains(key));
     }
     var kvList = rawQueryItems!.map(
       (key, value) {
-        return MapEntry(key, value.toString().isNotEmpty ? "$key=${value.toString()}" : "");
+        return MapEntry(
+          key,
+          value != null && value.toString().isNotEmpty ? 
+            "$key=${value.toString()}" : 
+            ""
+          );
       }).values.toList();
 
     kvList.removeWhere((value) => value.toString().isEmpty);
     var path = kvList.join("&").trim(); 
     path = path.isNotEmpty ? "?${kvList.join("&")}" : '';
 
-    return "${_replaceEndpointPathWithValue(endpointPath, rawQueryItems, pathParameters)}$path";
+    return "${_replaceEndpointPathWithValue(endpointPath, defaultRawQueryItems)}$path";
   }
 
+  /// TODO : Simplify this
   List<String?> _getPathParameters(String path, Map<String, dynamic>? parameters) {
     if(!path.contains("{")) { return []; }
     if(parameters?.isEmpty ?? true) { return []; }
@@ -98,11 +125,11 @@ class BaseEndpoint {
     return result;
   }
 
-  String _replaceEndpointPathWithValue(String path, Map<String, dynamic> paramters, List<String?> pathVariableList) {
-    if(!path.contains("{")) { return path; }
+  String _replaceEndpointPathWithValue(String path, Map<String, dynamic>? parameters) {
+    if(!path.contains("{") || parameters == null) { return path; }
     var replacedPath = path;
-    for (var pathVariable in pathVariableList) {
-      replacedPath = replacedPath.replaceAll("{$pathVariable}", paramters[pathVariable]! as String);
+    for (var pathVariable in parameters.keys) {
+      replacedPath = replacedPath.replaceAll("{$pathVariable}", parameters[pathVariable].toString());
     }
     return replacedPath;
   }

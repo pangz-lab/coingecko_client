@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the CoinLinks class from the coingecko_client library, for the Dart programming language.">
+  <title>CoinLinks class - coingecko_client library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">coingecko_client</a></li>
+    <li><a href="../coingecko_client/coingecko_client-library.html">coingecko_client</a></li>
+    <li class="self-crumb">CoinLinks class</li>
+  </ol>
+  <div class="self-name">CoinLinks</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-class">CoinLinks</span> class 
+ 
+</h1></div>
+
+    
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+  <dt>Inheritance</dt>
+  <dd>
+    <ul class="gt-separated dark clazz-relationships">
+      <li><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Object-class.html">Object</a></li>
+        <li><a href="../coingecko_client/BaseModel-class.html">BaseModel</a></li>
+      <li>CoinLinks</li>
+    </ul>
+  </dd>
+
+        
+        
+
+
+
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+
+    <dl class="constructor-summary-list">
+        <dt id="CoinLinks" class="callable">
+          <span class="name"><a href="../coingecko_client/CoinLinks/CoinLinks.html">CoinLinks</a></span><span class="signature">(<span class="parameter" id="-param-homepage">{<span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">homepage</span>, </span><span class="parameter" id="-param-blockchainSite"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">blockchainSite</span>, </span><span class="parameter" id="-param-officialForumUrl"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">officialForumUrl</span>, </span><span class="parameter" id="-param-chatUrl"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">chatUrl</span>, </span><span class="parameter" id="-param-announcementUrl"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">announcementUrl</span>, </span><span class="parameter" id="-param-twitterScreenName"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">twitterScreenName</span>, </span><span class="parameter" id="-param-facebookUsername"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">facebookUsername</span>, </span><span class="parameter" id="-param-bitcointalkThreadIdentifier"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">bitcointalkThreadIdentifier</span>, </span><span class="parameter" id="-param-telegramChannelIdentifier"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">telegramChannelIdentifier</span>, </span><span class="parameter" id="-param-subredditUrl"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">subredditUrl</span>, </span><span class="parameter" id="-param-reposUrl"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span> <span class="parameter-name">reposUrl</span>}</span>)</span>
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="CoinLinks.fromJson" class="callable">
+          <span class="name"><a href="../coingecko_client/CoinLinks/CoinLinks.fromJson.html">CoinLinks.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span>)</span>
+        </dt>
+        <dd>
+          
+        </dd>
+    </dl>
+  </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="announcementUrl" class="property">
+  <span class="name"><a href="../coingecko_client/CoinLinks/announcementUrl.html">announcementUrl</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">read-only</span></div>
+
+</dd>
+
+        <dt id="bitcointalkThreadIdentifier" class="property">
+  <span class="name"><a href="../coingecko_client/CoinLinks/bitcointalkThreadIdentifier.html">bitcointalkThreadIdentifier</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/int-class.html">int</a>?</span> 
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">read-only</span></div>
+
+</dd>
+
+        <dt id="blockchainSite" class="property">
+  <span class="name"><a href="../coingecko_client/CoinLinks/blockchainSite.html">blockchainSite</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">read-only</span></div>
+
+</dd>
+
+        <dt id="chatUrl" class="property">
+  <span class="name"><a href="../coingecko_client/CoinLinks/chatUrl.html">chatUrl</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">read-only</span></div>
+
+</dd>
+
+        <dt id="facebookUsername" class="property">
+  <span class="name"><a href="../coingecko_client/CoinLinks/facebookUsername.html">facebookUsername</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">read-only</span></div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="homepage" class="property">
+  <span class="name"><a href="../coingecko_client/CoinLinks/homepage.html">homepage</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">read-only</span></div>
+
+</dd>
+
+        <dt id="officialForumUrl" class="property">
+  <span class="name"><a href="../coingecko_client/CoinLinks/officialForumUrl.html">officialForumUrl</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">read-only</span></div>
+
+</dd>
+
+        <dt id="reposUrl" class="property">
+  <span class="name"><a href="../coingecko_client/CoinLinks/reposUrl.html">reposUrl</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span> 
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">read-only</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">read-only</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="subredditUrl" class="property">
+  <span class="name"><a href="../coingecko_client/CoinLinks/subredditUrl.html">subredditUrl</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">read-only</span></div>
+
+</dd>
+
+        <dt id="telegramChannelIdentifier" class="property">
+  <span class="name"><a href="../coingecko_client/CoinLinks/telegramChannelIdentifier.html">telegramChannelIdentifier</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">read-only</span></div>
+
+</dd>
+
+        <dt id="twitterScreenName" class="property">
+  <span class="name"><a href="../coingecko_client/CoinLinks/twitterScreenName.html">twitterScreenName</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">read-only</span></div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toDate" class="callable inherited">
+  <span class="name"><a href="../coingecko_client/BaseModel/toDate.html">toDate</a></span><span class="signature">(<wbr><span class="parameter" id="toDate-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/DateTime-class.html">DateTime</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toDateFromMs" class="callable inherited">
+  <span class="name"><a href="../coingecko_client/BaseModel/toDateFromMs.html">toDateFromMs</a></span><span class="signature">(<wbr><span class="parameter" id="toDateFromMs-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/DateTime-class.html">DateTime</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toDateFromTimestamp" class="callable inherited">
+  <span class="name"><a href="../coingecko_client/BaseModel/toDateFromTimestamp.html">toDateFromTimestamp</a></span><span class="signature">(<wbr><span class="parameter" id="toDateFromTimestamp-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/DateTime-class.html">DateTime</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toDouble" class="callable inherited">
+  <span class="name"><a href="../coingecko_client/BaseModel/toDouble.html">toDouble</a></span><span class="signature">(<wbr><span class="parameter" id="toDouble-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/double-class.html">double</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toInt" class="callable inherited">
+  <span class="name"><a href="../coingecko_client/BaseModel/toInt.html">toInt</a></span><span class="signature">(<wbr><span class="parameter" id="toInt-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/int-class.html">int</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toJson" class="callable">
+  <span class="name"><a href="../coingecko_client/CoinLinks/toJson.html">toJson</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="toList" class="callable inherited">
+  <span class="name"><a href="../coingecko_client/BaseModel/toList.html">toList</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="toList-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toMap" class="callable inherited">
+  <span class="name"><a href="../coingecko_client/BaseModel/toMap.html">toMap</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="toMap-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>, <span class="type-parameter">T</span>&gt;</span>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../index.html">coingecko_client</a></li>
+  <li><a href="../coingecko_client/coingecko_client-library.html">coingecko_client</a></li>
+  <li class="self-crumb">CoinLinks class</li>
+</ol>
+
+
+    <h5>coingecko_client library</h5>
+    <ol>
+      <li class="section-title"><a href="../coingecko_client/coingecko_client-library.html#classes">Classes</a></li>
+        <li><a href="../coingecko_client/AssetPlatform-class.html">AssetPlatform</a></li>
+        <li><a href="../coingecko_client/BaseCurrency-class.html">BaseCurrency</a></li>
+        <li><a href="../coingecko_client/BaseModel-class.html">BaseModel</a></li>
+        <li><a href="../coingecko_client/CoinBasicInfo-class.html">CoinBasicInfo</a></li>
+        <li><a href="../coingecko_client/CoinCategoryBasicInfo-class.html">CoinCategoryBasicInfo</a></li>
+        <li><a href="../coingecko_client/CoinCategoryInfo-class.html">CoinCategoryInfo</a></li>
+        <li><a href="../coingecko_client/CoinGeckoClient-class.html">CoinGeckoClient</a></li>
+        <li><a href="../coingecko_client/CoinInfo-class.html">CoinInfo</a></li>
+        <li><a href="../coingecko_client/CoinLinks-class.html">CoinLinks</a></li>
+        <li><a href="../coingecko_client/CoinMarket-class.html">CoinMarket</a></li>
+        <li><a href="../coingecko_client/CoinMarketHistory-class.html">CoinMarketHistory</a></li>
+        <li><a href="../coingecko_client/CoinOhlc-class.html">CoinOhlc</a></li>
+        <li><a href="../coingecko_client/CoinTickers-class.html">CoinTickers</a></li>
+        <li><a href="../coingecko_client/CompanyInfo-class.html">CompanyInfo</a></li>
+        <li><a href="../coingecko_client/CompanyList-class.html">CompanyList</a></li>
+        <li><a href="../coingecko_client/ContractInfo-class.html">ContractInfo</a></li>
+        <li><a href="../coingecko_client/ContractMarketHistory-class.html">ContractMarketHistory</a></li>
+        <li><a href="../coingecko_client/CustomCurrency-class.html">CustomCurrency</a></li>
+        <li><a href="../coingecko_client/Derivatives-class.html">Derivatives</a></li>
+        <li><a href="../coingecko_client/DerivativesExchange-class.html">DerivativesExchange</a></li>
+        <li><a href="../coingecko_client/DerivativesTickerInfo-class.html">DerivativesTickerInfo</a></li>
+        <li><a href="../coingecko_client/ExchangeBasicInfo-class.html">ExchangeBasicInfo</a></li>
+        <li><a href="../coingecko_client/ExchangeInfo-class.html">ExchangeInfo</a></li>
+        <li><a href="../coingecko_client/ExchangeRate-class.html">ExchangeRate</a></li>
+        <li><a href="../coingecko_client/ExchangeStatus-class.html">ExchangeStatus</a></li>
+        <li><a href="../coingecko_client/ExchangeVolumeChart-class.html">ExchangeVolumeChart</a></li>
+        <li><a href="../coingecko_client/GlobalCryptoInfo-class.html">GlobalCryptoInfo</a></li>
+        <li><a href="../coingecko_client/GlobalDefiInfo-class.html">GlobalDefiInfo</a></li>
+        <li><a href="../coingecko_client/HistoricalData-class.html">HistoricalData</a></li>
+        <li><a href="../coingecko_client/MarketData-class.html">MarketData</a></li>
+        <li><a href="../coingecko_client/MarketIndex-class.html">MarketIndex</a></li>
+        <li><a href="../coingecko_client/NftBasicInfo-class.html">NftBasicInfo</a></li>
+        <li><a href="../coingecko_client/NftInfo-class.html">NftInfo</a></li>
+        <li><a href="../coingecko_client/Project-class.html">Project</a></li>
+        <li><a href="../coingecko_client/Roi-class.html">Roi</a></li>
+        <li><a href="../coingecko_client/TickerInfo-class.html">TickerInfo</a></li>
+
+
+
+
+
+
+      <li class="section-title"><a href="../coingecko_client/coingecko_client-library.html#enums">Enums</a></li>
+        <li><a href="../coingecko_client/AssetPlatformsFilter.html">AssetPlatformsFilter</a></li>
+        <li><a href="../coingecko_client/CoinCategoriesDataOrdering.html">CoinCategoriesDataOrdering</a></li>
+        <li><a href="../coingecko_client/CoinMarketDataOrdering.html">CoinMarketDataOrdering</a></li>
+        <li><a href="../coingecko_client/CoinPriceChange.html">CoinPriceChange</a></li>
+        <li><a href="../coingecko_client/CoinTickersDataOrdering.html">CoinTickersDataOrdering</a></li>
+        <li><a href="../coingecko_client/CryptoCurrencies.html">CryptoCurrencies</a></li>
+        <li><a href="../coingecko_client/Currencies.html">Currencies</a></li>
+        <li><a href="../coingecko_client/DataRange.html">DataRange</a></li>
+        <li><a href="../coingecko_client/DerivativesExchangeOrdering.html">DerivativesExchangeOrdering</a></li>
+        <li><a href="../coingecko_client/DerivativesTickers.html">DerivativesTickers</a></li>
+        <li><a href="../coingecko_client/ExchangeDataOrdering.html">ExchangeDataOrdering</a></li>
+        <li><a href="../coingecko_client/NftsDataOrdering.html">NftsDataOrdering</a></li>
+
+
+      <li class="section-title"><a href="../coingecko_client/coingecko_client-library.html#exceptions">Exceptions</a></li>
+        <li><a href="../coingecko_client/DataParsingException-class.html">DataParsingException</a></li>
+        <li><a href="../coingecko_client/NetworkRequestException-class.html">NetworkRequestException</a></li>
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+    <ol>
+
+        <li class="section-title"><a href="../coingecko_client/CoinLinks-class.html#constructors">Constructors</a></li>
+          <li><a href="../coingecko_client/CoinLinks/CoinLinks.html">CoinLinks</a></li>
+          <li><a href="../coingecko_client/CoinLinks/CoinLinks.fromJson.html">fromJson</a></li>
+
+
+        <li class="section-title">
+          <a href="../coingecko_client/CoinLinks-class.html#instance-properties">Properties</a>
+        </li>
+          <li><a href="../coingecko_client/CoinLinks/announcementUrl.html">announcementUrl</a></li>
+          <li><a href="../coingecko_client/CoinLinks/bitcointalkThreadIdentifier.html">bitcointalkThreadIdentifier</a></li>
+          <li><a href="../coingecko_client/CoinLinks/blockchainSite.html">blockchainSite</a></li>
+          <li><a href="../coingecko_client/CoinLinks/chatUrl.html">chatUrl</a></li>
+          <li><a href="../coingecko_client/CoinLinks/facebookUsername.html">facebookUsername</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Object/hashCode.html">hashCode</a></li>
+          <li><a href="../coingecko_client/CoinLinks/homepage.html">homepage</a></li>
+          <li><a href="../coingecko_client/CoinLinks/officialForumUrl.html">officialForumUrl</a></li>
+          <li><a href="../coingecko_client/CoinLinks/reposUrl.html">reposUrl</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Object/runtimeType.html">runtimeType</a></li>
+          <li><a href="../coingecko_client/CoinLinks/subredditUrl.html">subredditUrl</a></li>
+          <li><a href="../coingecko_client/CoinLinks/telegramChannelIdentifier.html">telegramChannelIdentifier</a></li>
+          <li><a href="../coingecko_client/CoinLinks/twitterScreenName.html">twitterScreenName</a></li>
+
+        <li class="section-title"><a href="../coingecko_client/CoinLinks-class.html#instance-methods">Methods</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+          <li class="inherited"><a href="../coingecko_client/BaseModel/toDate.html">toDate</a></li>
+          <li class="inherited"><a href="../coingecko_client/BaseModel/toDateFromMs.html">toDateFromMs</a></li>
+          <li class="inherited"><a href="../coingecko_client/BaseModel/toDateFromTimestamp.html">toDateFromTimestamp</a></li>
+          <li class="inherited"><a href="../coingecko_client/BaseModel/toDouble.html">toDouble</a></li>
+          <li class="inherited"><a href="../coingecko_client/BaseModel/toInt.html">toInt</a></li>
+          <li><a href="../coingecko_client/CoinLinks/toJson.html">toJson</a></li>
+          <li class="inherited"><a href="../coingecko_client/BaseModel/toList.html">toList</a></li>
+          <li class="inherited"><a href="../coingecko_client/BaseModel/toMap.html">toMap</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Object/toString.html">toString</a></li>
+
+        <li class="section-title inherited"><a href="../coingecko_client/CoinLinks-class.html#operators">Operators</a></li>
+          <li class="inherited"><a href="https://api.dart.dev/dev/3.0.0-397.0.dev/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    coingecko_client
+      1.0.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

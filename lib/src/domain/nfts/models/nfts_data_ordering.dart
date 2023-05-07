@@ -6,7 +6,7 @@ enum NftsDataOrdering {
   marketCapNativeAsc('market_cap_native_asc'),
   marketCapNativeDesc('market_cap_native_desc'),
   marketCapUsdAsc('market_cap_usd_asc'),
-  marketCapUsdDesc('market_cap_usd_des');
+  marketCapUsdDesc('market_cap_usd_desc');
   const NftsDataOrdering(this.value);
   final String value;
 }

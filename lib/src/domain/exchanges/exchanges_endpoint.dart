@@ -1,11 +1,14 @@
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/exchanges_data_ordering.dart';
+import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_info.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_basic_info.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_data_ordering.dart';
+import 'package:coingecko_client/src/domain/exchanges/models/exchange_volume_chart.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
+import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
-import 'package:http/http.dart';
 
 class ExchangesEndpoint extends BaseEndpoint {
-  String _path = "";
   ExchangesEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey}) : super(httpRequestService, {apiKey: apiKey});
 
   /// List all exchanges (Active with trading volumes)
@@ -15,27 +18,46 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// Total results per page
   /// Default value:: 100
   /// [page] page through results
-  Future<Response> getExchanges({
+  Future<List<ExchangeInfo>> getList({
     int? perPage,
     int? page
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'per_page': perPage,
-        'page': page
-      },
-      endpointPath: "/exchanges"
-    );
-    return await send(_path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'per_page': perPage,
+          'page': page
+        },
+        endpointPath: "/exchanges"
+      );
+
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => ExchangeInfo.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// List all supported markets id and name (no pagination required)
   /// <br/><b>Endpoint </b>: /exchanges/list
   /// 
   /// Use this to obtain all the markets' id in order to make API calls
-  Future<Response> getExchangesList() async {
-    _path = '/exchanges/list';
-    return await send(_path);
+  Future<List<ExchangeBasicInfo>> getBasicList() async {
+    try {
+      var path = '/exchanges/list';
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => ExchangeBasicInfo.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get exchange volume in BTC and top 100 tickers only
@@ -48,16 +70,24 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// You are responsible for managing how you want to display these information (e.g. footnote, different background, change opacity, hide)
   /// 
   /// [id] pass the exchange id (can be obtained from /exchanges/list) eg. binance
-  Future<Response> getExchangesWithId({
+  Future<ExchangeInfo> getInfo({
     required String id
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'id': id
-      },
-      endpointPath: "/exchanges/{id}"
-    );
-    return await send(_path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id
+        },
+        endpointPath: "/exchanges/{id}"
+      );
+      return ExchangeInfo.fromJson(await sendBasic(path));
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get exchange tickers (paginated, 100 tickers per page)
@@ -74,26 +104,38 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// [page] Page through results
   /// [depth] flag to show 2% orderbook depth i.e., cost_to_move_up_usd and cost_to_move_down_usd. valid values: true, false
   /// [order] valid values: <b>trust_score_desc (default), trust_score_asc and volume_desc</b>
-  Future<Response> getExchangesWithIdTickers({
+  Future<List<TickerInfo>?> getTickerList({
     required String id,
-    String? coinIds,
+    List<String>? coinIds,
     bool? includeExchangeLogo,
     int? page,
     bool? depth,
-    ExchangesDataOrdering? order
+    ExchangeDataOrdering? order
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'id': id,
-        'coin_ids': coinIds,
-        'include_exchange_logo': includeExchangeLogo,
-        'page': page,
-        'depth': depth,
-        'order': order?.value ?? ''
-      },
-      endpointPath: "/exchanges/{id}/tickers"
-    );
-    return await send(_path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'coin_ids': coinIds?.join(','),
+          'include_exchange_logo': includeExchangeLogo,
+          'page': page,
+          'depth': depth,
+          'order': order?.value
+        },
+        endpointPath: "/exchanges/{id}/tickers"
+      );
+
+      var json = await sendBasic(path);
+      return json['tickers'] != null 
+        ? List<dynamic>.of(json['tickers']).map((e) => TickerInfo.fromJson(e)).toList() 
+        : null;
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 
   /// Get volume_chart data for a given exchange
@@ -101,17 +143,27 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// 
   /// [id] pass the exchange id (can be obtained from /exchanges/list) eg. binance
   /// [days]  Data up to number of days ago (eg. 1,14,30)
-  Future<Response> getExchangesWithIdVolumeChart({
+  Future<List<ExchangeVolumeChart>> getVolumeChartList({
     required String id,
     required DataRange days
   }) async {
-    _path = createEndpointUrlPath(
-      rawQueryItems: {
-        'id': id,
-        'days': days.value
-      },
-      endpointPath: "/exchanges/{id}/volume_chart"
-    );
-    return await send(_path);
+    try {
+      var path = createEndpointPathUrl(
+        rawQueryItems: {
+          'id': id,
+          'days': days.value
+        },
+        endpointPath: "/exchanges/{id}/volume_chart"
+      );
+
+      var result = List<dynamic>.of(await sendBasic(path));
+      return result.map((value) => ExchangeVolumeChart.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch(_) {
+      rethrow;
+    }
   }
 }

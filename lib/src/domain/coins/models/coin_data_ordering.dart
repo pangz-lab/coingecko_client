@@ -1,7 +1,5 @@
 enum CoinMarketDataOrdering {
   marketCapDesc('market_cap_desc'),
-  geckoDesc('gecko_desc'),
-  geckoAsc('gecko_asc'),
   marketCapAsc('market_cap_asc'),
   volumeAsc('volume_asc'),
   volumeDesc('volume_desc'),
