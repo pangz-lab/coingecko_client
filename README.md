@@ -36,7 +36,7 @@ dependencies:
 # Usage 
 - Initialize the client class
 - Use the client properties to send the request
-- ( Checkout the example folder for more samples )
+- ( Checkout the <a href="https://github.com/pangz-lab/coingecko_client/tree/master/example">example folder</a> for more practical usage )
 
 ```dart
 import 'package:coingecko_client/coingecko_client.dart';
