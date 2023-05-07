@@ -9,7 +9,7 @@ void main() async {
     print(result.first.runtimeType);
     print(result.first.id);
     print(result.first.name);
-  print(result.first.shortName);
+    print(result.first.shortName);
   
 
   } on NetworkRequestException catch (e, _){
@@ -19,6 +19,7 @@ void main() async {
   } on TypeError catch (e, _){
     print(e.stackTrace);
   } catch(_) {
+    /// Do something here or just rethrow
     rethrow;
   }
 }
