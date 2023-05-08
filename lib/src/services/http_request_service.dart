@@ -10,7 +10,6 @@ abstract class HttpRequestServiceInterface {
       throw UnimplementedError();
 }
 
-
 /// Main implementation of the HttpRequestServiceInterface using the http library.
 /// Other http packages can be used(like dio) as long it implements this interface.
 /// This the main HTTP service class used to send the HTTP request to the coingecko endpoints
