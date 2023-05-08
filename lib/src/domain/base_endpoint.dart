@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
@@ -66,7 +67,7 @@ class BaseEndpoint {
       final query = urlComponent.length > 1 ? urlComponent.elementAt(1) : null;
       final response = await httpRequestService
           .sendGet(host, urlComponent.elementAt(0), query, headers: headers);
-      if (response.statusCode != 200) {
+      if (response.statusCode != HttpStatus.ok) {
         throw NetworkRequestException.failedResponse(
             response.statusCode, response);
       }

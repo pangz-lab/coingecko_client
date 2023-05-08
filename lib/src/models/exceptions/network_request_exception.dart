@@ -6,7 +6,13 @@ import 'package:http/http.dart';
 /// to determine the main cause of the error.
 ///
 class NetworkRequestException extends ClientException {
-  NetworkRequestException(super.message);
+  int? _statusCode;
+  int? get statusCode => _statusCode;
+  NetworkRequestException(
+    super.message,
+    {int? statusCode}) {
+    _statusCode = statusCode;
+  }
 
   factory NetworkRequestException.failedResponse(
       int statusCode, Response response) {
@@ -19,6 +25,7 @@ class NetworkRequestException extends ClientException {
         "\n\n[REQUEST]"
         "\n${response.request?.url ?? ''}"
         "\n${response.request?.headers ?? ''}"
-        "\n${response.request?.method ?? ''}");
+        "\n${response.request?.method ?? ''}",
+        statusCode:statusCode);
   }
 }

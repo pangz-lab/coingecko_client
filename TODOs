@@ -38,4 +38,4 @@ dart pub publish --dry-run
 10. Run dart pub publish
 dart pub publish
 11. Add github tag for the new version
-11. Github release
+12. Github release

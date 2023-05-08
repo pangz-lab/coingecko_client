@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/version-v1.0.4-blue)
+![version](https://img.shields.io/badge/version-v1.1.0-blue)
 ![coverage](https://img.shields.io/badge/coverage-100%25-success)
 ![version](https://img.shields.io/badge/sdk-v2.19.3-blue)
 ![license](https://img.shields.io/badge/license-BSD--3-blue)
@@ -24,7 +24,26 @@
 </p>
 
 
-A simple and intuitive package to access the [CoinGecko REST API Service](https://www.coingecko.com/en/api/documentation).
+A simple and intuitive package for the [CoinGecko REST API Service](https://www.coingecko.com/en/api/documentation).
+<br>
+<br>
+
+⚔️ Why this ❓🤨🤔
+---
+
+<blockquote>
+<div>&nbsp</div>
+✔️ fully tested <a href="https://github.com/pangz-lab/coingecko_client/tree/master/test">( see test coverage )</a>.<br>
+✔️ simple and easy to use.<br>
+✔️ almost all results are converted to <b>model/dto/entity</b> ( so you don't need to worry about making your own classes ).<br>
+✔️ fully documented.<br>
+✔️ actively being developed and supported.<br>
+<div>&nbsp</div>
+</blockquote>
+
+#### 💡 You can go directly to the [examples](https://github.com/pangz-lab/coingecko_client/tree/master/example) and see for yourself.
+
+___
 
 Table of Contents
 ---------------
@@ -32,6 +51,7 @@ Table of Contents
 2. [Requirements](#requirements)
 3. [Installation](#installation)
 4. [Usage](#usage)
+    - [Sample Usage](#sample-usage)
 5. [Endpoints](#endpoints)
     - [ping](#-ping)
     - [coins](#-coins)
@@ -59,14 +79,14 @@ API Version Support
 
 Requirements
 ---------------
-- ✔️ dart sdk: >= 2.19.3
+- ✔️ ***dart sdk***: >= `2.19.3`
 
 Installation
 ---------------
 Add the dependency to your Dart / Flutter project:<br>
-(under the `dependencies`, add the following)
+( in `pubspec.yaml` file under the `dependencies`, add the following )
 ```yaml
-coingecko_client: ^1.0.4
+coingecko_client: ^1.1.0
 ```
 
 <p></p>Go to <a href="https://pub.dev/packages/coingecko_client">pub.dev</a> for more details.</p>
@@ -79,28 +99,68 @@ coingecko_client: ^1.0.4
 ```dart
 import 'package:coingecko_client/coingecko_client.dart';
 
-var client = CoinGeckoClient();
+final client = CoinGeckoClient();
 ```
-- Use any of the client properties to access the endpoint to use. `(use coins for this case)`
-- All results are returned by a `Future` object so `await` is **always** necessary.
+- Use any of the client properties to access the services. `(use coins)`
+- All results are returned from a `Future` object so `async/await` is **necessary**.
 ```dart
-var coinHistory = await client.coins.getHistory(
+final coinHistory = await client.coins.getHistory(
     id: 'bitcoin',
     date: DateTime.now()
 );
 ```
-- Access the result's object
+- The following sample just prints the property so just do yours here.
+- 💡 **TIP** : Most editors(especially VS Code) supports object reflection. You can hover on the result object to conveniently get all the available properties you can use.
 ```dart
 print(coinHistory);
 print(coinHistory.name);
 ```
 - Result varies depending on the endpoint.
-- **TIP**: Most editor supports object reflection. You can hover on the result object to get all the available properties you can use.
-- ( Checkout the <a href="https://github.com/pangz-lab/coingecko_client/tree/master/example">example folder</a> for more samples. )
+- It's recommended to wrap it within a `try/catch` block to handle the runtime errors - not only because it's part of the package design but also the ideal way to do this.
+
+
+## Sample Usage
+---
+```dart
+import 'package:coingecko_client/coingecko_client.dart';
+
+void main() async {
+    try {
+        final client = CoinGeckoClient();
+        final coinHistory = await client.coins.getHistory(
+            id: 'bitcoin',
+            date: DateTime.now()
+        );
+        print(coinHistory);
+        print(coinHistory.name);
+
+    } on Exception catch (e, _) {
+        /// Exception handling
+        /// All runtime exceptions will go here.
+        /// All http status code other than 200 will also be here.
+        /// [Sample error handling]
+        print("error occured");
+        if(e is NetworkRequestException) {
+            print(e.statusCode);
+        } else {
+            rethrow;
+        }
+    }
+}
+```
+- Look at the [sample code](https://github.com/pangz-lab/coingecko_client/blob/master/example/coingecko_client_sample.dart).
+- HTTP status code other than [200](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) will be raised as an exception. i.e. `404` or `429`.
+- Non-error status codes such as `>= 201`, `3xx` or `1xx` will still be treated as an exception as the API service does not require methods other than GET request.
+- This might change in the future but it's not part of their service as of now. (YAGNI)
+- Check [here](https://github.com/pangz-lab/coingecko_client/tree/master/example") for more examples.
 
 
 ___
 <br>
+
+# Endpoints
+## [ Community ]
+
 
 # [🌐](#table-of-contents) ping
 ### 📤 */ping*
@@ -110,8 +170,6 @@ client.ping.getResult();
 
 ___
 <br>
-
-# Endpoints
 
 # [🌐](#table-of-contents) coins
 ### 📤 */coins/list*
