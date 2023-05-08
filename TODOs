@@ -31,11 +31,9 @@ dart test test/domain
 dart test test/coingecko*
 7. Run analyze
 dart analyze
-8. Run documentation
-dart doc
-9. Run publish --dry-run
+8. Run publish --dry-run
 dart pub publish --dry-run
-10. Run dart pub publish
+9. Run dart pub publish
 dart pub publish
-11. Add github tag for the new version
-12. Github release
+10. Add github tag for the new version
+11. Github release
