@@ -1,3 +1,9 @@
+## 1.1.0
+2023/05/08 JST
+- Some minor code improvements
+- Improved exception handling
+- Added sample implementation
+- Improved readme
 ## 1.0.4
 2023/05/08 JST
 - Fixed json serilization support

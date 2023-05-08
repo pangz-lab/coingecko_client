@@ -8,9 +8,7 @@ import 'package:http/http.dart';
 class NetworkRequestException extends ClientException {
   int? _statusCode;
   int? get statusCode => _statusCode;
-  NetworkRequestException(
-    super.message,
-    {int? statusCode}) {
+  NetworkRequestException(super.message, {int? statusCode}) {
     _statusCode = statusCode;
   }
 
@@ -26,6 +24,6 @@ class NetworkRequestException extends ClientException {
         "\n${response.request?.url ?? ''}"
         "\n${response.request?.headers ?? ''}"
         "\n${response.request?.method ?? ''}",
-        statusCode:statusCode);
+        statusCode: statusCode);
   }
 }

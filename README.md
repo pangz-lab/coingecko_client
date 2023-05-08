@@ -1,6 +1,6 @@
 ![version](https://img.shields.io/badge/version-v1.1.0-blue)
 ![coverage](https://img.shields.io/badge/coverage-100%25-success)
-![version](https://img.shields.io/badge/sdk-v2.19.3-blue)
+![sdk](https://img.shields.io/badge/sdk-v2.19.3-blue)
 ![license](https://img.shields.io/badge/license-BSD--3-blue)
 [![GitHub issues by-label](https://img.shields.io/github/issues/badges/shields/open)](https://github.com/pangz-lab/coingecko_client/issues)
 
@@ -24,7 +24,7 @@
 </p>
 
 
-A simple and intuitive package for the [CoinGecko REST API Service](https://www.coingecko.com/en/api/documentation).
+A simple and intuitive package for the [CoinGecko REST API Service](https://www.coingecko.com/en/api/documentation) ( v3 ).
 <br>
 <br>
 
@@ -35,7 +35,7 @@ A simple and intuitive package for the [CoinGecko REST API Service](https://www.
 <div>&nbsp</div>
 ✔️ fully tested <a href="https://github.com/pangz-lab/coingecko_client/tree/master/test">( see test coverage )</a>.<br>
 ✔️ simple and easy to use.<br>
-✔️ almost all results are converted to <b>model/dto/entity</b> ( so you don't need to worry about making your own classes ).<br>
+✔️ almost all results are converted to <b>model/dto/entity</b> ( so you don't need to worry about making your own model classes ).<br>
 ✔️ fully documented.<br>
 ✔️ actively being developed and supported.<br>
 <div>&nbsp</div>
@@ -477,10 +477,10 @@ client.search.getResult(query: 'bybit');
 
 🐞 Issues / Bugs / Improvements
 ---------------
-- If you found any issues or bugs, please let me know.
-- If you require an urgent fix, raise an issue and I'll try to find time to resolve it.
-- Should you decide to make your own change, create your own branch and raise a PR to the master branch.
-- If you have any suggestions or concerns, you can contact me directly using discord.
+- If you found any issues or bugs, [please raise it here](https://github.com/pangz-lab/coingecko_client/issues).
+- For urgent fix, please chat directly to the discord channel and I'll find time to resolve it.
+- Should you decide to make your own change, create your own branch and raise a PR to the master branch and ping me.
+- Any suggestions or concerns, you can contact me directly using discord, twitter or email.
 
 <br>
 
@@ -494,3 +494,8 @@ Contacts
 <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/6266bc493fb42d4e27bb8393_847541504914fd33810e70a0ea73177e.ico" height="25"> Pangz#4102
 </p>
 </i>
+<p>
+<a href="https://twitter.com/intent/follow?screen_name=Pangz55192569">
+    <img src="https://img.shields.io/twitter/follow/Pangz55192569?style=social&logo=twitter" alt="follow on witter">
+</a>
+</p>
