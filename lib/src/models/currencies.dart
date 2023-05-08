@@ -749,7 +749,7 @@ enum CryptoCurrencies implements BaseCurrency {
 }
 
 /// You might need to use currencies that does not exist<br>
-/// in either `Currencies` or `CryptoCurrencies` enum/class. You can use this do define
+/// in either `Currencies` or `CryptoCurrencies` enum/class. You can use this to define
 /// custom currencies.
 class CustomCurrency implements BaseCurrency {
   String? _code;
