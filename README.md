@@ -421,8 +421,8 @@ client.search.getResult(query: 'bybit');
 ---------------
 - If you found any issues or bugs, please let me know.
 - If you require an urgent fix, raise an issue and I'll try to find time to resolve it.
-- Should you decide to make your own change, raise your PR to the main branch and let me know.
-- If you have any suggestions or concern, you can contact me directly using discord.
+- Should you decide to make your own change, raise your PR to the main branch.
+- If you have any suggestions or concerns, you can contact me directly using discord.
 
 <br>
 
