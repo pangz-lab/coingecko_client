@@ -1,5 +1,6 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Basic roi information. Used mainly for coin information.
 class Roi extends BaseModel {
   double? _times;
   String? _currency;

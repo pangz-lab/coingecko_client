@@ -1,5 +1,6 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Contains the coin's basic information.
 class CoinBasicInfo extends BaseModel {
   String? _id;
   String? _symbol;

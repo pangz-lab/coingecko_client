@@ -1,5 +1,6 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+// Contains summary information of the global top 100 cryptos.
 class GlobalCryptoInfo extends BaseModel {
   int? _activeCryptocurrencies;
   int? _upcomingIcos;

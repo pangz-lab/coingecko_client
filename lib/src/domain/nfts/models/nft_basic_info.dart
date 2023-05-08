@@ -1,5 +1,7 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Nfts basic information. Use to obtain basic info of all the NFT ids 
+/// and other nft related information.
 class NftBasicInfo extends BaseModel {
   String? _id;
   String? _contractAddress;

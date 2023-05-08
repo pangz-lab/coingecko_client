@@ -1,5 +1,7 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Market index information. Use in getting the list of indexes
+/// or a specific market index.
 class MarketIndex extends BaseModel {
   String? _name;
   String? _id;

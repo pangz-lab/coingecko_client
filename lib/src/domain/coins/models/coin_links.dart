@@ -1,5 +1,7 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Contains urls from different sources.
+/// This is mainly used for the coin result but is also used in other domain.
 class CoinLinks extends BaseModel {
   List<String>? _homepage;
   List<String>? _blockchainSite;

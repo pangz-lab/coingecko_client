@@ -1,3 +1,4 @@
+/// Mainly use to filter derivatives tickers.
 enum DerivativesTickers {
   all('all'),
   unexpired('unexpired');

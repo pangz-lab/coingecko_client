@@ -59,7 +59,7 @@
     
 <section class="desc markdown">
   <p>CoinGecko API client.</p>
-<p>Main library</p>
+<p>Main coingecko_client library</p>
 </section>
 
 
@@ -72,7 +72,8 @@
 
 </dt>
 <dd>
-  
+  Asset platform information. Use in getting list of an asset platforms or a
+specific asset platform.
 </dd>
 
         <dt id="BaseCurrency">
@@ -102,7 +103,7 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  Contains the coin's basic information.
 </dd>
 
         <dt id="CoinCategoryBasicInfo">
@@ -110,7 +111,7 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  Basic information of a coin category.
 </dd>
 
         <dt id="CoinCategoryInfo">
@@ -118,7 +119,7 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  Coin category detailed info
 </dd>
 
         <dt id="CoinGeckoClient">
@@ -126,7 +127,9 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  Main coingecko_client library class.
+This is the class that should be instantiated to access all the available
+coingecko api endpoints.
 </dd>
 
         <dt id="CoinInfo">
@@ -134,7 +137,7 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  Coins detailed information.
 </dd>
 
         <dt id="CoinLinks">
@@ -142,7 +145,8 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  Contains urls from different sources.
+This is mainly used for the coin result but is also used in other domain.
 </dd>
 
         <dt id="CoinMarket">
@@ -150,7 +154,8 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  Contains the coin market data used when getting all the coin market list
+or just getting an information about a specific market.
 </dd>
 
         <dt id="CoinMarketHistory">
@@ -166,7 +171,7 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  Provides data for the coin's open, high, low and close for a specific period.
 </dd>
 
         <dt id="CoinTickers">
@@ -174,7 +179,8 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  Provides a list of tickers for a specifc coin.
+Mainly used for retrieving coin data.
 </dd>
 
         <dt id="CompanyInfo">
@@ -182,7 +188,7 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  Crypto company information.
 </dd>
 
         <dt id="CompanyList">
@@ -190,7 +196,7 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  Crypto company listing information.
 </dd>
 
         <dt id="ContractInfo">
@@ -198,7 +204,8 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  A wrapper class of CoinInfo.
+Used mainly for getting coin info from a contract address.
 </dd>
 
         <dt id="ContractMarketHistory">
@@ -206,7 +213,8 @@ to avoid formatting error in runtime
 
 </dt>
 <dd>
-  
+  A wrapper class of CoinMarketHistory.<br>
+Used mainly for getting coin info from contract address.<br>
 </dd>
 
         <dt id="CustomCurrency">
@@ -215,7 +223,7 @@ to avoid formatting error in runtime
 </dt>
 <dd>
   You might need to use currencies that does not exist<br>
-in either <code>Currencies</code> or <code>CryptoCurrencies</code> enum/clas. You can use this do define
+in either <code>Currencies</code> or <code>CryptoCurrencies</code> enum/class. You can use this do define
 custom currencies.
 </dd>
 
@@ -224,7 +232,7 @@ custom currencies.
 
 </dt>
 <dd>
-  
+  Derivatives main information. Used in obtaining list of derivatives or a specific derivatives.
 </dd>
 
         <dt id="DerivativesExchange">
@@ -232,7 +240,7 @@ custom currencies.
 
 </dt>
 <dd>
-  
+  Derivatives exchange main information.
 </dd>
 
         <dt id="DerivativesTickerInfo">
@@ -240,7 +248,7 @@ custom currencies.
 
 </dt>
 <dd>
-  
+  Derivatives ticker detailed information.
 </dd>
 
         <dt id="ExchangeBasicInfo">
@@ -248,7 +256,7 @@ custom currencies.
 
 </dt>
 <dd>
-  
+  Exchange basic information. Used when returning list of exchanges.
 </dd>
 
         <dt id="ExchangeInfo">
@@ -256,7 +264,7 @@ custom currencies.
 
 </dt>
 <dd>
-  
+  Exchange main information. Provides detailed information of a specific exchange.
 </dd>
 
         <dt id="ExchangeRate">
@@ -264,7 +272,7 @@ custom currencies.
 
 </dt>
 <dd>
-  
+  Exchange rate data. Used when collecting rates of a specific coin.
 </dd>
 
         <dt id="ExchangeStatus">
@@ -272,7 +280,7 @@ custom currencies.
 
 </dt>
 <dd>
-  
+  Exchange status. Mainly used in ExchangeInfo class.
 </dd>
 
         <dt id="ExchangeVolumeChart">
@@ -280,7 +288,8 @@ custom currencies.
 
 </dt>
 <dd>
-  
+  Wrapper class of HistoricalData class. Used specifically for
+exchange volume.
 </dd>
 
         <dt id="GlobalCryptoInfo">
@@ -321,7 +330,8 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Market index information. Use in getting the list of indexes
+or a specific market index.
 </dd>
 
         <dt id="NftBasicInfo">
@@ -329,7 +339,8 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Nfts basic information. Use to obtain basic info of all the NFT ids
+and other nft related information.
 </dd>
 
         <dt id="NftInfo">
@@ -337,7 +348,7 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Nft information. Contains all information of a specific nft.
 </dd>
 
         <dt id="Project">
@@ -353,7 +364,7 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Basic roi information. Used mainly for coin information.
 </dd>
 
         <dt id="TickerInfo">
@@ -361,7 +372,7 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Ticker detailed information. Used in coins and other domains.
 </dd>
 
       </dl>
@@ -381,7 +392,7 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Mainly use for filtering asset platform result list.
 </dd>
 
         <dt id="CoinCategoriesDataOrdering">
@@ -389,7 +400,7 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Use to define sorting order of coin categories result.
 </dd>
 
         <dt id="CoinMarketDataOrdering">
@@ -397,7 +408,7 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Defines the sorting order of coin result
 </dd>
 
         <dt id="CoinPriceChange">
@@ -405,7 +416,7 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Provides range of time when getting the data for coin price changes.
 </dd>
 
         <dt id="CoinTickersDataOrdering">
@@ -413,7 +424,7 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Defines the sorting order of coin tickers result
 </dd>
 
         <dt id="CryptoCurrencies">
@@ -445,7 +456,7 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Use to define sorting order of derivatives exchange.
 </dd>
 
         <dt id="DerivativesTickers">
@@ -453,7 +464,7 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Mainly use to filter derivatives tickers.
 </dd>
 
         <dt id="ExchangeDataOrdering">
@@ -461,7 +472,7 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Use to define sorting order exchange data.
 </dd>
 
         <dt id="NftsDataOrdering">
@@ -469,7 +480,7 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Use to define sorting order of nft result.
 </dd>
 
       </dl>

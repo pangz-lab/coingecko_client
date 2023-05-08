@@ -5,7 +5,6 @@ import 'package:coingecko_client/src/domain/categories/models/coin_category_info
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
-
 ///
 /// List all coin categories and categories with market data
 ///

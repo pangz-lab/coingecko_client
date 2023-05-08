@@ -1,5 +1,6 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Basic information of a coin category.
 class CoinCategoryBasicInfo extends BaseModel {
   String? _id;
   String? _name;
