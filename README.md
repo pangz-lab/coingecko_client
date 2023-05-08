@@ -325,7 +325,7 @@ client.contract.getMarketHistory(
     id: 'ethereum',
     contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
     vsCurrency: Currencies.jpy,
-    days : DataRange.in2Weeks,
+    days: DataRange.in2Weeks,
 );
 ```
 ### 📤 */coins/{id}/contract/{contract_address}/market_chart/range*
