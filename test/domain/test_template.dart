@@ -9,7 +9,7 @@
 //   final String apiVersionPath = "/api/v3";
 
 //   group('getMarketExchangeVolumeChart method in', () {
-//     var basePath = "/exchanges";
+//     final basePath = "/exchanges";
 //     group('ExchangesEndpoint test endpoint path creation', () {
 //       var sut = ExchangesEndpoint(
 //         HttpRequestServiceMock(
@@ -40,7 +40,7 @@
 //             body: MarketExchangeVolumeMockData.validResponseBody
 //           )
 //         );
-//         var result = await sut!.getMarketExchangeVolumeChart(
+//         final result = await sut!.getMarketExchangeVolumeChart(
 //           page: 1,
 //           perPage: 3
 //         );
@@ -67,7 +67,7 @@
 //             body: MarketExchangeVolumeMockData.responseBodyWithIncompleteKeys
 //           )
 //         );
-//         var result = await sut!.getMarketExchangeVolumeChart(page: 1, perPage: 3);
+//         final result = await sut!.getMarketExchangeVolumeChart(page: 1, perPage: 3);
 //         var firstItem = result.elementAt(0);
 //         expect(result.length, 1);
 //         expect(firstItem.id, "bybit_spot");

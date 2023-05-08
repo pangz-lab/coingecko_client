@@ -17,7 +17,7 @@ class GlobalEndpoint extends BaseEndpoint {
   /// <br/><b>Endpoint </b>: /global
   Future<GlobalCryptoInfo> getCryptoInfo() async {
     try {
-      var path = '/global';
+      final path = '/global';
       var response = await sendBasic(path);
 
       return GlobalCryptoInfo.fromJson(response['data']);
@@ -34,7 +34,7 @@ class GlobalEndpoint extends BaseEndpoint {
   /// <br/><b>Endpoint </b>: /global/decentralized_finance_defi
   Future<GlobalDefiInfo> getDefiInfo() async {
     try {
-      var path = '/global/decentralized_finance_defi';
+      final path = '/global/decentralized_finance_defi';
       var response = await sendBasic(path);
 
       return GlobalDefiInfo.fromJson(response['data']);

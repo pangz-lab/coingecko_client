@@ -34,7 +34,7 @@ class SimpleEndpoint extends BaseEndpoint {
       bool? includeLastUpdatedAt,
       int? precision}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'ids': ids.join(','),
         'vs_currencies': vsCurrencies.map((e) => e.getCode()).join(','),
         'include_market_cap': includeMarketCap,
@@ -76,7 +76,7 @@ class SimpleEndpoint extends BaseEndpoint {
       bool? includeLastUpdatedAt,
       int? precision}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'id': id,
         'contract_addresses': contractAddresses.join(','),
         'vs_currencies': vsCurrencies.map((e) => e.getCode()).join(','),
@@ -101,7 +101,7 @@ class SimpleEndpoint extends BaseEndpoint {
   /// <br/><b>Endpoint </b>: /simple/supported_vs_currencies
   Future<List<String>> getSupportedVsCurrencies() async {
     try {
-      var path = '/simple/supported_vs_currencies';
+      final path = '/simple/supported_vs_currencies';
       return List<String>.from((await sendBasic(path)));
     } on FormatException {
       throw DataParsingException.unreadableData();

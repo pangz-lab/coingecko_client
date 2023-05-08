@@ -21,11 +21,11 @@ class AssetPlatformsEndpoint extends BaseEndpoint {
   ///  valid values: "nft" (asset_platform nft-support)
   Future<List<AssetPlatform>> getList({AssetPlatformsFilter? filter}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'filter': filter?.name},
           endpointPath: "/asset_platforms");
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => AssetPlatform.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();

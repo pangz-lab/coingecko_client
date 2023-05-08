@@ -5,7 +5,7 @@ void main() async {
     var client = CoinGeckoClient();
 
     /// sample call for - /ping
-    var result = await client.ping.getResult();
+    final result = await client.ping.getResult();
     print(result);
   } on NetworkRequestException catch (e, _) {
     print(e.message);

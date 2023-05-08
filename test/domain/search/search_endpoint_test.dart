@@ -12,7 +12,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getResult method in', () {
-    var basePath = "/search";
+    final basePath = "/search";
     group('SearchEndpoint test endpoint path creation', () {
       var sut = SearchEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: SearchMockData.validResponseBody));
@@ -27,7 +27,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = SearchEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: SearchMockData.validResponseBody));
-        var result = await sut!.getResult(query: 'bybit');
+        final result = await sut!.getResult(query: 'bybit');
 
         expect(result, {
           "coins": [],
@@ -66,7 +66,7 @@ void main() {
         sut = SearchEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: SearchMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getResult(query: 'bybit');
+        final result = await sut!.getResult(query: 'bybit');
 
         expect(result, {
           "coins": [],

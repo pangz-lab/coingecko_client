@@ -15,7 +15,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getInfo method in', () {
-    var basePath =
+    final basePath =
         "/coins/ethereum/contract/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984";
     group('ContractEndpoint test endpoint path creation', () {
       var sut = ContractEndpoint(HttpRequestServiceMock(
@@ -34,7 +34,7 @@ void main() {
         sut = ContractEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: ContractInfoMockData.validResponseBody));
 
-        var result = await sut!.getInfo(
+        final result = await sut!.getInfo(
             id: 'ethereum',
             contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984');
 
@@ -372,7 +372,7 @@ void main() {
             statusCode: 200,
             body: ContractInfoMockData.responseBodyWithIncompleteKeys));
 
-        var result = await sut!.getInfo(
+        final result = await sut!.getInfo(
             id: 'ethereum',
             contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984');
 
@@ -471,7 +471,7 @@ void main() {
   });
 
   group('getMarketHistory method in', () {
-    var basePath =
+    final basePath =
         "/coins/ethereum/contract/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984/market_chart/";
     group('ContractEndpoint test endpoint path creation', () {
       var sut = ContractEndpoint(HttpRequestServiceMock(
@@ -495,7 +495,7 @@ void main() {
         sut = ContractEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: ContractMarketHistoryMockData.validResponseBody));
-        var result = await sut!.getMarketHistory(
+        final result = await sut!.getMarketHistory(
           id: 'ethereum',
           contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
           vsCurrency: Currencies.jpy,
@@ -540,7 +540,7 @@ void main() {
             statusCode: 200,
             body:
                 ContractMarketHistoryMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getMarketHistory(
+        final result = await sut!.getMarketHistory(
           id: 'ethereum',
           contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
           vsCurrency: Currencies.jpy,
@@ -649,7 +649,7 @@ void main() {
   });
 
   group('getMarketHistoryWithDateRange method in', () {
-    var basePath =
+    final basePath =
         "/coins/ethereum/contract/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984/market_chart/range";
     group('ContractEndpoint test endpoint path creation', () {
       var sut = ContractEndpoint(HttpRequestServiceMock(
@@ -674,7 +674,7 @@ void main() {
         sut = ContractEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: ContractMarketHistoryMockData.validResponseBody));
-        var result = await sut!.getMarketHistoryWithDateRange(
+        final result = await sut!.getMarketHistoryWithDateRange(
           id: 'ethereum',
           contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
           vsCurrency: Currencies.php,
@@ -720,7 +720,7 @@ void main() {
             statusCode: 200,
             body:
                 ContractMarketHistoryMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getMarketHistoryWithDateRange(
+        final result = await sut!.getMarketHistoryWithDateRange(
           id: 'ethereum',
           contractAddress: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
           vsCurrency: Currencies.php,

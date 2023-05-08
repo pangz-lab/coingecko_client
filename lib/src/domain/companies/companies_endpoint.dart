@@ -17,7 +17,7 @@ class CompaniesEndpoint extends BaseEndpoint {
   /// [coin_id] bitcoin or ethereum
   Future<CompanyList> getList({required String? coinId}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'coin_id': coinId},
           endpointPath: "/companies/public_treasury/{coin_id}");
 

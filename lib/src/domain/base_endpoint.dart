@@ -50,7 +50,7 @@ class BaseEndpoint {
   /// ```
   Future<dynamic> sendPro(String path) {
     try {
-      var headers = Map.fromEntries(
+      final headers = Map.fromEntries(
           [MapEntry<String, String>(apiKeyQueryParam, _apiKey ?? '')]);
       return _send(path, apiProHost, headers: headers);
     } catch (_) {
@@ -62,15 +62,15 @@ class BaseEndpoint {
       {Map<String, String>? headers}) async {
     try {
       _endpointPath = "$version$path";
-      var urlComponent = _endpointPath.split("?");
-      var query = urlComponent.length > 1 ? urlComponent.elementAt(1) : null;
-      var response = await httpRequestService
+      final urlComponent = _endpointPath.split("?");
+      final query = urlComponent.length > 1 ? urlComponent.elementAt(1) : null;
+      final response = await httpRequestService
           .sendGet(host, urlComponent.elementAt(0), query, headers: headers);
       if (response.statusCode != 200) {
         throw NetworkRequestException.failedResponse(
             response.statusCode, response);
       }
-      var data = utf8.decode(response.bodyBytes);
+      final data = utf8.decode(response.bodyBytes);
       if (data.trim().isEmpty) {
         throw DataParsingException("Response data is empty");
       }
@@ -86,8 +86,8 @@ class BaseEndpoint {
   /// the presence of key-value pair. Or could be both.
   String createEndpointPathUrl(
       {required String endpointPath, Map<String, dynamic>? rawQueryItems}) {
-    var defaultRawQueryItems = Map<String, dynamic>.from(rawQueryItems ?? {});
-    var pathParameters = _getPathParameters(endpointPath, rawQueryItems);
+    final defaultRawQueryItems = Map<String, dynamic>.from(rawQueryItems ?? {});
+    final pathParameters = _getPathParameters(endpointPath, rawQueryItems);
     if (pathParameters.isNotEmpty && rawQueryItems != null) {
       rawQueryItems.removeWhere((key, value) => pathParameters.contains(key));
     }
@@ -119,7 +119,7 @@ class BaseEndpoint {
       return [];
     }
 
-    var result = path.split("/").map((e) {
+    final result = path.split("/").map((e) {
       if (!e.contains("{")) {
         return "";
       }

@@ -5,7 +5,7 @@ void main() async {
     var client = CoinGeckoClient();
 
     /// sample call for - /search/trending
-    var result = client.trending.getResult();
+    final result = client.trending.getResult();
     print(result);
   } on NetworkRequestException catch (e, _) {
     print(e.message);

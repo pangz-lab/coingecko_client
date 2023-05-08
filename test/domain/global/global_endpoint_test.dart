@@ -12,7 +12,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getCryptoInfo method in', () {
-    var basePath = "/global";
+    final basePath = "/global";
     group('GlobalEndpoint test endpoint path creation', () {
       var sut = GlobalEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: GlobalCryptoMockData.validResponseBody));
@@ -27,7 +27,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = GlobalEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: GlobalCryptoMockData.validResponseBody));
-        var result = await sut!.getCryptoInfo();
+        final result = await sut!.getCryptoInfo();
 
         expect(result.activeCryptocurrencies, 10689);
         expect(result.upcomingIcos, 0);
@@ -70,7 +70,7 @@ void main() {
         sut = GlobalEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: GlobalCryptoMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getCryptoInfo();
+        final result = await sut!.getCryptoInfo();
 
         expect(result.activeCryptocurrencies, 10689);
         expect(result.upcomingIcos, 0);
@@ -119,7 +119,7 @@ void main() {
   });
 
   group('getDefiInfo method in', () {
-    var basePath = "/global/decentralized_finance_defi";
+    final basePath = "/global/decentralized_finance_defi";
     group('GlobalEndpoint test endpoint path creation', () {
       var sut = GlobalEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: GlobalDefiMockData.validResponseBody));
@@ -134,7 +134,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = GlobalEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: GlobalDefiMockData.validResponseBody));
-        var result = await sut!.getDefiInfo();
+        final result = await sut!.getDefiInfo();
 
         expect(result.defiMarketCap, 47865869842.9580810533925392854);
         expect(result.ethMarketCap, 236815713504.1697382997169007792);
@@ -153,7 +153,7 @@ void main() {
         sut = GlobalEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: GlobalDefiMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getDefiInfo();
+        final result = await sut!.getDefiInfo();
 
         expect(result.defiMarketCap, null);
         expect(result.ethMarketCap, null);

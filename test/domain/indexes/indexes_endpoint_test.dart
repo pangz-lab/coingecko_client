@@ -12,7 +12,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getList method in', () {
-    var basePath = "/indexes";
+    final basePath = "/indexes";
     group('IndexesEndpoint test endpoint path creation', () {
       var sut = IndexesEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: MarketIndexListMockData.validResponseBody));
@@ -32,7 +32,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = IndexesEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: MarketIndexListMockData.validResponseBody));
-        var result = await sut!.getList(perPage: 10, page: 2);
+        final result = await sut!.getList(perPage: 10, page: 2);
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
@@ -49,7 +49,7 @@ void main() {
         sut = IndexesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: MarketIndexListMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getList(perPage: 10, page: 2);
+        final result = await sut!.getList(perPage: 10, page: 2);
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
@@ -95,7 +95,7 @@ void main() {
   });
 
   group('getInfo method in', () {
-    var basePath = "/indexes/bybit/HOT";
+    final basePath = "/indexes/bybit/HOT";
     group('IndexesEndpoint test endpoint path creation', () {
       var sut = IndexesEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: MarketIndexMockData.validResponseBody));
@@ -113,7 +113,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = IndexesEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: MarketIndexMockData.validResponseBody));
-        var result = await sut!.getInfo(
+        final result = await sut!.getInfo(
           marketId: 'bybit',
           id: 'HOT',
         );
@@ -130,7 +130,7 @@ void main() {
         sut = IndexesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: MarketIndexMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getInfo(
+        final result = await sut!.getInfo(
           marketId: 'bybit',
           id: 'HOT',
         );
@@ -192,7 +192,7 @@ void main() {
   });
 
   group('getBasicInfo method in', () {
-    var basePath = "/indexes/list";
+    final basePath = "/indexes/list";
     group('IndexesEndpoint test endpoint path creation', () {
       var sut = IndexesEndpoint(HttpRequestServiceMock(
           statusCode: 200,
@@ -209,7 +209,7 @@ void main() {
         sut = IndexesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: MarketIndexBasicInfoMockData.validResponseBody));
-        var result = await sut!.getBasicInfoList();
+        final result = await sut!.getBasicInfoList();
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
@@ -226,7 +226,7 @@ void main() {
         sut = IndexesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: MarketIndexBasicInfoMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getBasicInfoList();
+        final result = await sut!.getBasicInfoList();
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);

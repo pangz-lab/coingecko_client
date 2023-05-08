@@ -19,11 +19,11 @@ class IndexesEndpoint extends BaseEndpoint {
   /// [page] Page through results
   Future<List<MarketIndex>> getList({int? perPage, int? page}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'per_page': perPage, 'page': page},
           endpointPath: "/indexes");
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => MarketIndex.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
@@ -42,7 +42,7 @@ class IndexesEndpoint extends BaseEndpoint {
   Future<MarketIndex> getInfo(
       {required String marketId, required String id}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'market_id': marketId, 'id': id},
           endpointPath: "/indexes/{market_id}/{id}");
 
@@ -60,9 +60,9 @@ class IndexesEndpoint extends BaseEndpoint {
   /// <br/><b>Endpoint </b>: /indexes/list
   Future<List<MarketIndex>> getBasicInfoList() async {
     try {
-      var path = '/indexes/list';
+      final path = '/indexes/list';
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => MarketIndex.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();

@@ -41,11 +41,11 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// [page] page through results
   Future<List<ExchangeInfo>> getList({int? perPage, int? page}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'per_page': perPage, 'page': page},
           endpointPath: "/exchanges");
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => ExchangeInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
@@ -62,8 +62,8 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// Use this to obtain all the markets' id in order to make API calls
   Future<List<ExchangeBasicInfo>> getBasicList() async {
     try {
-      var path = '/exchanges/list';
-      var result = List<dynamic>.of(await sendBasic(path));
+      final path = '/exchanges/list';
+      final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => ExchangeBasicInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
@@ -86,7 +86,7 @@ class ExchangesEndpoint extends BaseEndpoint {
   /// [id] pass the exchange id (can be obtained from /exchanges/list) eg. binance
   Future<ExchangeInfo> getInfo({required String id}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'id': id}, endpointPath: "/exchanges/{id}");
       return ExchangeInfo.fromJson(await sendBasic(path));
     } on FormatException {
@@ -120,7 +120,7 @@ class ExchangesEndpoint extends BaseEndpoint {
       bool? depth,
       ExchangeDataOrdering? order}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'id': id,
         'coin_ids': coinIds?.join(','),
         'include_exchange_logo': includeExchangeLogo,
@@ -152,11 +152,11 @@ class ExchangesEndpoint extends BaseEndpoint {
   Future<List<ExchangeVolumeChart>> getVolumeChartList(
       {required String id, required DataRange days}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'id': id, 'days': days.value},
           endpointPath: "/exchanges/{id}/volume_chart");
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result
           .map((value) => ExchangeVolumeChart.fromJson(value))
           .toList();

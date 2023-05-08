@@ -31,7 +31,7 @@ void main() {
     sut = AssetPlatformsEndpoint(HttpRequestServiceMock(
         statusCode: 200, body: AssetPlatformsMockData.validResponseBody));
     test('with data in getting the correct response type', () async {
-      var result = await sut!.getList();
+      final result = await sut!.getList();
       expect(result.elementAt(0).id, 'factom');
       expect(result.elementAt(0).chainIdentifier, null);
       expect(result.elementAt(0).name, 'Factom');
@@ -45,7 +45,7 @@ void main() {
       sut = AssetPlatformsEndpoint(HttpRequestServiceMock(
           statusCode: 200,
           body: AssetPlatformsMockData.responseBodyWithIncompleteKeys));
-      var result = await sut!.getList();
+      final result = await sut!.getList();
       expect(result.length, 2);
       expect(result.elementAt(0).id, 'factom');
       expect(result.elementAt(0).name, 'Factom');

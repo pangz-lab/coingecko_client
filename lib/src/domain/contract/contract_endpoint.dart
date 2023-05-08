@@ -23,7 +23,7 @@ class ContractEndpoint extends BaseEndpoint {
   Future<ContractInfo> getInfo(
       {required String id, required String contractAddress}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'id': id, 'contract_address': contractAddress},
           endpointPath: "/coins/{id}/contract/{contract_address}");
 
@@ -50,7 +50,7 @@ class ContractEndpoint extends BaseEndpoint {
       required Currencies vsCurrency,
       required DataRange days}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'id': id,
         'contract_address': contractAddress,
         'vs_currency': vsCurrency.code,
@@ -82,7 +82,7 @@ class ContractEndpoint extends BaseEndpoint {
       required DateTime from,
       required DateTime to}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {
             'id': id,
             'contract_address': contractAddress,

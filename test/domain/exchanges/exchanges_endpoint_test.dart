@@ -14,7 +14,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getList method in', () {
-    var basePath = "/exchanges";
+    final basePath = "/exchanges";
     group('ExchangesEndpoint test endpoint path creation', () {
       var sut = ExchangesEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: ExchangesMockData.validResponseBody));
@@ -34,7 +34,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = ExchangesEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: ExchangesMockData.validResponseBody));
-        var result = await sut!.getList(page: 1, perPage: 3);
+        final result = await sut!.getList(page: 1, perPage: 3);
         var firstItem = result.elementAt(0);
         expect(result.length, 3);
         expect(firstItem.id, "bybit_spot");
@@ -59,7 +59,7 @@ void main() {
         sut = ExchangesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: ExchangesMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getList(page: 1, perPage: 3);
+        final result = await sut!.getList(page: 1, perPage: 3);
         var firstItem = result.elementAt(0);
         expect(result.length, 1);
         expect(firstItem.id, "bybit_spot");
@@ -111,7 +111,7 @@ void main() {
   });
 
   group('getBasicList method in', () {
-    var basePath = "/exchanges/list";
+    final basePath = "/exchanges/list";
     group('ExchangesEndpoint test endpoint path creation', () {
       test('with required parameters', () async {
         sut = ExchangesEndpoint(HttpRequestServiceMock(
@@ -125,7 +125,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = ExchangesEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: MarketExchangeMockData.validResponseBody));
-        var result = await sut!.getBasicList();
+        final result = await sut!.getBasicList();
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(3);
         expect(result.length, 4);
@@ -141,7 +141,7 @@ void main() {
         sut = ExchangesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: MarketExchangeMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getBasicList();
+        final result = await sut!.getBasicList();
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
         expect(result.length, 2);
@@ -187,7 +187,7 @@ void main() {
   });
 
   group('getInfo method in', () {
-    var basePath = "/exchanges/binance";
+    final basePath = "/exchanges/binance";
     group('ExchangesEndpoint test endpoint path creation', () {
       test('with all parameters', () async {
         sut = ExchangesEndpoint(HttpRequestServiceMock(
@@ -203,7 +203,7 @@ void main() {
         sut = ExchangesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: MarketExchangeInfoMockData.validResponseBody));
-        var result = await sut!.getInfo(id: 'binance');
+        final result = await sut!.getInfo(id: 'binance');
         expect(result.id, null);
         expect(result.name, "Binance");
         expect(result.yearEstablished, 2017);
@@ -267,7 +267,7 @@ void main() {
         sut = ExchangesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: MarketExchangeInfoMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getInfo(id: 'binance');
+        final result = await sut!.getInfo(id: 'binance');
         expect(result.id, null);
         expect(result.name, "Binance");
         expect(result.yearEstablished, 2017);
@@ -354,7 +354,7 @@ void main() {
   });
 
   group('getTickerList method in', () {
-    var basePath = "/exchanges/binance/tickers";
+    final basePath = "/exchanges/binance/tickers";
     group('ExchangesEndpoint test endpoint path creation', () {
       var sut = ExchangesEndpoint(HttpRequestServiceMock(
           statusCode: 200,
@@ -383,7 +383,7 @@ void main() {
         sut = ExchangesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: MarketExchangeTickersMockData.validResponseBody));
-        var result = await sut?.getTickerList(
+        final result = await sut?.getTickerList(
             id: 'binance',
             coinIds: ['bitcoin', 'ethereum'],
             includeExchangeLogo: true,
@@ -429,7 +429,7 @@ void main() {
             statusCode: 200,
             body:
                 MarketExchangeTickersMockData.responseBodyWithIncompleteKeys));
-        var result = await sut?.getTickerList(
+        final result = await sut?.getTickerList(
             id: 'binance',
             coinIds: ['bitcoin', 'ethereum'],
             includeExchangeLogo: true,
@@ -497,7 +497,7 @@ void main() {
   });
 
   group('getVolumeChartList method in', () {
-    var basePath = "/exchanges/binance/volume_chart";
+    final basePath = "/exchanges/binance/volume_chart";
     group('ExchangesEndpoint test endpoint path creation', () {
       var sut = ExchangesEndpoint(HttpRequestServiceMock(
           statusCode: 200,
@@ -514,7 +514,7 @@ void main() {
         sut = ExchangesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: MarketExchangeVolumeMockData.validResponseBody));
-        var result = await sut?.getVolumeChartList(
+        final result = await sut?.getVolumeChartList(
             id: 'binance', days: DataRange.in1Week);
         var firstItem = result?.elementAt(0);
         var lastItem = result?.elementAt(4);
@@ -533,7 +533,7 @@ void main() {
         sut = ExchangesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: MarketExchangeVolumeMockData.responseBodyWithIncompleteKeys));
-        var result = await sut?.getVolumeChartList(
+        final result = await sut?.getVolumeChartList(
             id: 'binance', days: DataRange.in1Week);
         var firstItem = result?.elementAt(0);
         var lastItem = result?.elementAt(1);

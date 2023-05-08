@@ -29,14 +29,14 @@ class NftsEndpoint extends BaseEndpoint {
       int? perPage,
       int? page}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'order': order?.value,
         'asset_platform_id': assetPlatformId,
         'per_page': perPage,
         'page': page
       }, endpointPath: "/nfts/list");
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => NftBasicInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
@@ -53,7 +53,7 @@ class NftsEndpoint extends BaseEndpoint {
   /// [id] id of nft collection (can be obtained from /nfts/list)
   Future<NftInfo> getInfo({required String id}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'id': id}, endpointPath: "/nfts/{id}");
 
       return NftInfo.fromJson(await sendBasic(path));
@@ -75,7 +75,7 @@ class NftsEndpoint extends BaseEndpoint {
       {required String assetPlatformId,
       required String contractAddress}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'asset_platform_id': assetPlatformId,
         'contract_address': contractAddress
       }, endpointPath: "/nfts/{asset_platform_id}/contract/{contract_address}");

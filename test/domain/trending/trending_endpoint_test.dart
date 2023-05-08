@@ -12,7 +12,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getResult method in', () {
-    var basePath = "/search/trending";
+    final basePath = "/search/trending";
     group('TrendingEndpoint test endpoint path creation', () {
       var sut = TrendingEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: TerndingMockData.validResponseBody));
@@ -27,7 +27,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = TrendingEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: TerndingMockData.validResponseBody));
-        var result = await sut!.getResult();
+        final result = await sut!.getResult();
 
         expect(result, {
           "coins": [
@@ -77,7 +77,7 @@ void main() {
         sut = TrendingEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: TerndingMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getResult();
+        final result = await sut!.getResult();
 
         expect(result, {
           "coins": [

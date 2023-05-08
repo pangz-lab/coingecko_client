@@ -13,7 +13,7 @@ class PingEndpoint extends BaseEndpoint {
   /// <br/><b>Endpoint </b>: /ping
   Future<Map<String, dynamic>> getResult() async {
     try {
-      var path = '/ping';
+      final path = '/ping';
 
       return Map<String, dynamic>.of(await sendBasic(path));
     } on FormatException {

@@ -11,7 +11,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getResult method in', () {
-    var basePath = "/ping";
+    final basePath = "/ping";
     group('PingEndpoint test endpoint path creation', () {
       var sut = PingEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: PingMockData.validResponseBody));
@@ -26,7 +26,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = PingEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: PingMockData.validResponseBody));
-        var result = await sut!.getResult();
+        final result = await sut!.getResult();
 
         expect(result, {"gecko_says": "(V3) To the Moon!"});
       });
@@ -35,7 +35,7 @@ void main() {
         sut = PingEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: PingMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getResult();
+        final result = await sut!.getResult();
 
         expect(result, {});
       });

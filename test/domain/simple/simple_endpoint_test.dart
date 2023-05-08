@@ -13,7 +13,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getSimpleCoinPrice method in', () {
-    var basePath = "/simple/price";
+    final basePath = "/simple/price";
     group('SimpleEndpoint test endpoint path creation', () {
       var sut = SimpleEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: SimpleCoinPriceMockData.validResponseBody));
@@ -45,7 +45,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = SimpleEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: SimpleCoinPriceMockData.validResponseBody));
-        var result = await sut!.getCoinPrice(
+        final result = await sut!.getCoinPrice(
             ids: ['bitcoin', 'ethereum', 'verus-coin'],
             vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
             includeMarketCap: true,
@@ -80,7 +80,7 @@ void main() {
         sut = SimpleEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: SimpleCoinPriceMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getCoinPrice(
+        final result = await sut!.getCoinPrice(
             ids: ['bitcoin', 'ethereum', 'verus-coin'],
             vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
             includeMarketCap: true,
@@ -159,7 +159,7 @@ void main() {
   });
 
   group('getTokenPrice method in', () {
-    var basePath = "/simple/token_price/avalanche";
+    final basePath = "/simple/token_price/avalanche";
     group('SimpleEndpoint test endpoint path creation', () {
       var sut = SimpleEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: SimpleTokenPriceMockData.validResponseBody));
@@ -193,7 +193,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = SimpleEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: SimpleTokenPriceMockData.validResponseBody));
-        var result = await sut!.getTokenPrice(
+        final result = await sut!.getTokenPrice(
             id: 'avalanche',
             contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
             vsCurrencies: [CryptoCurrencies.btc],
@@ -217,7 +217,7 @@ void main() {
         sut = SimpleEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: SimpleTokenPriceMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getTokenPrice(
+        final result = await sut!.getTokenPrice(
             id: 'avalanche',
             contractAddresses: ['0x2098fABE9C82eb5280AF4841a5000f373E99a498'],
             vsCurrencies: [CryptoCurrencies.btc],
@@ -289,7 +289,7 @@ void main() {
   });
 
   group('getSupportedVsCurrencies method in', () {
-    var basePath = "/simple/supported_vs_currencies";
+    final basePath = "/simple/supported_vs_currencies";
     group('SimpleEndpoint test endpoint path creation', () {
       test('with required parameters', () async {
         sut = SimpleEndpoint(HttpRequestServiceMock(
@@ -305,7 +305,7 @@ void main() {
         sut = SimpleEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: SimpleSupportedVsCurrencyMockData.validResponseBody));
-        var result = await sut!.getSupportedVsCurrencies();
+        final result = await sut!.getSupportedVsCurrencies();
         expect(result.length, 10);
         expect(result.first, 'vrsc');
         expect(result.last, 'sats');

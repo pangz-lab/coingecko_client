@@ -48,11 +48,11 @@ class CoinsEndpoint extends BaseEndpoint {
   ///  valid values: true, false
   Future<List<CoinBasicInfo>> getBasicList({bool? includePlatform}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'include_platform': includePlatform},
           endpointPath: "/coins/list");
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => CoinBasicInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
@@ -88,7 +88,7 @@ class CoinsEndpoint extends BaseEndpoint {
       bool? sparkline,
       List<CoinPriceChange>? priceChangePercentage}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'vs_currency': vsCurrency.code,
         'ids': ids?.join(','),
         'category': category,
@@ -100,7 +100,7 @@ class CoinsEndpoint extends BaseEndpoint {
             priceChangePercentage?.map((e) => e.value).join(",")
       }, endpointPath: "/coins/markets");
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => CoinMarket.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
@@ -136,7 +136,7 @@ class CoinsEndpoint extends BaseEndpoint {
       bool? developerData,
       bool? sparkline}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'id': id,
         'localization': localization,
         'tickers': tickers,
@@ -178,7 +178,7 @@ class CoinsEndpoint extends BaseEndpoint {
       CoinTickersDataOrdering? order,
       bool? depth}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'id': id,
         'exchange_ids': exchangeIds,
         'include_exchange_logo': includeExchangeLogo,
@@ -206,7 +206,7 @@ class CoinsEndpoint extends BaseEndpoint {
   Future<CoinInfo> getHistory(
       {required String id, required DateTime date, bool? localization}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'id': id,
         'date': DateService.formatAsDefault(date),
         'localization': localization
@@ -237,7 +237,7 @@ class CoinsEndpoint extends BaseEndpoint {
       required DataRange days,
       String? interval}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'id': id,
         'vs_currency': vsCurrency.code,
         'days': days.value,
@@ -269,7 +269,7 @@ class CoinsEndpoint extends BaseEndpoint {
       required DateTime from,
       required DateTime to}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'id': id,
         'vs_currency': vsCurrency.code,
         'from': from.millisecondsSinceEpoch,
@@ -303,13 +303,13 @@ class CoinsEndpoint extends BaseEndpoint {
       required Currencies vsCurrency,
       required DataRange days}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'id': id,
         'vs_currency': vsCurrency.code,
         'days': days.value
       }, endpointPath: "/coins/{id}/ohlc");
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => CoinOhlc.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();

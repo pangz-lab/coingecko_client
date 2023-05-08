@@ -12,7 +12,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getList method in', () {
-    var basePath = "/companies/public_treasury/ethereum";
+    final basePath = "/companies/public_treasury/ethereum";
     group('CompaniesEndpoint test endpoint path creation', () {
       var sut = CompaniesEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: CompaniesMockData.validResponseBody));
@@ -27,7 +27,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = CompaniesEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: CompaniesMockData.validResponseBody));
-        var result = await sut!.getList(coinId: 'ethereum');
+        final result = await sut!.getList(coinId: 'ethereum');
 
         expect(result.totalHoldings, 80026.1);
         expect(result.totalValueUsd, 152884386.10418233);
@@ -58,7 +58,7 @@ void main() {
         sut = CompaniesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CompaniesMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getList(coinId: 'ethereum');
+        final result = await sut!.getList(coinId: 'ethereum');
 
         expect(result.totalHoldings, 80026.1);
         expect(result.totalValueUsd, 152884386.10418233);

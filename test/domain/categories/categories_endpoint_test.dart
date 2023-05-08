@@ -14,7 +14,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getBasicList method in', () {
-    var basePath = "/coins/categories/list";
+    final basePath = "/coins/categories/list";
     group('CategoriesEndpoint test endpoint path creation', () {
       var sut = CategoriesEndpoint(HttpRequestServiceMock(
           statusCode: 200,
@@ -31,7 +31,7 @@ void main() {
         sut = CategoriesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CategoriesBasicInfoListMockData.validResponseBody));
-        var result = await sut!.getBasicList();
+        final result = await sut!.getBasicList();
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
@@ -49,7 +49,7 @@ void main() {
             statusCode: 200,
             body: CategoriesBasicInfoListMockData
                 .responseBodyWithIncompleteKeys));
-        var result = await sut!.getBasicList();
+        final result = await sut!.getBasicList();
 
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(3);
@@ -98,7 +98,7 @@ void main() {
   });
 
   group('getList method in', () {
-    var basePath = "/coins/categories";
+    final basePath = "/coins/categories";
     group('CategoriesEndpoint test endpoint path creation', () {
       var sut = CategoriesEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: CategoriesInfoListMockData.validResponseBody));
@@ -120,7 +120,7 @@ void main() {
         sut = CategoriesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CategoriesInfoListMockData.validResponseBody));
-        var result =
+        final result =
             await sut!.getList(order: CoinCategoriesDataOrdering.marketCapAsc);
 
         var firstItem = result.elementAt(0);
@@ -160,7 +160,7 @@ void main() {
         sut = CategoriesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CategoriesInfoListMockData.responseBodyWithIncompleteKeys));
-        var result =
+        final result =
             await sut!.getList(order: CoinCategoriesDataOrdering.marketCapAsc);
 
         var firstItem = result.elementAt(0);

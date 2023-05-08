@@ -79,7 +79,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CoinListMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getBasicList(includePlatform: true);
+        final result = await sut!.getBasicList(includePlatform: true);
         expect(result.length, 2);
         expect(result.elementAt(0).id, '01coin');
         expect(result.elementAt(0).name, '01coin');
@@ -125,7 +125,7 @@ void main() {
   });
 
   group('getMarketList method in', () {
-    var basePath = "/coins/markets";
+    final basePath = "/coins/markets";
     group('CoinsEndpoint test endpoint path creation', () {
       var sut = CoinsEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: CoinMarketMockData.validResponseBody));
@@ -162,7 +162,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: CoinMarketMockData.validResponseBody));
-        var result = await sut!.getMarketList(vsCurrency: Currencies.php);
+        final result = await sut!.getMarketList(vsCurrency: Currencies.php);
         var item1 = result.elementAt(0);
         expect(result.length, 1);
         expect(item1.id, "vechain");
@@ -204,7 +204,7 @@ void main() {
             statusCode: 200,
             body: CoinMarketMockData.validResponseBodyWithCompleteParameter));
 
-        var result = await sut!.getMarketList(
+        final result = await sut!.getMarketList(
           vsCurrency: Currencies.jpy,
           ids: ['bitcoin', 'verus-coin'],
           category: 'aave-tokens',
@@ -277,7 +277,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CoinMarketMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getMarketList(vsCurrency: Currencies.php);
+        final result = await sut!.getMarketList(vsCurrency: Currencies.php);
         var item = result.elementAt(0);
         expect(item.currentPrice, 34006);
         expect(item.marketCap, 23.3);
@@ -330,7 +330,7 @@ void main() {
   });
 
   group('getInfo method in', () {
-    var basePath = "/coins/bitcoin";
+    final basePath = "/coins/bitcoin";
     group('CoinsEndpoint test endpoint path creation', () {
       var sut = CoinsEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: CoinInfoMockData.validResponseBody));
@@ -358,7 +358,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: CoinInfoMockData.validResponseBody));
-        var result = await sut!.getInfo(
+        final result = await sut!.getInfo(
             id: 'bitcoin',
             localization: false,
             tickers: true,
@@ -429,7 +429,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CoinInfoMockData.validResponseBodyWithCompleteParameter));
-        var result = await sut!.getInfo(
+        final result = await sut!.getInfo(
             id: 'bitcoin',
             localization: true,
             tickers: true,
@@ -738,7 +738,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CoinInfoMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getInfo(id: 'bitcoin');
+        final result = await sut!.getInfo(id: 'bitcoin');
         expect(result.id, 'bitcoin');
         expect(result.platforms, {"": ""});
         expect(result.lastUpdated, null);
@@ -776,7 +776,7 @@ void main() {
   });
 
   group('getTickers method in', () {
-    var basePath = "/coins/bitcoin/tickers";
+    final basePath = "/coins/bitcoin/tickers";
     group('CoinsEndpoint test endpoint path creation', () {
       var sut = CoinsEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: CoinTickersMockData.validResponseBody));
@@ -804,7 +804,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: CoinTickersMockData.validResponseBody));
-        var result = await sut!.getTickers(
+        final result = await sut!.getTickers(
           id: 'bitcoin',
         );
 
@@ -818,7 +818,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CoinTickersMockData.validResponseBodyWithCompleteParameter));
-        var result = await sut!.getTickers(
+        final result = await sut!.getTickers(
             id: 'bitcoin',
             exchangeIds: 'aave',
             includeExchangeLogo: true,
@@ -867,7 +867,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CoinTickersMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getTickers(id: 'bitcoin');
+        final result = await sut!.getTickers(id: 'bitcoin');
         expect(result.name, 'Bitcoin');
         expect(result.tickers, null);
         expect(jsonEncode(result.toJson()).runtimeType, String);
@@ -905,7 +905,7 @@ void main() {
   });
 
   group('getHistory method in', () {
-    var basePath = "/coins/bitcoin/history";
+    final basePath = "/coins/bitcoin/history";
     group('CoinsEndpoint test endpoint path creation', () {
       var sut = CoinsEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: CoinHistoryMockData.validResponseBody));
@@ -928,7 +928,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: CoinHistoryMockData.validResponseBody));
-        var result =
+        final result =
             await sut!.getHistory(id: 'bitcoin', date: DateTime(2022, 12, 30));
 
         expect(result.id, 'bitcoin');
@@ -967,7 +967,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CoinHistoryMockData.validResponseBodyWithCompleteParameter));
-        var result =
+        final result =
             await sut!.getHistory(id: 'bitcoin', date: DateTime(2022, 12, 30));
 
         expect(result.id, 'bitcoin');
@@ -1060,7 +1060,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CoinHistoryMockData.responseBodyWithIncompleteKeys));
-        var result =
+        final result =
             await sut!.getHistory(id: 'bitcoin', date: DateTime(2022, 12, 30));
         expect(result.name, "Bitcoin");
         expect(result.id, null);
@@ -1107,7 +1107,7 @@ void main() {
   });
 
   group('getMarketHistory method in', () {
-    var basePath = "$apiVersionPath/coins/bitcoin/market_chart";
+    final basePath = "$apiVersionPath/coins/bitcoin/market_chart";
     group('CoinsEndpoint test endpoint path creation', () {
       var sut = CoinsEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: CoinMarketChartMockData.validResponseBody));
@@ -1126,7 +1126,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: CoinMarketChartMockData.validResponseBody));
-        var result = await sut!.getMarketHistory(
+        final result = await sut!.getMarketHistory(
           id: 'bitcoin',
           vsCurrency: Currencies.jpy,
           days: DataRange.in1Day,
@@ -1167,7 +1167,7 @@ void main() {
             statusCode: 200,
             body: CoinMarketChartMockData
                 .validResponseBodyWithCompleteParameter));
-        var result = await sut!.getMarketHistory(
+        final result = await sut!.getMarketHistory(
             id: 'bitcoin',
             vsCurrency: Currencies.jpy,
             days: DataRange.in1Day,
@@ -1222,7 +1222,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CoinMarketChartMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getMarketHistory(
+        final result = await sut!.getMarketHistory(
             id: 'bitcoin',
             vsCurrency: Currencies.jpy,
             days: DataRange.in1Day,
@@ -1238,7 +1238,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(statusCode: 200, body: '''{
     "error": "coin not found"
   }'''));
-        var result = await sut!.getMarketHistory(
+        final result = await sut!.getMarketHistory(
             id: 'bitcoin',
             vsCurrency: Currencies.jpy,
             days: DataRange.in1Day,
@@ -1287,7 +1287,7 @@ void main() {
   });
 
   group('getMarketHistoryWithDateRange method in', () {
-    var basePath = "$apiVersionPath/coins/bitcoin/market_chart/range";
+    final basePath = "$apiVersionPath/coins/bitcoin/market_chart/range";
     group('CoinsEndpoint test endpoint path creation', () {
       var sut = CoinsEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: CoinMarketChartMockData.validResponseBody));
@@ -1307,7 +1307,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: CoinMarketChartMockData.validResponseBody));
-        var result = await sut!.getMarketHistoryWithDateRange(
+        final result = await sut!.getMarketHistoryWithDateRange(
             id: 'bitcoin',
             vsCurrency: Currencies.jpy,
             from: DateTime.fromMillisecondsSinceEpoch(1392577232),
@@ -1348,7 +1348,7 @@ void main() {
             statusCode: 200,
             body: CoinMarketChartMockData
                 .validResponseBodyWithCompleteParameter));
-        var result = await sut!.getMarketHistoryWithDateRange(
+        final result = await sut!.getMarketHistoryWithDateRange(
             id: 'bitcoin',
             vsCurrency: Currencies.jpy,
             from: DateTime.fromMillisecondsSinceEpoch(1392577232),
@@ -1402,7 +1402,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CoinMarketChartMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getMarketHistoryWithDateRange(
+        final result = await sut!.getMarketHistoryWithDateRange(
             id: 'bitcoin',
             vsCurrency: Currencies.jpy,
             from: DateTime.fromMillisecondsSinceEpoch(1392577232),
@@ -1418,7 +1418,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(statusCode: 200, body: '''{
     "error": "coin not found"
   }'''));
-        var result = await sut!.getMarketHistoryWithDateRange(
+        final result = await sut!.getMarketHistoryWithDateRange(
             id: 'bitcoin',
             vsCurrency: Currencies.jpy,
             from: DateTime.fromMillisecondsSinceEpoch(1392577232),
@@ -1467,7 +1467,7 @@ void main() {
   });
 
   group('getOhlcList method in', () {
-    var basePath = "$apiVersionPath/coins/bitcoin/ohlc";
+    final basePath = "$apiVersionPath/coins/bitcoin/ohlc";
     group('CoinsEndpoint test endpoint path creation', () {
       var sut =
           CoinsEndpoint(HttpRequestServiceMock(statusCode: 200, body: '[]'));
@@ -1483,7 +1483,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: CoinOhlcMockData.validResponseBody));
-        var result = await sut!.getOhlcList(
+        final result = await sut!.getOhlcList(
             id: 'bitcoin', vsCurrency: Currencies.jpy, days: DataRange.in1Day);
         var fistElement = result.elementAt(0);
         expect(result.length, 3);
@@ -1501,7 +1501,7 @@ void main() {
         sut = CoinsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: CoinOhlcMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getOhlcList(
+        final result = await sut!.getOhlcList(
             id: 'bitcoin', vsCurrency: Currencies.jpy, days: DataRange.in1Day);
         var fistElement = result.elementAt(0);
         var secondElement = result.elementAt(1);
@@ -1529,7 +1529,7 @@ void main() {
       test('should still return a result for invalid data format', () async {
         sut =
             CoinsEndpoint(HttpRequestServiceMock(statusCode: 200, body: '[]'));
-        var result = await sut!.getOhlcList(
+        final result = await sut!.getOhlcList(
             id: 'bitcoin', vsCurrency: Currencies.jpy, days: DataRange.in1Day);
         expect(result.isEmpty, true);
       });

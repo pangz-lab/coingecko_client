@@ -15,10 +15,10 @@ class ExchangeRatesEndpoint extends BaseEndpoint {
   /// <br/><b>Endpoint </b>: /exchange_rates
   Future<List<ExchangeRate>> getList() async {
     try {
-      var path = '/exchange_rates';
+      final path = '/exchange_rates';
       var response = await sendBasic(path);
 
-      var result = Map<String, dynamic>.of(response['rates']);
+      final result = Map<String, dynamic>.of(response['rates']);
       return result.values.map((map) => ExchangeRate.fromJson(map)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();

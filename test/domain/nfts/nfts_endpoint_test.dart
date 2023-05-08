@@ -14,7 +14,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getBasicList method in', () {
-    var basePath = "/nfts/list";
+    final basePath = "/nfts/list";
     group('NftsEndpoint test endpoint path creation', () {
       var sut = NftsEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: NftBasicInfoListMockData.validResponseBody));
@@ -39,7 +39,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = NftsEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: NftBasicInfoListMockData.validResponseBody));
-        var result = await sut!.getBasicList(
+        final result = await sut!.getBasicList(
             order: NftsDataOrdering.marketCapUsdDesc,
             assetPlatformId: "ethereum",
             perPage: 10,
@@ -68,7 +68,7 @@ void main() {
         sut = NftsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: NftBasicInfoListMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getBasicList(
+        final result = await sut!.getBasicList(
             order: NftsDataOrdering.marketCapUsdDesc,
             assetPlatformId: "ethereum",
             perPage: 10,
@@ -144,7 +144,7 @@ void main() {
   });
 
   group('getInfo method in', () {
-    var basePath = "/nfts/meebits";
+    final basePath = "/nfts/meebits";
     group('NftsEndpoint test endpoint path creation', () {
       var sut = NftsEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: NftInfoMockData.validResponseBody));
@@ -161,7 +161,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = NftsEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: NftInfoMockData.validResponseBody));
-        var result = await sut!.getInfo(
+        final result = await sut!.getInfo(
           id: 'meebits',
         );
 
@@ -201,7 +201,7 @@ void main() {
         sut = NftsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: NftInfoMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getInfo(
+        final result = await sut!.getInfo(
           id: 'meebits',
         );
 
@@ -280,7 +280,7 @@ void main() {
   });
 
   group('getContractInfo method in', () {
-    var basePath =
+    final basePath =
         "/nfts/ethereum/contract/0x36F379400DE6c6BCDF4408B282F8b685c56adc60";
     group('NftsEndpoint test endpoint path creation', () {
       var sut = NftsEndpoint(HttpRequestServiceMock(
@@ -298,7 +298,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = NftsEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: NftInfoMockData.validResponseBody));
-        var result = await sut!.getContractInfo(
+        final result = await sut!.getContractInfo(
             assetPlatformId: 'ethereum',
             contractAddress: '0x36F379400DE6c6BCDF4408B282F8b685c56adc60');
 
@@ -338,7 +338,7 @@ void main() {
         sut = NftsEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: NftInfoMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getContractInfo(
+        final result = await sut!.getContractInfo(
             assetPlatformId: 'ethereum',
             contractAddress: '0x36F379400DE6c6BCDF4408B282F8b685c56adc60');
 

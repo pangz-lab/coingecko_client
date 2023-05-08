@@ -16,7 +16,7 @@ class TrendingEndpoint extends BaseEndpoint {
   /// Top-7 trending coins on CoinGecko as searched by users in the last 24 hours (Ordered by most popular first)
   Future<Map<String, dynamic>> getResult() async {
     try {
-      var path = '/search/trending';
+      final path = '/search/trending';
 
       return Map<String, dynamic>.of(await sendBasic(path));
     } on FormatException {

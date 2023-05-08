@@ -25,11 +25,11 @@ class DerivativesEndpoint extends BaseEndpoint {
   Future<List<Derivatives>> getList(
       {DerivativesTickers? includeTickers}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'include_tickers': includeTickers?.value},
           endpointPath: "/derivatives");
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => Derivatives.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();
@@ -49,13 +49,13 @@ class DerivativesEndpoint extends BaseEndpoint {
   Future<List<DerivativesExchange>> getExchangeList(
       {DerivativesExchangeOrdering? order, int? perPage, int? page}) async {
     try {
-      var path = createEndpointPathUrl(rawQueryItems: {
+      final path = createEndpointPathUrl(rawQueryItems: {
         'order': order?.value,
         'per_page': perPage,
         'page': page
       }, endpointPath: "/derivatives/exchanges");
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result
           .map((value) => DerivativesExchange.fromJson(value))
           .toList();
@@ -76,7 +76,7 @@ class DerivativesEndpoint extends BaseEndpoint {
   Future<DerivativesExchange> getExchange(
       {required String id, DerivativesTickers? includeTickers}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'id': id, 'include_tickers': includeTickers?.value},
           endpointPath: "/derivatives/exchanges/{id}");
 
@@ -94,9 +94,9 @@ class DerivativesEndpoint extends BaseEndpoint {
   /// <br/><b>Endpoint </b>: /derivatives/exchanges/list
   Future<List<ExchangeBasicInfo>> getExchangeBasicInfoList() async {
     try {
-      var path = '/derivatives/exchanges/list';
+      final path = '/derivatives/exchanges/list';
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => ExchangeBasicInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();

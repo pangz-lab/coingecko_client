@@ -14,7 +14,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getList method in', () {
-    var basePath = "/derivatives";
+    final basePath = "/derivatives";
     group('DerivativesEndpoint test endpoint path creation', () {
       var sut = DerivativesEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: DerivativesMockData.validResponseBody));
@@ -35,7 +35,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = DerivativesEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: DerivativesMockData.validResponseBody));
-        var result =
+        final result =
             await sut!.getList(includeTickers: DerivativesTickers.unexpired);
 
         var firstItem = result.elementAt(0);
@@ -83,7 +83,7 @@ void main() {
         sut = DerivativesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: DerivativesMockData.responseBodyWithIncompleteKeys));
-        var result =
+        final result =
             await sut!.getList(includeTickers: DerivativesTickers.unexpired);
 
         var firstItem = result.elementAt(0);
@@ -163,7 +163,7 @@ void main() {
   });
 
   group('getExchangeList method in', () {
-    var basePath = "/derivatives/exchanges";
+    final basePath = "/derivatives/exchanges";
     group('DerivativesEndpoint test endpoint path creation', () {
       var sut = DerivativesEndpoint(HttpRequestServiceMock(
           statusCode: 200,
@@ -187,7 +187,7 @@ void main() {
         sut = DerivativesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: DerivativesExchangeListMockData.validResponseBody));
-        var result = await sut!.getExchangeList(
+        final result = await sut!.getExchangeList(
             order: DerivativesExchangeOrdering.nameAsc, perPage: 10, page: 2);
 
         var firstItem = result.elementAt(0);
@@ -229,7 +229,7 @@ void main() {
             statusCode: 200,
             body: DerivativesExchangeListMockData
                 .responseBodyWithIncompleteKeys));
-        var result = await sut!.getExchangeList(
+        final result = await sut!.getExchangeList(
             order: DerivativesExchangeOrdering.nameAsc, perPage: 10, page: 2);
 
         var firstItem = result.elementAt(0);
@@ -316,7 +316,7 @@ void main() {
   });
 
   group('getExchange method in', () {
-    var basePath = "/derivatives/exchanges/bybit";
+    final basePath = "/derivatives/exchanges/bybit";
     group('DerivativesEndpoint test endpoint path creation', () {
       var sut = DerivativesEndpoint(HttpRequestServiceMock(
           statusCode: 200,
@@ -340,7 +340,7 @@ void main() {
         sut = DerivativesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: DerivativesExchangeMockData.validResponseBody));
-        var result = await sut!.getExchange(
+        final result = await sut!.getExchange(
             id: "bybit", includeTickers: DerivativesTickers.unexpired);
 
         expect(result.name, "Bybit (Futures)");
@@ -394,7 +394,7 @@ void main() {
         sut = DerivativesEndpoint(HttpRequestServiceMock(
             statusCode: 200,
             body: DerivativesExchangeMockData.responseBodyWithIncompleteKeys));
-        var result = await sut!.getExchange(
+        final result = await sut!.getExchange(
             id: "bybit", includeTickers: DerivativesTickers.unexpired);
 
         expect(result.name, null);
@@ -483,7 +483,7 @@ void main() {
   });
 
   group('getExchangeBasicInfoList method in', () {
-    var basePath = "/derivatives/exchanges/list";
+    final basePath = "/derivatives/exchanges/list";
     group('DerivativesEndpoint test endpoint path creation', () {
       var sut = DerivativesEndpoint(HttpRequestServiceMock(
           statusCode: 200,
@@ -501,7 +501,7 @@ void main() {
             statusCode: 200,
             body: DerivativesExchangeBasicInfoListMockData.validResponseBody));
 
-        var result = await sut!.getExchangeBasicInfoList();
+        final result = await sut!.getExchangeBasicInfoList();
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(3);
         expect(result.length, 4);
@@ -519,7 +519,7 @@ void main() {
             body: DerivativesExchangeBasicInfoListMockData
                 .responseBodyWithIncompleteKeys));
 
-        var result = await sut!.getExchangeBasicInfoList();
+        final result = await sut!.getExchangeBasicInfoList();
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(1);
         expect(result.length, 2);

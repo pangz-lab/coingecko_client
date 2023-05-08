@@ -17,9 +17,9 @@ class CategoriesEndpoint extends BaseEndpoint {
   /// <br/><b>Endpoint </b>: /coins/categories/list
   Future<List<CoinCategoryBasicInfo>> getBasicList() async {
     try {
-      var path = '/coins/categories/list';
+      final path = '/coins/categories/list';
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result
           .map((value) => CoinCategoryBasicInfo.fromJson(value))
           .toList();
@@ -39,11 +39,11 @@ class CategoriesEndpoint extends BaseEndpoint {
   Future<List<CoinCategoryInfo>> getList(
       {CoinCategoriesDataOrdering? order}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'order': order?.value},
           endpointPath: "/coins/categories");
 
-      var result = List<dynamic>.of(await sendBasic(path));
+      final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => CoinCategoryInfo.fromJson(value)).toList();
     } on FormatException {
       throw DataParsingException.unreadableData();

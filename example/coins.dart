@@ -5,7 +5,7 @@ void main() async {
     var client = CoinGeckoClient();
 
     /// sample call for - /coins/list
-    var result = await client.coins.getBasicList();
+    final result = await client.coins.getBasicList();
     var firstCoin = result.first;
     var lastCoin = result.last;
     print(firstCoin);

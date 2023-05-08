@@ -12,7 +12,7 @@ void main() {
   final String apiVersionPath = "/api/v3";
 
   group('getList method in', () {
-    var basePath = "/exchange_rates";
+    final basePath = "/exchange_rates";
     group('ExchangeRatesEndpoint test endpoint path creation', () {
       var sut = ExchangeRatesEndpoint(HttpRequestServiceMock(
           statusCode: 200, body: ExchangeRatesMockData.validResponseBody));
@@ -27,7 +27,7 @@ void main() {
       test('with data in getting the correct response type', () async {
         sut = ExchangeRatesEndpoint(HttpRequestServiceMock(
             statusCode: 200, body: ExchangeRatesMockData.validResponseBody));
-        var result = await sut!.getList();
+        final result = await sut!.getList();
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(2);
 
@@ -49,7 +49,7 @@ void main() {
             statusCode: 200,
             body: ExchangeRatesMockData.responseBodyWithIncompleteKeys));
 
-        var result = await sut!.getList();
+        final result = await sut!.getList();
         var firstItem = result.elementAt(0);
         var lastItem = result.elementAt(2);
 

@@ -16,7 +16,7 @@ class SearchEndpoint extends BaseEndpoint {
   /// [query] Search string
   Future<Map<String, dynamic>> getResult({required String query}) async {
     try {
-      var path = createEndpointPathUrl(
+      final path = createEndpointPathUrl(
           rawQueryItems: {'query': query}, endpointPath: "/search");
 
       return Map<String, dynamic>.of(await sendBasic(path));
