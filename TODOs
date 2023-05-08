@@ -18,14 +18,24 @@ Roadmap
 1. Add Pro API endpoints
 2. Improve response object of some methods - currently using as Map, should use a data model
 
-Checklist for release
+Release Checklist
+
 1. Update pubspec.yml version [1]
 2. Update README version [2]
 3. Update README steps (optional)
 4. Update CHANGELOG
-5. Run dart format .
-6. Run dart analyze
-7. Run dart doc
-8. Run dart pub publish --dry-run
-9. Run dart pub publish
-10. Add github tag for the new version
+5. Run formatting
+dart format .
+6. Run test
+dart test test/domain
+dart test test/coingecko*
+7. Run analyze
+dart analyze
+8. Run documentation
+dart doc
+9. Run publish --dry-run
+dart pub publish --dry-run
+10. Run dart pub publish
+dart pub publish
+11. Add github tag for the new version
+11. Github release
