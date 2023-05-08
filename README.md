@@ -26,13 +26,30 @@
 
 A simple and intuitive package to access the [CoinGecko REST API Service](https://www.coingecko.com/en/api/documentation).
 
-
+Table of Contents
+---------------
 1. [API Version Support](#api-version-support)
 2. [Requirements](#requirements)
 3. [Installation](#installation)
 4. [Usage](#usage)
 5. [Endpoints](#endpoints)
-    - [ping](#ping)
+    - [ping](#-ping)
+    - [coins](#-coins)
+    - [exchanges](#-exchanges)
+    - [simple](#-simple)
+    - [derivatives](#-derivatives)
+    - [indexes](#-indexes)
+    - [nfts](#-nfts)
+    - [contract](#-contract)
+    - [asset_platforms](#-asset_platforms)
+    - [categories](#-categories)
+    - [global](#-global)
+    - [exchange rates](#-exchange-rates)
+    - [companies](#-companies)
+    - [trending](#-trending)
+    - [search](#-search)
+6. [Issues / Bugs / Improvements](#-issues--bugs--improvements)
+7. [Contacts](#contacts)
 
 API Version Support
 ---------------
@@ -58,13 +75,13 @@ coingecko_client: ^1.0.2
 
 
 # Usage 
-- Initialize the client class
+- Import the library and initialize the client class.
 ```dart
 import 'package:coingecko_client/coingecko_client.dart';
 
 var client = CoinGeckoClient();
 ```
-- Use the client properties to access the endpoint to use.
+- Use any of the client properties to access the endpoint to use. `(use coins for this case)`
 - All results are returned by a `Future` object so `await` is **always** necessary.
 ```dart
 var coinHistory = await client.coins.getHistory(
@@ -72,19 +89,20 @@ var coinHistory = await client.coins.getHistory(
     date: DateTime.now()
 );
 ```
-- Result varies depending on the endpoint used.
-- TIP: You can highlight the result object to get all the available properties.
+- Access the result's object
 ```dart
 print(coinHistory);
 print(coinHistory.name);
 ```
-- ( Checkout the <a href="https://github.com/pangz-lab/coingecko_client/tree/master/example">example folder</a> for more examples )
+- Result varies depending on the endpoint.
+- **TIP**: Most editor supports object reflection. You can hover on the result object to get all the available properties you can use.
+- ( Checkout the <a href="https://github.com/pangz-lab/coingecko_client/tree/master/example">example folder</a> for more samples. )
 
 
 ___
 <br>
 
-# 🌐 ping
+# [🌐](#table-of-contents) ping
 ### 📤 */ping*
 ```dart
 client.ping.getResult();
@@ -95,7 +113,7 @@ ___
 
 # Endpoints
 
-# 🌐 coins
+# [🌐](#table-of-contents) coins
 ### 📤 */coins/list*
 ```dart
 client.coins.getBasicList();
@@ -151,7 +169,7 @@ client.coins.getOhlcList(
 ___
 <br>
 
-# 🌐 exchanges
+# [🌐](#table-of-contents) exchanges
 ### 📤 */exchanges*
 ```dart
 client.exchanges.getList();
@@ -186,12 +204,12 @@ client.exchanges.getVolumeChartList(
 ___
 <br>
 
-# 🌐 simple
+# [🌐](#table-of-contents) simple
 ### 📤 */simple/price*
 ```dart
 client.simple.getCoinPrice(
     ids: ['bitcoin', 'ethereum', 'verus-coin'],
-    vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
+    vsCurrencies: [ Currencies.jpy, Currencies.usd, Currencies.php ],
     includeMarketCap: true,
     include24hrVol: true,
     include24hrChange: true,
@@ -221,7 +239,7 @@ client.simple.getSupportedVsCurrencies();
 ___
 <br>
 
-# 🌐 derivatives
+# [🌐](#table-of-contents) derivatives
 ### 📤 */derivatives*
 ```dart
 client.derivatives.getList(
@@ -251,7 +269,7 @@ client.derivatives.getExchangeBasicInfoList();
 ___
 <br>
 
-# 🌐 indexes
+# [🌐](#table-of-contents) indexes
 ### 📤 */indexes*
 ```dart
 client.indexes.getList(
@@ -274,7 +292,7 @@ client.indexes.getBasicInfo();
 ___
 <br>
 
-# 🌐 nfts
+# [🌐](#table-of-contents) nfts
 ### 📤 */nfts/list*
 ```dart
 client.nfts.getBasicList(
@@ -300,7 +318,7 @@ client.nfts.getContractInfo(
 ___
 <br>
 
-# 🌐 contract
+# [🌐](#table-of-contents) contract
 ### 📤 */coins/{id}/contract/{contract_address}/market_chart*
 ```dart
 client.contract.getMarketHistory(
@@ -325,7 +343,13 @@ client.contract.getMarketHistoryWithDateRange(
 ___
 <br>
 
-# 🌐 categories
+# [🌐](#table-of-contents) asset_platforms
+### 📤 */asset_platforms*
+```dart
+await client.assetPlatforms.getList();
+```
+
+# [🌐](#table-of-contents) categories
 ### 📤 */coins/categories/list*
 ```dart
 client.categories.getBasicList();
@@ -341,7 +365,7 @@ client.categories.getList(
 ___
 <br>
 
-# 🌐 global
+# [🌐](#table-of-contents) global
 ### 📤 */global*
 ```dart
 client.global.getCryptoInfo();
@@ -354,7 +378,7 @@ client.global.getDefiInfo();
 ___
 <br>
 
-# 🌐 exchange rates
+# [🌐](#table-of-contents) exchange rates
 ### 📤 */exchange_rates*
 ```dart
 client.exchangeRates.getList();
@@ -364,7 +388,7 @@ client.exchangeRates.getList();
 ___
 <br>
 
-# 🌐 companies
+# [🌐](#table-of-contents) companies
 ### 📤 */companies/public_treasury/{coin_id}*
 ```dart
 client.companies.getList(
@@ -375,7 +399,7 @@ client.companies.getList(
 ___
 <br>
 
-# 🌐 trending
+# [🌐](#table-of-contents) trending
 ### 📤 */search/trending*
 ```dart
 client.trending.getResult();
@@ -385,7 +409,7 @@ client.trending.getResult();
 ___
 <br>
 
-# 🌐 search
+# [🌐](#table-of-contents) search
 ### 📤 */search*
 ```dart
 client.search.getResult(query: 'bybit');
@@ -395,9 +419,10 @@ client.search.getResult(query: 'bybit');
 
 🐞 Issues / Bugs / Improvements
 ---------------
-- If you found any issues or bugs or any concerns, please reach me out using the following contacts.
+- If you found any issues or bugs, please let me know.
 - If you require an urgent fix, raise an issue and I'll try to find time to resolve it.
 - Should you decide to make your own change, raise your PR to the main branch and let me know.
+- If you have any suggestions or concern, you can contact me directly using discord.
 
 <br>
 
