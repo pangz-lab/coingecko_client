@@ -1,9 +1,8 @@
 ## 1.0.4
 2023/05/08 JST
-- Fixed toJson support
-- Added more test
+- Fixed json serilization support
+- Added unit and integration test for json support
 - Improved documentation and other pub points related stuff
-- Updated readme
 ## 1.0.3
 2023/05/08 JST
 - Updated .pubignore
