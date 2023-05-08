@@ -39,6 +39,7 @@ class CoinCategoryInfo extends BaseModel {
   double? get volume24h => _volume24h;
   DateTime? get updatedAt => _updatedAt;
 
+  /// Converts the raw json data(contained in a Map or List) to a CoinCategoryInfo object
   CoinCategoryInfo.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _name = json['name'];
@@ -50,6 +51,7 @@ class CoinCategoryInfo extends BaseModel {
     _updatedAt = toDate(json['updated_at']);
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = _id;
@@ -59,7 +61,7 @@ class CoinCategoryInfo extends BaseModel {
     data['content'] = _content;
     data['top_3_coins'] = _top3Coins;
     data['volume_24h'] = _volume24h;
-    data['updated_at'] = _updatedAt;
+    data['updated_at'] = _updatedAt.toString();
     return data;
   }
 }

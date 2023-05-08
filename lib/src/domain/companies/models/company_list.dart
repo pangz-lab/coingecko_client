@@ -24,6 +24,7 @@ class CompanyList extends BaseModel {
   double? get marketCapDominance => _marketCapDominance;
   List<CompanyInfo>? get companies => _companies;
 
+  /// Converts the raw json data(contained in a Map or List) to a CompanyList object
   CompanyList.fromJson(Map<String, dynamic> json) {
     _totalHoldings = toDouble(json['total_holdings']);
     _totalValueUsd = toDouble(json['total_value_usd']);
@@ -35,6 +36,7 @@ class CompanyList extends BaseModel {
         : null;
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['total_holdings'] = _totalHoldings;

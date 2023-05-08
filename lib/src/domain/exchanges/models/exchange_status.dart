@@ -36,6 +36,7 @@ class ExchangeStatus extends BaseModel {
   bool? get pin => _pin;
   Project? get project => _project;
 
+  /// Converts the raw json data(contained in a Map or List) to an ExchangeStatus object
   ExchangeStatus.fromJson(Map<String, dynamic> json) {
     _description = json['description'];
     _category = json['category'];
@@ -47,15 +48,16 @@ class ExchangeStatus extends BaseModel {
         json['project'] != null ? Project.fromJson(json['project']) : null;
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['description'] = _description;
     data['category'] = _category;
-    data['created_at'] = _createdAt;
+    data['created_at'] = _createdAt.toString();
     data['user'] = _user;
     data['user_title'] = _userTitle;
     data['pin'] = _pin;
-    data['project'] = _project;
+    data['project'] = _project?.toJson();
     return data;
   }
 }
@@ -79,6 +81,7 @@ class Project {
   String? get name => _name;
   Image? get image => _image;
 
+  /// Converts the raw json data(contained in a Map or List) to a Project object
   Project.fromJson(Map<String, dynamic> json) {
     _type = json['type'];
     _id = json['id'];
@@ -86,12 +89,13 @@ class Project {
     _image = json['image'] != null ? Image.fromJson(json['image']) : null;
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['type'] = _type;
     data['id'] = _id;
     data['name'] = _name;
-    data['image'] = _image;
+    data['image'] = _image?.toJson();
     return data;
   }
 }

@@ -52,6 +52,7 @@ class CoinLinks extends BaseModel {
   String? get subredditUrl => _subredditUrl;
   Map<String, dynamic>? get reposUrl => _reposUrl;
 
+  /// Converts the raw json data(contained in a Map or List) to a CoinLinks object
   CoinLinks.fromJson(Map<String, dynamic> json) {
     _homepage = toList<String>(json['homepage']);
     _blockchainSite = toList<String>(json['blockchain_site']);
@@ -66,6 +67,7 @@ class CoinLinks extends BaseModel {
     _reposUrl = toMap<dynamic>(json['repos_url']);
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['homepage'] = _homepage;

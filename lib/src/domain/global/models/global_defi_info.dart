@@ -35,6 +35,7 @@ class GlobalDefiInfo extends BaseModel {
   String? get topCoinName => _topCoinName;
   double? get topCoinDefiDominance => _topCoinDefiDominance;
 
+  /// Converts the raw json data(contained in a Map or List) to a GlobalDefiInfo object
   GlobalDefiInfo.fromJson(Map<String, dynamic> json) {
     _defiMarketCap = toDouble(json['defi_market_cap']);
     _ethMarketCap = toDouble(json['eth_market_cap']);
@@ -45,6 +46,7 @@ class GlobalDefiInfo extends BaseModel {
     _topCoinDefiDominance = toDouble(json['top_coin_defi_dominance']);
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['defi_market_cap'] = _defiMarketCap;

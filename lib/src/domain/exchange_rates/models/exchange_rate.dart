@@ -19,6 +19,7 @@ class ExchangeRate extends BaseModel {
   double? get value => _value;
   String? get type => _type;
 
+  /// Converts the raw json data(contained in a Map or List) to an ExchangeRate object
   ExchangeRate.fromJson(Map<String, dynamic> json) {
     _name = json['name'];
     _unit = json['unit'];
@@ -26,6 +27,7 @@ class ExchangeRate extends BaseModel {
     _type = json['type'];
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['name'] = _name;

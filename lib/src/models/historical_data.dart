@@ -16,14 +16,16 @@ class HistoricalData extends BaseModel implements Comparable {
   DateTime? get timestamp => _timestamp;
   double? get value => _value;
 
+  /// Converts the raw json data(contained in a Map or List) to a HistoricalData object
   HistoricalData.fromJson(List<dynamic> json) {
     _timestamp = toDateFromMs(json.elementAt(0));
     _value = toDouble(json.elementAt(1));
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['timestamp'] = _timestamp;
+    data['timestamp'] = _timestamp.toString();
     data['value'] = _value;
     return data;
   }

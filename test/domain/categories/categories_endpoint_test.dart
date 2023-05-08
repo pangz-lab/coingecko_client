@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:coingecko_client/src/domain/categories/categories_endpoint.dart';
 import 'package:coingecko_client/src/domain/categories/models/coin_categories_data_ordering.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
@@ -38,6 +40,8 @@ void main() {
         expect(firstItem.name, "Aave Tokens");
         expect(lastItem.id, "algorand-ecosystem");
         expect(lastItem.name, "Algorand Ecosystem");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -54,6 +58,8 @@ void main() {
         expect(firstItem.name, null);
         expect(lastItem.id, null);
         expect(lastItem.name, "Aptos Ecosystem");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 
@@ -146,6 +152,8 @@ void main() {
         ]);
         expect(lastItem.volume24h, 52516565.164146915);
         expect(lastItem.updatedAt, DateTime.parse("2023-05-06T04:10:10.438Z"));
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -180,6 +188,8 @@ void main() {
         ]);
         expect(lastItem.volume24h, null);
         expect(lastItem.updatedAt, null);
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 

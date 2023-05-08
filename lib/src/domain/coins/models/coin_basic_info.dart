@@ -23,6 +23,7 @@ class CoinBasicInfo extends BaseModel {
   String? get name => _name;
   Map<String, dynamic>? get platforms => _platforms;
 
+  /// Converts the raw json data(contained in a Map or List) to a CoinBasicInfo object
   CoinBasicInfo.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _symbol = json['symbol'];
@@ -30,6 +31,7 @@ class CoinBasicInfo extends BaseModel {
     _platforms = toMap<dynamic>(json['platforms']);
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = _id;

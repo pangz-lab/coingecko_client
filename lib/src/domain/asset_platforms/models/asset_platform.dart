@@ -25,6 +25,7 @@ class AssetPlatform extends BaseModel {
   String? get name => _name;
   String? get shortName => _shortName;
 
+  /// Converts the raw json data(contained in a Map or List) to an AssetPlatform object
   AssetPlatform.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _chainIdentifier = toInt(json['chain_identifier']);
@@ -32,6 +33,7 @@ class AssetPlatform extends BaseModel {
     _shortName = json['shortname'];
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = id;

@@ -79,6 +79,7 @@ class TickerInfo extends BaseModel {
   String? get coinId => _coinId;
   String? get targetCoinId => _targetCoinId;
 
+  /// Converts the raw json data(contained in a Map or List) to a TickerInfo object
   TickerInfo.fromJson(Map<String, dynamic> json) {
     _base = json['base'];
     _target = json['target'];
@@ -100,6 +101,7 @@ class TickerInfo extends BaseModel {
     _targetCoinId = json['target_coin_id'];
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['base'] = _base;
@@ -111,9 +113,9 @@ class TickerInfo extends BaseModel {
     data['converted_volume'] = _convertedVolume;
     data['trust_score'] = _trustScore;
     data['bid_ask_spread_percentage'] = _bidAskSpreadPercentage;
-    data['timestamp'] = _timestamp;
-    data['last_traded_at'] = _lastTradedAt;
-    data['last_fetch_at'] = _lastFetchAt;
+    data['timestamp'] = _timestamp.toString();
+    data['last_traded_at'] = _lastTradedAt.toString();
+    data['last_fetch_at'] = _lastFetchAt.toString();
     data['is_anomaly'] = _isAnomaly;
     data['is_stale'] = _isStale;
     data['trade_url'] = _tradeUrl;

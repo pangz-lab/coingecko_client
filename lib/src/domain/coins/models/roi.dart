@@ -16,12 +16,14 @@ class Roi extends BaseModel {
   String? get currency => _currency;
   double? get percentage => _percentage;
 
+  /// Converts the raw json data(contained in a Map or List) to an Roi object
   Roi.fromJson(Map<String, dynamic> json) {
     _times = toDouble(json['times']);
     _currency = json['currency'];
     _percentage = toDouble(json['percentage']);
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['times'] = _times;

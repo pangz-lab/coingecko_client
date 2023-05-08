@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:coingecko_client/src/domain/exchange_rates/exchange_rates_endpoint.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
@@ -39,6 +40,8 @@ void main() {
         expect(lastItem.unit, "XRP");
         expect(lastItem.value, 63171.034);
         expect(lastItem.type, "crypto");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -59,6 +62,8 @@ void main() {
         expect(lastItem.unit, "XRP");
         expect(lastItem.value, null);
         expect(lastItem.type, null);
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 

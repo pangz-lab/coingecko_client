@@ -1,6 +1,6 @@
+import 'dart:convert';
 import 'package:coingecko_client/src/domain/simple/simple_endpoint.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
-
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
 import 'package:test/test.dart';
@@ -72,6 +72,8 @@ void main() {
         expect(firstItem["php_24h_change"], 1.9533072546775028);
         expect(secondItem["jpy"], 253266.49596619446);
         expect(thirdItem["jpy"], 96.560977993782572222);
+
+        expect(jsonEncode(result).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -105,6 +107,8 @@ void main() {
         expect(firstItem["php_market_cap"], 30492667312929.062);
         expect(firstItem["php_24h_vol"], 943273289214.5586);
         expect(firstItem["php_24h_change"], 1.9533072546775028);
+
+        expect(jsonEncode(result).runtimeType, String);
       });
     });
 
@@ -205,6 +209,8 @@ void main() {
         expect(firstItem["btc_market_cap"], 74963848431157.84);
         expect(firstItem["btc_24h_vol"], 2319295474939.273);
         expect(firstItem["btc_24h_change"], 0.8304785217679028);
+
+        expect(jsonEncode(result).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -227,6 +233,8 @@ void main() {
         expect(firstItem["btc_market_cap"], null);
         expect(firstItem["btc_24h_vol"], 2319295474939.273);
         expect(firstItem["btc_24h_change"], 0.8304785217679028);
+
+        expect(jsonEncode(result).runtimeType, String);
       });
     });
 
@@ -301,6 +309,8 @@ void main() {
         expect(result.length, 10);
         expect(result.first, 'vrsc');
         expect(result.last, 'sats');
+
+        expect(jsonEncode(result).runtimeType, String);
       });
     });
 

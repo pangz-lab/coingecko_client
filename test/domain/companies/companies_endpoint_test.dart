@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:coingecko_client/src/domain/companies/companies_endpoint.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
@@ -49,6 +50,8 @@ void main() {
         expect(lastCompany.totalEntryValueUsd, 405880);
         expect(lastCompany.totalCurrentValueUsd, 278923);
         expect(lastCompany.percentageOfTotalSupply, 0);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -78,6 +81,8 @@ void main() {
         expect(lastCompany.totalEntryValueUsd, 405880);
         expect(lastCompany.totalCurrentValueUsd, 278923);
         expect(lastCompany.percentageOfTotalSupply, 0);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
     });
 

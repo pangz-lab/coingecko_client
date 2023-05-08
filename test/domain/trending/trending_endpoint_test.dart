@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:coingecko_client/src/domain/trending/trending_endpoint.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
@@ -68,6 +69,8 @@ void main() {
             }
           ]
         });
+
+        expect(jsonEncode(result).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -104,6 +107,8 @@ void main() {
             }
           ]
         });
+
+        expect(jsonEncode(result).runtimeType, String);
       });
     });
 

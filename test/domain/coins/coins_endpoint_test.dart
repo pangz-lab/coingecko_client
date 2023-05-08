@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:coingecko_client/src/domain/coins/coins_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_basic_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
@@ -70,6 +71,8 @@ void main() {
             "0xe41d2489571d322189246dafa5ebde1f4699f498");
         expect(result.elementAt(1).platforms!["avalanche"],
             "0x596fa47043f99a4e0f122243b841e55375cde0d2");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -86,6 +89,8 @@ void main() {
         expect(result.elementAt(1).name, 'Zus');
         expect(result.elementAt(1).symbol, 'zcn');
         expect(result.elementAt(1).platforms, null);
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 
@@ -188,6 +193,8 @@ void main() {
         expect(item1.roi!.times, 3.6135702295092447);
         expect(item1.roi!.currency, "eth");
         expect(item1.roi!.percentage, 361.3570229509245);
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test(
@@ -262,6 +269,8 @@ void main() {
           249.0714321528849,
           249.24412926857016
         ]);
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -410,6 +419,8 @@ void main() {
             <String, dynamic>{"alexa_rank": 9440, "bing_matches": null});
         expect(result.statusUpdates!.length, 0);
         expect(result.lastUpdated!, DateTime.parse("2023-03-24T13:55:13.610Z"));
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test(
@@ -719,6 +730,8 @@ void main() {
         expect(result.tickers!.elementAt(0).tokenInfoUrl, null);
         expect(result.tickers!.elementAt(0).coinId, "bitcoin");
         expect(result.tickers!.elementAt(0).targetCoinId, "tether");
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -846,6 +859,8 @@ void main() {
         expect(result.tickers!.elementAt(0).tokenInfoUrl, null);
         expect(result.tickers!.elementAt(0).coinId, "bitcoin");
         expect(result.tickers!.elementAt(0).targetCoinId, null);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -855,6 +870,7 @@ void main() {
         var result = await sut!.getTickers(id: 'bitcoin');
         expect(result.name, 'Bitcoin');
         expect(result.tickers, null);
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for error response', () async {
@@ -942,6 +958,8 @@ void main() {
             "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579");
         expect(result.image!.small,
             "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579");
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('with data in getting the correct response type with complete body',
@@ -1034,6 +1052,8 @@ void main() {
         });
         expect(result.publicInterestStats,
             {"alexa_rank": null, "bing_matches": null});
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -1046,6 +1066,8 @@ void main() {
         expect(result.id, null);
         expect(result.platforms, null);
         expect(result.lastUpdated, null);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for error response', () async {
@@ -1134,6 +1156,8 @@ void main() {
             result.totalVolumes!.elementAt(1).compareTo(
                 HistoricalData.fromJson([1680175636000, 2785972479143.1724])),
             0);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test(
@@ -1190,6 +1214,8 @@ void main() {
                 .elementAt(2)
                 .compareTo(HistoricalData.fromJson([null, null])),
             0);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -1204,6 +1230,8 @@ void main() {
         expect(result.prices!.length, 2);
         expect(result.marketCaps!.length, 2);
         expect(result.totalVolumes, null);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for invalid data format', () async {
@@ -1309,6 +1337,8 @@ void main() {
             result.totalVolumes!.elementAt(1).compareTo(
                 HistoricalData.fromJson([1680175636000, 2785972479143.1724])),
             0);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test(
@@ -1364,6 +1394,8 @@ void main() {
                 .elementAt(2)
                 .compareTo(HistoricalData.fromJson([null, null])),
             0);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -1378,6 +1410,8 @@ void main() {
         expect(result.prices!.length, 2);
         expect(result.marketCaps!.length, 2);
         expect(result.totalVolumes, null);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for invalid data format', () async {
@@ -1459,6 +1493,8 @@ void main() {
         expect(fistElement.high, 4075375.26);
         expect(fistElement.low, 4056990.83);
         expect(fistElement.close, 4056990.83);
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -1486,6 +1522,8 @@ void main() {
         expect(thirdElement.high, null);
         expect(thirdElement.low, null);
         expect(thirdElement.close, null);
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for invalid data format', () async {

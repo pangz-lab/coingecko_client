@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:coingecko_client/src/domain/asset_platforms/asset_platforms_endpoint.dart';
 import 'package:coingecko_client/src/domain/asset_platforms/models/asset_platforms_filter.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
@@ -37,8 +38,9 @@ void main() {
       expect(result.elementAt(0).shortName, '');
       expect(result.elementAt(1).name, 'OpenLedger');
       expect(result.elementAt(1).chainIdentifier, 12);
-    });
 
+      expect(jsonEncode(result).runtimeType, String);
+    });
     test('should still return a result for incomplete data format', () async {
       sut = AssetPlatformsEndpoint(HttpRequestServiceMock(
           statusCode: 200,
@@ -53,6 +55,8 @@ void main() {
       expect(result.elementAt(1).name, null);
       expect(result.elementAt(1).chainIdentifier, 12);
       expect(result.elementAt(1).shortName, 'sn');
+
+      expect(jsonEncode(result).runtimeType, String);
     });
   });
 

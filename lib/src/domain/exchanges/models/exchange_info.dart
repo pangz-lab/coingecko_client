@@ -106,6 +106,7 @@ class ExchangeInfo extends BaseModel {
   List<TickerInfo>? get tickers => _tickers;
   List<ExchangeStatus>? get statusUpdates => _statusUpdates;
 
+  /// Converts the raw json data(contained in a Map or List) to an ExchangeInfo object
   ExchangeInfo.fromJson(Map<String?, dynamic> json) {
     _id = json['id'];
     _name = json['name'];
@@ -164,8 +165,8 @@ class ExchangeInfo extends BaseModel {
     data['trust_score_rank'] = _trustScoreRank;
     data['trade_volume_24h_btc'] = _tradeVolume24hBtc;
     data['trade_volume_24h_btc_normalized'] = _tradeVolume24hBtcNormalized;
-    data['tickers'] = _tickers;
-    data['status_updates'] = _statusUpdates;
+    data['tickers'] = _tickers?.map((e) => e.toJson()).toList();
+    data['status_updates'] = _statusUpdates?.map((e) => e.toJson()).toList();
     return data;
   }
 }

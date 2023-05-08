@@ -13,11 +13,13 @@ class CoinCategoryBasicInfo extends BaseModel {
   String? get id => _id;
   String? get name => _name;
 
+  /// Converts the raw json data(contained in a Map or List) to a CoinCategoryBasicInfo object
   CoinCategoryBasicInfo.fromJson(Map<String, dynamic> json) {
     _id = json['category_id'];
     _name = json['name'];
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = _id;

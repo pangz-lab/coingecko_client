@@ -19,6 +19,7 @@ class CoinMarketHistory extends BaseModel {
   List<HistoricalData>? get marketCaps => _marketCaps;
   List<HistoricalData>? get totalVolumes => _totalVolumes;
 
+  /// Converts the raw json data(contained in a Map or List) to a CoinMarketHistory object
   CoinMarketHistory.fromJson(Map<String, dynamic> json) {
     _prices = json['prices'] != null
         ? List<dynamic>.of(json['prices'])
@@ -37,11 +38,12 @@ class CoinMarketHistory extends BaseModel {
         : null;
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['prices'] = _prices;
-    data['market_caps'] = _marketCaps;
-    data['total_volumes'] = _totalVolumes;
+    data['prices'] = _prices?.map((e) => e.toJson()).toList();
+    data['market_caps'] = _marketCaps?.map((e) => e.toJson()).toList();
+    data['total_volumes'] = _totalVolumes?.map((e) => e.toJson()).toList();
     return data;
   }
 }

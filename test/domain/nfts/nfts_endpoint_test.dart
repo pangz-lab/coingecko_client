@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:coingecko_client/src/domain/nfts/models/nfts_data_ordering.dart';
 import 'package:coingecko_client/src/domain/nfts/nfts_endpoint.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
@@ -59,6 +60,8 @@ void main() {
         expect(lastItem.name, "Autoglyphs");
         expect(lastItem.assetPlatformId, "ethereum");
         expect(lastItem.symbol, "☵");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -85,6 +88,8 @@ void main() {
         expect(lastItem.name, null);
         expect(lastItem.assetPlatformId, "ethereum");
         expect(lastItem.symbol, "☵");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 
@@ -188,6 +193,8 @@ void main() {
         expect(result.links!["homepage"], "https://meebits.larvalabs.com/");
         expect(result.links!["twitter"], "https://twitter.com/larvalabs");
         expect(result.links!["discord"], "");
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -225,6 +232,8 @@ void main() {
         expect(result.links!["homepage"], "https://meebits.larvalabs.com/");
         expect(result.links!["twitter"], "https://twitter.com/larvalabs");
         expect(result.links!["discord"], null);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
     });
 
@@ -321,6 +330,8 @@ void main() {
         expect(result.links!["homepage"], "https://meebits.larvalabs.com/");
         expect(result.links!["twitter"], "https://twitter.com/larvalabs");
         expect(result.links!["discord"], "");
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -358,6 +369,8 @@ void main() {
         expect(result.links!["homepage"], "https://meebits.larvalabs.com/");
         expect(result.links!["twitter"], "https://twitter.com/larvalabs");
         expect(result.links!["discord"], null);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
     });
 

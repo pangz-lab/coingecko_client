@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:coingecko_client/src/domain/derivatives/derivatives_endpoint.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange_ordering.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_tickers.dart';
@@ -74,6 +75,8 @@ void main() {
         expect(secondItem.lastTradedAt!.toUtc(),
             DateTime.parse("2023-05-04 04:41:59.000Z"));
         expect(secondItem.expiredAt, null);
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -119,6 +122,7 @@ void main() {
         expect(secondItem.volume24h, null);
         expect(secondItem.lastTradedAt, null);
         expect(secondItem.expiredAt, null);
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 
@@ -216,6 +220,8 @@ void main() {
         expect(secondtItem.description,
             "Founded in 2018, BingX is a crypto social trading exchange that offers spot, derivatives and copy trading services to more than 100 countries worldwide.\r\n\r\nBingX prides itself as the people's exchange by unlocking the fast-growing cryptocurrency market for everyone, connecting users with experts traders and a platform to invest in a simple, engaging and transparent way.");
         expect(secondtItem.url, "https://bingx.com/");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -254,6 +260,8 @@ void main() {
         expect(secondtItem.country, null);
         expect(secondtItem.description, null);
         expect(secondtItem.url, null);
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 
@@ -378,6 +386,8 @@ void main() {
         expect(tickerFirstItem.lastTraded!.toUtc(),
             DateTime.parse("2023-05-04 03:46:08.000Z"));
         expect(tickerFirstItem.expiredAt, null);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -426,6 +436,8 @@ void main() {
         expect(tickerFirstItem.lastTraded!.toUtc(),
             DateTime.parse("2023-05-04 03:46:08.000Z"));
         expect(tickerFirstItem.expiredAt, null);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
     });
 
@@ -497,6 +509,8 @@ void main() {
         expect(firstItem.name, "Binance (Futures)");
         expect(lastItem.id, "ftx");
         expect(lastItem.name, "FTX (Derivatives)");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -513,6 +527,8 @@ void main() {
         expect(firstItem.name, "Binance (Futures)");
         expect(lastItem.id, "ftx");
         expect(lastItem.name, null);
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 

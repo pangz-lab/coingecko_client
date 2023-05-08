@@ -35,6 +35,7 @@ class CompanyInfo extends BaseModel {
   int? get totalCurrentValueUsd => _totalCurrentValueUsd;
   double? get percentageOfTotalSupply => _percentageOfTotalSupply;
 
+  /// Converts the raw json data(contained in a Map or List) to a CompanyInfo object
   CompanyInfo.fromJson(Map<String, dynamic> json) {
     _name = json['name'];
     _symbol = json['symbol'];
@@ -45,6 +46,7 @@ class CompanyInfo extends BaseModel {
     _percentageOfTotalSupply = toDouble(json['percentage_of_total_supply']);
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['name'] = _name;

@@ -35,8 +35,8 @@ class CoinInfo extends BaseModel {
   double? _liquidityScore;
   double? _publicInterestScore;
   MarketData? _marketData;
-  Map<String, dynamic>? _communitydata;
-  Map<String, dynamic>? _developerdata;
+  Map<String, dynamic>? _communityData;
+  Map<String, dynamic>? _developerData;
   Map<String, dynamic>? _publicInterestStats;
   List<String>? _statusUpdates;
   DateTime? _lastUpdated;
@@ -108,8 +108,8 @@ class CoinInfo extends BaseModel {
     _liquidityScore = liquidityScore;
     _publicInterestScore = publicInterestScore;
     _marketData = marketData;
-    _communitydata = communitydata;
-    _developerdata = developerdata;
+    _communityData = communitydata;
+    _developerData = developerdata;
     _publicInterestStats = publicInterestStats;
     _statusUpdates = statusUpdates;
     _lastUpdated = lastUpdated;
@@ -145,13 +145,14 @@ class CoinInfo extends BaseModel {
   double? get liquidityScore => _liquidityScore;
   double? get publicInterestScore => _publicInterestScore;
   MarketData? get marketData => _marketData;
-  Map<String, dynamic>? get communitydata => _communitydata;
-  Map<String, dynamic>? get developerdata => _developerdata;
+  Map<String, dynamic>? get communitydata => _communityData;
+  Map<String, dynamic>? get developerdata => _developerData;
   Map<String, dynamic>? get publicInterestStats => _publicInterestStats;
   List<String>? get statusUpdates => _statusUpdates;
   DateTime? get lastUpdated => _lastUpdated;
   List<TickerInfo>? get tickers => _tickers;
 
+  /// Converts the raw json data(contained in a Map or List) to a CoinInfo object
   CoinInfo.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _symbol = json['symbol'];
@@ -186,8 +187,8 @@ class CoinInfo extends BaseModel {
     _marketData = json['market_data'] != null
         ? MarketData.fromJson(json['market_data'])
         : null;
-    _communitydata = toMap<dynamic>(json['community_data']);
-    _developerdata = toMap<dynamic>(json['developer_data']);
+    _communityData = toMap<dynamic>(json['community_data']);
+    _developerData = toMap<dynamic>(json['developer_data']);
     _publicInterestStats = toMap<dynamic>(json['public_interest_stats']);
     _statusUpdates = toList<String>(json['status_updates']);
     _lastUpdated = toDate(json['last_updated']);
@@ -198,6 +199,7 @@ class CoinInfo extends BaseModel {
         : null;
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = _id;
@@ -213,10 +215,10 @@ class CoinInfo extends BaseModel {
     data['additional_notices'] = _additionalNotices;
     data['localization'] = _localization;
     data['description'] = _description;
-    data['links'] = _links;
-    data['image'] = _image;
+    data['links'] = _links?.toJson();
+    data['image'] = _image?.toJson();
     data['country_origin'] = _countryOrigin;
-    data['genesis_date'] = _genesisDate;
+    data['genesis_date'] = _genesisDate.toString();
     data['contract_address'] = _contractAddress;
     data['sentiment_votes_up_percentage'] = _sentimentVotesUpPercentage;
     data['sentiment_votes_down_percentage'] = _sentimentVotesDownPercentage;
@@ -228,7 +230,13 @@ class CoinInfo extends BaseModel {
     data['community_score'] = _communityScore;
     data['liquidity_score'] = _liquidityScore;
     data['public_interest_score'] = _publicInterestScore;
-    data['market_data'] = _marketData;
+    data['market_data'] = _marketData?.toJson();
+    data['community_data'] = _communityData;
+    data['developer_data'] = _developerData;
+    data['public_interest_stats'] = _publicInterestStats;
+    data['status_updates'] = _statusUpdates;
+    data['last_updated'] = _lastUpdated.toString();
+    data['tickers'] = _tickers?.map((e) => e.toJson()).toList() ?? [];
     return data;
   }
 }

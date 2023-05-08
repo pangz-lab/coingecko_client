@@ -75,6 +75,7 @@ class NftInfo extends BaseModel {
   int? get totalSupply => _totalSupply;
   Map<String, dynamic>? get links => _links;
 
+  /// Converts the raw json data(contained in a Map or List) to an NftInfo object
   NftInfo.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _contractAddress = json['contract_address'];
@@ -96,6 +97,7 @@ class NftInfo extends BaseModel {
     _links = toMap<dynamic>(json['links']);
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = _id;

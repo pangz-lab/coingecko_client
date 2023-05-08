@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:coingecko_client/src/domain/exchanges/exchanges_endpoint.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/exchange_data_ordering.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
@@ -50,6 +51,8 @@ void main() {
         expect(firstItem.trustScoreRank, 4);
         expect(firstItem.tradeVolume24hBtc, 32427.38111948771);
         expect(firstItem.tradeVolume24hBtcNormalized, 32427.38111948771);
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -73,6 +76,8 @@ void main() {
         expect(firstItem.trustScoreRank, null);
         expect(firstItem.tradeVolume24hBtc, 32427.38111948771);
         expect(firstItem.tradeVolume24hBtcNormalized, null);
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 
@@ -128,6 +133,8 @@ void main() {
         expect(firstItem.name, '1BCH');
         expect(lastItem.id, 'abcc');
         expect(lastItem.name, 'ABCC');
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -142,6 +149,8 @@ void main() {
         expect(firstItem.name, null);
         expect(lastItem.id, null);
         expect(lastItem.name, "ABCC");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 
@@ -250,6 +259,8 @@ void main() {
             "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250");
         expect(status1?.project?.image?.large,
             "https://assets.coingecko.com/markets/images/52/large/binance.jpg?1519353250");
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -311,6 +322,8 @@ void main() {
         expect(status1?.project?.image?.small, null);
         expect(status1?.project?.image?.large,
             "https://assets.coingecko.com/markets/images/52/large/binance.jpg?1519353250");
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
     });
 
@@ -407,6 +420,8 @@ void main() {
         expect(firstItem.tokenInfoUrl, null);
         expect(firstItem.coinId, "bitcoin");
         expect(firstItem.targetCoinId, "tether");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -443,6 +458,8 @@ void main() {
         expect(firstItem.tokenInfoUrl, null);
         expect(firstItem.coinId, "bitcoin");
         expect(firstItem.targetCoinId, "tether");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 
@@ -508,6 +525,8 @@ void main() {
         expect(lastItem?.timestamp,
             DateTime.fromMillisecondsSinceEpoch(1681317000000));
         expect(lastItem?.value, 378779.3901295906839115);
+
+        expect(jsonEncode(result!.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -524,6 +543,8 @@ void main() {
         expect(lastItem?.timestamp,
             DateTime.fromMillisecondsSinceEpoch(1681306200000));
         expect(lastItem?.value, null);
+
+        expect(jsonEncode(result!.elementAt(0).toJson()).runtimeType, String);
       });
     });
 

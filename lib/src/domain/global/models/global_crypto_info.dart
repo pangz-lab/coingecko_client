@@ -48,6 +48,7 @@ class GlobalCryptoInfo extends BaseModel {
       _marketCapChangePercentage24hUsd;
   DateTime? get updatedAt => _updatedAt;
 
+  /// Converts the raw json data(contained in a Map or List) to a GlobalCryptoInfo object
   GlobalCryptoInfo.fromJson(Map<String, dynamic> json) {
     _activeCryptocurrencies = toInt(json['active_cryptocurrencies']);
     _upcomingIcos = toInt(json['upcoming_icos']);
@@ -62,6 +63,7 @@ class GlobalCryptoInfo extends BaseModel {
     _updatedAt = toDateFromTimestamp(json['updated_at']);
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['active_cryptocurrencies'] = _activeCryptocurrencies;
@@ -74,7 +76,7 @@ class GlobalCryptoInfo extends BaseModel {
     data['market_cap_percentage'] = _marketCapPercentage;
     data['market_cap_change_percentage_24h_usd'] =
         _marketCapChangePercentage24hUsd;
-    data['updated_at'] = _updatedAt;
+    data['updated_at'] = _updatedAt.toString();
     return data;
   }
 }

@@ -56,6 +56,7 @@ class DerivativesExchange extends BaseModel {
   String? get url => _url;
   List<DerivativesTickerInfo>? get tickers => _tickers;
 
+  /// Converts the raw json data(contained in a Map or List) to a DerivativesExchange object
   DerivativesExchange.fromJson(Map<String, dynamic> json) {
     _name = json['name'];
     _id = json['id'];
@@ -75,6 +76,7 @@ class DerivativesExchange extends BaseModel {
         : null;
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['name'] = _name;

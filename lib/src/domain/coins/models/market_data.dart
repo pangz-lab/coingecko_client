@@ -193,6 +193,7 @@ class MarketData extends BaseModel {
   Map<String, dynamic>? get sparkline7d => _sparkline7d;
   DateTime? get lastUpdated => _lastUpdated;
 
+  /// Converts the raw json data(contained in a Map or List) to a MarketData object
   MarketData.fromJson(Map<String, dynamic> json) {
     _currentPrice = toMap<dynamic>(json['current_price']);
     _totalValueLocked = toMap<dynamic>(json['total_value_locked']);
@@ -251,6 +252,7 @@ class MarketData extends BaseModel {
     _lastUpdated = toDate(json['last_updated']);
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
 
@@ -258,7 +260,7 @@ class MarketData extends BaseModel {
     data['total_value_locked'] = _totalValueLocked;
     data['mcap_to_tvl_ratio'] = _mcapToTvlRatio;
     data['fdv_to_tvl_ratio'] = _fdvToTvlRatio;
-    data['roi'] = _roi;
+    data['roi'] = _roi?.toJson();
     data['ath'] = _ath;
     data['ath_change_percentage'] = _athChangePercentage;
     data['ath_date'] = _athDate;
@@ -305,7 +307,7 @@ class MarketData extends BaseModel {
     data['max_supply'] = _maxSupply;
     data['circulating_supply'] = _circulatingSupply;
     data['sparkline_7d'] = _sparkline7d;
-    data['last_updated'] = _lastUpdated;
+    data['last_updated'] = _lastUpdated.toString();
     return data;
   }
 }

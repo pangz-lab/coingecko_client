@@ -15,6 +15,7 @@ class CoinTickers extends BaseModel {
   String? get name => _name;
   List<TickerInfo>? get tickers => _tickers;
 
+  /// Converts the raw json data(contained in a Map or List) to a CoinTickers object
   CoinTickers.fromJson(Map<String, dynamic> json) {
     _name = json['name'];
     _tickers = json['tickers'] != null
@@ -24,10 +25,11 @@ class CoinTickers extends BaseModel {
         : null;
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['name'] = _name;
-    data['tickers'] = _tickers;
+    data['tickers'] = _tickers?.map((e) => e.toJson()).toList();
     return data;
   }
 }

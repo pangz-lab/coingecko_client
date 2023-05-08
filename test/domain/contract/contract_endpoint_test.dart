@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:coingecko_client/src/domain/contract/contract_endpoint.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
@@ -362,6 +363,8 @@ void main() {
         expect(firstTicker.tokenInfoUrl, null);
         expect(firstTicker.coinId, "uniswap");
         expect(firstTicker.targetCoinId, "tether");
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -418,6 +421,8 @@ void main() {
         expect(result.image, null);
         expect(result.countryOrigin, null);
         expect(result.marketData, null);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
     });
 
@@ -526,6 +531,8 @@ void main() {
             result.totalVolumes!.elementAt(1).compareTo(
                 HistoricalData.fromJson([1680175636000, 2785972479143.1724])),
             0);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -579,6 +586,8 @@ void main() {
                 .elementAt(2)
                 .compareTo(HistoricalData.fromJson([null, null])),
             0);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
     });
 
@@ -702,6 +711,8 @@ void main() {
             result.totalVolumes!.elementAt(1).compareTo(
                 HistoricalData.fromJson([1680175636000, 2785972479143.1724])),
             0);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -756,6 +767,8 @@ void main() {
                 .elementAt(2)
                 .compareTo(HistoricalData.fromJson([null, null])),
             0);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
     });
 

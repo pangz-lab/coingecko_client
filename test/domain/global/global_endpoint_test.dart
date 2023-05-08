@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:coingecko_client/src/domain/global/global_endpoint.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
@@ -61,6 +62,8 @@ void main() {
         expect(result.marketCapChangePercentage24hUsd, 1.0640913224189947);
         expect(
             result.updatedAt!.toUtc().toString(), '2023-05-06 05:28:35.000Z');
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -80,6 +83,8 @@ void main() {
         expect(result.marketCapChangePercentage24hUsd, 1.0640913224189947);
         expect(
             result.updatedAt!.toUtc().toString(), '2023-05-06 05:28:35.000Z');
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
     });
 
@@ -140,6 +145,8 @@ void main() {
             3.7973157237481210812554212782141867546879483948402413255296209);
         expect(result.topCoinName, "Lido Staked Ether");
         expect(result.topCoinDefiDominance, 25.924971412066956);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -156,6 +163,8 @@ void main() {
             3.7973157237481210812554212782141867546879483948402413255296209);
         expect(result.topCoinName, "Lido Staked Ether");
         expect(result.topCoinDefiDominance, 25.924971412066956);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
     });
 

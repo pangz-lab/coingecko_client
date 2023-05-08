@@ -27,6 +27,7 @@ class CoinOhlc extends BaseModel {
   double? get low => _low;
   double? get close => _close;
 
+  /// Converts the raw json data(contained in a Map or List) to a CoinOhlc object
   CoinOhlc.fromJson(List<dynamic> json) {
     var map = json.toList().asMap();
     _time = map.containsKey(0) ? toDateFromMs(json.elementAt(0)) : null;
@@ -36,9 +37,10 @@ class CoinOhlc extends BaseModel {
     _close = map.containsKey(4) ? toDouble(json.elementAt(4)) : null;
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['time'] = _time;
+    data['time'] = _time.toString();
     data['open'] = _open;
     data['high'] = _high;
     data['low'] = _low;

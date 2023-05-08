@@ -28,6 +28,7 @@ class NftBasicInfo extends BaseModel {
   String? get assetPlatformId => _assetPlatformId;
   String? get symbol => _symbol;
 
+  /// Converts the raw json data(contained in a Map or List) to an NftBasicInfo object
   NftBasicInfo.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _contractAddress = json['contract_address'];
@@ -36,6 +37,7 @@ class NftBasicInfo extends BaseModel {
     _symbol = json['symbol'];
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = _id;

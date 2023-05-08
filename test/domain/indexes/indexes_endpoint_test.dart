@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:coingecko_client/src/domain/indexes/indexes_endpoint.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
@@ -40,6 +41,8 @@ void main() {
         expect(firstItem.name, "ZB (Derivatives) PEOPLE");
         expect(lastItem.id, "LUNA");
         expect(lastItem.name, "Bibox (Futures) LUNA");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -55,6 +58,8 @@ void main() {
         expect(firstItem.name, null);
         expect(lastItem.id, null);
         expect(lastItem.name, "Bibox (Futures) LUNA");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 
@@ -117,6 +122,8 @@ void main() {
         expect(result.market, "Bybit (Futures)");
         expect(result.last, 0.001845);
         expect(result.isMultiAssetComposite, false);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -131,6 +138,8 @@ void main() {
         expect(result.market, null);
         expect(result.last, 0.001845);
         expect(result.isMultiAssetComposite, null);
+
+        expect(jsonEncode(result.toJson()).runtimeType, String);
       });
     });
 
@@ -209,6 +218,8 @@ void main() {
         expect(firstItem.name, "ZB (Derivatives) PEOPLE");
         expect(lastItem.id, "LUNA");
         expect(lastItem.name, "Bibox (Futures) LUNA");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
 
       test('should still return a result for incomplete data format', () async {
@@ -224,6 +235,8 @@ void main() {
         expect(firstItem.name, null);
         expect(lastItem.id, null);
         expect(lastItem.name, "Bibox (Futures) LUNA");
+
+        expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
       });
     });
 

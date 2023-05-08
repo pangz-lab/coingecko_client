@@ -153,6 +153,7 @@ class CoinMarket extends BaseModel {
   double? get priceChangePercentage7dInCurrency =>
       _priceChangePercentage7dInCurrency;
 
+  /// Converts the raw json data(contained in a Map or List) to a CoinMarket object
   CoinMarket.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _symbol = json['symbol'];
@@ -198,6 +199,7 @@ class CoinMarket extends BaseModel {
         toDouble(json['price_change_percentage_7d_in_currency']);
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = _id;
@@ -220,12 +222,12 @@ class CoinMarket extends BaseModel {
     data['max_supply'] = _maxSupply;
     data['ath'] = _ath;
     data['ath_change_percentage'] = _athChangePercentage;
-    data['ath_date'] = _athDate;
+    data['ath_date'] = _athDate.toString();
     data['atl'] = _atl;
     data['atl_change_percentage'] = _atlChangePercentage;
-    data['atl_date'] = _atlDate;
+    data['atl_date'] = _atlDate.toString();
     data['roi'] = _roi;
-    data['last_updated'] = _lastUpdated;
+    data['last_updated'] = _lastUpdated.toString();
     data['sparkline_in_7d'] = _sparklineIn7d;
     data['price_change_percentage_14d_in_currency'] =
         _priceChangePercentage14dInCurrency;

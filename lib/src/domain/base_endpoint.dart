@@ -3,16 +3,27 @@ import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.da
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
-abstract class ResponseDate {
-  String get baseEndpoint;
-}
-
+/// Main class that provides utility methods in preparing and sending the<br>
+/// http request to the API service.<br>
+/// This class is being extended by domain classes.
 class BaseEndpoint {
+  /// Coingecko community endpoint host
   static final apiHost = "api.coingecko.com";
+
+  /// Coingecko pro endpoint host
   static final apiProHost = "pro-api.coingecko.com";
+
+  /// Coingecko key name. This is embedded either in the url query
+  /// of the http request header. This will contain the API key
+  /// provided to the pro user when sent to the service.
   static final apiKeyQueryParam = "x_cg_pro_api_key";
+
+  /// Current API version supported
   static final version = "/api/v3";
   String _endpointPath = "";
+
+  /// The generated endpoint path. This will contain the resulting endpoints
+  /// which is used as the URL and the query in sending the request.
   String get endpointPath => _endpointPath;
   HttpRequestServiceInterface httpRequestService;
   String? _apiKey;
@@ -21,6 +32,7 @@ class BaseEndpoint {
     _apiKey = apiKey;
   }
 
+  /// Sends the HTTP request to the community host server
   Future<dynamic> sendBasic(String path) {
     try {
       return _send(path, apiHost);
@@ -29,6 +41,13 @@ class BaseEndpoint {
     }
   }
 
+  /// **CURRENTLY NOT SUPPORTED**
+  /// Sends the HTTP request to the pro host server<br>
+  /// This automatically embeds the provided api key in CoinGeckoClient.
+  /// This will be used for every request.
+  /// ```dart
+  /// var client = CoinGeckoClient(apiKey: API_KEY_YOU_SET_HERE);
+  /// ```
   Future<dynamic> sendPro(String path) {
     try {
       var headers = Map.fromEntries(
@@ -62,6 +81,9 @@ class BaseEndpoint {
     }
   }
 
+  /// The main method that generates the URL based on the given url template.<br>
+  /// This either recreates the url structure if needed or crete a url query based on
+  /// the presence of key-value pair. Or could be both.
   String createEndpointPathUrl(
       {required String endpointPath, Map<String, dynamic>? rawQueryItems}) {
     var defaultRawQueryItems = Map<String, dynamic>.from(rawQueryItems ?? {});
@@ -87,7 +109,7 @@ class BaseEndpoint {
     return "${_replaceEndpointPathWithValue(endpointPath, defaultRawQueryItems)}$path";
   }
 
-  /// TODO : Simplify this
+  // TODO : Simplify this
   List<String?> _getPathParameters(
       String path, Map<String, dynamic>? parameters) {
     if (!path.contains("{")) {

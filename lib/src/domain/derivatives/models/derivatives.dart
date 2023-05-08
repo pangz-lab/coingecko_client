@@ -63,6 +63,7 @@ class Derivatives extends BaseModel {
   DateTime? get lastTradedAt => _lastTradedAt;
   DateTime? get expiredAt => _expiredAt;
 
+  /// Converts the raw json data(contained in a Map or List) to a Derivatives object
   Derivatives.fromJson(Map<String, dynamic> json) {
     _market = json['market'];
     _symbol = json['symbol'];
@@ -80,6 +81,7 @@ class Derivatives extends BaseModel {
     _expiredAt = toDateFromTimestamp(json['expired_at']);
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['market'] = _market;
@@ -94,8 +96,8 @@ class Derivatives extends BaseModel {
     data['funding_rate'] = _fundingRate;
     data['open_interest'] = _openInterest;
     data['volume_24h'] = _volume24h;
-    data['last_traded_at'] = _lastTradedAt;
-    data['expired_at'] = _expiredAt;
+    data['last_traded_at'] = _lastTradedAt.toString();
+    data['expired_at'] = _expiredAt.toString();
     return data;
   }
 }

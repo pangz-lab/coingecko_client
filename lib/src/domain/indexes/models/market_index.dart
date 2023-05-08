@@ -28,6 +28,7 @@ class MarketIndex extends BaseModel {
   double? get last => _last;
   bool? get isMultiAssetComposite => _isMultiAssetComposite;
 
+  /// Converts the raw json data(contained in a Map or List) to a MarketIndex object
   MarketIndex.fromJson(Map<String, dynamic> json) {
     _name = json['name'];
     _id = json['id'];
@@ -36,6 +37,7 @@ class MarketIndex extends BaseModel {
     _isMultiAssetComposite = json['is_multi_asset_composite'];
   }
 
+  /// Converts the object to a Map to make it json serializable.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['name'] = _name;
