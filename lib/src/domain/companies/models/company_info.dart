@@ -1,5 +1,6 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Crypto company information.
 class CompanyInfo extends BaseModel {
   String? _name;
   String? _symbol;

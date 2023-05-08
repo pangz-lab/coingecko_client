@@ -1,5 +1,6 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Provides data for the coin's open, high, low and close for a specific period.
 class CoinOhlc extends BaseModel {
   DateTime? _time;
   double? _open;

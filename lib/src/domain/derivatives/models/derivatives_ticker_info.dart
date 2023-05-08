@@ -1,5 +1,6 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Derivatives ticker detailed information.
 class DerivativesTickerInfo extends BaseModel {
   String? _symbol;
   String? _base;

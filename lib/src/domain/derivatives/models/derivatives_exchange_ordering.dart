@@ -1,3 +1,4 @@
+/// Use to define sorting order of derivatives exchange.
 enum DerivativesExchangeOrdering {
   nameAsc('name_asc'),
   nameDesc('name_desc'),

@@ -1,3 +1,4 @@
+/// Exchange basic information. Used when returning list of exchanges.
 class ExchangeBasicInfo {
   String? _id;
   String? _name;

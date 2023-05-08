@@ -1,5 +1,6 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Exchange rate data. Used when collecting rates of a specific coin.
 class ExchangeRate extends BaseModel {
   String? _name;
   String? _unit;

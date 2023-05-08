@@ -1,6 +1,8 @@
 import 'package:coingecko_client/src/domain/coins/models/roi.dart';
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Contains the coin market data used when getting all the coin market list
+/// or just getting an information about a specific market.
 class CoinMarket extends BaseModel {
   String? _id;
   String? _symbol;

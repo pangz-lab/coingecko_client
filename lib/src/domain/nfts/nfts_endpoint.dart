@@ -5,7 +5,6 @@ import 'package:coingecko_client/src/domain/nfts/models/nfts_data_ordering.dart'
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
-
 ///
 /// - Use this to obtain all the NFT ids in order to make API calls, paginated to 100 items<br>
 /// - Get current data (name, price_floor, volume_24h ...) for an NFT collection. native_currency (string) is only a representative of the currency.<br>

@@ -2,6 +2,7 @@ import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/exchange_status.dart';
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Exchange main information. Provides detailed information of a specific exchange.
 class ExchangeInfo extends BaseModel {
   String? _id;
   String? _name;

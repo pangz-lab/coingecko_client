@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/version-v1.0.1-blue)
+![version](https://img.shields.io/badge/version-v1.0.2-blue)
 ![coverage](https://img.shields.io/badge/coverage-100%25-success)
 ![version](https://img.shields.io/badge/sdk-v2.19.3-blue)
 ![license](https://img.shields.io/badge/license-BSD--3-blue)
@@ -13,7 +13,7 @@
 
 <p align="center">
     <img src="https://lh3.googleusercontent.com/fife/APg5EOY3h1MG5I3ny2d3X9NITN9GNuyx8uPlEu50W6GhYw-CsCPY7h_8DN1l9uYw8J7YjmUl9pDhuUhv6yrh5gv9jENoaWQcPebQ4NcsweTAtsFB2ehWWa9ETrSWCLoRTEVax27GsKGKVB6lLYNN1776Mytpv0RlNXgsnA-1eP30YQopud2cqf0YOTudo-heagG4oieBKBGr2A4ChIrQ5t0UglNYpmz8Q_F57k9mdq8hrBzuDmyUhdFI40tFZtg_vUKIZTY_vd2BIJmGkZZ3nuMMyZbOOMhgSTMxzlpb3dA23Gd2ymBGfNobQZOa4hBOpd_XxibFox5EOQOd9XpSbhdPt0EIAzXEb4qVsMJ4_NMW7OEdk0JQAjaAsFzZvVYL-uKFu-vzWSFg_GRWteDkUUYhv60V1H2zrmAfDdN10lE5Y9aiMbyc-62XSzaCtGBwSmmfP8iCdMP_RsJquvqWHJTEHKW6mIC8BXbMqDu8ieTsUqc8veRBfHRgn1iA1lUywABUELyAANMCqZ450v6nDYOCiRXFVeIh9-O3G9PzGgYu7V0o7MSDBhL-3Y0kENycsIqzvnPSBQX38BOKgP77in8aXU9uBzS275CDoeCValoNwx2pZOXVmLFk7y_yBHArm3VD7ctfwP_NzOkC84zNcn2QVycgmBdsXlULj_Q-POX2W_LM7T4TxLQkoAn5B4SvBikTN-Le_Ge2WkQkIcA7U3_j8GUywRSYXr8m78xeZODWi9zJEFUfc8zYt-19PYcrx0YFSivwOqOxpIm-IEm6x4vyapjB-7X-ljxc2TzeWqOShXkyl5gKK0Evd-0U6hTVN_mL_uPWAlvWLs3LCKu9IZ5bVDEmJVtBspEhxdrjQQjNqur01g4VMy3Yy_KhNientu_AJm7ndNAeAQAoKfgiUtQNrtY306648slrRdKDOt5nTLWiHUWvXcUqh6u5KyTI1YNBneHQyWk2ExhxIUFPAi2QUnzeu21IBKUoele9BDGKEoOz4dV3J1qgi0-7C1kvvWtoxxnL5z-9LSwtAEW1vaw5iEy3yhAcbN9nrKtEC0O75e3XHR2eXt4NKxBF7dgdWX9lS_llslIsvw3rFx9VOLfcCM71HTCO3tczlf8abxHg1R6TlKWOGfqaYOBdqIRqPPF1sagLZvbe75uIjRbnCwBaRtVl4Z1s7Q30I_8Jeq2oJRCnYQcgbjpXRvpClEfhlJT76ybo9hT2aG_QFE01SwptYQ2A-btnwo9jimH0hc4vIQXR1_pMFHQa62rd2hSiTla5qo95WqTQWoVtbW55hN2h7LTF4IBm1ETYo81KFpM1HTzYR7LZQOQMs2_BaUaCQBetOmIWZKhLWRZC8_X3OVSRokTj6xuXtotwcHbXln661ITXs-1yCxdgWmpIL92mPjMlljMUA_kQJru0s_lm-DEqdZaFqmuj4fdNqGjZuEN1-FQgVRd-coSHPKd4F2RY2djuATNBtQU5nIwWgm-tuXM6YHX3KzliOp1glQzUURkKVaUq3-lxgfhY4IxRBgmHrw=w1862-h968"
-    height="175" />
+    height="165" />
 </p>
 
 # coingecko_client
@@ -25,6 +25,31 @@
 
 
 A simple and intuitive package to access the [CoinGecko REST API Service](https://www.coingecko.com/en/api/documentation).
+
+Table of Contents
+---------------
+1. [API Version Support](#api-version-support)
+2. [Requirements](#requirements)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Endpoints](#endpoints)
+    - [ping](#-ping)
+    - [coins](#-coins)
+    - [exchanges](#-exchanges)
+    - [simple](#-simple)
+    - [derivatives](#-derivatives)
+    - [indexes](#-indexes)
+    - [nfts](#-nfts)
+    - [contract](#-contract)
+    - [asset_platforms](#-asset_platforms)
+    - [categories](#-categories)
+    - [global](#-global)
+    - [exchange rates](#-exchange-rates)
+    - [companies](#-companies)
+    - [trending](#-trending)
+    - [search](#-search)
+6. [Issues / Bugs / Improvements](#-issues--bugs--improvements)
+7. [Contacts](#contacts)
 
 API Version Support
 ---------------
@@ -38,10 +63,10 @@ Requirements
 
 Installation
 ---------------
-Add the dependency to your Dart / Flutter project:
+Add the dependency to your Dart / Flutter project:<br>
+(under the `dependencies`, add the following)
 ```yaml
-dependencies:
-  coingecko_client: ^1.0.1
+coingecko_client: ^1.0.2
 ```
 
 <p></p>Go to <a href="https://pub.dev/packages/coingecko_client">pub.dev</a> for more details.</p>
@@ -50,20 +75,34 @@ dependencies:
 
 
 # Usage 
-- Initialize the client class
-- Use the client properties to send the request
-- ( Checkout the <a href="https://github.com/pangz-lab/coingecko_client/tree/master/example">example folder</a> for more practical usage )
-
+- Import the library and initialize the client class.
 ```dart
 import 'package:coingecko_client/coingecko_client.dart';
 
 var client = CoinGeckoClient();
 ```
+- Use any of the client properties to access the endpoint to use. `(use coins for this case)`
+- All results are returned by a `Future` object so `await` is **always** necessary.
+```dart
+var coinHistory = await client.coins.getHistory(
+    id: 'bitcoin',
+    date: DateTime.now()
+);
+```
+- Access the result's object
+```dart
+print(coinHistory);
+print(coinHistory.name);
+```
+- Result varies depending on the endpoint.
+- **TIP**: Most editor supports object reflection. You can hover on the result object to get all the available properties you can use.
+- ( Checkout the <a href="https://github.com/pangz-lab/coingecko_client/tree/master/example">example folder</a> for more samples. )
+
 
 ___
 <br>
 
-# 🌐 ping
+# [🌐](#table-of-contents) ping
 ### 📤 */ping*
 ```dart
 client.ping.getResult();
@@ -72,7 +111,9 @@ client.ping.getResult();
 ___
 <br>
 
-# 🌐 coins
+# Endpoints
+
+# [🌐](#table-of-contents) coins
 ### 📤 */coins/list*
 ```dart
 client.coins.getBasicList();
@@ -128,7 +169,7 @@ client.coins.getOhlcList(
 ___
 <br>
 
-# 🌐 exchanges
+# [🌐](#table-of-contents) exchanges
 ### 📤 */exchanges*
 ```dart
 client.exchanges.getList();
@@ -163,12 +204,12 @@ client.exchanges.getVolumeChartList(
 ___
 <br>
 
-# 🌐 simple
+# [🌐](#table-of-contents) simple
 ### 📤 */simple/price*
 ```dart
 client.simple.getCoinPrice(
     ids: ['bitcoin', 'ethereum', 'verus-coin'],
-    vsCurrencies: [Currencies.jpy, Currencies.usd, Currencies.php],
+    vsCurrencies: [ Currencies.jpy, Currencies.usd, Currencies.php ],
     includeMarketCap: true,
     include24hrVol: true,
     include24hrChange: true,
@@ -198,7 +239,7 @@ client.simple.getSupportedVsCurrencies();
 ___
 <br>
 
-# 🌐 derivatives
+# [🌐](#table-of-contents) derivatives
 ### 📤 */derivatives*
 ```dart
 client.derivatives.getList(
@@ -228,7 +269,7 @@ client.derivatives.getExchangeBasicInfoList();
 ___
 <br>
 
-# 🌐 indexes
+# [🌐](#table-of-contents) indexes
 ### 📤 */indexes*
 ```dart
 client.indexes.getList(
@@ -251,7 +292,7 @@ client.indexes.getBasicInfo();
 ___
 <br>
 
-# 🌐 nfts
+# [🌐](#table-of-contents) nfts
 ### 📤 */nfts/list*
 ```dart
 client.nfts.getBasicList(
@@ -277,7 +318,7 @@ client.nfts.getContractInfo(
 ___
 <br>
 
-# 🌐 contract
+# [🌐](#table-of-contents) contract
 ### 📤 */coins/{id}/contract/{contract_address}/market_chart*
 ```dart
 client.contract.getMarketHistory(
@@ -302,7 +343,13 @@ client.contract.getMarketHistoryWithDateRange(
 ___
 <br>
 
-# 🌐 categories
+# [🌐](#table-of-contents) asset_platforms
+### 📤 */asset_platforms*
+```dart
+await client.assetPlatforms.getList();
+```
+
+# [🌐](#table-of-contents) categories
 ### 📤 */coins/categories/list*
 ```dart
 client.categories.getBasicList();
@@ -318,7 +365,7 @@ client.categories.getList(
 ___
 <br>
 
-# 🌐 global
+# [🌐](#table-of-contents) global
 ### 📤 */global*
 ```dart
 client.global.getCryptoInfo();
@@ -331,7 +378,7 @@ client.global.getDefiInfo();
 ___
 <br>
 
-# 🌐 exchange rates
+# [🌐](#table-of-contents) exchange rates
 ### 📤 */exchange_rates*
 ```dart
 client.exchangeRates.getList();
@@ -341,7 +388,7 @@ client.exchangeRates.getList();
 ___
 <br>
 
-# 🌐 companies
+# [🌐](#table-of-contents) companies
 ### 📤 */companies/public_treasury/{coin_id}*
 ```dart
 client.companies.getList(
@@ -352,7 +399,7 @@ client.companies.getList(
 ___
 <br>
 
-# 🌐 trending
+# [🌐](#table-of-contents) trending
 ### 📤 */search/trending*
 ```dart
 client.trending.getResult();
@@ -362,7 +409,7 @@ client.trending.getResult();
 ___
 <br>
 
-# 🌐 search
+# [🌐](#table-of-contents) search
 ### 📤 */search*
 ```dart
 client.search.getResult(query: 'bybit');
@@ -372,9 +419,10 @@ client.search.getResult(query: 'bybit');
 
 🐞 Issues / Bugs / Improvements
 ---------------
-- If you found any issues or bugs or any concerns, please reach me out using the following contacts.
+- If you found any issues or bugs, please let me know.
 - If you require an urgent fix, raise an issue and I'll try to find time to resolve it.
-- Should you decide to make your own change, raise your PR to the main branch and let me know.
+- Should you decide to make your own change, raise your PR to the main branch.
+- If you have any suggestions or concerns, you can contact me directly using discord.
 
 <br>
 

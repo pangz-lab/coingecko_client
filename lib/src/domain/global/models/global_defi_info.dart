@@ -1,5 +1,6 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+// Contains summary information of the global top 100 defis.
 class GlobalDefiInfo extends BaseModel {
   double? _defiMarketCap;
   double? _ethMarketCap;

@@ -3,7 +3,7 @@ import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.da
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
 ///
-/// Use to check API server status
+/// Use to check API server status.
 ///
 class PingEndpoint extends BaseEndpoint {
   PingEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey})

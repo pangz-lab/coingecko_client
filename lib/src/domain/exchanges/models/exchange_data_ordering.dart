@@ -1,3 +1,4 @@
+/// Use to define sorting order exchange data.
 enum ExchangeDataOrdering {
   trustScoreDesc('trust_score_desc'),
   trustScoreAsc('trust_score_asc'),

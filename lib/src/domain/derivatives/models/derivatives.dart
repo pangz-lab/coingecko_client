@@ -1,5 +1,6 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Derivatives main information. Used in obtaining list of derivatives or a specific derivatives.
 class Derivatives extends BaseModel {
   String? _market;
   String? _symbol;

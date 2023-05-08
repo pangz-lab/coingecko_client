@@ -4,6 +4,7 @@ import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
 import 'package:coingecko_client/src/models/base_model.dart';
 import 'package:coingecko_client/src/models/image.dart';
 
+/// Coins detailed information.
 class CoinInfo extends BaseModel {
   String? _id;
   String? _symbol;

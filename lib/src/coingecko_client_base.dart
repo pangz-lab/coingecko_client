@@ -15,6 +15,9 @@ import './domain/simple/simple_endpoint.dart';
 import './domain/trending/trending_endpoint.dart';
 import './services/http_request_service.dart';
 
+/// Main coingecko_client library class.
+/// This is the class that should be instantiated to access all the available
+/// coingecko api endpoints.
 class CoinGeckoClient {
   ///
   /// Set the API key to access pro version endpoint
@@ -34,7 +37,7 @@ class CoinGeckoClient {
   ///
   PingEndpoint get ping => PingEndpoint(_httpService);
 
-  /// 
+  ///
   /// - Get the current price of any cryptocurrencies in any other supported currencies that you need.<br>
   /// - Get current price of tokens (using contract addresses) for a given platform in any other currency that you need.<br>
   /// - Get list of supported_vs_currencies.<br>
@@ -93,7 +96,7 @@ class CoinGeckoClient {
   /// Ticker is_anomaly is true if ticker's price is outliered by our system.<br>
   /// You are responsible for managing how you want to display these information<br>
   /// (e.g. footnote, different background, change opacity, hide)<br><br>
-  /// 
+  ///
   /// - Get exchange tickers<br>
   /// <b>IMPORTANT:</b><br>
   /// Ticker is_stale is true when ticker that has not been updated/unchanged from the exchange for a while.<br>

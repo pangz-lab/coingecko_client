@@ -1,5 +1,6 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Ticker detailed information. Used in coins and other domains.
 class TickerInfo extends BaseModel {
   String? _base;
   String? _target;

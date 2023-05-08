@@ -1,3 +1,4 @@
+/// Defines the sorting order of coin result
 enum CoinMarketDataOrdering {
   marketCapDesc('market_cap_desc'),
   marketCapAsc('market_cap_asc'),
@@ -10,6 +11,7 @@ enum CoinMarketDataOrdering {
   final String value;
 }
 
+/// Defines the sorting order of coin tickers result
 enum CoinTickersDataOrdering {
   trustScoreDesc('trust_score_desc'),
   trustScoreAsc('trust_score_asc'),

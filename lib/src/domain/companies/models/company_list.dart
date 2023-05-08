@@ -1,6 +1,7 @@
 import 'package:coingecko_client/src/domain/companies/models/company_info.dart';
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Crypto company listing information.
 class CompanyList extends BaseModel {
   double? _totalHoldings;
   double? _totalValueUsd;

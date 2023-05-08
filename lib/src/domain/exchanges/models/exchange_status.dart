@@ -1,6 +1,7 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 import 'package:coingecko_client/src/models/image.dart';
 
+/// Exchange status. Mainly used in ExchangeInfo class.
 class ExchangeStatus extends BaseModel {
   String? _description;
   String? _category;

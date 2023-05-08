@@ -1,6 +1,7 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 import 'package:coingecko_client/src/models/image.dart';
 
+/// Nft information. Contains all information of a specific nft.
 class NftInfo extends BaseModel {
   String? _id;
   String? _contractAddress;

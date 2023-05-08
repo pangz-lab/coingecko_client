@@ -18,7 +18,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 /// Ticker is_anomaly is true if ticker's price is outliered by our system.<br>
 /// You are responsible for managing how you want to display these information<br>
 /// (e.g. footnote, different background, change opacity, hide)<br><br>
-/// 
+///
 /// - Get exchange tickers<br>
 /// <b>IMPORTANT:</b><br>
 /// Ticker is_stale is true when ticker that has not been updated/unchanged from the exchange for a while.<br>

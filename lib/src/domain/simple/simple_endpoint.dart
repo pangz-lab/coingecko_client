@@ -3,7 +3,7 @@ import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
-/// 
+///
 /// - Get the current price of any cryptocurrencies in any other supported currencies that you need.<br>
 /// - Get current price of tokens (using contract addresses) for a given platform in any other currency that you need.<br>
 /// - Get list of supported_vs_currencies.<br>

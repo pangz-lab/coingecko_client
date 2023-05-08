@@ -3,7 +3,7 @@ import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.da
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
 ///
-/// Top-7 trending coins on CoinGecko as searched by users in the last 24 hours (Ordered by most popular first)
+/// Top-7 trending coins on CoinGecko as searched by users in the last 24 hours (Ordered by most popular first).
 ///
 class TrendingEndpoint extends BaseEndpoint {
   TrendingEndpoint(HttpRequestServiceInterface httpRequestService,

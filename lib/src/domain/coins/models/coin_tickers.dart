@@ -1,6 +1,8 @@
 import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Provides a list of tickers for a specifc coin.
+/// Mainly used for retrieving coin data.
 class CoinTickers extends BaseModel {
   String? _name;
   List<TickerInfo>? _tickers;

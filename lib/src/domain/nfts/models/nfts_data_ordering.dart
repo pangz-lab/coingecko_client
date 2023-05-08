@@ -1,3 +1,4 @@
+/// Use to define sorting order of nft result.
 enum NftsDataOrdering {
   h24VolumeNativeAsc('h24_volume_native_asc'),
   h24VolumeNativeDesc('h24_volume_native_desc'),

@@ -1,5 +1,7 @@
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Asset platform information. Use in getting list of an asset platforms or a 
+/// specific asset platform.
 class AssetPlatform extends BaseModel {
   String? _id;
   int? _chainIdentifier;

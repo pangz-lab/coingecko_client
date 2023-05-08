@@ -1,3 +1,4 @@
+/// Use to define sorting order of coin categories result.
 enum CoinCategoriesDataOrdering {
   marketCapDesc('market_cap_desc'),
   marketCapAsc('market_cap_asc'),

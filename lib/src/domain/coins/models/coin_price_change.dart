@@ -1,3 +1,4 @@
+/// Provides range of time when getting the data for coin price changes.
 enum CoinPriceChange {
   in1Hour('1h'),
   in24Hours('24h'),
