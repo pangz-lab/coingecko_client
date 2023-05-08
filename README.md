@@ -346,7 +346,7 @@ ___
 # [🌐](#table-of-contents) asset_platforms
 ### 📤 */asset_platforms*
 ```dart
-await client.assetPlatforms.getList();
+client.assetPlatforms.getList();
 ```
 
 # [🌐](#table-of-contents) categories
