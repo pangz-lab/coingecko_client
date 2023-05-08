@@ -297,7 +297,7 @@ exchange volume.
 
 </dt>
 <dd>
-  
+  Contains summary information of the global top 100 cryptos.
 </dd>
 
         <dt id="GlobalDefiInfo">
@@ -305,7 +305,7 @@ exchange volume.
 
 </dt>
 <dd>
-  
+  Contains summary information of the global top 100 defis.
 </dd>
 
         <dt id="HistoricalData">
@@ -322,7 +322,8 @@ It could be price, ticker or some other data that requires this format.
 
 </dt>
 <dd>
-  
+  Market data definition. Use in providing the list of market
+data when obtaining coin information
 </dd>
 
         <dt id="MarketIndex">
@@ -356,7 +357,7 @@ and other nft related information.
 
 </dt>
 <dd>
-  
+  Project information. Mainly used in ExchangeStatus class.
 </dd>
 
         <dt id="Roi">
@@ -392,7 +393,7 @@ and other nft related information.
 
 </dt>
 <dd>
-  Mainly use for filtering asset platform result list.
+  Use to filter asset platform result list.
 </dd>
 
         <dt id="CoinCategoriesDataOrdering">
@@ -408,7 +409,7 @@ and other nft related information.
 
 </dt>
 <dd>
-  Defines the sorting order of coin result
+  Use to define the sorting order of coin result.
 </dd>
 
         <dt id="CoinPriceChange">
@@ -416,7 +417,7 @@ and other nft related information.
 
 </dt>
 <dd>
-  Provides range of time when getting the data for coin price changes.
+  Provides range of time in days in getting the data for coin price changes.
 </dd>
 
         <dt id="CoinTickersDataOrdering">
@@ -424,7 +425,7 @@ and other nft related information.
 
 </dt>
 <dd>
-  Defines the sorting order of coin tickers result
+  Use to define the sorting order of coin tickers result.
 </dd>
 
         <dt id="CryptoCurrencies">
@@ -448,7 +449,7 @@ and other nft related information.
 
 </dt>
 <dd>
-  Use to specify data for a specific date ranges.
+  Use to specify data range in number of days.
 </dd>
 
         <dt id="DerivativesExchangeOrdering">
@@ -464,7 +465,7 @@ and other nft related information.
 
 </dt>
 <dd>
-  Mainly use to filter derivatives tickers.
+  Use to filter derivatives tickers.
 </dd>
 
         <dt id="ExchangeDataOrdering">
@@ -505,8 +506,8 @@ Data can be unreadable or have an incorrect formatting.
 
 </dt>
 <dd>
-  Used to raise when a network issue has occurred while sending the request.<br>
-to the server. Request and response will be loogged as a result which help
+  Used to raise when a network issue has occurred while sending the request<br>
+to the server. Request and response will be logged as a result which help
 to determine the main cause of the error.
 </dd>
 
@@ -609,7 +610,7 @@ to determine the main cause of the error.
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.1
+      1.0.2
   </span>
 
   

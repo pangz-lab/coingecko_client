@@ -60,6 +60,7 @@ class ExchangeStatus extends BaseModel {
   }
 }
 
+/// Project information. Mainly used in ExchangeStatus class.
 class Project {
   String? _type;
   String? _id;

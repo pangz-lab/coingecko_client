@@ -63,7 +63,7 @@
 
     
 <section class="desc markdown">
-  <p>Defines the sorting order of coin result</p>
+  <p>Use to define the sorting order of coin result.</p>
 </section>
 
 
@@ -113,7 +113,7 @@
 
 </dt>
 <dd>
-  
+  <p>Sort by market capital in descending order</p>
   
 
     <div>
@@ -128,26 +128,11 @@
 
 </dt>
 <dd>
-  
+  <p>Sort by market capital in ascending order</p>
   
 
     <div>
       <span class="signature"><code>CoinMarketDataOrdering(&#39;market_cap_asc&#39;)</code></span>
-    </div>
-</dd>
-
-          <dt id="volumeAsc" class="constant">
-    <span class="name ">volumeAsc</span>
-  <span class="signature">&#8594; const <a href="../coingecko_client/CoinMarketDataOrdering.html">CoinMarketDataOrdering</a></span>
-  
-
-</dt>
-<dd>
-  
-  
-
-    <div>
-      <span class="signature"><code>CoinMarketDataOrdering(&#39;volume_asc&#39;)</code></span>
     </div>
 </dd>
 
@@ -158,7 +143,7 @@
 
 </dt>
 <dd>
-  
+  <p>Sort by volume in descending order</p>
   
 
     <div>
@@ -166,18 +151,18 @@
     </div>
 </dd>
 
-          <dt id="idAsc" class="constant">
-    <span class="name ">idAsc</span>
+          <dt id="volumeAsc" class="constant">
+    <span class="name ">volumeAsc</span>
   <span class="signature">&#8594; const <a href="../coingecko_client/CoinMarketDataOrdering.html">CoinMarketDataOrdering</a></span>
   
 
 </dt>
 <dd>
-  
+  <p>Sort by volume in ascending order</p>
   
 
     <div>
-      <span class="signature"><code>CoinMarketDataOrdering(&#39;id_asc&#39;)</code></span>
+      <span class="signature"><code>CoinMarketDataOrdering(&#39;volume_asc&#39;)</code></span>
     </div>
 </dd>
 
@@ -188,11 +173,26 @@
 
 </dt>
 <dd>
-  
+  <p>Sort by id in descending order</p>
   
 
     <div>
       <span class="signature"><code>CoinMarketDataOrdering(&#39;id_desc&#39;)</code></span>
+    </div>
+</dd>
+
+          <dt id="idAsc" class="constant">
+    <span class="name ">idAsc</span>
+  <span class="signature">&#8594; const <a href="../coingecko_client/CoinMarketDataOrdering.html">CoinMarketDataOrdering</a></span>
+  
+
+</dt>
+<dd>
+  <p>Sort by id in ascending order</p>
+  
+
+    <div>
+      <span class="signature"><code>CoinMarketDataOrdering(&#39;id_asc&#39;)</code></span>
     </div>
 </dd>
 
@@ -328,7 +328,7 @@
   
 
     <div>
-      <span class="signature"><code>[marketCapDesc, marketCapAsc, volumeAsc, volumeDesc, idAsc, idDesc]</code></span>
+      <span class="signature"><code>[marketCapDesc, marketCapAsc, volumeDesc, volumeAsc, idDesc, idAsc]</code></span>
     </div>
 </dd>
 
@@ -426,10 +426,10 @@
         <li class="section-title"><a href="../coingecko_client/CoinMarketDataOrdering.html#values">Values</a></li>
           <li><a href="../coingecko_client/CoinMarketDataOrdering.html#marketCapDesc">marketCapDesc</a></li>
           <li><a href="../coingecko_client/CoinMarketDataOrdering.html#marketCapAsc">marketCapAsc</a></li>
-          <li><a href="../coingecko_client/CoinMarketDataOrdering.html#volumeAsc">volumeAsc</a></li>
           <li><a href="../coingecko_client/CoinMarketDataOrdering.html#volumeDesc">volumeDesc</a></li>
-          <li><a href="../coingecko_client/CoinMarketDataOrdering.html#idAsc">idAsc</a></li>
+          <li><a href="../coingecko_client/CoinMarketDataOrdering.html#volumeAsc">volumeAsc</a></li>
           <li><a href="../coingecko_client/CoinMarketDataOrdering.html#idDesc">idDesc</a></li>
+          <li><a href="../coingecko_client/CoinMarketDataOrdering.html#idAsc">idAsc</a></li>
 
         <li class="section-title">
           <a href="../coingecko_client/CoinMarketDataOrdering.html#instance-properties">Properties</a>
@@ -460,7 +460,7 @@
 <footer>
   <span class="no-break">
     coingecko_client
-      1.0.1
+      1.0.2
   </span>
 
   

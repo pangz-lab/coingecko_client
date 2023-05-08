@@ -1,8 +1,8 @@
 import 'package:http/http.dart';
 
 ///
-/// Used to raise when a network issue has occurred while sending the request.<br>
-/// to the server. Request and response will be loogged as a result which help
+/// Used to raise when a network issue has occurred while sending the request<br>
+/// to the server. Request and response will be logged as a result which help
 /// to determine the main cause of the error.
 ///
 class NetworkRequestException extends ClientException {

@@ -6,9 +6,7 @@ abstract class BaseCurrency {
   String getCode();
 }
 
-///
 /// Collection of known world currencies.
-///
 enum Currencies implements BaseCurrency {
   afn('afn'),
   eur('eur'),
@@ -199,9 +197,7 @@ enum Currencies implements BaseCurrency {
   }
 }
 
-///
 /// Collection of known cryptocurrencies.
-///
 enum CryptoCurrencies implements BaseCurrency {
   btc('btc'),
   eth('eth'),

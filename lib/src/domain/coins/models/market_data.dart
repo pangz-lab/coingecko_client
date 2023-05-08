@@ -1,6 +1,8 @@
 import 'package:coingecko_client/src/domain/coins/models/roi.dart';
 import 'package:coingecko_client/src/models/base_model.dart';
 
+/// Market data definition. Use in providing the list of market
+/// data when obtaining coin information
 class MarketData extends BaseModel {
   Map<String, dynamic>? _currentPrice;
   Map<String, dynamic>? _totalValueLocked;
