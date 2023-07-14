@@ -1,3 +1,6 @@
+## 1.1.1
+2023/07/14 JST
+- Update http library to version 1.1.0
 ## 1.1.0
 2023/05/08 JST
 - Some minor code improvements
