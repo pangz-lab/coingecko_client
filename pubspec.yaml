@@ -1,6 +1,6 @@
 name: coingecko_client
 description: A simple and intuitive package for the CoinGecko REST API Service ( v3 )
-version: 1.2.0
+version: 1.2.1
 repository: https://github.com/pangz-lab/coingecko_client
 license: BSD 3-Clause
 

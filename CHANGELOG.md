@@ -1,3 +1,6 @@
+## 1.2.1
+2023/08/26 JST
+- README update to change the versioning
 ## 1.2.0
 2023/08/26 JST
 - Added support for the following coin PRO endpoints 

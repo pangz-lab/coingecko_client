@@ -1,4 +1,5 @@
-![version](https://img.shields.io/badge/version-v1.1.0-blue)
+<!-- version 1.2.1 -->
+![version](https://img.shields.io/badge/version-v1.2.1-blue)
 ![coverage](https://img.shields.io/badge/coverage-100%25-success)
 ![sdk](https://img.shields.io/badge/sdk-v2.19.3-blue)
 ![license](https://img.shields.io/badge/license-BSD--3-blue)
@@ -92,7 +93,7 @@ Installation
 Add the dependency to your Dart / Flutter project:<br>
 ( in `pubspec.yaml` file under the `dependencies`, add the following )
 ```yaml
-coingecko_client: ^1.1.1
+coingecko_client: ^1.2.1
 ```
 
 <p></p>Go to <a href="https://pub.dev/packages/coingecko_client">pub.dev</a> for more details.</p>
