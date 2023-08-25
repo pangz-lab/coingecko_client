@@ -1,7 +1,7 @@
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/nfts/models/nft_basic_info.dart';
 import 'package:coingecko_client/src/domain/nfts/models/nft_info.dart';
-import 'package:coingecko_client/src/domain/nfts/models/nfts_data_ordering.dart';
+import 'package:coingecko_client/src/domain/nfts/enums/nfts_data_ordering.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
@@ -12,7 +12,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 ///
 class NftsEndpoint extends BaseEndpoint {
   NftsEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// List all supported NFT ids, paginated by 100 items per page, paginated to 100 items
   /// <br/><b>Endpoint </b>: /nfts/list

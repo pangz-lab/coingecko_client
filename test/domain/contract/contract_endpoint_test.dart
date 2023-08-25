@@ -1,10 +1,5 @@
 import 'dart:convert';
-import 'package:coingecko_client/src/domain/contract/contract_endpoint.dart';
-import 'package:coingecko_client/src/models/currencies.dart';
-import 'package:coingecko_client/src/models/data_range.dart';
-import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
-import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
-import 'package:coingecko_client/src/models/historical_data.dart';
+import 'package:coingecko_client/coingecko_client.dart';
 import 'package:test/test.dart';
 
 import '../../services/http_request_service_mock.dart';

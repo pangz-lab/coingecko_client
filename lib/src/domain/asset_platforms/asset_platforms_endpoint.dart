@@ -1,6 +1,6 @@
 import 'package:coingecko_client/src/domain/asset_platforms/models/asset_platform.dart';
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
-import 'package:coingecko_client/src/domain/asset_platforms/models/asset_platforms_filter.dart';
+import 'package:coingecko_client/src/domain/asset_platforms/enums/asset_platforms_filter.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
@@ -11,7 +11,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 class AssetPlatformsEndpoint extends BaseEndpoint {
   AssetPlatformsEndpoint(HttpRequestServiceInterface httpRequestService,
       {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// List all asset platforms (Blockchain networks)
   /// <br/><b>Endpoint </b>: /asset_platforms

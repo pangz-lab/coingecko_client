@@ -1,6 +1,4 @@
-import 'package:coingecko_client/src/domain/ping/ping_endpoint.dart';
-import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
-import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
+import 'package:coingecko_client/coingecko_client.dart';
 import 'package:test/test.dart';
 
 import '../../services/http_request_service_mock.dart';

@@ -8,7 +8,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 class SearchEndpoint extends BaseEndpoint {
   SearchEndpoint(HttpRequestServiceInterface httpRequestService,
       {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// Search for coins, categories and markets listed on CoinGecko ordered by largest Market Cap first
   /// <br/><b>Endpoint </b>: /search

@@ -1,37 +1,5 @@
 import 'dart:convert';
-import 'package:coingecko_client/src/coingecko_client_base.dart';
-import 'package:coingecko_client/src/domain/asset_platforms/models/asset_platform.dart';
-import 'package:coingecko_client/src/domain/categories/models/coin_categories_data_ordering.dart';
-import 'package:coingecko_client/src/domain/categories/models/coin_category_basic_info.dart';
-import 'package:coingecko_client/src/domain/categories/models/coin_category_info.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_basic_info.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_market.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_market_history.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
-import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
-import 'package:coingecko_client/src/domain/companies/models/company_list.dart';
-import 'package:coingecko_client/src/domain/contract/models/contract_info.dart';
-import 'package:coingecko_client/src/domain/contract/models/contract_market_history.dart';
-import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange.dart';
-import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange_ordering.dart';
-import 'package:coingecko_client/src/domain/derivatives/models/derivatives_tickers.dart';
-import 'package:coingecko_client/src/domain/derivatives/models/derivatives.dart';
-import 'package:coingecko_client/src/domain/exchange_rates/models/exchange_rate.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/exchange_data_ordering.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/exchange_info.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/exchange_basic_info.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/exchange_volume_chart.dart';
-import 'package:coingecko_client/src/domain/global/models/global_crypto_info.dart';
-import 'package:coingecko_client/src/domain/global/models/global_defi_info.dart';
-import 'package:coingecko_client/src/domain/indexes/models/market_index.dart';
-import 'package:coingecko_client/src/domain/nfts/models/nft_basic_info.dart';
-import 'package:coingecko_client/src/domain/nfts/models/nft_info.dart';
-import 'package:coingecko_client/src/models/currencies.dart';
-import 'package:coingecko_client/src/models/data_range.dart';
+import 'package:coingecko_client/coingecko_client.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -135,6 +103,26 @@ void main() {
           id: 'bitcoin', vsCurrency: Currencies.php, days: DataRange.max);
       expect(result.elementAt(0).runtimeType, CoinOhlc);
       expect(jsonEncode(result.elementAt(0).toJson()).runtimeType, String);
+    });
+
+    test('getNewList: request should return a valid response', () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      final result = await sut.getNewList();
+      expect(result.elementAt(0).runtimeType, CoinBasicInfo);
+    });
+
+    test('getTopGainersAndLosers: request should return a valid response',
+        () async {
+      await Future.delayed(Duration(milliseconds: delay));
+      final result = await sut.getTopGainersAndLosers(
+          vsCurrency: Currencies.php,
+          duration: CoinDuration.in14Days,
+          topCoins: CoinRanking.top300);
+      expect(result.runtimeType, CoinRankingResult);
+      expect(jsonEncode(result.topGainers?.elementAt(0)).runtimeType,
+          CoinRankingInfo);
+      expect(jsonEncode(result.topLosers?.elementAt(0)).runtimeType,
+          CoinRankingInfo);
     });
   });
 

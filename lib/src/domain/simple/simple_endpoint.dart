@@ -11,7 +11,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 class SimpleEndpoint extends BaseEndpoint {
   SimpleEndpoint(HttpRequestServiceInterface httpRequestService,
       {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// Get the current price of any cryptocurrencies in any other supported currencies that you need.
   /// <br/><b>Endpoint </b>: /simple/price
@@ -44,7 +44,7 @@ class SimpleEndpoint extends BaseEndpoint {
         'precision': precision
       }, endpointPath: "/simple/price");
 
-      return Map<String, dynamic>.from((await sendBasic(path)));
+      return Map<String, dynamic>.from(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {
@@ -87,7 +87,7 @@ class SimpleEndpoint extends BaseEndpoint {
         'precision': precision
       }, endpointPath: "/simple/token_price/{id}");
 
-      return Map<String, dynamic>.from((await sendBasic(path)));
+      return Map<String, dynamic>.from(await sendBasic(path));
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {

@@ -1,5 +1,5 @@
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
-import 'package:coingecko_client/src/domain/categories/models/coin_categories_data_ordering.dart';
+import 'package:coingecko_client/src/domain/categories/enums/coin_categories_data_ordering.dart';
 import 'package:coingecko_client/src/domain/categories/models/coin_category_basic_info.dart';
 import 'package:coingecko_client/src/domain/categories/models/coin_category_info.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
@@ -11,7 +11,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 class CategoriesEndpoint extends BaseEndpoint {
   CategoriesEndpoint(HttpRequestServiceInterface httpRequestService,
       {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// List all categories
   /// <br/><b>Endpoint </b>: /coins/categories/list

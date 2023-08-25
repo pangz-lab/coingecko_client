@@ -1,19 +1,5 @@
 import 'dart:convert';
-import 'package:coingecko_client/src/domain/coins/coins_endpoint.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_basic_info.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_market_history.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
-import 'package:coingecko_client/src/domain/coins/models/roi.dart';
-import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
-import 'package:coingecko_client/src/models/currencies.dart';
-import 'package:coingecko_client/src/models/data_range.dart';
-import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
-import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
-import 'package:coingecko_client/src/models/historical_data.dart';
+import 'package:coingecko_client/coingecko_client.dart';
 import 'package:test/test.dart';
 
 import '../../services/http_request_service_mock.dart';
@@ -22,6 +8,7 @@ import 'mock/coins_mock_data.dart';
 void main() {
   CoinsEndpoint? sut;
   final String apiVersionPath = "/api/v3";
+  const testApiKey = '1212121212121';
 
   group('getBasicList method in', () {
     group('CoinsEndpoint test endpoint path creation', () {
@@ -1566,6 +1553,253 @@ void main() {
                 id: 'bitcoin',
                 vsCurrency: Currencies.jpy,
                 days: DataRange.in1Day),
+            throwsA(isA<DataParsingException>()));
+      });
+    });
+  });
+
+  group('getNewList method in', () {
+    final basePath = "$apiVersionPath/coins/list/new";
+    group('CoinsEndpoint test endpoint path creation', () {
+      var sut = CoinsEndpoint(
+          HttpRequestServiceMock(statusCode: 200, body: '[]'),
+          apiKey: testApiKey);
+
+      test('without parameters', () async {
+        await sut.getNewList();
+        expect(sut.endpointPath, basePath);
+      });
+    });
+
+    group('CoinsEndpoint test endpoint response', () {
+      test('with data in getting the correct response type', () async {
+        sut = CoinsEndpoint(
+            HttpRequestServiceMock(
+                statusCode: 200, body: CoinNewListMockData.validResponseBody),
+            apiKey: testApiKey);
+        final result = await sut!.getNewList();
+        var fistElement = result.elementAt(0);
+        expect(result.length, 3);
+        expect(fistElement, isA<CoinBasicInfo>());
+        expect(fistElement.id, 'texan');
+        expect(fistElement.symbol, 'texan');
+        expect(fistElement.name, 'Texan');
+        expect(
+            fistElement.activatedAt, DateTime.parse('2023-01-14 18:58:36.000'));
+      });
+
+      test('should still return a result for incomplete data format', () async {
+        sut = CoinsEndpoint(
+            HttpRequestServiceMock(
+                statusCode: 200,
+                body: CoinNewListMockData.responseBodyWithIncompleteKeys),
+            apiKey: testApiKey);
+        final result = await sut!.getNewList();
+        var fistElement = result.elementAt(0);
+        var secondElement = result.elementAt(1);
+        var lastElement = result.elementAt(2);
+        expect(result.length, 3);
+        expect(fistElement, isA<CoinBasicInfo>());
+        expect(fistElement.id, null);
+        expect(fistElement.name, 'Texan');
+        expect(fistElement.symbol, 'texan');
+        expect(
+            fistElement.activatedAt, DateTime.parse('2023-01-14 18:58:36.000'));
+        expect(secondElement, isA<CoinBasicInfo>());
+        expect(secondElement.id, 'nexacoin');
+        expect(secondElement.name, 'Nexacoin');
+        expect(secondElement.symbol, null);
+        expect(secondElement.activatedAt,
+            DateTime.parse('2023-01-14 18:58:36.000'));
+
+        expect(lastElement, isA<CoinBasicInfo>());
+        expect(lastElement.id, 'nexacoin');
+        expect(lastElement.name, 'Nexacoin');
+        expect(lastElement.symbol, 'nexa');
+        expect(lastElement.activatedAt, null);
+      });
+    });
+
+    group('CoinsEndpoint test for error handling', () {
+      test('should throw an exception for failed request', () async {
+        sut = CoinsEndpoint(
+            HttpRequestServiceMock(
+                statusCode: 500,
+                body: CoinMarketChartMockData.validResponseBody),
+            apiKey: testApiKey);
+        await expectLater(
+            sut!.getNewList(), throwsA(isA<NetworkRequestException>()));
+      });
+
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
+        sut = CoinsEndpoint(
+            HttpRequestServiceMock(
+                statusCode: 200,
+                body: CoinMarketChartMockData.responseBodyWithInvalidFormat),
+            apiKey: testApiKey);
+        await expectLater(
+            sut!.getNewList(), throwsA(isA<DataParsingException>()));
+
+        sut = CoinsEndpoint(HttpRequestServiceMock(statusCode: 200, body: "{}"),
+            apiKey: testApiKey);
+        await expectLater(
+            sut!.getNewList(), throwsA(isA<DataParsingException>()));
+      });
+    });
+  });
+
+  group('getTopGainersAndLosers method in', () {
+    final basePath = "$apiVersionPath/coins/top_gainers_losers";
+    group('CoinsEndpoint test endpoint path creation', () {
+      var sut = CoinsEndpoint(
+          HttpRequestServiceMock(
+              statusCode: 200,
+              body: CoinTopGainersAndLosersMockData.validResponseBody),
+          apiKey: testApiKey);
+
+      test('with required parameters', () async {
+        await sut.getTopGainersAndLosers(vsCurrency: Currencies.usd);
+        expect(sut.endpointPath, "$basePath?vs_currency=usd");
+      });
+
+      test('with all parameters', () async {
+        await sut.getTopGainersAndLosers(
+            vsCurrency: Currencies.usd,
+            duration: CoinDuration.in14Days,
+            topCoins: CoinRanking.top300);
+        expect(sut.endpointPath,
+            "$basePath?vs_currency=usd&duration=14d&top_coins=300");
+      });
+    });
+
+    group('CoinsEndpoint test endpoint response', () {
+      test('with data in getting the correct response type', () async {
+        sut = CoinsEndpoint(
+            HttpRequestServiceMock(
+                statusCode: 200,
+                body: CoinTopGainersAndLosersMockData.validResponseBody),
+            apiKey: testApiKey);
+        final result = await sut!.getTopGainersAndLosers(
+          vsCurrency: Currencies.usd,
+          duration: CoinDuration.in14Days,
+          topCoins: CoinRanking.all,
+        );
+        final topGainers = result.topGainers;
+        final topLosers = result.topLosers;
+        expect(topGainers!.length, 2);
+        expect(topLosers!.length, 2);
+        expect(result, isA<CoinRankingResult>());
+        expect(topGainers, isA<List>());
+        expect(topLosers, isA<List>());
+
+        final tgFirstElement = topGainers.elementAt(0);
+        final tlFirstElement = topLosers.elementAt(0);
+        expect(tgFirstElement, isA<CoinRankingInfo>());
+        expect(tlFirstElement, isA<CoinRankingInfo>());
+
+        expect(tgFirstElement.id, "platinx");
+        expect(tgFirstElement.symbol, "ptx");
+        expect(tgFirstElement.name, "PlatinX");
+        expect(tgFirstElement.image,
+            "https://assets.coingecko.com/coins/images/23726/original/logo200x200.png?1645162319");
+        expect(tgFirstElement.marketCapRank, null);
+        expect(tgFirstElement.value, 0.020361781843315337);
+        expect(tgFirstElement.valueFor24hVolume, 187147.7839535509);
+        expect(tgFirstElement.valueFor1hChange, 96.92603350641804);
+
+        expect(tlFirstElement.id, "nftearth");
+        expect(tlFirstElement.symbol, "nfte");
+        expect(tlFirstElement.name, "NFTEarth");
+        expect(tlFirstElement.image,
+            "https://assets.coingecko.com/coins/images/29116/original/20230223_224134.jpg?1677224110");
+        expect(tlFirstElement.marketCapRank, null);
+        expect(tlFirstElement.value, 0.013121207474003034);
+        expect(tlFirstElement.valueFor24hVolume, 85887.2358881691);
+        expect(tlFirstElement.valueFor1hChange, -30.431856675273593);
+      });
+
+      test('should still return a result for incomplete data format', () async {
+        sut = CoinsEndpoint(
+            HttpRequestServiceMock(
+                statusCode: 200,
+                body: CoinTopGainersAndLosersMockData
+                    .responseBodyWithIncompleteKeys),
+            apiKey: testApiKey);
+        final result = await sut!.getTopGainersAndLosers(
+          vsCurrency: Currencies.usd,
+          duration: CoinDuration.in14Days,
+          topCoins: CoinRanking.all,
+        );
+        final topGainers = result.topGainers;
+        final topLosers = result.topLosers;
+
+        final tgFirstElement = topGainers!.elementAt(0);
+        final tlFirstElement = topLosers!.elementAt(0);
+
+        expect(tgFirstElement.id, "platinx");
+        expect(tgFirstElement.symbol, "ptx");
+        expect(tgFirstElement.name, "PlatinX");
+        expect(tgFirstElement.image, null);
+        expect(tgFirstElement.marketCapRank, null);
+        expect(tgFirstElement.value, null);
+        expect(tgFirstElement.valueFor24hVolume, 187147.7839535509);
+        expect(tgFirstElement.valueFor1hChange, 96.92603350641804);
+
+        expect(tlFirstElement.id, "nftearth");
+        expect(tlFirstElement.symbol, "nfte");
+        expect(tlFirstElement.name, "NFTEarth");
+        expect(tlFirstElement.image,
+            "https://assets.coingecko.com/coins/images/29116/original/20230223_224134.jpg?1677224110");
+        expect(tlFirstElement.marketCapRank, null);
+        expect(tlFirstElement.value, 0.013121207474003034);
+        expect(tlFirstElement.valueFor24hVolume, 85887.2358881691);
+        expect(tlFirstElement.valueFor1hChange, null);
+      });
+    });
+
+    group('CoinsEndpoint test for error handling', () {
+      test('should throw an exception for failed request', () async {
+        sut = CoinsEndpoint(
+            HttpRequestServiceMock(
+                statusCode: 500,
+                body: CoinTopGainersAndLosersMockData.validResponseBody),
+            apiKey: testApiKey);
+        await expectLater(
+            sut!.getTopGainersAndLosers(
+              vsCurrency: Currencies.usd,
+              duration: CoinDuration.in14Days,
+              topCoins: CoinRanking.all,
+            ),
+            throwsA(isA<NetworkRequestException>()));
+      });
+
+      test(
+          'should return a FormatException when result is error or when parsing failed',
+          () async {
+        sut = CoinsEndpoint(
+            HttpRequestServiceMock(
+                statusCode: 200,
+                body: CoinTopGainersAndLosersMockData
+                    .responseBodyWithInvalidFormat),
+            apiKey: testApiKey);
+        await expectLater(
+            sut!.getTopGainersAndLosers(
+              vsCurrency: Currencies.usd,
+              duration: CoinDuration.in14Days,
+              topCoins: CoinRanking.all,
+            ),
+            throwsA(isA<DataParsingException>()));
+
+        sut = CoinsEndpoint(HttpRequestServiceMock(statusCode: 200, body: ""),
+            apiKey: testApiKey);
+        await expectLater(
+            sut!.getTopGainersAndLosers(
+              vsCurrency: Currencies.usd,
+              duration: CoinDuration.in14Days,
+              topCoins: CoinRanking.all,
+            ),
             throwsA(isA<DataParsingException>()));
       });
     });

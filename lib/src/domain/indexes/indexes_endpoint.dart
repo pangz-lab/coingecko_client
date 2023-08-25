@@ -10,7 +10,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 class IndexesEndpoint extends BaseEndpoint {
   IndexesEndpoint(HttpRequestServiceInterface httpRequestService,
       {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// List all market indexes
   /// <br/><b>Endpoint </b>: /indexes

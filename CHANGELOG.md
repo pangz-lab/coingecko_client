@@ -1,3 +1,10 @@
+## 1.2.0
+2023/08/26 JST
+- Added support for the following coin PRO endpoints 
+    - getNewList
+    - getTopGainersAndLosers
+- Exported exposed classes
+- Removed unnecessary unit test imports and replaced by the actual library import
 ## 1.1.1
 2023/07/14 JST
 - Update http library to version 1.1.0

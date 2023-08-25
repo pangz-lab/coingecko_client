@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
+import 'package:coingecko_client/src/models/exceptions/request_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
 
 /// Main class that provides utility methods in preparing and sending the<br>
@@ -17,7 +18,7 @@ class BaseEndpoint {
   /// Coingecko key name. This is embedded either in the url query
   /// of the http request header. This will contain the API key
   /// provided to the pro user when sent to the service.
-  static final apiKeyQueryParam = "x_cg_pro_api_key";
+  static final apiKeyQueryParam = "x-cg-pro-api-key";
 
   /// Current API version supported
   static final version = "/api/v3";
@@ -28,8 +29,7 @@ class BaseEndpoint {
   String get endpointPath => _endpointPath;
   HttpRequestServiceInterface httpRequestService;
   String? _apiKey;
-  BaseEndpoint(this.httpRequestService, Map<String?, String?> map,
-      {String? apiKey}) {
+  BaseEndpoint(this.httpRequestService, {String? apiKey}) {
     _apiKey = apiKey;
   }
 
@@ -51,6 +51,9 @@ class BaseEndpoint {
   /// ```
   Future<dynamic> sendPro(String path) {
     try {
+      if (_apiKey?.isEmpty ?? true) {
+        throw RequestException.apiKeyNotFound();
+      }
       final headers = Map.fromEntries(
           [MapEntry<String, String>(apiKeyQueryParam, _apiKey ?? '')]);
       return _send(path, apiProHost, headers: headers);

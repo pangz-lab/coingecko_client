@@ -1,12 +1,15 @@
+import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_basic_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_info.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_market.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_price_change.dart';
-import 'package:coingecko_client/src/domain/base_endpoint.dart';
-import 'package:coingecko_client/src/domain/coins/models/coin_data_ordering.dart';
+import 'package:coingecko_client/src/domain/coins/models/coin_ranking_result.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_tickers.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_market_history.dart';
 import 'package:coingecko_client/src/domain/coins/models/coin_ohlc.dart';
+import 'package:coingecko_client/src/domain/coins/enums/coin_price_change.dart';
+import 'package:coingecko_client/src/domain/coins/enums/coin_duration.dart';
+import 'package:coingecko_client/src/domain/coins/enums/coin_ranking.dart';
+import 'package:coingecko_client/src/domain/coins/enums/coin_data_ordering.dart';
 import 'package:coingecko_client/src/models/currencies.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
@@ -37,7 +40,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 class CoinsEndpoint extends BaseEndpoint {
   CoinsEndpoint(HttpRequestServiceInterface httpRequestService,
       {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// List all supported coins id, name and symbol (no pagination required)
   /// <br/><b>Endpoint </b>: /coins/list
@@ -311,6 +314,50 @@ class CoinsEndpoint extends BaseEndpoint {
 
       final result = List<dynamic>.of(await sendBasic(path));
       return result.map((value) => CoinOhlc.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  /// [💰PRO Endpoint] Get the latest 200 coins (id) that recently listed on CoinGecko.com
+  /// <br/><b>Endpoint </b>: /coins/list/new
+  Future<List<CoinBasicInfo>> getNewList() async {
+    try {
+      final path = "/coins/list/new";
+      final result = List<dynamic>.of(await sendPro(path));
+      return result.map((value) => CoinBasicInfo.fromJson(value)).toList();
+    } on FormatException {
+      throw DataParsingException.unreadableData();
+    } on TypeError {
+      throw DataParsingException.mismatchedType();
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  /// [💰PRO Endpoint] Get the top 30 coins with largest price gain and loss by a specific time duration
+  /// <br/><b>Endpoint </b>: /coins/top_gainers_losers
+  ///
+  /// [vs_currency] The target currency to use for filtering the data (usd, eur, jpy, etc.)
+  /// [duration] Filter result by time range - Default `24h`
+  /// [top_coins] Filter result by MarketCap ranking or all coins (including coins that do not have MarketCap ranking)
+  Future<CoinRankingResult> getTopGainersAndLosers(
+      {required Currencies vsCurrency,
+      CoinDuration? duration,
+      CoinRanking? topCoins}) async {
+    try {
+      final path = createEndpointPathUrl(rawQueryItems: {
+        'vs_currency': vsCurrency.code,
+        'duration': duration?.value,
+        'top_coins': topCoins?.value,
+      }, endpointPath: "/coins/top_gainers_losers");
+
+      final result = Map<String, dynamic>.from(await sendPro(path));
+      return CoinRankingResult.fromJson(result, vsCurrency);
     } on FormatException {
       throw DataParsingException.unreadableData();
     } on TypeError {

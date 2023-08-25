@@ -13,7 +13,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 class ContractEndpoint extends BaseEndpoint {
   ContractEndpoint(HttpRequestServiceInterface httpRequestService,
       {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// Get coin info from contract address
   /// <br/><b>Endpoint </b>: /coins/{id}/contract/{contract_address}

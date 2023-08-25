@@ -1,8 +1,5 @@
 import 'dart:convert';
-import 'package:coingecko_client/src/domain/asset_platforms/asset_platforms_endpoint.dart';
-import 'package:coingecko_client/src/domain/asset_platforms/models/asset_platforms_filter.dart';
-import 'package:coingecko_client/src/models/exceptions/network_request_exception.dart';
-import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
+import 'package:coingecko_client/coingecko_client.dart';
 import 'package:test/test.dart';
 
 import '../../services/http_request_service_mock.dart';

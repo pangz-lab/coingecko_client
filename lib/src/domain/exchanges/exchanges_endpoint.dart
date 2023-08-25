@@ -2,7 +2,7 @@ import 'package:coingecko_client/src/domain/base_endpoint.dart';
 import 'package:coingecko_client/src/domain/coins/models/ticker_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/exchange_info.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/exchange_basic_info.dart';
-import 'package:coingecko_client/src/domain/exchanges/models/exchange_data_ordering.dart';
+import 'package:coingecko_client/src/domain/exchanges/enums/exchange_data_ordering.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/exchange_volume_chart.dart';
 import 'package:coingecko_client/src/models/data_range.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
@@ -30,7 +30,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 class ExchangesEndpoint extends BaseEndpoint {
   ExchangesEndpoint(HttpRequestServiceInterface httpRequestService,
       {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// List all exchanges (Active with trading volumes)
   /// <br/><b>Endpoint </b>: /exchanges

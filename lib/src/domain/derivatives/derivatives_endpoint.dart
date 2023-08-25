@@ -1,8 +1,8 @@
 import 'package:coingecko_client/src/domain/base_endpoint.dart';
+import 'package:coingecko_client/src/domain/derivatives/enums/derivatives_exchange_ordering.dart';
+import 'package:coingecko_client/src/domain/derivatives/enums/derivatives_tickers.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives.dart';
 import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange.dart';
-import 'package:coingecko_client/src/domain/derivatives/models/derivatives_exchange_ordering.dart';
-import 'package:coingecko_client/src/domain/derivatives/models/derivatives_tickers.dart';
 import 'package:coingecko_client/src/domain/exchanges/models/exchange_basic_info.dart';
 import 'package:coingecko_client/src/models/exceptions/data_parsing_exception.dart';
 import 'package:coingecko_client/src/services/http_request_service.dart';
@@ -16,7 +16,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 class DerivativesEndpoint extends BaseEndpoint {
   DerivativesEndpoint(HttpRequestServiceInterface httpRequestService,
       {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// List all derivative tickers
   /// <br/><b>Endpoint </b>: /derivatives

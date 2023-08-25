@@ -230,6 +230,20 @@ client.coins.getOhlcList(
 );
 ```
 
+## **[ 💰PRO Endpoints ]**
+### 📤 */coins/list/new*
+```dart
+client.coins.getNewList();
+```
+### 📤 */coins/top_gainers_losers*
+```dart
+client.coins.getTopGainersAndLosers(
+    vsCurrency: Currencies.php,
+    duration: CoinDuration.in14Days,
+    topCoins: CoinRanking.top300
+);
+```
+
 ___
 <br>
 

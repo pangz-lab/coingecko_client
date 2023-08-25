@@ -8,7 +8,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 class TrendingEndpoint extends BaseEndpoint {
   TrendingEndpoint(HttpRequestServiceInterface httpRequestService,
       {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// Get trending search coins (Top-7) on CoinGecko in the last 24 hours
   /// <br/><b>Endpoint </b>: /search/trending

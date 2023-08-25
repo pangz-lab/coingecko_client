@@ -1229,3 +1229,125 @@ class CoinOhlcMockData {
   "name": "bitcoin",
 },''';
 }
+
+class CoinNewListMockData {
+  static final validResponseBody = r'''[
+    {
+        "id": "texan",
+        "symbol": "texan",
+        "name": "Texan",
+        "activated_at": 1673690316
+    },
+    {
+        "id": "nexacoin",
+        "symbol": "nexa",
+        "name": "Nexacoin",
+        "activated_at": 1673689429
+    },
+    {
+        "id": "nexacoin",
+        "symbol": "nexa",
+        "name": "Nexacoin",
+        "activated_at": 1673689429
+    }
+]''';
+
+  static final responseBodyWithIncompleteKeys = r'''[
+    {
+        "symbol": "texan",
+        "name": "Texan",
+        "activated_at": 1673690316
+    },
+    {
+        "id": "nexacoin",
+        "name": "Nexacoin",
+        "activated_at": 1673690316
+    },
+    {
+        "id": "nexacoin",
+        "symbol": "nexa",
+        "name": "Nexacoin"
+    }
+]''';
+  //Invalid json format - with comma at the end
+  static final responseBodyWithInvalidFormat = r'''{
+  "name": "bitcoin",
+},''';
+}
+
+class CoinTopGainersAndLosersMockData {
+  static final validResponseBody = r'''{
+    "top_gainers": [
+        {
+          "id": "platinx",
+          "symbol": "ptx",
+          "name": "PlatinX",
+          "image": "https://assets.coingecko.com/coins/images/23726/original/logo200x200.png?1645162319",
+          "market_cap_rank": null,
+          "usd": 0.020361781843315337,
+          "usd_24h_vol": 187147.7839535509,
+          "usd_1h_change": 96.92603350641804
+        },
+        {
+          "id": "motiv-protocol",
+          "symbol": "mov",
+          "name": "MOTIV Protocol",
+          "image": "https://assets.coingecko.com/coins/images/11869/original/jvftnBL-_400x400.jpg?1595498693",
+          "market_cap_rank": null,
+          "usd": 0.000405080858465138,
+          "usd_24h_vol": 303229.51924620906,
+          "usd_1h_change": 40.029963487686324
+        }
+      ],
+      "top_losers": [
+        {
+          "id": "nftearth",
+          "symbol": "nfte",
+          "name": "NFTEarth",
+          "image": "https://assets.coingecko.com/coins/images/29116/original/20230223_224134.jpg?1677224110",
+          "market_cap_rank": null,
+          "usd": 0.013121207474003034,
+          "usd_24h_vol": 85887.2358881691,
+          "usd_1h_change": -30.431856675273593
+        },
+        {
+            "id": "bear-inu",
+            "symbol": "bear",
+            "name": "Bear Inu",
+            "image": "https://assets.coingecko.com/coins/images/29517/original/bear.png?1679394237",
+            "market_cap_rank": null,
+            "usd": 5.514461480763323e-06,
+            "usd_24h_vol": 583306.7193019107,
+            "usd_1h_change": -29.115041946342522
+        }
+      ]
+}''';
+
+  static final responseBodyWithIncompleteKeys = r'''{
+    "top_gainers": [
+        {
+          "id": "platinx",
+          "symbol": "ptx",
+          "name": "PlatinX",
+          "market_cap_rank": null,
+          "usd_24h_vol": 187147.7839535509,
+          "usd_1h_change": 96.92603350641804
+        }
+      ],
+      "top_losers": [
+        {
+          "id": "nftearth",
+          "symbol": "nfte",
+          "name": "NFTEarth",
+          "image": "https://assets.coingecko.com/coins/images/29116/original/20230223_224134.jpg?1677224110",
+          "market_cap_rank": null,
+          "usd": 0.013121207474003034,
+          "usd_24h_vol": 85887.2358881691
+        }
+      ]
+}''';
+  //Invalid json format - with comma at the end
+  static final responseBodyWithInvalidFormat = r'''{
+  "name": "bitcoin",
+},''';
+}

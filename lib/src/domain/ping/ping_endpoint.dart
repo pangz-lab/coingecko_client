@@ -7,7 +7,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 ///
 class PingEndpoint extends BaseEndpoint {
   PingEndpoint(HttpRequestServiceInterface httpRequestService, {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// Check API server status
   /// <br/><b>Endpoint </b>: /ping

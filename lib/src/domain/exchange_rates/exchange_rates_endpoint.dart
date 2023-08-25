@@ -9,7 +9,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 class ExchangeRatesEndpoint extends BaseEndpoint {
   ExchangeRatesEndpoint(HttpRequestServiceInterface httpRequestService,
       {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// Get BTC-to-Currency exchange rates
   /// <br/><b>Endpoint </b>: /exchange_rates

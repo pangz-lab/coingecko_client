@@ -9,7 +9,7 @@ import 'package:coingecko_client/src/services/http_request_service.dart';
 class CompaniesEndpoint extends BaseEndpoint {
   CompaniesEndpoint(HttpRequestServiceInterface httpRequestService,
       {String? apiKey})
-      : super(httpRequestService, {apiKey: apiKey});
+      : super(httpRequestService, apiKey: apiKey);
 
   /// Get public companies bitcoin or ethereum holdings (Ordered by total holdings descending)
   /// <br/><b>Endpoint </b>: /companies/public_treasury/{coin_id}
