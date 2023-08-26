@@ -2,7 +2,7 @@ import 'package:coingecko_client/coingecko_client.dart';
 
 void main() async {
   try {
-    var client = CoinGeckoClient();
+    final client = CoinGeckoClient();
 
     /// sample call for - /ping
     final result = await client.ping.getResult();
