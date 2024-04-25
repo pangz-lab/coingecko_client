@@ -1,3 +1,6 @@
+## 1.2.2
+2024/04/25 JST
+- Added Web support
 ## 1.2.1
 2023/08/26 JST
 - README update to change the versioning
